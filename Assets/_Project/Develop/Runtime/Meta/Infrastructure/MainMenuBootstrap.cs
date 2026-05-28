@@ -1,5 +1,7 @@
-﻿using Assets._Project.Develop.Runtime.Infrastructure;
+﻿using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
+using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 using System.Collections;
 using UnityEngine;
@@ -27,6 +29,17 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
         public override void Run()
         {
             Debug.Log("Старт сцены главного меню");
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
+                ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
+
+                coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs()));
+            }
         }
     }
 }
