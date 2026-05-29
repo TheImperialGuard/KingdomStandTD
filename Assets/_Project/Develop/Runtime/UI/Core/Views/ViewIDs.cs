@@ -2,6 +2,6 @@
 {
     public class ViewIDs
     {
-        //public const string ViewType = nameof(ViewType);
+        public const string LevelTile = nameof(LevelTile);
     }
 }

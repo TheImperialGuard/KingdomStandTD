@@ -11,7 +11,7 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Views
 
         private readonly Dictionary<string, string> _viewIDToResourcesPath = new Dictionary<string, string>()
         {
-            //{ViewIDs.ID, "prefab/path" }
+            {ViewIDs.LevelTile, "UI/Meta/MainMenu/LevelTileView" }
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)

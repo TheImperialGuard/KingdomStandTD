@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 7923138839561499919}
   - component: {fileID: 1571707429636990855}
   - component: {fileID: 5201068590513192283}
+  - component: {fileID: 5561308851967839298}
   m_Layer: 5
   m_Name: LevelTileView
   m_TagString: Untagged
@@ -160,6 +161,27 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5561308851967839298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681703476496702632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b501cfdd264eea47a339632eda5aea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels.LevelTileView
+  _background: {fileID: 1571707429636990855}
+  _levelNumberText: {fileID: 9006158758424020010}
+  _button: {fileID: 5201068590513192283}
+  _starFillers:
+  - {fileID: 3285855788090037439}
+  - {fileID: 8060279180634522745}
+  - {fileID: 1893649525709837671}
+  _activeColor: {r: 1, g: 0.0990566, b: 0.0990566, a: 1}
+  _completedColor: {r: 0.11523833, g: 1, b: 0.08018869, a: 1}
 --- !u!1 &6621276168022494453
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +421,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1670961379572812226, guid: 393ca25adeed7bf458419216286e11e7, type: 3}
   m_PrefabInstance: {fileID: 2388409235275922491}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8060279180634522745 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5692137329319262274, guid: 393ca25adeed7bf458419216286e11e7, type: 3}
+  m_PrefabInstance: {fileID: 2388409235275922491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &6104928962483662117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -496,6 +529,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 393ca25adeed7bf458419216286e11e7, type: 3}
+--- !u!114 &1893649525709837671 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5692137329319262274, guid: 393ca25adeed7bf458419216286e11e7, type: 3}
+  m_PrefabInstance: {fileID: 6104928962483662117}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!224 &4866528685911483623 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1670961379572812226, guid: 393ca25adeed7bf458419216286e11e7, type: 3}
@@ -598,6 +642,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 393ca25adeed7bf458419216286e11e7, type: 3}
+--- !u!114 &3285855788090037439 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5692137329319262274, guid: 393ca25adeed7bf458419216286e11e7, type: 3}
+  m_PrefabInstance: {fileID: 7162760597456825597}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!224 &8383255361443964223 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1670961379572812226, guid: 393ca25adeed7bf458419216286e11e7, type: 3}
