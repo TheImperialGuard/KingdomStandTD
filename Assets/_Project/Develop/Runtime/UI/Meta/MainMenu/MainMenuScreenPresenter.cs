@@ -1,8 +1,8 @@
 ﻿using Assets._Project.Develop.Runtime.Meta.Features.Levels;
+using Assets._Project.Develop.Runtime.Meta.Infrastructure;
 using Assets._Project.Develop.Runtime.UI.Core.Presenters;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,15 +33,20 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
 
         public void Initialize()
         {
-            _levelsProgressionService.AddLevelToCompleted(1, LevelResults.Perfect);
-            _levelsProgressionService.AddLevelToCompleted(2, LevelResults.Bad);
-
             CreateLevelsList();
 
             foreach (LevelTilePresenter presenter in _levelsTilesPresenters)
             {
                 presenter.Initialize();
             }
+        }
+
+        public void ShowLastLevelAnimation()
+        {
+            int lastLevelNumber = _levelsTilesPresenters.Count;
+
+            _levelsTilesPresenters[lastLevelNumber - 1]
+                .PlayAnimation(_screen.LevelsPositionsList[lastLevelNumber - 1].PathPointViews);
         }
 
         public void Dispose()
@@ -56,7 +61,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
         private void CreateLevelsList()
         {
             for (int i = 1; _levelsProgressionService.CanPlay(i); i++)
-                CreateLevelTile(_screen.LevelsPositionsList[i - 1], i);
+                CreateLevelTile(_screen.LevelsPositionsList[i - 1].Position, i);
         }
 
         private void CreateLevelTile(RectTransform position, int levelNumber)

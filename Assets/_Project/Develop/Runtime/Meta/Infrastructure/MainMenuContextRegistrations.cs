@@ -9,8 +9,12 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
 {
     public class MainMenuContextRegistrations
     {
-        public static void Process(DIContainer container)
+        private static MainMenuInputArgs _inputArgs;
+
+        public static void Process(DIContainer container, MainMenuInputArgs args)
         {
+            _inputArgs = args;
+
             container.RegisterAsSingle(CreateMainMenuPresentersFactory);
 
             container.RegisterAsSingle(CreateMainMenuUIRoot).NonLazy();
