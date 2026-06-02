@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 using System.Collections;
 using UnityEngine;
@@ -39,6 +40,14 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
                 ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
 
                 coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1)));
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                PlayerDataProvider dataProvider = _container.Resolve<PlayerDataProvider>();
+                ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
+
+                coroutinesPerformer.StartPerform(dataProvider.SaveAsync());
             }
         }
     }
