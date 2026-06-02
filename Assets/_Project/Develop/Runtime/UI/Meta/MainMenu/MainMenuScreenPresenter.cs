@@ -1,6 +1,8 @@
-﻿using Assets._Project.Develop.Runtime.UI.Core.Presenters;
+﻿using Assets._Project.Develop.Runtime.Meta.Features.Levels;
+using Assets._Project.Develop.Runtime.UI.Core.Presenters;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,20 +15,27 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
         private readonly MainMenuPresentersFactory _presentersFactory;
         private readonly ViewsFactory _viewsFactory;
 
+        private readonly LevelsProgressionService _levelsProgressionService;
+
         private readonly List<LevelTilePresenter> _levelsTilesPresenters = new();
 
         public MainMenuScreenPresenter(
-            MainMenuScreenView screen, 
-            MainMenuPresentersFactory presentersFactory, 
-            ViewsFactory viewsFactory)
+            MainMenuScreenView screen,
+            MainMenuPresentersFactory presentersFactory,
+            ViewsFactory viewsFactory,
+            LevelsProgressionService levelsProgressionService)
         {
             _screen = screen;
             _presentersFactory = presentersFactory;
             _viewsFactory = viewsFactory;
+            _levelsProgressionService = levelsProgressionService;
         }
 
         public void Initialize()
         {
+            _levelsProgressionService.AddLevelToCompleted(1, LevelResults.Perfect);
+            _levelsProgressionService.AddLevelToCompleted(2, LevelResults.Bad);
+
             CreateLevelsList();
 
             foreach (LevelTilePresenter presenter in _levelsTilesPresenters)
@@ -46,18 +55,17 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
 
         private void CreateLevelsList()
         {
-            int index = 1;
+            for (int i = 1; _levelsProgressionService.CanPlay(i); i++)
+                CreateLevelTile(_screen.LevelsPositionsList[i - 1], i);
+        }
 
-            foreach (RectTransform position in _screen.LevelsPositionsList)
-            {
-                LevelTileView tileView = _viewsFactory.Create<LevelTileView>(ViewIDs.LevelTile, position);
+        private void CreateLevelTile(RectTransform position, int levelNumber)
+        {
+            LevelTileView tileView = _viewsFactory.Create<LevelTileView>(ViewIDs.LevelTile, position);
 
-                LevelTilePresenter tilePresenter = _presentersFactory.CreateLevelTilePresenter(tileView, index);
+            LevelTilePresenter tilePresenter = _presentersFactory.CreateLevelTilePresenter(tileView, levelNumber);
 
-                _levelsTilesPresenters.Add(tilePresenter);
-
-                index++;
-            }
+            _levelsTilesPresenters.Add(tilePresenter);
         }
     }
 }

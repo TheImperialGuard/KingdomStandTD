@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.UI.Core.Views;
+﻿using Assets._Project.Develop.Runtime.Meta.Features.Levels;
+using Assets._Project.Develop.Runtime.UI.Core.Views;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
@@ -45,16 +46,37 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
         public void SetActive() => _background.color = _activeColor;
 
-        public void SetStars(int activeCount)
+        public void SetResults(LevelResults results)
         {
-            if (activeCount > _starFillers.Count)
-                throw new ArgumentOutOfRangeException(
-                    $"Active stars count cannot exceed the number of star fillers:" +
-                    $" {activeCount} given, max: {_starFillers.Count}");
+            int stars = 0;
 
-            for (int i = 0; i < activeCount; i++)
+            switch (results)
             {
-                _starFillers[i].gameObject.SetActive(true);
+                case LevelResults.Perfect:
+                    stars = 3;
+                    break;
+
+                case LevelResults.Average:
+                    stars = 2;
+                    break;
+
+                case LevelResults.Bad:
+                    stars = 1;
+                    break;
+
+                case LevelResults.Defeat:
+                    stars = 0;
+                    break;
+
+                default:
+                    throw new ArgumentException($"{nameof(results)} result not supported in LevelTileView");
+            }
+
+            for (int i = 0; i < _starFillers.Count; i++)
+            {
+                bool starStatus = i < stars;
+
+                _starFillers[i].gameObject.SetActive(starStatus);
             }
         }
 

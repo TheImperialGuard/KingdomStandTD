@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
@@ -22,7 +23,8 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Presenters
                 view,
                 _container.Resolve<SceneSwitcherService>(),
                 _container.Resolve<ICoroutinesPerformer>(),
-                levelNumber);
+                levelNumber,
+                _container.Resolve<LevelsProgressionService>());
         }
 
         public MainMenuScreenPresenter CreateMainMenuScreen(MainMenuScreenView view)
@@ -30,7 +32,8 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Presenters
             return new MainMenuScreenPresenter(
                 view,
                 this,
-                _container.Resolve<ViewsFactory>());
+                _container.Resolve<ViewsFactory>(),
+                _container.Resolve<LevelsProgressionService>());
         }
     }
 }
