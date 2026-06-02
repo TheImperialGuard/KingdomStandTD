@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -19,6 +20,8 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateConfigsProviderService);
 
             container.RegisterAsSingle(CreateSceneSwitcherService);
+
+            container.RegisterAsSingle(CreateViewsFactory);
 
             container.RegisterAsSingle<ICoroutinesPerformer>(CreateCoroutinesPerformer);
 
@@ -44,6 +47,11 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
                 c.Resolve<SceneLoaderService>(),
                 c.Resolve<ILoadingScreen>(),
                 c);
+        }
+
+        private static ViewsFactory CreateViewsFactory(DIContainer c)
+        {
+            return new ViewsFactory(c.Resolve<ResourcesAssetsLoader>());
         }
 
         private static CoroutinesPerformer CreateCoroutinesPerformer(DIContainer c)

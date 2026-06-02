@@ -119,10 +119,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28429c1c702f0a489775a29023d6d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.UI.Meta.MainMenu.MainMenuUIRoot
-  <HUDLayer>k__BackingField: {fileID: 0}
-  <VFXUnderPopupsLayer>k__BackingField: {fileID: 0}
-  <PopupsLayer>k__BackingField: {fileID: 0}
-  <VFXOverPopupsLayer>k__BackingField: {fileID: 0}
+  <HUDLayer>k__BackingField: {fileID: 9091389531319162089}
+  <VFXUnderPopupsLayer>k__BackingField: {fileID: 4753000069268061434}
+  <PopupsLayer>k__BackingField: {fileID: 2015972444402119593}
+  <VFXOverPopupsLayer>k__BackingField: {fileID: 1759373572820896803}
 --- !u!1 &1442281349280245997
 GameObject:
   m_ObjectHideFlags: 0

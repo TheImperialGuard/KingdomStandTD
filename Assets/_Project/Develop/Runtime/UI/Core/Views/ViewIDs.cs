@@ -3,5 +3,6 @@
     public class ViewIDs
     {
         public const string LevelTile = nameof(LevelTile);
+        public const string MainMenuScreen = nameof(MainMenuScreen);
     }
 }
