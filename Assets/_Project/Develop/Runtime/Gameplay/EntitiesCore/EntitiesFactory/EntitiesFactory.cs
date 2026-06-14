@@ -1,11 +1,9 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
-using System.Collections.Generic;
-using UnityEngine;
 
-namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
+namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
 {
-    public class EntitiesFactory
+    public partial class EntitiesFactory
     {
         private readonly DIContainer _container;
         private readonly EntitiesLifeContext _entitiesLifeContext;
