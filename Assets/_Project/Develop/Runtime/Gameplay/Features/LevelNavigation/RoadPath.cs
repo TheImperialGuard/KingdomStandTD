@@ -9,13 +9,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
     {
         [SerializeField] private PathNumber _number;
 
-        [SerializeField] private Transform _spawner;
+        [SerializeField] private List<Waypoint> _waypoints;
 
-        [SerializeField] private List<RoadTile> _tiles;
 
-        public Vector3 SpawnerPosition => _spawner.position;
-
-        public IReadOnlyList<RoadTile> Tiles => _tiles;
+        public IReadOnlyList<Waypoint> Waypoints => _waypoints;
 
         public PathNumber Number => _number;
     }
