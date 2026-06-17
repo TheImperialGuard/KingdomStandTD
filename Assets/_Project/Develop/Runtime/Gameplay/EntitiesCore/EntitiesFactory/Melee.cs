@@ -1,5 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities;
 using Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Sensors;
+using Assets._Project.Develop.Runtime.Utilities;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
@@ -20,8 +22,15 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddRotationSpeed(new(config.RotateSpeed));
 
             entity
+                .AddContactsDetectingMask(Layers.Triggers)
+                .AddContactCollidersBuffer(new Buffer<Collider>(64));
+
+            entity
                 .AddSystem(new RigidbodyMovementSystem())
                 .AddSystem(new RigidbodyRotationSystem());
+
+            entity
+                .AddSystem(new BodyContactsDetectingSystem());
 
             return entity;
         }
