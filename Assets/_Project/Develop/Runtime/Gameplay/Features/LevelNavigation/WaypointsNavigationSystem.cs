@@ -40,7 +40,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
 
                 if (collider.TryGetComponent(out Waypoint reachedWaypoint))
                 {
-                    if (_waypoints.Contains(reachedWaypoint))
+                    if (_waypoints.Contains(reachedWaypoint) && _reachedWaypoints.Contains(reachedWaypoint) == false)
                     {
                         _reachedWaypoints.Add(reachedWaypoint);
                         SwitchWaypoint();
