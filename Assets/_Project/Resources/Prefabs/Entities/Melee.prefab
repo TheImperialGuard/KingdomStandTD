@@ -252,6 +252,9 @@ PrefabInstance:
       addedObject: {fileID: 8758442810190760910}
     - targetCorrespondingSourceObject: {fileID: 8144761594807049000, guid: de9a22f950a83ca43be03ed29b15b26a, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 8767513385341834585}
+    - targetCorrespondingSourceObject: {fileID: 8144761594807049000, guid: de9a22f950a83ca43be03ed29b15b26a, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 4535258823637651698}
     - targetCorrespondingSourceObject: {fileID: 8144761594807049000, guid: de9a22f950a83ca43be03ed29b15b26a, type: 3}
       insertIndex: -1
@@ -287,6 +290,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Sensors.BodyColliderRegistrator
   _body: {fileID: 986512327933822999}
+--- !u!114 &8767513385341834585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7269835122164473616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7562fb8cbf028e49a9cb54519cc5914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.DisableCollidersOnDeathRegistrator
+  _colliders:
+  - {fileID: 986512327933822999}
 --- !u!54 &4535258823637651698
 Rigidbody:
   m_ObjectHideFlags: 0
