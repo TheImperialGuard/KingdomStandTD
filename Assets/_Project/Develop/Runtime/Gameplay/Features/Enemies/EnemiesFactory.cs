@@ -29,7 +29,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
         }
 
-        public Entity Create(Vector3 position, EntityConfig config, List<Waypoint> path)
+        public Entity Create(Vector3 position, EntityConfig config, IReadOnlyList<Waypoint> path)
         {
             Entity entity;
 
@@ -39,7 +39,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
                     entity = _entitiesFactory.CreateMelee(position, meleeConfig);
 
                     entity
-                        .AddWaypoints(path)
+                        .AddWaypoints(new(path))
                         .AddCurrentWaypoint()
                         .AddReachedWaypoints(new())
                         .AddIsPathFinished();
