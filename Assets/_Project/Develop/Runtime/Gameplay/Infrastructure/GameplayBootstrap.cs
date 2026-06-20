@@ -1,6 +1,12 @@
-﻿using Assets._Project.Develop.Runtime.Infrastructure;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities;
+using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
+using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Infrastructure;
+using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 using System;
@@ -13,6 +19,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
     {
         private DIContainer _container;
         private GameplayInputArgs _inputArgs;
+
+        private EntitiesLifeContext _entitiesLifeContext;
+        private AIBrainsContext _brainsContext;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -32,16 +41,35 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             Debug.Log("Инициализация геймплейной сцены");
 
+            _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+            _brainsContext = _container.Resolve<AIBrainsContext>();
+
             yield break;
         }
 
         public override void Run()
         {
             Debug.Log("Старт геймплейной сцены");
+
+            Level level = _container.Resolve<Level>();
+
+            EnemiesFactory enemiesFactory = _container.Resolve<EnemiesFactory>();
+
+            MeleeConfig meleeConfig = _container.Resolve<ResourcesAssetsLoader>().Load<MeleeConfig>("Configs/Gameplay/Entities/Enemies/TestMelee");
+
+            Vector3 spawnPos = new Vector3(
+                level.RoadPaths[0].Waypoints[0].transform.position.x,
+                level.RoadPaths[0].Waypoints[0].transform.position.y,
+                level.RoadPaths[0].Waypoints[0].transform.position.z - 1);
+
+            enemiesFactory.Create(spawnPos, meleeConfig, level.RoadPaths[0].Waypoints);
         }
 
         private void Update()
         {
+            _brainsContext?.Update(Time.deltaTime);
+            _entitiesLifeContext?.Update(Time.deltaTime);
+
             if (Input.GetKeyDown(KeyCode.M))
             {
                 SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
