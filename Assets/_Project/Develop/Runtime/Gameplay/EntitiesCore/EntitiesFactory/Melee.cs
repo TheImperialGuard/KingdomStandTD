@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Sensors;
 using Assets._Project.Develop.Runtime.Utilities;
+using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
@@ -22,8 +23,18 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddRotationSpeed(new(config.RotateSpeed));
 
             entity
-                .AddContactsDetectingMask(Layers.Triggers)
+                .AddContactsDetectingMask(Layers.TriggersMask)
                 .AddContactCollidersBuffer(new Buffer<Collider>(64));
+
+            ICompositeCondition canMove = new CompositeCondition()
+                .Add(new FuncCondition(() => true));
+
+            ICompositeCondition canRotate = new CompositeCondition()
+                .Add(new FuncCondition(() => true));
+
+            entity
+                .AddCanMove(canMove)
+                .AddCanRotate(canRotate);
 
             entity
                 .AddSystem(new RigidbodyMovementSystem())
