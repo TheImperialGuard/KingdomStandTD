@@ -15,6 +15,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Level
             { PathNumber.Third, Color.red },
         };
 
+        public IReadOnlyList<RoadPath> RoadPaths => _roadPaths;
+
         void OnDrawGizmos()
         {
             for (int i = 0; i < _roadPaths.Count; i++)
