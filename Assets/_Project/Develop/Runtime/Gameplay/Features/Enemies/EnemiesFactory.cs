@@ -2,8 +2,10 @@
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
+using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,14 +40,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
                 case MeleeConfig meleeConfig:
                     entity = _entitiesFactory.CreateMelee(position, meleeConfig);
 
-                    entity
-                        .AddWaypoints(new(path))
-                        .AddCurrentWaypoint()
-                        .AddReachedWaypoints(new())
-                        .AddIsPathFinished();
+                    AddWaypointMovementFor(entity, path);
 
-                    entity.
-                        AddSystem(new WaypointsNavigationSystem());
+                    ICompositeCondition mustSelfRelease = new CompositeCondition()
+                        .Add(new FuncCondition(() => entity.IsPathFinished.Value == true));
+
+                    entity
+                        .AddMustSelfRelease(mustSelfRelease);
+
+                    entity
+                        .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
 
                     _brainsFactory.CreateMeleeBrain(entity);
 
@@ -58,6 +62,18 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
             _entitiesLifeContext.Add(entity);
 
             return entity;
+        }
+
+        private void AddWaypointMovementFor(Entity entity, IReadOnlyList<Waypoint> path)
+        {
+            entity
+                .AddWaypoints(new(path))
+                .AddCurrentWaypoint()
+                .AddReachedWaypoints(new())
+                .AddIsPathFinished();
+
+            entity
+                .AddSystem(new WaypointsNavigationSystem());
         }
     }
 }
