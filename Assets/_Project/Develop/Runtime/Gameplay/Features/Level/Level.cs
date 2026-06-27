@@ -7,6 +7,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Level
     public class Level : MonoBehaviour
     {
         [SerializeField] private List<RoadPath> _roadPaths;
+        [SerializeField] private List<TowerTile> _towerTiles;
 
         private readonly Dictionary<PathNumber, Color> _pathNumberToGizmosColors = new()
         {
