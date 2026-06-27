@@ -21,23 +21,28 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootPoint() {Value = value}); 
 		}
 
-		public Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirections InstantShotDirectionsC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirections>();
+		public Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirection InstantShotDirectionC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirection>();
 
-		public Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirectionArgsList InstantShotDirections => InstantShotDirectionsC.Value;
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirectionArgs> InstantShotDirection => InstantShotDirectionC.Value;
 
-		public bool TryGetInstantShotDirections(out Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirectionArgsList value)
+		public bool TryGetInstantShotDirection(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirectionArgs> value)
 		{
-			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirections component);
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirection component);
 			if(result)
 				value = component.Value;
 			else
-				value = default(Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirectionArgsList);
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirectionArgs>);
 			return result;
 		}
 
-		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInstantShotDirections(Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirectionArgsList value)
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInstantShotDirection()
 		{
-			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirections() {Value = value}); 
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirection() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirectionArgs>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInstantShotDirection(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirectionArgs> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShotDirection() {Value = value}); 
 		}
 
 		public Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShootRange InstantShootRangeC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.InstantShootRange>();
@@ -69,6 +74,30 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsProjectile()
 		{
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.IsProjectile() ); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Owner OwnerC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Owner>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> Owner => OwnerC.Value;
+
+		public bool TryGetOwner(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Owner component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddOwner()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Owner() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddOwner(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Owner() {Value = value}); 
 		}
 
 		public Assets._Project.Develop.Runtime.Gameplay.Features.Sensors.BodyCollider BodyColliderC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Sensors.BodyCollider>();
