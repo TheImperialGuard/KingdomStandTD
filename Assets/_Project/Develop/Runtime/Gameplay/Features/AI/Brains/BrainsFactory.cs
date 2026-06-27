@@ -1,6 +1,9 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.States;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Attack;
+using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +46,32 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
             stateMachine.AddState(waypointsMovementState);
 
             return stateMachine;
+        }
+
+        public StateMachineBrain CreateTowerBrain(Entity entity, ITargetSelector targetSelector)
+        {
+            FindTargetState findTargetState = new FindTargetState(targetSelector, _entitiesLifeContext, entity);
+            AttackTriggerState attackTriggerState = new AttackTriggerState(entity);
+
+            ICompositeCondition fromFindTargetToAttackTriggerStateCondition = new CompositeCondition()
+                .Add(entity.CanStartAttack)
+                .Add(new FuncCondition(() => entity.CurrentTarget.Value != null));
+
+            ICondition fromAttackTriggerToFindTargetStateCondition = new FuncCondition(() => entity.InAttackCooldown.Value == true);
+
+            AIStateMachine stateMachine = new AIStateMachine();
+
+            stateMachine.AddState(findTargetState);
+            stateMachine.AddState(attackTriggerState);
+
+            stateMachine.AddTransition(findTargetState, attackTriggerState, fromFindTargetToAttackTriggerStateCondition);
+            stateMachine.AddTransition(attackTriggerState, findTargetState, fromAttackTriggerToFindTargetStateCondition);
+
+            StateMachineBrain brain = new StateMachineBrain(stateMachine);
+
+            _brainsContext.SetBrainsFor(entity, brain);
+
+            return brain;
         }
     }
 }
