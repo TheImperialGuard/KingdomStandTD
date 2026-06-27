@@ -16,12 +16,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
             _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
 
             entity
+                .AddCurrentTarget()
                 .AddStartAttackRequest()
                 .AddStartAttackEvent()
                 .AddEndAttackEvent()
                 .AddInstantAttackDamage(new ReactiveVariable<float>(config.AttackDamage))
                 .AddInstantShootRange(new ReactiveVariable<float>(config.AttackRange))
-                .AddInstantShotDirections(new InstantShotDirectionArgsList())
+                .AddInstantShotDirection()
                 .AddAttackCancelEvent()
                 .AddAttackCooldownCurrentTime()
                 .AddAttackCooldownInitialTime(new ReactiveVariable<float>(config.AttackCooldown))
@@ -34,8 +35,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddCanStartAttack(canStartAttack);
 
             entity
+                .AddSystem(new ShootDirectionCalculateSystem())
                 .AddSystem(new StartAttackSystem())
-                .AddSystem(new AttackCooldownTimerSystem());
+                .AddSystem(new AttackCooldownTimerSystem())
+                .AddSystem(new InstantShootSystem(this));
 
             return entity;
         }
