@@ -1,8 +1,10 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Infrastructure;
@@ -54,8 +56,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             Level level = _container.Resolve<Level>();
 
             EnemiesFactory enemiesFactory = _container.Resolve<EnemiesFactory>();
+            TowersFactory towersFactory = _container.Resolve<TowersFactory>();
 
             MeleeConfig meleeConfig = _container.Resolve<ResourcesAssetsLoader>().Load<MeleeConfig>("Configs/Gameplay/Entities/Enemies/TestMelee");
+            TowerConfig towerConfig = _container.Resolve<ResourcesAssetsLoader>().Load<TowerConfig>("Configs/Gameplay/Entities/Towers/TestTowerConfig");
 
             Vector3 spawnPos = new Vector3(
                 level.RoadPaths[0].Waypoints[0].transform.position.x,
@@ -63,6 +67,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 level.RoadPaths[0].Waypoints[0].transform.position.z - 1);
 
             enemiesFactory.Create(spawnPos, meleeConfig, level.RoadPaths[0].Waypoints);
+            towersFactory.Create(level.TowerTiles[0].TowerPosition, towerConfig);
         }
 
         private void Update()

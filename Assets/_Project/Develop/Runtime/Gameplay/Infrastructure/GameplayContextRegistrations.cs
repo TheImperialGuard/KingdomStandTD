@@ -4,6 +4,7 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using UnityEngine;
@@ -33,6 +34,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateAIBrainsContext);
 
             container.RegisterAsSingle(CreateEnemiesFactory);
+
+            container.RegisterAsSingle(CreateTowerFactory);
         }
 
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c) => new();
@@ -56,6 +59,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             => new(c);
 
         private static BrainsFactory CreateBrainsFactory(DIContainer c)
+            => new(c);
+
+        private static TowersFactory CreateTowerFactory(DIContainer c)
             => new(c);
 
         private static Level CreateLevelEnvironment(DIContainer c)
