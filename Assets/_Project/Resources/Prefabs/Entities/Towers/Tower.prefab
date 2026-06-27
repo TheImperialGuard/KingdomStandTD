@@ -44,7 +44,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7594907031105049859}
+  - component: {fileID: 4787858795147104946}
   - component: {fileID: 6674499055720179359}
+  - component: {fileID: 1046660925013228768}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -69,6 +71,18 @@ Transform:
   - {fileID: 744924724756065338}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4787858795147104946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891846149284200393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41bf143db3ecd334fb8a78c7ae35aa99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono.MonoEntity
 --- !u!114 &6674499055720179359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +96,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootPointEntityRegistrator
   _shootPoint: {fileID: 744924724756065338}
+--- !u!114 &1046660925013228768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891846149284200393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15dc001e7e7a1cb4b87c12423bc08e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Common.TransformEntityRegistrator
 --- !u!1 &6388111338780754435
 GameObject:
   m_ObjectHideFlags: 0
