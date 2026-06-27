@@ -1,19 +1,20 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 {
     public class InstantShotDirectionArgs
     {
-        private int _angle;
+        private Vector3 _direction;
         private int _projectileCounts;
 
-        public InstantShotDirectionArgs(int angle, int projectileCounts)
+        public InstantShotDirectionArgs(Vector3 direction, int projectileCounts)
         {
-            _angle = angle;
+            _direction = direction;
             _projectileCounts = projectileCounts;
         }
 
-        public int Angle => _angle;
+        public Vector3 Direction => _direction;
         public int ProjectileCounts
         {
             get => _projectileCounts;

@@ -9,9 +9,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
         public Transform Value;
     }
 
-    public class InstantShotDirections : IEntityComponent
+    public class InstantShotDirection : IEntityComponent
     {
-        public InstantShotDirectionArgsList Value;
+        public ReactiveVariable<InstantShotDirectionArgs> Value;
     }
 
     public class InstantShootRange : IEntityComponent
@@ -21,5 +21,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 
     public class IsProjectile : IEntityComponent
     {
+    }
+
+    public class Owner : IEntityComponent
+    {
+        public ReactiveVariable<Entity> Value;
     }
 }
