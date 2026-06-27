@@ -17,6 +17,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Level
         };
 
         public IReadOnlyList<RoadPath> RoadPaths => _roadPaths;
+        public IReadOnlyList<TowerTile> TowerTiles => _towerTiles;
 
         void OnDrawGizmos()
         {
