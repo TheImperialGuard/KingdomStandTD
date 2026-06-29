@@ -15,4 +15,4 @@ MonoBehaviour:
   <PrefabPath>k__BackingField: Prefabs/Entities/Towers/Tower
   <AttackRange>k__BackingField: 2
   <AttackCooldown>k__BackingField: 2
-  <AttackDamage>k__BackingField: 2
+  <AttackDamage>k__BackingField: 50
