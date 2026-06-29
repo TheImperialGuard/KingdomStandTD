@@ -133,8 +133,11 @@ GameObject:
   - component: {fileID: 7291159091627897364}
   - component: {fileID: 9165197543421545895}
   - component: {fileID: 2620213157030393795}
-  - component: {fileID: 6519335450213886312}
   - component: {fileID: -8440224438888123767}
+  - component: {fileID: 4052231005645962925}
+  - component: {fileID: 6456332898890981146}
+  - component: {fileID: 6519335450213886312}
+  - component: {fileID: 6746307409085666685}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -182,6 +185,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d440865fc84fbd42a298c6f86c3fa5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Common.RigidbodyEntityRegistrator
+--- !u!114 &-8440224438888123767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798298027441660720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15dc001e7e7a1cb4b87c12423bc08e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Common.TransformEntityRegistrator
+--- !u!114 &4052231005645962925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798298027441660720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd5970032381f224aa2affd729d6a958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Sensors.BodyColliderRegistrator
+  _body: {fileID: 6746307409085666685}
+--- !u!114 &6456332898890981146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798298027441660720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7562fb8cbf028e49a9cb54519cc5914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.DisableCollidersOnDeathRegistrator
+  _colliders:
+  - {fileID: 6746307409085666685}
 --- !u!54 &6519335450213886312
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -201,7 +243,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -209,15 +251,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &-8440224438888123767
-MonoBehaviour:
+--- !u!136 &6746307409085666685
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7798298027441660720}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15dc001e7e7a1cb4b87c12423bc08e11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Common.TransformEntityRegistrator
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Height: 0.1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
