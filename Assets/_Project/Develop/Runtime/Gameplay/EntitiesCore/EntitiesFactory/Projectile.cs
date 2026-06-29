@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Sensors;
+using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Utilities;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
@@ -31,7 +32,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddContactEntitiesBuffer(new Buffer<Entity>(64))
                 .AddDeathMask(Layers.EnviromentMask)
                 .AddIsTouchDeathMask()
-                .AddBodyContactDamage(new ReactiveVariable<float>(damage));
+                .AddBodyContactDamage(new ReactiveVariable<float>(damage))
+                .AddTeam(new ReactiveVariable<Teams>(owner.Team.Value));
 
             ICompositeCondition canMove = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));

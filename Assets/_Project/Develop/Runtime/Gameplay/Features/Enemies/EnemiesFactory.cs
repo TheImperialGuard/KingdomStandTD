@@ -4,8 +4,10 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
+using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
+using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,6 +65,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
                 default:
                     throw new ArgumentException($"Not support {config.GetType()} type config");
             }
+
+            entity.AddTeam(new ReactiveVariable<Teams>(Teams.Enemies));
 
             _entitiesLifeContext.Add(entity);
 

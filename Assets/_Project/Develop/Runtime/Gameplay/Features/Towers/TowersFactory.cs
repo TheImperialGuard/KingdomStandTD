@@ -3,9 +3,9 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
+using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
-using System;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
@@ -34,6 +34,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             Entity entity;
 
             entity = _entitiesFactory.CreateTower(position, config);
+
+            entity.AddTeam(new ReactiveVariable<Teams>(Teams.Allies));
 
             _brainsFactory.CreateTowerBrain(entity, new NearestTargetInRangeSelector(entity));
 
