@@ -42,8 +42,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
 
                     AddWaypointMovementFor(entity, path);
 
-                    ICompositeCondition mustSelfRelease = new CompositeCondition()
-                        .Add(new FuncCondition(() => entity.IsPathFinished.Value == true));
+                    ICompositeCondition mustSelfReleaseByDeath = new CompositeCondition()
+                        .Add(new FuncCondition(() => entity.IsDead.Value == true))
+                        .Add(new FuncCondition(() => entity.InDeathProcces.Value == false));
+
+                    ICompositeCondition mustSelfRelease = new CompositeCondition(LogicOperations.Or)
+                        .Add(new FuncCondition(() => entity.IsPathFinished.Value == true))
+                        .Add(mustSelfReleaseByDeath);
 
                     entity
                         .AddMustSelfRelease(mustSelfRelease);

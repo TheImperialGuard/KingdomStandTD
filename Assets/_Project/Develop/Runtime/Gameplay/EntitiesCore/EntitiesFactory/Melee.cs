@@ -1,4 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities;
+using Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
+using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Sensors;
 using Assets._Project.Develop.Runtime.Utilities;
@@ -26,19 +28,41 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddContactsDetectingMask(Layers.TriggersMask)
                 .AddContactCollidersBuffer(new Buffer<Collider>(64));
 
+            entity
+                .AddMaxHealth(new(config.MaxHealth))
+                .AddCurrentHealth(new(config.MaxHealth))
+                .AddTakeDamageRequest()
+                .AddTakeDamageEvent()
+                .AddIsDead()
+                .AddDeathProcessInitialTime(new(config.DeathProcessTime))
+                .AddDeathProcessCurrentTime()
+                .AddInDeathProcces();
+
             ICompositeCondition canMove = new CompositeCondition()
-                .Add(new FuncCondition(() => true));
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
             ICompositeCondition canRotate = new CompositeCondition()
-                .Add(new FuncCondition(() => true));
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            ICompositeCondition canApplyDamage = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            ICompositeCondition mustDie = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
 
             entity
                 .AddCanMove(canMove)
-                .AddCanRotate(canRotate);
+                .AddCanRotate(canRotate)
+                .AddCanApplyDamage(canApplyDamage)
+                .AddMustDie(mustDie);
 
             entity
                 .AddSystem(new RigidbodyMovementSystem())
-                .AddSystem(new RigidbodyRotationSystem());
+                .AddSystem(new RigidbodyRotationSystem())
+                .AddSystem(new ApplyDamageSystem())
+                .AddSystem(new DeathSystem())
+                .AddSystem(new DeathProcessTimerSystem())
+                .AddSystem(new DisableCollidersOnDeathSystem());
 
             entity
                 .AddSystem(new BodyContactsDetectingSystem());
