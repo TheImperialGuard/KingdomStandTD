@@ -1,9 +1,10 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Shoot;
+using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
 {
@@ -22,7 +23,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
         {
             IEnumerable<Entity> selectedTargets = targets.Where(target =>
             {
-                bool result = target != _source;
+                bool result = target.HasComponent<TakeDamageRequest>();
+
+                if (target.TryGetCanApplyDamage(out ICompositeCondition canApplyDamage))
+                {
+                    result = result && canApplyDamage.Evaluate();
+                }
+
+                result = result && (target != _source);
 
                 float distanceToTarget = GetDistanceTo(target);
 
