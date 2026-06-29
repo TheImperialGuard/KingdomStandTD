@@ -22,7 +22,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
         {
             IEnumerable<Entity> selectedTargets = GetEnemiesFrom(targets);
 
+            if (selectedTargets.Any() == false)
+                return null;
+
             selectedTargets = GetTargetsInRangeFrom(selectedTargets);
+
+            if (selectedTargets.Any() == false)
+                return null;
 
             selectedTargets = GetDamagableTargetsFrom(selectedTargets);
 
