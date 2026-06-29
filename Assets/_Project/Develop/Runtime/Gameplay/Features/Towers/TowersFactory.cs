@@ -37,7 +37,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 
             entity.AddTeam(new ReactiveVariable<Teams>(Teams.Allies));
 
-            _brainsFactory.CreateTowerBrain(entity, new NearestTargetInRangeSelector(entity));
+            _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
 
             _entitiesLifeContext.Add(entity);
 
