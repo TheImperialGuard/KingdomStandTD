@@ -12,17 +12,15 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
         private readonly EntitiesFactory _entitiesFactory;
 
         private ReactiveVariable<InstantShotDirectionArgs> _directionArgs;
-        private ReactiveEvent _attackRequest;
-
-        private Entity _shooterEntity;
-
         private ReactiveVariable<float> _damage;
 
+        private ReactiveEvent _attackRequest;
+        private ReactiveEvent _endAttackEvent;
+
+        private Entity _shooterEntity;
         private Transform _shootPoint;
 
         private IDisposable _attackRequestDisposable;
-
-        private ReactiveEvent _endAttackEvent;
 
         public InstantShootSystem(EntitiesFactory entitiesFactory)
         {
@@ -32,17 +30,15 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
         public void OnInit(Entity entity)
         {
             _attackRequest = entity.StartAttackRequest;
+            _endAttackEvent = entity.EndAttackEvent;
+
             _directionArgs = entity.InstantShotDirection;
-
-            _shooterEntity = entity;
-
             _damage = entity.InstantAttackDamage;
 
+            _shooterEntity = entity;
             _shootPoint = entity.ShootPoint;
 
             _attackRequestDisposable = _attackRequest.Subscribe(OnAttackRequest);
-
-            _endAttackEvent = entity.EndAttackEvent;
         }
 
         public void OnDispose()
@@ -53,6 +49,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
         private void OnAttackRequest()
         {
             Shoot(_directionArgs.Value.Direction, _directionArgs.Value.ProjectileCounts);
+
             _endAttackEvent.Invoke();
         }
 

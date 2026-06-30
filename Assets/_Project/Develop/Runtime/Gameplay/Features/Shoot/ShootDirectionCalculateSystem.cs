@@ -1,7 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
-using System;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
@@ -30,6 +29,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
                 Vector3 directionToTarget = (leadPoint - _shootPoint.position).normalized;
 
                 _directionArgs.Value = new(directionToTarget, 1);
+            } 
+            else
+            {
+                _directionArgs.Value = null;
             }
         }
 
