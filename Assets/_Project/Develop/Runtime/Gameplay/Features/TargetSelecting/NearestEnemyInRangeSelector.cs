@@ -20,19 +20,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
         }
         public Entity SelectTargetFrom(IEnumerable<Entity> targets)
         {
-            IEnumerable<Entity> selectedTargets = GetEnemiesFrom(targets);
-
-            if (selectedTargets.Any() == false)
+            if (TryGetEnemies(targets, out IEnumerable<Entity> selectedTargets) == false)
                 return null;
 
-            selectedTargets = GetTargetsInRangeFrom(selectedTargets);
-
-            if (selectedTargets.Any() == false)
+            if (TryGetTargetsInRange(selectedTargets, out selectedTargets) == false)
                 return null;
 
-            selectedTargets = GetDamagableTargetsFrom(selectedTargets);
-
-            if (selectedTargets.Any() == false)
+            if (TryGetDamagableTargets(selectedTargets, out selectedTargets) == false)
                 return null;
 
             Entity closestTarget = GetClosestTargetFrom(selectedTargets);
@@ -60,6 +54,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
             return closestTarget;
         }
 
+        private bool TryGetDamagableTargets(IEnumerable<Entity> targets, out IEnumerable<Entity> damagables)
+        {
+            damagables = GetDamagableTargetsFrom(targets);
+
+            return damagables.Any();
+        }
+
         private IEnumerable<Entity> GetDamagableTargetsFrom(IEnumerable<Entity> targets)
         {
             return targets.Where(target =>
@@ -75,9 +76,23 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
             });
         }
 
+        private bool TryGetTargetsInRange(IEnumerable<Entity> targets, out IEnumerable<Entity> targetsInRange)
+        {
+            targetsInRange = GetTargetsInRangeFrom(targets);
+
+            return targetsInRange.Any();
+        }
+
         private IEnumerable<Entity> GetTargetsInRangeFrom(IEnumerable<Entity> targets)
         {
             return targets.Where(target => GetDistanceTo(target) <= _source.InstantShootRange.Value);
+        }
+
+        private bool TryGetEnemies(IEnumerable<Entity> targets, out IEnumerable<Entity> enemies)
+        {
+            enemies = GetEnemiesFrom(targets);
+
+            return enemies.Any();
         }
 
         private IEnumerable<Entity> GetEnemiesFrom(IEnumerable<Entity> targets)
