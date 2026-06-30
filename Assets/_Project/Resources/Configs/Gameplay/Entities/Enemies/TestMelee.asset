@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfeebf69a152655419186986d96cb378, type: 3}
   m_Name: TestMelee
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.MeleeConfig
-  <PrefabPath>k__BackingField: Prefabs/Entities/Melee
+  <PrefabPath>k__BackingField: Prefabs/Entities/Characters/Melee
   <MoveSpeed>k__BackingField: 1
   <RotateSpeed>k__BackingField: 900
+  <MaxHealth>k__BackingField: 4
+  <DeathProcessTime>k__BackingField: 2
