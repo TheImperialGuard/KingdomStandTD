@@ -5,6 +5,8 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers
 {
     public abstract class TowerConfig : EntityConfig
     {
+        [SerializeField] private DamageTypes _damageType = DamageTypes.Physic;
+
         [field: SerializeField] public string PrefabPath { get; private set; }
 
         [field: SerializeField, Min(0)] public float AttackRange { get; private set; } = 3f;
@@ -13,6 +15,16 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers
 
         [field: SerializeField, Min(0)] public float AttackDamage { get; private set; } = 2f;
 
-        [field: SerializeField] public DamageTypes DamageType { get; private set; } = DamageTypes.Physic;
+        public DamageTypes DamageType => _damageType;
+
+        private void OnValidate()
+        {
+            if (_damageType == DamageTypes.None)
+            {
+                _damageType = DamageTypes.Physic;
+
+                Debug.LogWarning("Attack damage type can not be None");
+            }
+        }
     }
 }

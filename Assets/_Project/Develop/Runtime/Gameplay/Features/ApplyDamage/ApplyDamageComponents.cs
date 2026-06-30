@@ -18,4 +18,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage
     {
         public ICompositeCondition Value;
     }
+
+    public class DamageResistanceType : IEntityComponent
+    {
+        public ReactiveVariable<DamageTypes> Value;
+    }
+
+    public class DamageResistanceIndex : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
 }

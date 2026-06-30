@@ -21,6 +21,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddStartAttackEvent()
                 .AddEndAttackEvent()
                 .AddInstantAttackDamage(new ReactiveVariable<float>(config.AttackDamage))
+                .AddInstantAttackDamageType(new(config.DamageType))
                 .AddInstantShootRange(new ReactiveVariable<float>(config.AttackRange))
                 .AddInstantShotDirection()
                 .AddAttackCooldownCurrentTime()

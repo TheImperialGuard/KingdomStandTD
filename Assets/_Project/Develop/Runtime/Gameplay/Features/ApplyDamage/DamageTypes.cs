@@ -2,6 +2,7 @@
 {
     public enum DamageTypes
     {
+        None,
         Physic,
         Magic
     }

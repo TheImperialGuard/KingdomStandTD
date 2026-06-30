@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: TestMelee
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.MeleeConfig
   <PrefabPath>k__BackingField: Prefabs/Entities/Characters/Melee
-  <MoveSpeed>k__BackingField: 1
+  <MoveSpeed>k__BackingField: 0.2
   <RotateSpeed>k__BackingField: 900
-  <MaxHealth>k__BackingField: 4
-  <DeathProcessTime>k__BackingField: 2
+  <MaxHealth>k__BackingField: 2
+  <DeathProcessTime>k__BackingField: 1
+  <DamageResistanceType>k__BackingField: 1
+  <DamageResistanceIndex>k__BackingField: 0.5

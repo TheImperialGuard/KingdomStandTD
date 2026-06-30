@@ -7,12 +7,13 @@ using Assets._Project.Develop.Runtime.Utilities;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
+using static UnityEngine.Rendering.STP;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
 {
     public partial class EntitiesFactory
     {
-        public Entity CreateProjectile(Vector3 position, Vector3 direction, float damage, Entity owner)
+        public Entity CreateProjectile(Vector3 position, Vector3 direction, Entity owner)
         {
             Entity entity = CreateEmpty();
 
@@ -32,7 +33,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddContactEntitiesBuffer(new Buffer<Entity>(64))
                 .AddDeathMask(Layers.EnviromentMask)
                 .AddIsTouchDeathMask()
-                .AddBodyContactDamage(new ReactiveVariable<float>(damage))
+                .AddBodyContactDamage(new ReactiveVariable<float>(owner.InstantAttackDamage.Value))
+                .AddInstantAttackDamageType(new(owner.InstantAttackDamageType.Value))
                 .AddTeam(new ReactiveVariable<Teams>(owner.Team.Value));
 
             ICompositeCondition canMove = new CompositeCondition()

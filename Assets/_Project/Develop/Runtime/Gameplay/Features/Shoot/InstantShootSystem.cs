@@ -12,7 +12,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
         private readonly EntitiesFactory _entitiesFactory;
 
         private ReactiveVariable<InstantShotDirectionArgs> _directionArgs;
-        private ReactiveVariable<float> _damage;
 
         private ReactiveEvent _attackRequest;
         private ReactiveEvent _endAttackEvent;
@@ -33,7 +32,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
             _endAttackEvent = entity.EndAttackEvent;
 
             _directionArgs = entity.InstantShotDirection;
-            _damage = entity.InstantAttackDamage;
 
             _shooterEntity = entity;
             _shootPoint = entity.ShootPoint;
@@ -64,7 +62,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
                 Vector2 offset = perpindicular * (-offesetBetweenProjectiles / 2f * (projectileCounts - 1) + i * offesetBetweenProjectiles);
                 Vector3 position = new Vector3(_shootPoint.position.x + offset.x, _shootPoint.position.y, _shootPoint.position.z + offset.y);
 
-                _entitiesFactory.CreateProjectile(position, direction, _damage.Value, _shooterEntity);
+                _entitiesFactory.CreateProjectile(position, direction, _shooterEntity);
             }
         }
     }

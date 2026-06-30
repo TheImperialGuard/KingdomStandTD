@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3feeb29ab14b6844a09a0e43d1c9619, type: 3}
   m_Name: ArrowsTowerConfig_level_1
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.ArrowsTowerConfig
+  _damageType: 1
   <PrefabPath>k__BackingField: Prefabs/Entities/Towers/Arrows/ArrowsTower_level_1
-  <AttackRange>k__BackingField: 3
+  <AttackRange>k__BackingField: 1
   <AttackCooldown>k__BackingField: 2
-  <AttackDamage>k__BackingField: 2
-  <DamageType>k__BackingField: 0
+  <AttackDamage>k__BackingField: 1

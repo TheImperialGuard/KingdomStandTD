@@ -33,6 +33,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddCurrentHealth(new(config.MaxHealth))
                 .AddTakeDamageRequest()
                 .AddTakeDamageEvent()
+                .AddDamageResistanceType(new(config.DamageResistanceType))
+                .AddDamageResistanceIndex(new(config.DamageResistanceIndex))
                 .AddIsDead()
                 .AddDeathProcessInitialTime(new(config.DeathProcessTime))
                 .AddDeathProcessCurrentTime()

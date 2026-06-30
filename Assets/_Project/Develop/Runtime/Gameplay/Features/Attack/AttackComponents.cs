@@ -1,12 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Attack
 {
@@ -38,6 +33,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Attack
     public class InstantAttackDamage : IEntityComponent
     {
         public ReactiveVariable<float> Value;
+    }
+
+    public class InstantAttackDamageType : IEntityComponent
+    {
+        public ReactiveVariable<DamageTypes> Value;
     }
 
     public class StartAttackRequest : IEntityComponent
