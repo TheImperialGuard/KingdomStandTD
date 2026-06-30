@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193a5dcbb319b3a42b997ea6be380bcb, type: 3}
   m_Name: Level_1
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.LevelConfig
-  <PrefabPath>k__BackingField: 
-  <WavesConfig>k__BackingField: {fileID: 0}
+  _arrowsTreeConfig: {fileID: 0}
+  <PrefabPath>k__BackingField: Prefabs/Levels/LevelOrigin
+  <WavesConfig>k__BackingField: {fileID: 11400000, guid: 61ada0ab1eeab334cad9461b2c8aa9f2, type: 2}
+  <ArrowsUpgradesLevelLimit>k__BackingField: 5
+  <MagicUpgradesLevelLimit>k__BackingField: 5
+  <CannonUpgradesLevelLimit>k__BackingField: 5
+  <BarracksUpgradesLevelLimit>k__BackingField: 5

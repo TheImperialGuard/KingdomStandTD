@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec8892bf97f4e42bac97aeaa7558b6, type: 3}
   m_Name: Level_1_Waves
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.EnemiesWavesListConfig
-  _waveToPathNumbers: []
+  _waveToPathNumbers:
+  - WaveConfig: {fileID: 11400000, guid: 5a46c69354e396d4e9f8646482ca69b1, type: 2}
+    PathNumber: 0

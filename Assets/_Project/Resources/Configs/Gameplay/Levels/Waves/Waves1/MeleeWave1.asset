@@ -15,5 +15,5 @@ MonoBehaviour:
   <WaveStage>k__BackingField: 1
   <WaveStartDelay>k__BackingField: 0
   <WaveDelayBetweenSpawns>k__BackingField: 1
-  <EnemyConfig>k__BackingField: {fileID: 0}
-  <EnemiesCount>k__BackingField: 1
+  <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 3b94d90c66f36024b937c884d541a969, type: 2}
+  <EnemiesCount>k__BackingField: 5
