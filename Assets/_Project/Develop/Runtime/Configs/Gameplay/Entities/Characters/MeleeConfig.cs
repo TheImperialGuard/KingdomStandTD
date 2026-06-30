@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Entities
+namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters
 {
     [CreateAssetMenu(menuName = "Configs/Gameplay/Entities/NewMeleeConfig", fileName = "MeleeConfig")]
     public class MeleeConfig : EntityConfig
