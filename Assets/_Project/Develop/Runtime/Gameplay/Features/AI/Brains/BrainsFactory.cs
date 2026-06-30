@@ -1,15 +1,8 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.States;
-using Assets._Project.Develop.Runtime.Gameplay.Features.Attack;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
 {
@@ -37,17 +30,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
             return brain;
         }
 
-        private AIStateMachine CreateWaypointMovementStateMachine(Entity entity)
-        {
-            WaypointsMovementState waypointsMovementState = new(entity);
-
-            AIStateMachine stateMachine = new AIStateMachine();
-
-            stateMachine.AddState(waypointsMovementState);
-
-            return stateMachine;
-        }
-
         public StateMachineBrain CreateTowerBrain(Entity entity, ITargetSelector targetSelector)
         {
             FindTargetState findTargetState = new FindTargetState(targetSelector, _entitiesLifeContext, entity);
@@ -55,9 +37,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
 
             ICompositeCondition fromFindTargetToAttackTriggerStateCondition = new CompositeCondition()
                 .Add(entity.CanStartAttack)
-                .Add(new FuncCondition(() => entity.CurrentTarget.Value != null));
+                .Add(new FuncCondition(() => entity.InstantShotDirection.Value != null));
 
-            ICondition fromAttackTriggerToFindTargetStateCondition = new FuncCondition(() => entity.InAttackCooldown.Value == true);
+            ICondition fromAttackTriggerToFindTargetStateCondition = new FuncCondition(() => entity.CanStartAttack.Evaluate() == false);
 
             AIStateMachine stateMachine = new AIStateMachine();
 
@@ -72,6 +54,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
             _brainsContext.SetBrainsFor(entity, brain);
 
             return brain;
+        }
+
+        private AIStateMachine CreateWaypointMovementStateMachine(Entity entity)
+        {
+            WaypointsMovementState waypointsMovementState = new(entity);
+
+            AIStateMachine stateMachine = new AIStateMachine();
+
+            stateMachine.AddState(waypointsMovementState);
+
+            return stateMachine;
         }
     }
 }

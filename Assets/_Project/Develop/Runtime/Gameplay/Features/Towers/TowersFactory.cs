@@ -6,6 +6,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
+using System;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
@@ -33,11 +34,21 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
         {
             Entity entity;
 
-            entity = _entitiesFactory.CreateTower(position, config);
+            switch (config)
+            {
+                case ArrowsTowerConfig arrowsTowerConfig:
+                    entity = _entitiesFactory.CreateArrowsTower(position, arrowsTowerConfig);
+
+                    _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
+
+                    break;
+
+                default:
+                    throw new ArgumentException($"Not support {config.GetType()} type config");
+            }
+            
 
             entity.AddTeam(new ReactiveVariable<Teams>(Teams.Allies));
-
-            _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
 
             _entitiesLifeContext.Add(entity);
 

@@ -9,7 +9,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
 {
     public partial class EntitiesFactory
     {
-        public Entity CreateTower(Vector3 position, TowerConfig config)
+        public Entity CreateArrowsTower(Vector3 position, ArrowsTowerConfig config)
         {
             Entity entity = CreateEmpty();
 
@@ -23,7 +23,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddInstantAttackDamage(new ReactiveVariable<float>(config.AttackDamage))
                 .AddInstantShootRange(new ReactiveVariable<float>(config.AttackRange))
                 .AddInstantShotDirection()
-                .AddAttackCancelEvent()
                 .AddAttackCooldownCurrentTime()
                 .AddAttackCooldownInitialTime(new ReactiveVariable<float>(config.AttackCooldown))
                 .AddInAttackCooldown();
