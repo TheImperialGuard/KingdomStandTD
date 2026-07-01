@@ -11,6 +11,7 @@ using Assets._Project.Develop.Runtime.Utilities.DataManagment.KeysStorage;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.Serializers;
 using Assets._Project.Develop.Runtime.Utilities.LoadingScreen;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
+using Assets._Project.Develop.Runtime.Utilities.Timer;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
@@ -22,6 +23,8 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateResourcesAssetsLoader);
 
             container.RegisterAsSingle(CreateSceneLoaderService);
+
+            container.RegisterAsSingle(CreateTimerServiceFactory);
 
             container.RegisterAsSingle(CreateConfigsProviderService);
 
@@ -43,6 +46,8 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
         private static ResourcesAssetsLoader CreateResourcesAssetsLoader(DIContainer c) => new();
 
         private static SceneLoaderService CreateSceneLoaderService(DIContainer c) => new();
+
+        private static TimerServiceFactory CreateTimerServiceFactory(DIContainer c) => new(c);
 
         private static ConfigsProviderService CreateConfigsProviderService(DIContainer c)
         {
