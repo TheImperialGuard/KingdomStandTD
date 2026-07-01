@@ -11,6 +11,8 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels
 
         [field: SerializeField] public string PrefabPath {  get; private set; }
         [field: SerializeField] public EnemiesWavesListConfig WavesConfig { get; private set; }
+        [field: SerializeField] public int StartGold { get; private set; }
+        [field: SerializeField] public int StartPlayerHealth { get; private set; } = 20;
 
         [field: SerializeField, Range(1, 5)] public int ArrowsUpgradesLevelLimit { get; private set; } = 5;
         [field: SerializeField, Range(1, 5)] public int MagicUpgradesLevelLimit { get; private set; } = 5;
