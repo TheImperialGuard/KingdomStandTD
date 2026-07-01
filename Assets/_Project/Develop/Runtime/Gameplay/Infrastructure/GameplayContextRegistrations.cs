@@ -7,6 +7,9 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
+using Assets._Project.Develop.Runtime.Utilities.Reactive;
+using Assets._Project.Develop.Runtime.Utilities.Wallet;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
@@ -28,6 +31,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateCollidersRegistryService);
 
             container.RegisterAsSingle(CreateLevelEnvironment).NonLazy();
+
+            container.RegisterAsSingle(CreateGameplayWalletService).NonLazy();
 
             container.RegisterAsSingle(CreateBrainsFactory);
 
@@ -63,6 +68,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static TowersFactory CreateTowerFactory(DIContainer c)
             => new(c);
+
+        private static WalletService CreateGameplayWalletService(DIContainer c)
+        {
+            Dictionary<CurrencyTypes, ReactiveVariable<int>> currencies = new()
+            {
+                {CurrencyTypes.Gold, new ReactiveVariable<int>(0) }
+            };
+
+            return new WalletService(currencies);
+        }
 
         private static Level CreateLevelEnvironment(DIContainer c)
         {
