@@ -16,6 +16,8 @@ MonoBehaviour:
   - 30
   <PrefabPath>k__BackingField: Prefabs/Levels/LevelOrigin
   <WavesConfig>k__BackingField: {fileID: 11400000, guid: 61ada0ab1eeab334cad9461b2c8aa9f2, type: 2}
+  <StartGold>k__BackingField: 100
+  <StartPlayerHealth>k__BackingField: 20
   <ArrowsUpgradesLevelLimit>k__BackingField: 5
   <MagicUpgradesLevelLimit>k__BackingField: 5
   <CannonUpgradesLevelLimit>k__BackingField: 5
