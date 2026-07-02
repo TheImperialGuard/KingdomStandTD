@@ -123,21 +123,21 @@ MonoBehaviour:
   - _enemiesWaveConfigs:
     - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 3b94d90c66f36024b937c884d541a969, type: 2}
       <RoadPath>k__BackingField: {fileID: 5456316474685536905}
-      <StartDelay>k__BackingField: 0
-      <DelayBetweenSpawns>k__BackingField: 1
+      <StartDelay>k__BackingField: 5
+      <DelayBetweenSpawns>k__BackingField: 3
       <EnemiesCount>k__BackingField: 2
     - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 3b94d90c66f36024b937c884d541a969, type: 2}
       <RoadPath>k__BackingField: {fileID: 6610908647149833602}
       <StartDelay>k__BackingField: 0
-      <DelayBetweenSpawns>k__BackingField: 1
-      <EnemiesCount>k__BackingField: 3
+      <DelayBetweenSpawns>k__BackingField: 3
+      <EnemiesCount>k__BackingField: 2
     <StageTime>k__BackingField: 30
     <TimeToSkipStage>k__BackingField: 15
   - _enemiesWaveConfigs:
     - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 3b94d90c66f36024b937c884d541a969, type: 2}
       <RoadPath>k__BackingField: {fileID: 6610908647149833602}
       <StartDelay>k__BackingField: 0
-      <DelayBetweenSpawns>k__BackingField: 1
+      <DelayBetweenSpawns>k__BackingField: 3
       <EnemiesCount>k__BackingField: 2
     <StageTime>k__BackingField: 30
     <TimeToSkipStage>k__BackingField: 15
@@ -980,6 +980,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9217051213537815537}
     m_Modifications:
+    - target: {fileID: 280861962308592731, guid: 972b0b7a64180e649b8f5236360f3929, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4932605604372494192, guid: 972b0b7a64180e649b8f5236360f3929, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2

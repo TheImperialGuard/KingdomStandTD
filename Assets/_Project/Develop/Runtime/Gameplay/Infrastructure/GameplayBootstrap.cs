@@ -1,9 +1,8 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
-using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
-using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
+using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
@@ -24,6 +23,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private EntitiesLifeContext _entitiesLifeContext;
         private AIBrainsContext _brainsContext;
+        private StageProviderService _stageProviderService;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -45,6 +45,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _brainsContext = _container.Resolve<AIBrainsContext>();
+            _stageProviderService = _container.Resolve<StageProviderService>();
 
             yield break;
         }
@@ -55,25 +56,24 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             Level level = _container.Resolve<Level>();
 
-            EnemiesFactory enemiesFactory = _container.Resolve<EnemiesFactory>();
             TowersFactory towersFactory = _container.Resolve<TowersFactory>();
 
-            MeleeConfig meleeConfig = _container.Resolve<ResourcesAssetsLoader>().Load<MeleeConfig>("Configs/Gameplay/Entities/Enemies/TestMelee");
             TowerConfig towerConfig = _container.Resolve<ResourcesAssetsLoader>().Load<TowerConfig>("Configs/Gameplay/Entities/Towers/Arrows/ArrowsTowerConfig_level_1");
 
-            //Vector3 spawnPos = new Vector3(
-            //    level.RoadPaths[0].Waypoints[0].transform.position.x,
-            //    level.RoadPaths[0].Waypoints[0].transform.position.y,
-            //    level.RoadPaths[0].Waypoints[0].transform.position.z - 1);
+            towersFactory.Create(level.TowerTiles[0].TowerPosition, towerConfig);
 
-            //enemiesFactory.Create(spawnPos, meleeConfig, level.RoadPaths[0].Waypoints);
-            //towersFactory.Create(level.TowerTiles[0].TowerPosition, towerConfig);
+            _stageProviderService.SwitchToNext();
+            _stageProviderService.StartCurrent();
         }
 
         private void Update()
         {
             _brainsContext?.Update(Time.deltaTime);
             _entitiesLifeContext?.Update(Time.deltaTime);
+
+            if(_stageProviderService != null && _stageProviderService.CurrentStageNumber.Value == 1)
+                _stageProviderService.UpdateCurrent(Time.deltaTime);
+            
 
             if (Input.GetKeyDown(KeyCode.M))
             {

@@ -12,6 +12,6 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels
         [field: SerializeField, Min(0)] public float StageTime { get; private set; } = 30f;
         [field: SerializeField, Min(0)] public float TimeToSkipStage { get; private set; } = 15f;
 
-        public IReadOnlyList<EnemiesWaveConfig> EnemiesWaveConfigs;
+        public IReadOnlyList<EnemiesWaveConfig> EnemiesWaveConfigs => _enemiesWaveConfigs;
     }
 }

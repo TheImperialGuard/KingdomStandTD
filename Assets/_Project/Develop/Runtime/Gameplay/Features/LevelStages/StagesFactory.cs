@@ -1,8 +1,10 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Timer;
 using System;
+using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 {

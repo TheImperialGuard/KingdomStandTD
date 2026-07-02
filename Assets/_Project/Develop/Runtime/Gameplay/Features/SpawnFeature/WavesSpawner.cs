@@ -60,7 +60,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
                 startTimer = _timerServiceFactory.Create(startDelay);
                 startTimer.Restart();
 
-                yield return new WaitWhile(() => startTimer.IsOver == true);
+                yield return new WaitUntil(() => startTimer.IsOver == true);
             }
 
             spawnCooldownTimer = _timerServiceFactory.Create(spawnDelay);
@@ -70,7 +70,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
                 SpawnEnemy(waveConfig.EnemyConfig, waveConfig.RoadPath.Waypoints);
 
                 spawnCooldownTimer.Restart();
-                yield return new WaitWhile(() => spawnCooldownTimer.IsOver == true);
+                yield return new WaitUntil(() => spawnCooldownTimer.IsOver == true);
             }
         }
 

@@ -17,5 +17,5 @@ MonoBehaviour:
   <RotateSpeed>k__BackingField: 900
   <MaxHealth>k__BackingField: 2
   <DeathProcessTime>k__BackingField: 1
-  <DamageResistanceType>k__BackingField: 1
+  <DamageResistanceType>k__BackingField: 0
   <DamageResistanceIndex>k__BackingField: 0.5

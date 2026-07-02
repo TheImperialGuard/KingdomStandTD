@@ -1,10 +1,9 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
+using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
@@ -22,7 +21,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
         private IDisposable _stageEndedDisposable;
 
-        public StageProviderService(StagesFactory stagesFactory, List<StageConfig> stagesConfigs)
+        public StageProviderService(StagesFactory stagesFactory, IReadOnlyList<StageConfig> stagesConfigs)
         {
             _stagesFactory = stagesFactory;
             _stagesConfigs = new(stagesConfigs);
