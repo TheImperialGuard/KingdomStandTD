@@ -1,5 +1,4 @@
-﻿using Assets._Project.Develop.Runtime.Infrastructure.DI;
-using Assets._Project.Develop.Runtime.Utilities.Reactive;
+﻿using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
@@ -11,16 +10,5 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         void Start();
         void Update(float deltaTime);
         void Cleanup();
-    }
-
-    public class StagesFactory
-    {
-        private readonly DIContainer _container;
-
-        public StagesFactory(DIContainer container)
-        {
-            _container = container;
-        }
-
     }
 }

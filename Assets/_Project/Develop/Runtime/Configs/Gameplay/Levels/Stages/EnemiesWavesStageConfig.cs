@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels
 {
     [Serializable]
-    public class EnemiesWaveStageConfig
+    public class EnemiesWavesStageConfig : StageConfig
     {
         [SerializeField] private List<EnemiesWaveConfig> _enemiesWaveConfigs;
 

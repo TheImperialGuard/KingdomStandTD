@@ -12,7 +12,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         private readonly TimerServiceFactory _timerServiceFactory;
         private readonly WavesSpawner _wavesSpawner;
 
-        private readonly EnemiesWaveStageConfig _config;
+        private readonly EnemiesWavesStageConfig _config;
 
         private readonly float _stageTime;
         private readonly float _timeToSkipStage;
@@ -27,7 +27,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         private List<IDisposable> _disposables = new();
 
         public EnemiesWavesStage(
-            EnemiesWaveStageConfig config,
+            EnemiesWavesStageConfig config,
             TimerServiceFactory timerServiceFactory,
             WavesSpawner wavesSpawner)
         {
