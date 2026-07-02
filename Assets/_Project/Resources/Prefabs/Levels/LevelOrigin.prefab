@@ -121,11 +121,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Level.Level
   _enemiesWavesStageConfigs:
   - _enemiesWaveConfigs:
-    - <EnemyConfig>k__BackingField: {fileID: 0}
-      <RoadPath>k__BackingField: {fileID: 0}
+    - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 3b94d90c66f36024b937c884d541a969, type: 2}
+      <RoadPath>k__BackingField: {fileID: 5456316474685536905}
       <StartDelay>k__BackingField: 0
-      <DelayBetweenSpawns>k__BackingField: 0
-      <EnemiesCount>k__BackingField: 0
+      <DelayBetweenSpawns>k__BackingField: 1
+      <EnemiesCount>k__BackingField: 2
+    - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 3b94d90c66f36024b937c884d541a969, type: 2}
+      <RoadPath>k__BackingField: {fileID: 6610908647149833602}
+      <StartDelay>k__BackingField: 0
+      <DelayBetweenSpawns>k__BackingField: 1
+      <EnemiesCount>k__BackingField: 3
+    <StageTime>k__BackingField: 30
+    <TimeToSkipStage>k__BackingField: 15
+  - _enemiesWaveConfigs:
+    - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 3b94d90c66f36024b937c884d541a969, type: 2}
+      <RoadPath>k__BackingField: {fileID: 6610908647149833602}
+      <StartDelay>k__BackingField: 0
+      <DelayBetweenSpawns>k__BackingField: 1
+      <EnemiesCount>k__BackingField: 2
     <StageTime>k__BackingField: 30
     <TimeToSkipStage>k__BackingField: 15
   _towerTiles:
@@ -500,6 +513,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 954441866173727920, guid: 91bbd52ac6d7baf47b37226fd7e14d96, type: 3}
   m_PrefabInstance: {fileID: 484723373865891555}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5456316474685536905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5549190912428788842, guid: 91bbd52ac6d7baf47b37226fd7e14d96, type: 3}
+  m_PrefabInstance: {fileID: 484723373865891555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84cfb4b29abb37245a0d177a03dfa34e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.RoadPath
 --- !u!1001 &915686849266798567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -729,6 +753,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 954441866173727920, guid: 91bbd52ac6d7baf47b37226fd7e14d96, type: 3}
   m_PrefabInstance: {fileID: 1638190792240021992}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6610908647149833602 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5549190912428788842, guid: 91bbd52ac6d7baf47b37226fd7e14d96, type: 3}
+  m_PrefabInstance: {fileID: 1638190792240021992}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84cfb4b29abb37245a0d177a03dfa34e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.RoadPath
 --- !u!1001 &1713019143538617829
 PrefabInstance:
   m_ObjectHideFlags: 0
