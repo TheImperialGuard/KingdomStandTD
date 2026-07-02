@@ -61,13 +61,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             MeleeConfig meleeConfig = _container.Resolve<ResourcesAssetsLoader>().Load<MeleeConfig>("Configs/Gameplay/Entities/Enemies/TestMelee");
             TowerConfig towerConfig = _container.Resolve<ResourcesAssetsLoader>().Load<TowerConfig>("Configs/Gameplay/Entities/Towers/Arrows/ArrowsTowerConfig_level_1");
 
-            Vector3 spawnPos = new Vector3(
-                level.RoadPaths[0].Waypoints[0].transform.position.x,
-                level.RoadPaths[0].Waypoints[0].transform.position.y,
-                level.RoadPaths[0].Waypoints[0].transform.position.z - 1);
+            //Vector3 spawnPos = new Vector3(
+            //    level.RoadPaths[0].Waypoints[0].transform.position.x,
+            //    level.RoadPaths[0].Waypoints[0].transform.position.y,
+            //    level.RoadPaths[0].Waypoints[0].transform.position.z - 1);
 
-            enemiesFactory.Create(spawnPos, meleeConfig, level.RoadPaths[0].Waypoints);
-            towersFactory.Create(level.TowerTiles[0].TowerPosition, towerConfig);
+            //enemiesFactory.Create(spawnPos, meleeConfig, level.RoadPaths[0].Waypoints);
+            //towersFactory.Create(level.TowerTiles[0].TowerPosition, towerConfig);
         }
 
         private void Update()
