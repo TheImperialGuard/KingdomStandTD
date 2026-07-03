@@ -42,6 +42,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
         public IReadOnlyEvent Completed => _completed;
 
+        public IReadOnlyEvent CanBeSkiped => _canBeSkiped;
+
         public void Start()
         {
             if (_inProcess)

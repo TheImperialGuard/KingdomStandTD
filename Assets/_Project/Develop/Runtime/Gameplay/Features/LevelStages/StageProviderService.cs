@@ -1,10 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
-using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
-using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 {
@@ -20,6 +17,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         private ReactiveVariable<StageResults> _currentStageResult = new();
 
         private IDisposable _stageEndedDisposable;
+        private IDisposable _stageCanBeSkipedDisposable;
 
         public StageProviderService(StagesFactory stagesFactory, IReadOnlyList<StageConfig> stagesConfigs)
         {
@@ -52,6 +50,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         public void StartCurrent()
         {
             _stageEndedDisposable = _currentStage.Completed.Subscribe(OnCurrentStageCompleted);
+            _stageCanBeSkipedDisposable = _currentStage.CanBeSkiped.Subscribe(OnCurrentStageCanBeSkiped);
 
             _currentStage.Start();
         }
@@ -65,11 +64,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
             _currentStage?.Dispose();
 
             _stageEndedDisposable?.Dispose();
+            _stageCanBeSkipedDisposable?.Dispose();
         }
 
         private void OnCurrentStageCompleted()
         {
             _currentStageResult.Value = StageResults.Completed;
+        }
+
+        private void OnCurrentStageCanBeSkiped()
+        {
+            _currentStageResult.Value = StageResults.CanBeSkiped;
         }
     }
 }

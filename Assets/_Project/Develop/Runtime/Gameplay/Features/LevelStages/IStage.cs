@@ -6,6 +6,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
     public interface IStage : IDisposable
     {
         IReadOnlyEvent Completed { get; }
+        IReadOnlyEvent CanBeSkiped { get; }
 
         void Start();
         void Update(float deltaTime);

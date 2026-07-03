@@ -3,6 +3,7 @@
     public enum StageResults
     {
         Completed,
-        Uncompleted
+        Uncompleted,
+        CanBeSkiped
     }
 }
