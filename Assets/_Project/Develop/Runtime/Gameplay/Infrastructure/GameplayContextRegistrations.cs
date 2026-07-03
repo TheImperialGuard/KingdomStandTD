@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
@@ -9,6 +10,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
+using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
@@ -54,6 +56,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateStagesFactory);
 
             container.RegisterAsSingle(CreateStageProviderService);
+
+            container.RegisterAsSingle(CreateGameModesFactory);
+
+            container.RegisterAsSingle(CreateGameplayCycle);
         }
 
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c) => new();
@@ -85,6 +91,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<Level>().EnemiesWavesStageConfigs);
         }
 
+        private static StagesCycle CreateGameplayCycle(DIContainer c)
+        {
+            return new StagesCycle(c.Resolve<StageProviderService>());
+        }
+
         private static EntitiesFactory CreateEntitiesFactory(DIContainer c)
             => new(c);
 
@@ -96,8 +107,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static TowersFactory CreateTowerFactory(DIContainer c)
             => new(c);
-
+        
         private static StagesFactory CreateStagesFactory(DIContainer c)
+            => new(c);
+
+        private static GameModesFactory CreateGameModesFactory(DIContainer c)
             => new(c);
 
         private static WalletService CreateGameplayWalletService(DIContainer c)

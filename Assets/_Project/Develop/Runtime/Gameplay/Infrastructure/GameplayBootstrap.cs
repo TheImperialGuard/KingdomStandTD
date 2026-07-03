@@ -2,8 +2,8 @@
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
-using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
+using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Infrastructure;
@@ -23,7 +23,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private EntitiesLifeContext _entitiesLifeContext;
         private AIBrainsContext _brainsContext;
-        private StageProviderService _stageProviderService;
+
+        private Level _level;
+        private IGameMode _gameMode;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -45,7 +47,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _brainsContext = _container.Resolve<AIBrainsContext>();
-            _stageProviderService = _container.Resolve<StageProviderService>();
+            _level = _container.Resolve<Level>();
 
             yield break;
         }
@@ -54,25 +56,23 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         {
             Debug.Log("Старт геймплейной сцены");
 
-            Level level = _container.Resolve<Level>();
-
             TowersFactory towersFactory = _container.Resolve<TowersFactory>();
 
             TowerConfig towerConfig = _container.Resolve<ResourcesAssetsLoader>().Load<TowerConfig>("Configs/Gameplay/Entities/Towers/Arrows/ArrowsTowerConfig_level_1");
 
-            towersFactory.Create(level.TowerTiles[0].TowerPosition, towerConfig);
+            towersFactory.Create(_level.TowerTiles[0].TowerPosition, towerConfig);
 
-            _stageProviderService.SwitchToNext();
-            _stageProviderService.StartCurrent();
+            GameModesFactory gameModesFactory = _container.Resolve<GameModesFactory>();
+
+            _gameMode = gameModesFactory.Create(GameModes.Basic); // поменять на взятие гейммода из конфига
+            _gameMode.Start();
         }
 
         private void Update()
         {
             _brainsContext?.Update(Time.deltaTime);
             _entitiesLifeContext?.Update(Time.deltaTime);
-
-            if(_stageProviderService != null && _stageProviderService.CurrentStageNumber.Value == 1)
-                _stageProviderService.UpdateCurrent(Time.deltaTime);
+            _gameMode?.Update(Time.deltaTime);
             
 
             if (Input.GetKeyDown(KeyCode.M))
