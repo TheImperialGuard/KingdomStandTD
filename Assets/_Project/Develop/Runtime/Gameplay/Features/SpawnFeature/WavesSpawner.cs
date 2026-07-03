@@ -1,8 +1,10 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using Assets._Project.Develop.Runtime.Utilities.Timer;
 using System;
 using System.Collections;
@@ -19,6 +21,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
         private readonly ICoroutinesPerformer _coroutinesPerformer;
 
         private List<Coroutine> _activeSpawnProcesses = new();
+        private List<Entity> _spawnedEntitites = new();
+
+        private int _requestedSpawnProcesses;
+        private int _completedSpawnProcesses;
+
+        private ReactiveVariable<bool> _isSpawnComplete = new();
 
         public WavesSpawner(
             EnemiesFactory enemiesFactory, 
@@ -29,6 +37,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
             _timerServiceFactory = timerServiceFactory;
             _coroutinesPerformer = coroutinesPerformer;
         }
+
+        public IReadOnlyList<Entity> SpawnedEntitites => _spawnedEntitites;
+
+        public IReadOnlyVariable<bool> IsSpawnComplete => _isSpawnComplete;
 
         public void SpawnWave(EnemiesWaveConfig waveConfig)
         {
@@ -49,6 +61,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
 
         private IEnumerator SpawnProcess(EnemiesWaveConfig waveConfig)
         {
+            _requestedSpawnProcesses++;
+
             float startDelay = waveConfig.StartDelay;
             float spawnDelay = waveConfig.DelayBetweenSpawns;
 
@@ -72,13 +86,19 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
                 spawnCooldownTimer.Restart();
                 yield return new WaitUntil(() => spawnCooldownTimer.IsOver == true);
             }
+
+            _completedSpawnProcesses++;
+
+            CheckSpawnComplete();
         }
 
         private void SpawnEnemy(CharacterConfig enemyConfig, IReadOnlyList<Waypoint> waypoints)
         {
             Vector3 spawnPos = waypoints.First().transform.position;
 
-            _enemiesFactory.Create(spawnPos, enemyConfig, waypoints);
+            Entity enemy = _enemiesFactory.Create(spawnPos, enemyConfig, waypoints);
+
+            _spawnedEntitites.Add(enemy);
         }
 
         private void ClearSpawnPorecesses()
@@ -88,6 +108,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
                 foreach (Coroutine process in _activeSpawnProcesses)
                     _coroutinesPerformer.StopPerform(process);
             }
+        }
+
+        public void CheckSpawnComplete()
+        {
+            bool result = _requestedSpawnProcesses > 0;
+
+            _isSpawnComplete.Value = result && _completedSpawnProcesses == _requestedSpawnProcesses;
         }
     }
 }
