@@ -13,6 +13,7 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages
         private ReactiveVariable<bool> _isCycleComplete = new();
 
         private bool _isRunning;
+        private bool _stageCanBeSkiped;
 
         private List<IDisposable> _disposables = new();
 
@@ -24,6 +25,8 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages
         }
 
         public IReadOnlyVariable<bool> IsCycleComplete => _isCycleComplete;
+
+        public bool InLastStage => _stageProviderService.HasNextStage() == false;
 
         public void Launch()
         {
@@ -43,6 +46,12 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages
                 return;
 
             _stageProviderService.UpdateCurrent(deltaTime);
+
+            if (_stageCanBeSkiped == true)
+            {
+                if (Input.GetKeyDown(KeyCode.S))
+                    SwitchStage();
+            }
         }
 
         public void Dispose()
@@ -63,7 +72,8 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages
                     break;
 
                 case StageResults.CanBeSkiped:
-                    OnStageCanBeSkiped();
+                    if (_stageProviderService.HasNextStage())
+                        OnStageCanBeSkiped();
                     break;
             }
         }
@@ -78,12 +88,16 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages
 
         private void OnStageCanBeSkiped()
         {
+            _stageCanBeSkiped = true;
+
             // создать попапы скипа
             Debug.Log($"Текущий стейдж может быть пропущен");
+
         }
 
         private void SwitchStage()
         {
+            _stageCanBeSkiped = false;
             _stageProviderService.SwitchToNext();
             _stageProviderService.StartCurrent();
             Debug.Log($"Запуск стейджа под номером: {_stageProviderService.CurrentStageNumber.Value}");
@@ -92,8 +106,8 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages
         private void OnCycleComplete()
         {
             _isRunning = false;
+            _stageCanBeSkiped = false;
             _isCycleComplete.Value = true;
-            Debug.Log($"Все стейджы пройдены");
         }
     }
 }
