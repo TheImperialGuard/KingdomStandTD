@@ -23,4 +23,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
     {
         public ReactiveVariable<bool> Value;
     }
+
+    public class DamageOnFinishPath : IEntityComponent
+    {
+        public ReactiveVariable<int> Value;
+    }
 }

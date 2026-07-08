@@ -45,6 +45,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
 
                     AddWaypointMovementFor(entity, path);
 
+                    entity.AddDamageOnFinishPath(new(meleeConfig.DamageOnFinishPath));
+
                     ICompositeCondition mustSelfReleaseByDeath = new CompositeCondition()
                         .Add(new FuncCondition(() => entity.IsDead.Value == true))
                         .Add(new FuncCondition(() => entity.InDeathProcces.Value == false));
