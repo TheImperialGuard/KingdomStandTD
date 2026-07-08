@@ -21,7 +21,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
         private readonly ICoroutinesPerformer _coroutinesPerformer;
 
         private List<Coroutine> _activeSpawnProcesses = new();
-        private List<Entity> _spawnedEntitites = new();
+        private Dictionary<Entity, IDisposable> _spawnedEnemiesToRemoveReason = new();
 
         private int _requestedSpawnProcesses;
         private int _completedSpawnProcesses;
@@ -38,7 +38,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
             _coroutinesPerformer = coroutinesPerformer;
         }
 
-        public IReadOnlyList<Entity> SpawnedEntitites => _spawnedEntitites;
+        public IReadOnlyList<Entity> SpawnedEntitites => _spawnedEnemiesToRemoveReason.Keys.ToList();
 
         public IReadOnlyVariable<bool> IsSpawnComplete => _isSpawnComplete;
 
@@ -57,6 +57,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
         public void Dispose()
         {
             Stop();
+
+            foreach (KeyValuePair<Entity, IDisposable> item in _spawnedEnemiesToRemoveReason)
+            {
+                item.Value.Dispose();
+            }
         }
 
         private IEnumerator SpawnProcess(EnemiesWaveConfig waveConfig)
@@ -98,7 +103,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
 
             Entity enemy = _enemiesFactory.Create(spawnPos, enemyConfig, waypoints);
 
-            _spawnedEntitites.Add(enemy);
+            IDisposable removeReason = enemy.IsDead.Subscribe((oldValue, isDead) =>
+            {
+                if (isDead)
+                {
+                    IDisposable disposable = _spawnedEnemiesToRemoveReason[enemy];
+                    disposable.Dispose();
+                    _spawnedEnemiesToRemoveReason.Remove(enemy);
+                }
+            });
+
+            _spawnedEnemiesToRemoveReason.Add(enemy, removeReason);
         }
 
         private void ClearSpawnPorecesses()
