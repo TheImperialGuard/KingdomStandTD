@@ -1,10 +1,12 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
 {
@@ -14,6 +16,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
 
         private readonly StagesCycle _stagesCycle;
         private readonly WavesSpawner _wavesSpawner;
+        private readonly PlayerHealth _playerHealth;
 
         private bool _isRunning;
 
@@ -21,17 +24,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
 
         private List<IDisposable> _disposables = new();
 
-        public BasicGameMode(StagesCycle stagesCycle, WavesSpawner wavesSpawner)
+        public BasicGameMode(
+            StagesCycle stagesCycle,
+            WavesSpawner wavesSpawner,
+            PlayerHealth playerHealth)
         {
             _stagesCycle = stagesCycle;
             _wavesSpawner = wavesSpawner;
+            _playerHealth = playerHealth;
 
-            _winCondition
-                .Add(new FuncCondition(() => _stagesCycle.IsCycleComplete.Value == true))
-                .Add(new FuncCondition(() => wavesSpawner.IsSpawnComplete.Value == true))
-                .Add(new FuncCondition(() => wavesSpawner.SpawnedEntitites.Count == 0));
-
-            // также добавить loseCond и проверку в update -> processLose
+            CreateWinCondition();
         }
 
         public IReadOnlyEvent<LevelResults> End => _end;
@@ -40,6 +42,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
         {
             //открытие попапов - триггеров волн
             //подписка на нажатие на эти попапы OnStartStagesCycle
+
+            _disposables.Add(_playerHealth.Current.Subscribe(OnPlayerHealthChanged));
 
             _isRunning = true;
 
@@ -66,6 +70,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
                 disposable.Dispose();
         }
 
+        private void CreateWinCondition()
+        {
+            _winCondition
+                .Add(new FuncCondition(() => _stagesCycle.InLastStage == true))
+                .Add(new FuncCondition(() => _wavesSpawner.IsSpawnComplete.Value == true))
+                .Add(new FuncCondition(() => _wavesSpawner.SpawnedEntitites.Count == 0));
+        }
+
         private void OnStartStagesRequest()
         {
             //закрытие попапов
@@ -73,27 +85,50 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
             _stagesCycle.Launch();
         }
 
-        private void ProcessEndGame()
+        private void OnPlayerHealthChanged(int oldValue, int newValue)
         {
-            _isRunning = false;
+            if (newValue <= 0)
+                ProcessLose();
         }
 
         private void ProcessWin()
         {
-            ProcessEndGame();
-
             LevelResults levelResults = CalculateWinResults();
 
+            ProcessEndGame(levelResults);
+        }
+
+        private void ProcessLose()
+        {
+            LevelResults levelResults = LevelResults.Defeat;
+
+            ProcessEndGame(levelResults);
+        }
+
+        private void ProcessEndGame(LevelResults levelResults)
+        {
+            _isRunning = false;
+
             _end.Invoke(levelResults);
+
+            Debug.Log($"Конец уровня с результатом: {levelResults}");
         }
 
         private LevelResults CalculateWinResults()
         {
             LevelResults results;
 
-            // проверить сервис хп игрока и выдать степень победы
+            int currentHealth = _playerHealth.Current.Value;
+            int maxHealth = _playerHealth.Current.Value;
 
-            results = LevelResults.Perfect;
+            float relation = currentHealth / maxHealth;
+
+            if (relation == 1f)
+                results = LevelResults.Perfect;
+            else if (relation >= 0.5f)
+                results = LevelResults.Average;
+            else
+                results = LevelResults.Bad;
 
             return results;
         }

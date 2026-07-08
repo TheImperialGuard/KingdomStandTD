@@ -8,6 +8,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.GameMode;
@@ -26,10 +27,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
     public class GameplayContextRegistrations
     {
         private static GameplayInputArgs _inputArgs;
+        private static LevelConfig _levelConfig;
 
         public static void Process(DIContainer container, GameplayInputArgs args)
         {
             _inputArgs = args;
+            _levelConfig = GetLevelConfig(container);
 
             container.RegisterAsSingle(CreateEntitiesFactory);
 
@@ -41,7 +44,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateLevel).NonLazy();
 
-            container.RegisterAsSingle(CreateGameplayWalletService).NonLazy();
+            container.RegisterAsSingle(CreateGameplayWalletService);
+
+            container.RegisterAsSingle(CreatePlayerHealth);
 
             container.RegisterAsSingle(CreateBrainsFactory);
 
@@ -60,6 +65,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateGameModesFactory);
 
             container.RegisterAsSingle(CreateGameplayCycle);
+
+            container.RegisterAsSingle(CreateDealDamageToPlayerService).NonLazy();
         }
 
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c) => new();
@@ -91,6 +98,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<Level>().EnemiesWavesStageConfigs);
         }
 
+        private static DealDamageToPlayerService CreateDealDamageToPlayerService(DIContainer c)
+        {
+            return new DealDamageToPlayerService(
+                c.Resolve<PlayerHealth>(),
+                c.Resolve<EntitiesLifeContext>());
+        }
+
         private static StagesCycle CreateGameplayCycle(DIContainer c)
         {
             return new StagesCycle(c.Resolve<StageProviderService>());
@@ -118,27 +132,40 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         {
             Dictionary<CurrencyTypes, ReactiveVariable<int>> currencies = new()
             {
-                {CurrencyTypes.Gold, new ReactiveVariable<int>(0) }
+                {CurrencyTypes.Gold, new ReactiveVariable<int>(_levelConfig.StartGold) }
             };
 
             return new WalletService(currencies);
         }
 
+        private static PlayerHealth CreatePlayerHealth(DIContainer c)
+        {
+            int maxValue = _levelConfig.StartPlayerHealth;
+
+            return new PlayerHealth(maxValue, maxValue);
+        }
+
         private static Level CreateLevel(DIContainer c)
+        {
+            ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
+
+            Level levelPrefab = resourcesAssetsLoader.Load<Level>(_levelConfig.PrefabPath);
+
+            Level levelInstance = GameObject.Instantiate(levelPrefab);
+
+            return levelInstance;
+        }
+
+        private static LevelConfig GetLevelConfig(DIContainer c)
         {
             int levelNumber = _inputArgs.LevelNumber;
 
-            ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
             ConfigsProviderService configsProviderService = c.Resolve<ConfigsProviderService>();
 
             LevelsListConfig levelsListConfig = configsProviderService.GetConfig<LevelsListConfig>();
             LevelConfig levelConfig = levelsListConfig.GetBy(levelNumber);
 
-            Level levelPrefab = resourcesAssetsLoader.Load<Level>(levelConfig.PrefabPath);
-
-            Level levelInstance = GameObject.Instantiate(levelPrefab);
-
-            return levelInstance;
+            return levelConfig;
         }
     }
 }
