@@ -125,12 +125,7 @@ MonoBehaviour:
       <RoadPath>k__BackingField: {fileID: 5456316474685536905}
       <StartDelay>k__BackingField: 5
       <DelayBetweenSpawns>k__BackingField: 3
-      <EnemiesCount>k__BackingField: 2
-    - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 3b94d90c66f36024b937c884d541a969, type: 2}
-      <RoadPath>k__BackingField: {fileID: 6610908647149833602}
-      <StartDelay>k__BackingField: 0
-      <DelayBetweenSpawns>k__BackingField: 3
-      <EnemiesCount>k__BackingField: 2
+      <EnemiesCount>k__BackingField: 3
     <StageTime>k__BackingField: 30
     <TimeToSkipStage>k__BackingField: 15
   - _enemiesWaveConfigs:
@@ -138,7 +133,7 @@ MonoBehaviour:
       <RoadPath>k__BackingField: {fileID: 6610908647149833602}
       <StartDelay>k__BackingField: 0
       <DelayBetweenSpawns>k__BackingField: 3
-      <EnemiesCount>k__BackingField: 2
+      <EnemiesCount>k__BackingField: 3
     <StageTime>k__BackingField: 30
     <TimeToSkipStage>k__BackingField: 15
   _towerTiles:

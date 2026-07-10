@@ -3,7 +3,6 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
-using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Infrastructure;
@@ -23,9 +22,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private EntitiesLifeContext _entitiesLifeContext;
         private AIBrainsContext _brainsContext;
+        private GameplayCycle _gameplayCycle;
 
         private Level _level;
-        private IGameMode _gameMode;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -48,6 +47,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _brainsContext = _container.Resolve<AIBrainsContext>();
             _level = _container.Resolve<Level>();
+            _gameplayCycle = _container.Resolve<GameplayCycle>();
 
             yield break;
         }
@@ -62,17 +62,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             towersFactory.Create(_level.TowerTiles[0].TowerPosition, towerConfig);
 
-            GameModesFactory gameModesFactory = _container.Resolve<GameModesFactory>();
-
-            _gameMode = gameModesFactory.Create(GameModes.Basic); // поменять на взятие гейммода из конфига
-            _gameMode.Start();
+            _gameplayCycle.Launch();
         }
 
         private void Update()
         {
             _brainsContext?.Update(Time.deltaTime);
             _entitiesLifeContext?.Update(Time.deltaTime);
-            _gameMode?.Update(Time.deltaTime);
+            _gameplayCycle?.Update(Time.deltaTime);
             
 
             if (Input.GetKeyDown(KeyCode.M))

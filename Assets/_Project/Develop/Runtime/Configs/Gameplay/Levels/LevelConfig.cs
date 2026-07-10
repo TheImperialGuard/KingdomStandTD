@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets._Project.Develop.Runtime.Gameplay.GameMode;
+using System;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels
@@ -7,6 +8,7 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels
     public class LevelConfig : ScriptableObject
     {
         [field: SerializeField] public string PrefabPath {  get; private set; }
+        [field: SerializeField] public GameModes GameMode { get; private set; } = GameModes.Basic;
         [field: SerializeField] public int StartGold { get; private set; }
         [field: SerializeField] public int StartPlayerHealth { get; private set; } = 20;
 
