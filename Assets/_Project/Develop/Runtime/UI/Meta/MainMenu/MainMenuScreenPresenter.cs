@@ -1,8 +1,10 @@
-﻿using Assets._Project.Develop.Runtime.Meta.Features.Levels;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.Meta.Infrastructure;
 using Assets._Project.Develop.Runtime.UI.Core.Presenters;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
+using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +18,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
         private readonly ViewsFactory _viewsFactory;
 
         private readonly LevelsProgressionService _levelsProgressionService;
+        private readonly ConfigsProviderService _configProviderService;
 
         private readonly List<LevelTilePresenter> _levelsTilesPresenters = new();
 
@@ -23,12 +26,14 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
             MainMenuScreenView screen,
             MainMenuPresentersFactory presentersFactory,
             ViewsFactory viewsFactory,
-            LevelsProgressionService levelsProgressionService)
+            LevelsProgressionService levelsProgressionService,
+            ConfigsProviderService configProviderService)
         {
             _screen = screen;
             _presentersFactory = presentersFactory;
             _viewsFactory = viewsFactory;
             _levelsProgressionService = levelsProgressionService;
+            _configProviderService = configProviderService;
         }
 
         public void Initialize()
@@ -60,8 +65,17 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
 
         private void CreateLevelsList()
         {
-            for (int i = 1; _levelsProgressionService.CanPlay(i); i++)
-                CreateLevelTile(_screen.LevelsPositionsList[i - 1].Position, i);
+            LevelsListConfig levelsListConfig = _configProviderService.GetConfig<LevelsListConfig>();
+
+            for (int i = 0; i < levelsListConfig.Levels.Count; i++)
+            {
+                int levelNumber = i + 1;
+
+                if(_levelsProgressionService.CanPlay(levelNumber) == false)
+                    break;
+
+                CreateLevelTile(_screen.LevelsPositionsList[i].Position, levelNumber);
+            }
         }
 
         private void CreateLevelTile(RectTransform position, int levelNumber)

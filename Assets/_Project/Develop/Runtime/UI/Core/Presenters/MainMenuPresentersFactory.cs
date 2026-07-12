@@ -4,6 +4,7 @@ using Assets._Project.Develop.Runtime.Meta.Infrastructure;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
+using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 
@@ -34,7 +35,8 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Presenters
                 view,
                 this,
                 _container.Resolve<ViewsFactory>(),
-                _container.Resolve<LevelsProgressionService>());
+                _container.Resolve<LevelsProgressionService>(),
+                _container.Resolve<ConfigsProviderService>());
         }
     }
 }
