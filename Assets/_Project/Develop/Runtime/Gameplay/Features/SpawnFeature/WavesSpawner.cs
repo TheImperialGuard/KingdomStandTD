@@ -4,7 +4,6 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
-using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using Assets._Project.Develop.Runtime.Utilities.Timer;
 using System;
 using System.Collections;
@@ -19,28 +18,31 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
         private readonly EnemiesFactory _enemiesFactory;
         private readonly TimerServiceFactory _timerServiceFactory;
         private readonly ICoroutinesPerformer _coroutinesPerformer;
+        private readonly EntitiesLifeContext _entitiesLifeContext;
 
         private List<Coroutine> _activeSpawnProcesses = new();
-        private Dictionary<Entity, IDisposable> _spawnedEnemiesToRemoveReason = new();
+        private List<Entity> _spawnedEnemies = new();
 
         private int _requestedSpawnProcesses;
         private int _completedSpawnProcesses;
 
-        private ReactiveVariable<bool> _isSpawnComplete = new();
-
         public WavesSpawner(
-            EnemiesFactory enemiesFactory, 
-            TimerServiceFactory timerServiceFactory, 
-            ICoroutinesPerformer coroutinesPerformer)
+            EnemiesFactory enemiesFactory,
+            TimerServiceFactory timerServiceFactory,
+            ICoroutinesPerformer coroutinesPerformer,
+            EntitiesLifeContext entitiesLifeContext)
         {
             _enemiesFactory = enemiesFactory;
             _timerServiceFactory = timerServiceFactory;
             _coroutinesPerformer = coroutinesPerformer;
+            _entitiesLifeContext = entitiesLifeContext;
+
+            _entitiesLifeContext.Released += OnSomeEntityReleased;
         }
 
-        public IReadOnlyList<Entity> SpawnedEntitites => _spawnedEnemiesToRemoveReason.Keys.ToList();
+        public IReadOnlyList<Entity> SpawnedEntitites => _spawnedEnemies;
 
-        public IReadOnlyVariable<bool> IsSpawnComplete => _isSpawnComplete;
+        public bool IsSpawnComplete => _requestedSpawnProcesses > 0 && _completedSpawnProcesses == _requestedSpawnProcesses;
 
         public void SpawnWave(EnemiesWaveConfig waveConfig)
         {
@@ -51,17 +53,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
 
         public void Stop()
         {
-            ClearSpawnPorecesses();
+            ClearSpawnProcesses();
         }
 
         public void Dispose()
         {
             Stop();
 
-            foreach (KeyValuePair<Entity, IDisposable> item in _spawnedEnemiesToRemoveReason)
-            {
-                item.Value.Dispose();
-            }
+            _entitiesLifeContext.Released -= OnSomeEntityReleased;
         }
 
         private IEnumerator SpawnProcess(EnemiesWaveConfig waveConfig)
@@ -93,8 +92,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
             }
 
             _completedSpawnProcesses++;
-
-            CheckSpawnComplete();
         }
 
         private void SpawnEnemy(CharacterConfig enemyConfig, IReadOnlyList<Waypoint> waypoints)
@@ -103,20 +100,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
 
             Entity enemy = _enemiesFactory.Create(spawnPos, enemyConfig, waypoints);
 
-            IDisposable removeReason = enemy.IsDead.Subscribe((oldValue, isDead) =>
-            {
-                if (isDead)
-                {
-                    IDisposable disposable = _spawnedEnemiesToRemoveReason[enemy];
-                    disposable.Dispose();
-                    _spawnedEnemiesToRemoveReason.Remove(enemy);
-                }
-            });
-
-            _spawnedEnemiesToRemoveReason.Add(enemy, removeReason);
+            _spawnedEnemies.Add(enemy);
         }
 
-        private void ClearSpawnPorecesses()
+        private void ClearSpawnProcesses()
         {
             if (_activeSpawnProcesses.Any())
             {
@@ -125,11 +112,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
             }
         }
 
-        public void CheckSpawnComplete()
+        private void OnSomeEntityReleased(Entity entity)
         {
-            bool result = _requestedSpawnProcesses > 0;
-
-            _isSpawnComplete.Value = result && _completedSpawnProcesses == _requestedSpawnProcesses;
+            if (_spawnedEnemies.Contains(entity))
+                _spawnedEnemies.Remove(entity);
         }
     }
 }

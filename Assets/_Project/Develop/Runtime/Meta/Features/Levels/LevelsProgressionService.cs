@@ -21,15 +21,20 @@ namespace Assets._Project.Develop.Runtime.Meta.Features.Levels
 
         public bool IsLevelCompleted(int levelNumber) => _completedLevels.ContainsKey(levelNumber);
 
-        public void AddLevelToCompleted(int levelNumber, LevelResults result)
+        public void AddLevelResultsToCompleted(int levelNumber, LevelResults result)
         {
             if (result == LevelResults.Defeat)
                 throw new InvalidOperationException($"Trying to add level {levelNumber} to completed, that marked as defeated");
 
-            if (IsLevelCompleted(levelNumber))
-                _completedLevels[levelNumber] = result;
+            if (IsLevelCompleted(levelNumber) == true)
+            {
+                if (result > _completedLevels[levelNumber])
+                    _completedLevels[levelNumber] = result;
+            }    
             else
+            {
                 _completedLevels.Add(levelNumber, result);
+            }
         }
 
         public bool CanPlay(int levelNumber)

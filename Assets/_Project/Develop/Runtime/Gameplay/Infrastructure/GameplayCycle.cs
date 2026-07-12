@@ -3,6 +3,7 @@ using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using System;
+using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 {
@@ -41,6 +42,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _gameMode = _gameModesFactory.Create(_gameModeType);
 
             _gameModeDisposable = _gameMode.End.Subscribe(OnGameModeEnded);
+
+            _gameMode.Start();
         }
 
         public void Update(float deltaTime) => _gameMode?.Update(deltaTime);
@@ -62,7 +65,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private void SaveLevelResults(LevelResults results)
         {
-            _levelsProgressionService.AddLevelToCompleted(_levelNumber, results);
+            _levelsProgressionService.AddLevelResultsToCompleted(_levelNumber, results);
 
             _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
         }

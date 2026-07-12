@@ -74,7 +74,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
         {
             _winCondition
                 .Add(new FuncCondition(() => _stagesCycle.InLastStage == true))
-                .Add(new FuncCondition(() => _wavesSpawner.IsSpawnComplete.Value == true))
+                .Add(new FuncCondition(() => _wavesSpawner.IsSpawnComplete == true))
                 .Add(new FuncCondition(() => _wavesSpawner.SpawnedEntitites.Count == 0));
         }
 
@@ -119,9 +119,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
             LevelResults results;
 
             int currentHealth = _playerHealth.Current.Value;
-            int maxHealth = _playerHealth.Current.Value;
+            int maxHealth = _playerHealth.Max.Value;
 
-            float relation = currentHealth / maxHealth;
+            float relation = (float)currentHealth / (float)maxHealth;
 
             if (relation == 1f)
                 results = LevelResults.Perfect;

@@ -2,9 +2,9 @@
 {
     public enum LevelResults
     {
-        Perfect,
-        Average,
-        Bad,
-        Defeat
+        Perfect = 3,
+        Average = 2,
+        Bad = 1,
+        Defeat = 0
     }
 }

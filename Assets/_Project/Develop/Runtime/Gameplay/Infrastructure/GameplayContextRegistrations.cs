@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
@@ -66,6 +67,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateGameplayCycle);
 
+            container.RegisterAsSingle(CreateStagesCycle);
+
             container.RegisterAsSingle(CreateDealDamageToPlayerService).NonLazy();
         }
 
@@ -88,7 +91,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             return new WavesSpawner(
                 c.Resolve<EnemiesFactory>(),
                 c.Resolve<TimerServiceFactory>(),
-                c.Resolve<ICoroutinesPerformer>());
+                c.Resolve<ICoroutinesPerformer>(),
+                c.Resolve<EntitiesLifeContext>());
         }
 
         private static StageProviderService CreateStageProviderService(DIContainer c)
@@ -142,6 +146,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             };
 
             return new WalletService(currencies);
+        }
+
+        private static StagesCycle CreateStagesCycle(DIContainer c)
+        {
+            return new StagesCycle(c.Resolve<StageProviderService>());
         }
 
         private static PlayerHealth CreatePlayerHealth(DIContainer c)

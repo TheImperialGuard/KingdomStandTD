@@ -5,6 +5,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.Meta.Infrastructure;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -67,9 +68,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private void Update()
         {
-            _brainsContext?.Update(Time.deltaTime);
-            _entitiesLifeContext?.Update(Time.deltaTime);
             _gameplayCycle?.Update(Time.deltaTime);
+            _entitiesLifeContext?.Update(Time.deltaTime);
+            _brainsContext?.Update(Time.deltaTime);
             
 
             if (Input.GetKeyDown(KeyCode.M))

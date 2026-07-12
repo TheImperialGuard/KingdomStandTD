@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.LevelsListConfig
   _levels:
   - {fileID: 11400000, guid: 278031e3a6012dd45b6fc516e81479b7, type: 2}
+  - {fileID: 11400000, guid: edb7ff62a888d5e42a095e9c15977f76, type: 2}
+  - {fileID: 11400000, guid: 624c4b0cf657f8042860ef4220c87b7d, type: 2}
