@@ -101,7 +101,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7281519091528349145}
   - {fileID: 5586361489619154003}
@@ -408,6 +408,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
       propertyPath: m_Name
       value: tile-straight (6)
@@ -566,6 +574,14 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
       propertyPath: m_Name
@@ -880,6 +896,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b11933ec2dbaa7847919d8fe9370fa8e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b11933ec2dbaa7847919d8fe9370fa8e, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b11933ec2dbaa7847919d8fe9370fa8e, type: 3}
       propertyPath: m_Name
       value: tile-corner-round
@@ -902,6 +926,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1596190603292065805}
     m_Modifications:
+    - target: {fileID: 4683814652431786055, guid: 4a4a73b2dfaf04d41b2a311edb25f6ad, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 92a3971f8175b7849a8f2d13508fd29b, type: 2}
     - target: {fileID: 5857894766417058600, guid: 4a4a73b2dfaf04d41b2a311edb25f6ad, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1
@@ -946,6 +974,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerTile
       objectReference: {fileID: 0}
+    - target: {fileID: 6906021705979945605, guid: 4a4a73b2dfaf04d41b2a311edb25f6ad, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 92a3971f8175b7849a8f2d13508fd29b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1165,6 +1197,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
       propertyPath: m_Name
       value: tile-straight (2)
@@ -1300,6 +1340,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
       propertyPath: m_Name
       value: tile-straight (4)
@@ -1434,6 +1482,14 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
       propertyPath: m_Name
@@ -1574,6 +1630,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
       propertyPath: m_Name
       value: tile-straight (5)
@@ -1709,6 +1773,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
       propertyPath: m_Name
       value: tile-straight (3)
@@ -1771,6 +1843,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
       propertyPath: m_Name
       value: tile-straight (8)
@@ -1832,6 +1912,14 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b78be38b9cfe1404e91db3d550e2ad7c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b78be38b9cfe1404e91db3d550e2ad7c, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b78be38b9cfe1404e91db3d550e2ad7c, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b78be38b9cfe1404e91db3d550e2ad7c, type: 3}
       propertyPath: m_Name
@@ -1967,6 +2055,14 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecafc7d8227a8bb4abff3b302c35cb01, type: 3}
       propertyPath: m_Name
