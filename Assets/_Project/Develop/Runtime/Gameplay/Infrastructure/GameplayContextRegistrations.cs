@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
@@ -69,6 +70,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateStagesCycle);
 
+            container.RegisterAsSingle(CreateTowersPlaceholdersService);
+
             container.RegisterAsSingle(CreateDealDamageToPlayerService).NonLazy();
         }
 
@@ -117,7 +120,20 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 _levelConfig.GameMode,
                 c.Resolve<PlayerDataProvider>(),
                 c.Resolve<LevelsProgressionService>(),
-                _inputArgs.LevelNumber);
+                _inputArgs.LevelNumber,
+                c.Resolve<TowersPlaceholdersService>());
+        }
+
+        private static TowersPlaceholdersService CreateTowersPlaceholdersService(DIContainer c)
+        {
+            ConfigsProviderService configsProviderService = c.Resolve<ConfigsProviderService>();
+
+            TowerPlaceholderConfig config = configsProviderService.GetConfig<TowerPlaceholderConfig>();
+
+            return new TowersPlaceholdersService(
+                c.Resolve<Level>(),
+                c.Resolve<EntitiesFactory>(),
+                config);
         }
 
         private static EntitiesFactory CreateEntitiesFactory(DIContainer c)

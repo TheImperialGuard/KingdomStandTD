@@ -50,6 +50,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _level = _container.Resolve<Level>();
             _gameplayCycle = _container.Resolve<GameplayCycle>();
 
+            _gameplayCycle.Prepare();
+
             yield break;
         }
 

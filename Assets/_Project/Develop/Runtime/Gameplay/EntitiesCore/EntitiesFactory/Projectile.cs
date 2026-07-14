@@ -7,7 +7,6 @@ using Assets._Project.Develop.Runtime.Utilities;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
-using static UnityEngine.Rendering.STP;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
 {

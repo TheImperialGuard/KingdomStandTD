@@ -1,9 +1,12 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
+using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
 {
@@ -18,9 +21,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
             _source = entity;
             _sourceTransform = entity.Transform;
         }
+
         public Entity SelectTargetFrom(IEnumerable<Entity> targets)
         {
-            if (TryGetEnemies(targets, out IEnumerable<Entity> selectedTargets) == false)
+            if (TryGetTeamMember(targets, out IEnumerable<Entity> selectedTargets) == false)
+                return null;
+
+            if (TryGetEnemies(selectedTargets, out selectedTargets) == false)
                 return null;
 
             if (TryGetTargetsInRange(selectedTargets, out selectedTargets) == false)
@@ -98,6 +105,18 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
         private IEnumerable<Entity> GetEnemiesFrom(IEnumerable<Entity> targets)
         {
             return targets.Where(target => EntitiesHelper.IsSameTeam(_source, target) == false);
+        }
+
+        private bool TryGetTeamMember(IEnumerable<Entity> targets, out IEnumerable<Entity> teamMembers)
+        {
+            teamMembers = GetTeamMemberFrom(targets);
+
+            return teamMembers.Any();
+        }
+
+        private IEnumerable<Entity> GetTeamMemberFrom(IEnumerable<Entity> targets)
+        {
+            return targets.Where(target => target.HasComponent<Team>());
         }
 
         private float GetDistanceTo(Entity target) => (_sourceTransform.position - target.Transform.position).magnitude;

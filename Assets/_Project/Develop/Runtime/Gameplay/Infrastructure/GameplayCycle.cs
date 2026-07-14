@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.GameMode;
+﻿using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
+using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
@@ -13,6 +14,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private readonly ICoroutinesPerformer _coroutinesPerformer;
         private readonly PlayerDataProvider _playerDataProvider;
         private readonly LevelsProgressionService _levelsProgressionService;
+        private readonly TowersPlaceholdersService _towersPlaceholdersService;
 
         private readonly GameModes _gameModeType;
         private readonly int _levelNumber;
@@ -27,7 +29,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             GameModes gameModeType,
             PlayerDataProvider playerDataProvider,
             LevelsProgressionService levelsProgressionService,
-            int levelNumber = 0)
+            int levelNumber,
+            TowersPlaceholdersService towersPlaceholdersService)
         {
             _gameModesFactory = gameModesFactory;
             _coroutinesPerformer = coroutinesPerformer;
@@ -35,6 +38,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _playerDataProvider = playerDataProvider;
             _levelsProgressionService = levelsProgressionService;
             _levelNumber = levelNumber;
+            _towersPlaceholdersService = towersPlaceholdersService;
+        }
+
+        public void Prepare()
+        {
+            _towersPlaceholdersService.CreateAllPlaceholders();
         }
 
         public void Launch()

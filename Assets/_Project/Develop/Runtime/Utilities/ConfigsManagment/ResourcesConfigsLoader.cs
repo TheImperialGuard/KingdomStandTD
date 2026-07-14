@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using System;
 using System.Collections;
@@ -14,6 +15,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.ConfigsManagment
         private readonly Dictionary<Type, string> _configsResourcesPaths = new()
         {
             {typeof(LevelsListConfig), "Configs/Gameplay/Levels/LevelsListConfig" },
+            {typeof(TowerPlaceholderConfig), "Configs/Gameplay/Entities/Towers/TowerPlaceholderConfig" },
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

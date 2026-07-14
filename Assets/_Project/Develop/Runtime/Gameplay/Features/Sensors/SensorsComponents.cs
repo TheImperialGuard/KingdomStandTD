@@ -10,6 +10,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Sensors
         public CapsuleCollider Value;
     }
 
+    public class BoxColliderComponent : IEntityComponent
+    {
+        public BoxCollider Value;
+    }
+
     public class ContactsDetectingMask : IEntityComponent
     {
         public LayerMask Value;
