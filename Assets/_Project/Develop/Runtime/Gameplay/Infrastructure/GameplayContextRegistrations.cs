@@ -6,9 +6,11 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
+using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.GameMode;
@@ -72,6 +74,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateTowersPlaceholdersService);
 
+            container.RegisterAsSingle(CreateRayShooterService);
+
+            container.RegisterAsSingle<IInputService>(CreateDesktopInput);
+
             container.RegisterAsSingle(CreateDealDamageToPlayerService).NonLazy();
         }
 
@@ -122,6 +128,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<LevelsProgressionService>(),
                 _inputArgs.LevelNumber,
                 c.Resolve<TowersPlaceholdersService>());
+        }
+
+        private static RayShooterService CreateRayShooterService(DIContainer c)
+        {
+            return new RayShooterService(c.Resolve<IInputService>());
+        }
+
+        private static DesktopInput CreateDesktopInput(DIContainer c)
+        {
+            return new DesktopInput();
         }
 
         private static TowersPlaceholdersService CreateTowersPlaceholdersService(DIContainer c)
