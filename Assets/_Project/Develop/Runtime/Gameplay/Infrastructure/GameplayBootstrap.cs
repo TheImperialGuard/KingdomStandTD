@@ -61,7 +61,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             TowerConfig towerConfig = _container.Resolve<ResourcesAssetsLoader>().Load<TowerConfig>("Configs/Gameplay/Entities/Towers/Arrows/ArrowsTowerConfig_level_1");
 
-            towersFactory.Create(_level.TowerTiles[0].TowerPosition, towerConfig);
+            towersFactory.Create(_level.TowersPositions[0].position, towerConfig);
 
             _gameplayCycle.Launch();
         }
