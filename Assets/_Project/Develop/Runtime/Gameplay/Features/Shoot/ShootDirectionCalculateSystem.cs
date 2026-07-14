@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
+using System;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 {
@@ -38,7 +39,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 
         private Vector3 CalculateLeadPoint()
         {
-            Vector3 currentTargetPosition = _currentTarget.Value.Transform.position;
+            if (_currentTarget.Value.TryGetAimingPoint(out Transform aimingPoint) == false)
+                throw new Exception($"Not found aiming point for target: {_currentTarget.Value.Transform.gameObject.name}");
+
+            Vector3 currentTargetPosition = aimingPoint.position;
             Vector3 currentTargetSpeed = _currentTarget.Value.Rigidbody.linearVelocity;
             Vector3 shootPointPosition = _shootPoint.position;
 

@@ -27,4 +27,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
     {
         public ReactiveVariable<Entity> Value;
     }
+
+    public class AimingPoint : IEntityComponent
+    {
+        public Transform Value;
+    }
 }
