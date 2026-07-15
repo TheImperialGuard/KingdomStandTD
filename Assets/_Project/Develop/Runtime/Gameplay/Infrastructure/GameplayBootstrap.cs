@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Sensors;
@@ -76,8 +77,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             
             if (_rayShooterService.LastHitInfo.Value.collider.gameObject.TryGetComponent(out MonoEntity monoEntity))
             {
-                if (monoEntity.LinkedEntity.TryGetComponent(out BoxColliderComponent boxCollider))
+                if (monoEntity.LinkedEntity.TryGetComponent(out IsInteractable interactable))
                 {
+                    if (monoEntity.LinkedEntity.TryGetComponent(out InteractRequest interactRequest))
+                        interactRequest.Value.Invoke();
+
                     TowersFactory towersFactory = _container.Resolve<TowersFactory>();
 
                     TowerConfig towerConfig = _container.Resolve<ResourcesAssetsLoader>().Load<TowerConfig>("Configs/Gameplay/Entities/Towers/Arrows/ArrowsTowerConfig_level_1");

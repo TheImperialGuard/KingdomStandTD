@@ -1,4 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
+using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
@@ -10,6 +12,23 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
             Entity entity = CreateEmpty();
 
             _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
+
+            IInteractAction interactAction = _container.Resolve<InteractiveActionsFabric>().CreateBuildTowerAction(entity);
+
+            entity
+                .AddIsInteractable()
+                .AddInteractRequest()
+                .AddInteractEvent()
+                .AddInteractiveAction(new(interactAction));
+                                                             
+            ICompositeCondition canInteract = new CompositeCondition()
+                .Add(new FuncCondition(() => true));
+
+            entity
+                .AddCanInteract(canInteract);
+
+            entity
+                .AddSystem(new InteractSystem());
 
             _entitiesLifeContext.Add(entity);
 

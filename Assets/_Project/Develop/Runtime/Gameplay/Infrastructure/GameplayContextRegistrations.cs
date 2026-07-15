@@ -7,6 +7,7 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
@@ -67,6 +68,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateStageProviderService);
 
             container.RegisterAsSingle(CreateGameModesFactory);
+
+            container.RegisterAsSingle(CreateInteractiveActionsFabric);
 
             container.RegisterAsSingle(CreateGameplayCycle);
 
@@ -166,8 +169,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         
         private static StagesFactory CreateStagesFactory(DIContainer c)
             => new(c);
-
+        
         private static GameModesFactory CreateGameModesFactory(DIContainer c)
+            => new(c);
+
+        private static InteractiveActionsFabric CreateInteractiveActionsFabric(DIContainer c)
             => new(c);
 
         private static WalletService CreateGameplayWalletService(DIContainer c)
