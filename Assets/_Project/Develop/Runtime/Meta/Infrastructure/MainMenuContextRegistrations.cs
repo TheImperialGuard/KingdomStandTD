@@ -1,6 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Infrastructure.DI;
-using Assets._Project.Develop.Runtime.UI.Core.Presenters;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
+using Assets._Project.Develop.Runtime.UI.Meta;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using UnityEngine;
@@ -32,7 +32,7 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
             ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
 
             MainMenuUIRoot mainMenuUIRootPrefab = resourcesAssetsLoader
-                .Load<MainMenuUIRoot>("UI/Meta/MainMenu/MainMenuUIRoot");
+                .Load<MainMenuUIRoot>("UI/Meta/MainMenuUIRoot");
 
             return GameObject.Instantiate(mainMenuUIRootPrefab);
         }

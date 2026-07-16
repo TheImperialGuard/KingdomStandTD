@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
+namespace Assets._Project.Develop.Runtime.UI.Meta
 {
     public class MainMenuUIRoot : MonoBehaviour
     {
