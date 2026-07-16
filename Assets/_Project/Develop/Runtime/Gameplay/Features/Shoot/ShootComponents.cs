@@ -32,4 +32,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
     {
         public Transform Value;
     }
+
+    public class ShootingRangeZoneComponent : IEntityComponent
+    {
+        public ShootingRangeZone Value;
+    }
 }

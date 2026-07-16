@@ -1,7 +1,10 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
+using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using System;
 using UnityEngine;
@@ -14,6 +17,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
 
         private readonly Entity _towerPlaceholder;
         private readonly RayShooterService _rayShooterService;
+        private readonly EntitiesFactory _entitiesFactory;
+        private readonly TowersListConfig _towersListConfig;
 
         private IDisposable _rayShooterServiceDisposable;
 
@@ -21,12 +26,16 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             ICoroutinesPerformer coroutinesPerformer,
             BuildTowerPopupView view,
             Entity towerPlaceholder,
-            RayShooterService rayShooterService)
+            RayShooterService rayShooterService,
+            EntitiesFactory entitiesFactory,
+            TowersListConfig towersListConfig)
             : base(coroutinesPerformer)
         {
             _view = view;
             _towerPlaceholder = towerPlaceholder;
             _rayShooterService = rayShooterService;
+            _entitiesFactory = entitiesFactory;
+            _towersListConfig = towersListConfig;
         }
 
         protected override PopupViewBase PopupView => _view;
@@ -58,7 +67,9 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
 
         private void OnBuildTowerButtonClicked(TowerTypes type)
         {
-            Debug.Log($"Вы кликнули на иконку башни {type}");
+            TowerConfig config = _towersListConfig.GetBy(type, 1);
+
+            _entitiesFactory.CreateTowerDemo(_towerPlaceholder.Transform.position, config);
         }
     }
 }

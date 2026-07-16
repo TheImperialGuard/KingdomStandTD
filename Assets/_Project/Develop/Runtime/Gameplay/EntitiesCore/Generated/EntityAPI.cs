@@ -143,6 +143,25 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.AimingPoint() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootingRangeZoneComponent ShootingRangeZoneC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootingRangeZoneComponent>();
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootingRangeZone ShootingRangeZone => ShootingRangeZoneC.Value;
+
+		public bool TryGetShootingRangeZone(out Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootingRangeZone value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootingRangeZoneComponent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootingRangeZone);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddShootingRangeZone(Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootingRangeZone value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootingRangeZoneComponent() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.Sensors.BodyCollider BodyColliderC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Sensors.BodyCollider>();
 
 		public UnityEngine.CapsuleCollider BodyCollider => BodyColliderC.Value;

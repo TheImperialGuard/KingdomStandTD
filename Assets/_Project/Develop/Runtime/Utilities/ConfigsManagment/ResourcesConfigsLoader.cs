@@ -16,6 +16,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.ConfigsManagment
         {
             {typeof(LevelsListConfig), "Configs/Gameplay/Levels/LevelsListConfig" },
             {typeof(TowerPlaceholderConfig), "Configs/Gameplay/Entities/Towers/TowerPlaceholderConfig" },
+            {typeof(TowersListConfig), "Configs/Gameplay/Entities/Towers/TowersListConfig" },
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

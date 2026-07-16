@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.ArrowsTowerConfig
   _damageType: 1
   <PrefabPath>k__BackingField: Prefabs/Entities/Towers/Arrows/ArrowsTower_level_1
-  <AttackRange>k__BackingField: 2
+  <AttackRange>k__BackingField: 4
   <AttackCooldown>k__BackingField: 2
   <AttackDamage>k__BackingField: 1
