@@ -3,11 +3,11 @@ using Assets._Project.Develop.Runtime.Infrastructure.DI;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
 {
-    public class InteractiveActionsFabric
+    public class InteractiveActionsFactory
     {
         private readonly DIContainer _container;
 
-        public InteractiveActionsFabric(DIContainer container)
+        public InteractiveActionsFactory(DIContainer container)
         {
             _container = container;
         }

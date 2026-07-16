@@ -13,7 +13,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
 
             _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
 
-            IInteractAction interactAction = _container.Resolve<InteractiveActionsFabric>().CreateBuildTowerAction(entity);
+            IInteractAction interactAction = _interactiveActionsFactory.CreateBuildTowerAction(entity);
 
             entity
                 .AddIsInteractable()
