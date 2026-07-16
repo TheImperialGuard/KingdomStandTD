@@ -1,10 +1,10 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
+﻿using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using System;
-using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 {
@@ -15,6 +15,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private readonly PlayerDataProvider _playerDataProvider;
         private readonly LevelsProgressionService _levelsProgressionService;
         private readonly TowersPlaceholdersService _towersPlaceholdersService;
+        private readonly PlayerInteractsService _playerInteractsService;
 
         private readonly GameModes _gameModeType;
         private readonly int _levelNumber;
@@ -30,7 +31,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             PlayerDataProvider playerDataProvider,
             LevelsProgressionService levelsProgressionService,
             int levelNumber,
-            TowersPlaceholdersService towersPlaceholdersService)
+            TowersPlaceholdersService towersPlaceholdersService,
+            PlayerInteractsService playerInteractsService)
         {
             _gameModesFactory = gameModesFactory;
             _coroutinesPerformer = coroutinesPerformer;
@@ -39,6 +41,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _levelsProgressionService = levelsProgressionService;
             _levelNumber = levelNumber;
             _towersPlaceholdersService = towersPlaceholdersService;
+            _playerInteractsService = playerInteractsService;
         }
 
         public void Prepare()
@@ -53,6 +56,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _gameModeDisposable = _gameMode.End.Subscribe(OnGameModeEnded);
 
             _gameMode.Start();
+            _playerInteractsService.Enable();
         }
 
         public void Update(float deltaTime) => _gameMode?.Update(deltaTime);
@@ -61,6 +65,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private void OnGameModeEnded(LevelResults results)
         {
+            _playerInteractsService.Disable();
+
             if (results != LevelResults.Defeat)
                 SaveLevelResults(results);
 

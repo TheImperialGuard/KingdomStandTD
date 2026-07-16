@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
 {
@@ -8,7 +9,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
 
         public bool IsEnabled { get; set; } = true;
 
-        public bool RayShotRequested => Input.GetKeyDown(RayShooterKeyCode);
+        public bool RayShotRequested 
+            => Input.GetKeyDown(RayShooterKeyCode) && EventSystem.current.IsPointerOverGameObject() == false;
 
         public Ray CameraRay => Camera.main.ScreenPointToRay(Input.mousePosition);
     }

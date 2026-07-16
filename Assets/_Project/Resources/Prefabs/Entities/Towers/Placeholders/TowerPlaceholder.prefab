@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6273606538855935467}
   - component: {fileID: 5490272527381651600}
+  - component: {fileID: 5470341819390073148}
   - component: {fileID: 4300568639830905083}
   - component: {fileID: 2508352710033271307}
   m_Layer: 0
@@ -47,6 +48,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41bf143db3ecd334fb8a78c7ae35aa99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono.MonoEntity
+--- !u!114 &5470341819390073148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3244370309859686156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15dc001e7e7a1cb4b87c12423bc08e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Common.TransformEntityRegistrator
 --- !u!114 &4300568639830905083
 MonoBehaviour:
   m_ObjectHideFlags: 0

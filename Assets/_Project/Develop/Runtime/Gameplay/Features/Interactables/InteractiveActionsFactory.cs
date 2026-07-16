@@ -1,5 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.UI.Gameplay;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
 {
@@ -14,7 +15,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
 
         public IInteractAction CreateBuildTowerAction(Entity source)
         {
-            return new BuildTowerAction(source);
+            return new BuildTowerAction(source, _container.Resolve<GameplayPopupService>());
         }
     }
 }

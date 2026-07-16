@@ -84,6 +84,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateRayShooterService);
 
+            container.RegisterAsSingle(CreatePlayerInteractsService);
+
             container.RegisterAsSingle(CreateGameplayPopupService);
 
             container.RegisterAsSingle<IInputService>(CreateDesktopInput);
@@ -139,7 +141,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<PlayerDataProvider>(),
                 c.Resolve<LevelsProgressionService>(),
                 _inputArgs.LevelNumber,
-                c.Resolve<TowersPlaceholdersService>());
+                c.Resolve<TowersPlaceholdersService>(),
+                c.Resolve<PlayerInteractsService>());
         }
 
         private static RayShooterService CreateRayShooterService(DIContainer c)
@@ -150,6 +153,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private static DesktopInput CreateDesktopInput(DIContainer c)
         {
             return new DesktopInput();
+        }
+
+        private static PlayerInteractsService CreatePlayerInteractsService(DIContainer c)
+        {
+            return new PlayerInteractsService(c.Resolve<RayShooterService>());
         }
 
         private static TowersPlaceholdersService CreateTowersPlaceholdersService(DIContainer c)

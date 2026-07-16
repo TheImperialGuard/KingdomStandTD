@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.UI.Gameplay;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
@@ -7,14 +8,19 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
     {
         private readonly Entity _source;
 
-        public BuildTowerAction(Entity source)
+        private readonly GameplayPopupService _popupService;
+
+        public BuildTowerAction(
+            Entity source, 
+            GameplayPopupService popupService)
         {
             _source = source;
+            _popupService = popupService;
         }
 
         public void Do()
         {
-            Debug.Log("Открыт попап постройки башни");
+            _popupService.OpenBuildTowerPopup(_source);
         }
     }
 }
