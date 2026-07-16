@@ -17,6 +17,9 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
+using Assets._Project.Develop.Runtime.UI.Core.Views;
+using Assets._Project.Develop.Runtime.UI.Gameplay;
+using Assets._Project.Develop.Runtime.UI.Meta;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -69,7 +72,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateGameModesFactory);
 
-            container.RegisterAsSingle(CreateInteractiveActionsFabric);
+            container.RegisterAsSingle(CreateInteractiveActionsFactory);
+
+            container.RegisterAsSingle(CreateGameplayPresentersFactory);
 
             container.RegisterAsSingle(CreateGameplayCycle);
 
@@ -79,9 +84,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateRayShooterService);
 
+            container.RegisterAsSingle(CreateGameplayPopupService);
+
             container.RegisterAsSingle<IInputService>(CreateDesktopInput);
 
             container.RegisterAsSingle(CreateDealDamageToPlayerService).NonLazy();
+
+            container.RegisterAsSingle(CreateGameplayUIRoot).NonLazy();
         }
 
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c) => new();
@@ -173,7 +182,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private static GameModesFactory CreateGameModesFactory(DIContainer c)
             => new(c);
 
-        private static InteractiveActionsFabric CreateInteractiveActionsFabric(DIContainer c)
+        private static InteractiveActionsFactory CreateInteractiveActionsFactory(DIContainer c)
+            => new(c);
+
+        private static GameplayPresentersFactory CreateGameplayPresentersFactory(DIContainer c)
             => new(c);
 
         private static WalletService CreateGameplayWalletService(DIContainer c)
@@ -189,6 +201,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private static StagesCycle CreateStagesCycle(DIContainer c)
         {
             return new StagesCycle(c.Resolve<StageProviderService>());
+        }
+
+        private static GameplayPopupService CreateGameplayPopupService(DIContainer c)
+        {
+            return new(
+                c.Resolve<ViewsFactory>(),
+                c.Resolve<GameplayUIRoot>(),
+                c.Resolve<GameplayPresentersFactory>());
         }
 
         private static PlayerHealth CreatePlayerHealth(DIContainer c)
@@ -219,6 +239,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             LevelConfig levelConfig = levelsListConfig.GetBy(levelNumber);
 
             return levelConfig;
+        }
+
+        private static GameplayUIRoot CreateGameplayUIRoot(DIContainer c)
+        {
+            ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
+
+            GameplayUIRoot gameplayUIRootPrefab = resourcesAssetsLoader
+                .Load<GameplayUIRoot>("UI/Gameplay/GameplayUIRoot");
+
+            return GameObject.Instantiate(gameplayUIRootPrefab);
         }
     }
 }
