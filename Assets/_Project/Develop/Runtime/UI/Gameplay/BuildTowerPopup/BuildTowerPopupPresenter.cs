@@ -1,7 +1,9 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
+using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using System;
@@ -16,9 +18,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
         private readonly Entity _towerPlaceholder;
         private readonly RayShooterService _rayShooterService;
         private readonly EntitiesFactory _entitiesFactory;
+        private readonly TowersFactory _towersFactory;
         private readonly TowersListConfig _towersListConfig;
 
         private IDisposable _rayShooterServiceDisposable;
+
+        private Entity _createdTowerDemo;
+        private TowerTypes _createdTowerDemoType;
 
         public BuildTowerPopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
@@ -26,7 +32,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             Entity towerPlaceholder,
             RayShooterService rayShooterService,
             EntitiesFactory entitiesFactory,
-            TowersListConfig towersListConfig)
+            TowersListConfig towersListConfig,
+            TowersFactory towersFactory)
             : base(coroutinesPerformer)
         {
             _view = view;
@@ -34,6 +41,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             _rayShooterService = rayShooterService;
             _entitiesFactory = entitiesFactory;
             _towersListConfig = towersListConfig;
+            _towersFactory = towersFactory;
         }
 
         protected override PopupViewBase PopupView => _view;
@@ -56,10 +64,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             _rayShooterServiceDisposable.Dispose();
 
             _view.BuildTowerButtonClicked -= OnBuildTowerButtonClicked;
+
+            ReleaseCurrentDemo();
         }
 
         private void OnClickedOutside(RaycastHit oldHit, RaycastHit newHit)
         {
+            ReleaseCurrentDemo();
             OnCloseRequest();
         }
 
@@ -67,7 +78,35 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
         {
             TowerConfig config = _towersListConfig.GetBy(type, 1);
 
-            _entitiesFactory.CreateTowerDemo(_towerPlaceholder.Transform.position, config);
+            if (_createdTowerDemo == null || type != _createdTowerDemoType)
+            {
+                CreateTowerDemo(config);
+                _createdTowerDemoType = type;
+                return;
+            }
+
+            BuildTower(config);
+            OnCloseRequest();
+        }
+
+        private void BuildTower(TowerConfig config)
+        {
+            ReleaseCurrentDemo();
+            _towersFactory.Create(_towerPlaceholder.Transform.position, config);
+        }
+
+        private void CreateTowerDemo(TowerConfig config)
+        {
+            ReleaseCurrentDemo();
+            _createdTowerDemo = _entitiesFactory.CreateTowerDemo(_towerPlaceholder.Transform.position, config);
+        }
+
+        private void ReleaseCurrentDemo()
+        {
+            if (_createdTowerDemo != null)
+            {
+                _createdTowerDemo.SelfReleaseRequested.Value = true;
+            }
         }
     }
 }

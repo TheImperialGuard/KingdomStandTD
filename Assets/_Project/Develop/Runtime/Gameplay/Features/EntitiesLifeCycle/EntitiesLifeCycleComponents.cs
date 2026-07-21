@@ -31,6 +31,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle
         public ICompositeCondition Value;
     }
 
+    public class SelfReleaseRequested : IEntityComponent
+    {
+        public ReactiveVariable<bool> Value;
+    }
+
     public class DeathProcessInitialTime : IEntityComponent
     {
         public ReactiveVariable<float> Value;

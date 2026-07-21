@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
@@ -31,7 +32,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 towerPlaceholder,
                 _container.Resolve<RayShooterService>(),
                 _container.Resolve<EntitiesFactory>(),
-                config);
+                config,
+                _container.Resolve<TowersFactory>());
         }
     }
 }

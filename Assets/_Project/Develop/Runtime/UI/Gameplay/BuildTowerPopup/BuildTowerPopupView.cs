@@ -44,6 +44,9 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             }
         }
 
-        private void OnBuildTowerButtonClicked(TowerTypes type) => BuildTowerButtonClicked?.Invoke(type);
+        private void OnBuildTowerButtonClicked(TowerTypes type)
+        {
+            BuildTowerButtonClicked?.Invoke(type);
+        }
     }
 }
