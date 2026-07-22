@@ -38,7 +38,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddSystem(new ShootDirectionCalculateSystem())
                 .AddSystem(new StartAttackSystem())
                 .AddSystem(new AttackCooldownTimerSystem())
-                .AddSystem(new InstantShootSystem(this));
+                .AddSystem(new InstantShootSystem(this))
+                .AddSystem(new RangeZoneRadiusCalcSystem());
 
             return entity;
         }

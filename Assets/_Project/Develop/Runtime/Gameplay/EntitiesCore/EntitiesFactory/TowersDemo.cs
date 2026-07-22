@@ -1,5 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Shoot;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using UnityEngine;
 
@@ -13,7 +14,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
 
             _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
 
-            entity.AddSelfReleaseRequested(new(false));
+            entity
+                .AddInstantShootRange(new(config.AttackRange))
+                .AddSelfReleaseRequested(new(false));
 
             ICompositeCondition mustSelfRelease = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.SelfReleaseRequested.Value == true));
@@ -21,9 +24,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
             entity
                 .AddMustSelfRelease(mustSelfRelease);
 
-            entity.AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+            entity
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext))
+                .AddSystem(new RangeZoneRadiusCalcSystem());
 
-            entity.ShootingRangeZone.SetRange(config.AttackRange);
             entity.ShootingRangeZone.Show();
 
             _entitiesLifeContext.Add(entity);
