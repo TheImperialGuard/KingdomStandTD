@@ -1,7 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
-using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
@@ -92,7 +91,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
         private void BuildTower(TowerConfig config)
         {
             ReleaseCurrentDemo();
+            ReleaseTowerPlaceholder();
             _towersFactory.Create(_towerPlaceholder.Transform.position, config);
+        }
+
+        private void ReleaseTowerPlaceholder()
+        {
+            _towerPlaceholder.SelfReleaseRequested.Value = true; 
         }
 
         private void CreateTowerDemo(TowerConfig config)
