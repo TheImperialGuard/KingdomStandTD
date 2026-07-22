@@ -6,7 +6,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
     {
         public void SetRange(float range)
         {
-            Vector3 scale = new(range, transform.localScale.y, range);
+            Vector3 scale = new(range * 2, transform.localScale.y, range * 2);
 
             transform.localScale = scale;
         }
