@@ -151,6 +151,8 @@ GameObject:
   - component: {fileID: 6674499055720179359}
   - component: {fileID: 1046660925013228768}
   - component: {fileID: 3870564116263172885}
+  - component: {fileID: 8454050225457399145}
+  - component: {fileID: 6903862146585615583}
   m_Layer: 0
   m_Name: ArrowsTower_level_1
   m_TagString: Untagged
@@ -226,6 +228,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootingRangeZoneEntityRegistrator
   _zone: {fileID: 548398845365281133}
+--- !u!114 &8454050225457399145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891846149284200393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aae2f6a2b52f494996c4a7475c2ea98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Sensors.BoxColliderRegistrator
+  _boxCollider: {fileID: 0}
+--- !u!65 &6903862146585615583
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891846149284200393}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.55, y: 1.2478158, z: 0.55}
+  m_Center: {x: 0, y: 0.6239079, z: 0}
 --- !u!1 &6388111338780754435
 GameObject:
   m_ObjectHideFlags: 0

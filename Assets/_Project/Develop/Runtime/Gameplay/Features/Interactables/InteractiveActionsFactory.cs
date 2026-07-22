@@ -17,5 +17,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
         {
             return new BuildTowerAction(source, _container.Resolve<GameplayPopupService>());
         }
+
+        public IInteractAction CreateSelectTowerAction(Entity source)
+        {
+            return new SelectTowerAction(source, _container.Resolve<GameplayPopupService>());
+        }
     }
 }
