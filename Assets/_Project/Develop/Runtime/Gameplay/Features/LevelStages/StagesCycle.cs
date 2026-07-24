@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Utilities.Reactive;
+﻿using Assets._Project.Develop.Runtime.UI.Gameplay;
+using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,22 +9,27 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
     public class StagesCycle : IDisposable
     {
         private readonly StageProviderService _stageProviderService;
+        private readonly GameplayPopupService _gameplayPopupService;
 
         private ReactiveVariable<bool> _isCycleComplete = new();
+        private ReactiveVariable<bool> _stageCanBeSkiped = new();
 
         private bool _isRunning;
-        private bool _stageCanBeSkiped;
 
         private List<IDisposable> _disposables = new();
 
-        public StagesCycle(StageProviderService stageProviderService)
+        public StagesCycle(
+            StageProviderService stageProviderService, 
+            GameplayPopupService gameplayPopupService)
         {
             _stageProviderService = stageProviderService;
 
             _disposables.Add(_stageProviderService.CurrentStageResult.Subscribe(OnStageResultChanged));
+            _gameplayPopupService = gameplayPopupService;
         }
 
         public IReadOnlyVariable<bool> IsCycleComplete => _isCycleComplete;
+        public IReadOnlyVariable<bool> StageCanBeSkiped => _stageCanBeSkiped;
 
         public bool InLastStage => _stageProviderService.HasNextStage() == false;
 
@@ -32,6 +38,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
             SwitchStage();
 
             _isRunning = true;
+        }
+
+        public void SkipStage()
+        {
+            if (_stageCanBeSkiped.Value == false)
+                throw new InvalidOperationException("Current stage can not be skiped");
+
+            SwitchStage();
         }
 
         public void Stop()
@@ -45,12 +59,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
                 return;
 
             _stageProviderService.UpdateCurrent(deltaTime);
-
-            if (_stageCanBeSkiped == true)
-            {
-                if (Input.GetKeyDown(KeyCode.S))
-                    SwitchStage();
-            }
         }
 
         public void Dispose()
@@ -87,16 +95,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
         private void OnStageCanBeSkiped()
         {
-            _stageCanBeSkiped = true;
+            _stageCanBeSkiped.Value = true;
 
-            // создать попапы скипа
+            _gameplayPopupService.OpenSkipStagePopup();
+
             Debug.Log($"Текущий стейдж может быть пропущен");
-
         }
 
-        private void SwitchStage()
+        public void SwitchStage()
         {
-            _stageCanBeSkiped = false;
+            _stageCanBeSkiped.Value = false;
             _stageProviderService.SwitchToNext();
             _stageProviderService.StartCurrent();
             Debug.Log($"Запуск стейджа под номером: {_stageProviderService.CurrentStageNumber.Value}");
@@ -105,7 +113,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         private void OnCycleComplete()
         {
             _isRunning = false;
-            _stageCanBeSkiped = false;
+            _stageCanBeSkiped.Value = false;
             _isCycleComplete.Value = true;
         }
     }

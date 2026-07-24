@@ -6,6 +6,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
+using Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -30,6 +31,15 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _coroutinesPerformer,
                 _container.Resolve<StagesCycle>(),
                 _container.Resolve<RayShooterService>());
+        }
+
+        public SkipStagePopupPresenter CreateSkipStagePopupPresenter(SkipStagePopupView view)
+        {
+            return new SkipStagePopupPresenter(
+                _coroutinesPerformer,
+                _container.Resolve<RayShooterService>(),
+                view,
+                _container.Resolve<StagesCycle>());
         }
 
         public BuildTowerPopupPresenter CreateBuildTowerPopupPresenter(BuildTowerPopupView view, Entity towerPlaceholder)

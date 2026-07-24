@@ -207,7 +207,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static StagesCycle CreateStagesCycle(DIContainer c)
         {
-            return new StagesCycle(c.Resolve<StageProviderService>());
+            return new StagesCycle(
+                c.Resolve<StageProviderService>(),
+                c.Resolve<GameplayPopupService>());
         }
 
         private static GameplayPopupService CreateGameplayPopupService(DIContainer c)

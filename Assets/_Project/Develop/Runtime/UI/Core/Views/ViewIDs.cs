@@ -6,5 +6,6 @@
         public const string MainMenuScreen = nameof(MainMenuScreen);
         public const string BuildTowerPopup = nameof(BuildTowerPopup);
         public const string StartStagesPopup = nameof(StartStagesPopup);
+        public const string SkipStagePopup = nameof(SkipStagePopup);
     }
 }
