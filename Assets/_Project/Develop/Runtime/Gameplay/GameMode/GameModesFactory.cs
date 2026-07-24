@@ -1,7 +1,8 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages;
+﻿using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.UI.Gameplay;
 using System;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
@@ -23,7 +24,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
                     return new BasicGameMode(
                         _container.Resolve<StagesCycle>(),
                         _container.Resolve<WavesSpawner>(),
-                        _container.Resolve<PlayerHealth>());
+                        _container.Resolve<PlayerHealth>(),
+                        _container.Resolve<GameplayPopupService>());
 
                 default:
                     throw new ArgumentException($"Not supported {nameof(mode)} game mode");

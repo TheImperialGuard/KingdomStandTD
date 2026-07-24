@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
+using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
 using System;
 using UnityEngine;
 
@@ -23,6 +24,17 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
         }
 
         protected override Transform PopupLayer => _uIRoot.PopupsLayer;
+
+        public StartStagesPopupPresenter OpenStartStagesPopup(Action closedCallback = null)
+        {
+            StartStagesPopupView view = ViewsFactory.Create<StartStagesPopupView>(ViewIDs.StartStagesPopup, PopupLayer);
+
+            StartStagesPopupPresenter popup = _gameplayPresentersFactory.CreateStartStagesPopupPresenter(view);
+
+            OnPopupCreated(popup, view, closedCallback);
+
+            return popup;
+        }
 
         public BuildTowerPopupPresenter OpenBuildTowerPopup(Entity towerPlaceholder, Action closedCallback = null)
         {

@@ -1,7 +1,8 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages;
+﻿using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
+using Assets._Project.Develop.Runtime.UI.Gameplay;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
@@ -13,6 +14,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
     public class BasicGameMode : IGameMode
     {
         private ReactiveEvent<LevelResults> _end = new();
+
+        private readonly GameplayPopupService _popupService;
 
         private readonly StagesCycle _stagesCycle;
         private readonly WavesSpawner _wavesSpawner;
@@ -27,11 +30,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
         public BasicGameMode(
             StagesCycle stagesCycle,
             WavesSpawner wavesSpawner,
-            PlayerHealth playerHealth)
+            PlayerHealth playerHealth,
+            GameplayPopupService popupService)
         {
             _stagesCycle = stagesCycle;
             _wavesSpawner = wavesSpawner;
             _playerHealth = playerHealth;
+            _popupService = popupService;
 
             CreateWinCondition();
         }
@@ -40,14 +45,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
 
         public void Start()
         {
-            //открытие попапов - триггеров волн
-            //подписка на нажатие на эти попапы OnStartStagesCycle
+            _popupService.OpenStartStagesPopup();
 
             _disposables.Add(_playerHealth.Current.Subscribe(OnPlayerHealthChanged));
 
             _isRunning = true;
-
-            OnStartStagesRequest(); //УБРАТЬ ПОСЛЕ РЕАЛИЗАЦИИ ПОПАПОВ СТАРТА
         }
 
         public void Update(float deltaTime)
@@ -65,7 +67,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
         {
             _isRunning = false;
 
-            //отписка от нажатия на попапы OnStartStagesCycle
             foreach (IDisposable disposable  in _disposables)
                 disposable.Dispose();
         }
@@ -76,13 +77,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
                 .Add(new FuncCondition(() => _stagesCycle.InLastStage == true))
                 .Add(new FuncCondition(() => _wavesSpawner.IsSpawnComplete == true))
                 .Add(new FuncCondition(() => _wavesSpawner.SpawnedEntitites.Count == 0));
-        }
-
-        private void OnStartStagesRequest()
-        {
-            //закрытие попапов
-
-            _stagesCycle.Launch();
         }
 
         private void OnPlayerHealthChanged(int oldValue, int newValue)

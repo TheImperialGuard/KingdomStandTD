@@ -15,12 +15,9 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
         private readonly BuildTowerPopupView _view;
 
         private readonly Entity _towerPlaceholder;
-        private readonly RayShooterService _rayShooterService;
         private readonly EntitiesFactory _entitiesFactory;
         private readonly TowersFactory _towersFactory;
         private readonly TowersListConfig _towersListConfig;
-
-        private IDisposable _rayShooterServiceDisposable;
 
         private Entity _createdTowerDemo;
         private TowerTypes _createdTowerDemoType;
@@ -33,11 +30,10 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             EntitiesFactory entitiesFactory,
             TowersListConfig towersListConfig,
             TowersFactory towersFactory)
-            : base(coroutinesPerformer)
+            : base(coroutinesPerformer, rayShooterService)
         {
             _view = view;
             _towerPlaceholder = towerPlaceholder;
-            _rayShooterService = rayShooterService;
             _entitiesFactory = entitiesFactory;
             _towersListConfig = towersListConfig;
             _towersFactory = towersFactory;
@@ -51,8 +47,6 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
 
             _view.UpdatePosition(_towerPlaceholder.Transform.position);
 
-            _rayShooterServiceDisposable = _rayShooterService.LastHitInfo.Subscribe(OnClickedOutside);
-
             _view.BuildTowerButtonClicked += OnBuildTowerButtonClicked;
         }
 
@@ -60,15 +54,15 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
         {
             base.Dispose();
 
-            _rayShooterServiceDisposable.Dispose();
-
             _view.BuildTowerButtonClicked -= OnBuildTowerButtonClicked;
 
             ReleaseCurrentDemo();
         }
 
-        private void OnClickedOutside(RaycastHit oldHit, RaycastHit newHit)
+        protected override void OnClickedOutside(RaycastHit oldHit, RaycastHit newHit)
         {
+            base.OnClickedOutside(oldHit, newHit);
+
             ReleaseCurrentDemo();
             OnCloseRequest();
         }

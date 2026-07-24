@@ -5,5 +5,6 @@
         public const string LevelTile = nameof(LevelTile);
         public const string MainMenuScreen = nameof(MainMenuScreen);
         public const string BuildTowerPopup = nameof(BuildTowerPopup);
+        public const string StartStagesPopup = nameof(StartStagesPopup);
     }
 }

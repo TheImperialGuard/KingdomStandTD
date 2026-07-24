@@ -1,10 +1,9 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
-using Assets._Project.Develop.Runtime.Utilities.Reactive;
+﻿using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages
+namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 {
     public class StagesCycle : IDisposable
     {

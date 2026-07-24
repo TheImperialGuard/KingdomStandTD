@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.UI.Core.Presenters;
+﻿using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
+using Assets._Project.Develop.Runtime.UI.Core.Presenters;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using DG.Tweening;
 using System;
@@ -12,18 +13,25 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Popups
         public event Action<PopupPresenterBase> CloseRequest;
 
         private readonly ICoroutinesPerformer _coroutinesPerformer;
+        private readonly RayShooterService _rayShooterService;
+
+        private IDisposable _rayShooterServiceDisposable;
 
         private Coroutine _process;
 
-        protected PopupPresenterBase(ICoroutinesPerformer coroutinesPerformer)
+        protected PopupPresenterBase(
+            ICoroutinesPerformer coroutinesPerformer, 
+            RayShooterService rayShooterService)
         {
             _coroutinesPerformer = coroutinesPerformer;
+            _rayShooterService = rayShooterService;
         }
 
         protected abstract PopupViewBase PopupView { get; }
 
         public virtual void Initialize()
         {
+            _rayShooterServiceDisposable = _rayShooterService.LastHitInfo.Subscribe(OnClickedOutside);
         }
 
         public virtual void Dispose()
@@ -31,6 +39,8 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Popups
             KillProcess();
 
             PopupView.CloseRequest -= OnCloseRequest;
+
+            _rayShooterServiceDisposable.Dispose();
         }
 
         public void Show()
@@ -46,6 +56,8 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Popups
 
             _process = _coroutinesPerformer.StartPerform(ProcessHide(callback));
         }
+
+        protected virtual void OnClickedOutside(RaycastHit oldHit, RaycastHit newHit) { }
 
         protected virtual void OnPreShow()
         {

@@ -14,6 +14,7 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Views
             {ViewIDs.LevelTile, "UI/Meta/MainMenu/LevelTileView" },
             {ViewIDs.MainMenuScreen, "UI/Meta/MainMenu/MainMenuScreenView" },
             {ViewIDs.BuildTowerPopup, "UI/Gameplay/BuildTowerPopup" },
+            {ViewIDs.StartStagesPopup, "UI/Gameplay/StartStagesPopup" },
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)

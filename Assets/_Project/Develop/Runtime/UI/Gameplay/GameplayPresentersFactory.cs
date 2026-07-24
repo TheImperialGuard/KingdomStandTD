@@ -1,10 +1,12 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
+using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
+using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 
@@ -19,6 +21,15 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
         {
             _container = container;
             _coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
+        }
+
+        public StartStagesPopupPresenter CreateStartStagesPopupPresenter(StartStagesPopupView view)
+        {
+            return new StartStagesPopupPresenter(
+                view,
+                _coroutinesPerformer,
+                _container.Resolve<StagesCycle>(),
+                _container.Resolve<RayShooterService>());
         }
 
         public BuildTowerPopupPresenter CreateBuildTowerPopupPresenter(BuildTowerPopupView view, Entity towerPlaceholder)
