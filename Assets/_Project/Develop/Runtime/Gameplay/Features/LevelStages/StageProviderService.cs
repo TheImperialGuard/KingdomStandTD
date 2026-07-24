@@ -27,6 +27,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
         public IReadOnlyVariable<int> CurrentStageNumber => _currentStageNumber;
 
+        public StageConfig NextStageConfig => _stagesConfigs[_currentStageNumber.Value];
+
         public IReadOnlyVariable<StageResults> CurrentStageResult => _currentStageResult;
 
         public int StagesCount => _stagesConfigs.Count;

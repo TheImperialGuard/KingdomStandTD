@@ -30,7 +30,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 view,
                 _coroutinesPerformer,
                 _container.Resolve<StagesCycle>(),
-                _container.Resolve<RayShooterService>());
+                _container.Resolve<RayShooterService>(),
+                _container.Resolve<StageProviderService>());
         }
 
         public SkipStagePopupPresenter CreateSkipStagePopupPresenter(SkipStagePopupView view)
@@ -39,7 +40,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _coroutinesPerformer,
                 _container.Resolve<RayShooterService>(),
                 view,
-                _container.Resolve<StagesCycle>());
+                _container.Resolve<StagesCycle>(),
+                _container.Resolve<StageProviderService>());
         }
 
         public BuildTowerPopupPresenter CreateBuildTowerPopupPresenter(BuildTowerPopupView view, Entity towerPlaceholder)
