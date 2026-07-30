@@ -15,6 +15,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
 
         [SerializeField] private Button _button;
 
+        public TowerTypes TowerType => _towerType;
+
         private void OnValidate()
         {
             _button = _button != null ? _button : GetComponent<Button>();
@@ -23,6 +25,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
         {
             _button.onClick.AddListener(OnButtonClicked);
         }
+
+        public void SwitchInteractableOn(bool value) => _button.interactable = value;
 
         public void OnDispose()
         {

@@ -700,6 +700,30 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Interactables.InteractiveAction() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning.GoldOnDeath GoldOnDeathC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning.GoldOnDeath>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> GoldOnDeath => GoldOnDeathC.Value;
+
+		public bool TryGetGoldOnDeath(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning.GoldOnDeath component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddGoldOnDeath()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning.GoldOnDeath() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddGoldOnDeath(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning.GoldOnDeath() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.CurrentHealth CurrentHealthC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.CurrentHealth>();
 
 		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> CurrentHealth => CurrentHealthC.Value;

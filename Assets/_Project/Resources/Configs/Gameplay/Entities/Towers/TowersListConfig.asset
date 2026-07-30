@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.TowersListConfig
   _upgradeTreeConfigs:
   - {fileID: 11400000, guid: 41a98988f7f4ee449ab13149fbb65913, type: 2}
+  - {fileID: 11400000, guid: beea6b2e0169a9343957c9e70524799c, type: 2}
+  - {fileID: 11400000, guid: 490ef39f13e18d340b4828a366646fd2, type: 2}
+  - {fileID: 11400000, guid: 1ad71d2f1c51469419d7f359f781fa1b, type: 2}

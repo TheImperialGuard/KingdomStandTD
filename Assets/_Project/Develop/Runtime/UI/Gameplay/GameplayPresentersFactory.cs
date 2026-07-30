@@ -10,6 +10,7 @@ using Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using Assets._Project.Develop.Runtime.Utilities.Wallet;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay
 {
@@ -56,7 +57,9 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<RayShooterService>(),
                 _container.Resolve<EntitiesFactory>(),
                 config,
-                _container.Resolve<TowersFactory>());
+                _container.Resolve<TowersFactory>(),
+                _container.Resolve<TowersPurchaseService>(),
+                _container.Resolve<WalletService>());
         }
     }
 }

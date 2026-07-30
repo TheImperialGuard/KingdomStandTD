@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
@@ -19,6 +20,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             Vector3 position = _camera.WorldToScreenPoint(worldPosition);
 
             transform.position = position;
+        }
+
+        public void SwitchInteractableFor(TowerTypes type, bool value)
+        {
+            BuildTowerButton towerButton = _towersButtons.Where((button) => button.TowerType == type).First();
+
+            towerButton.SwitchInteractableOn(value);
         }
 
         private void Awake()

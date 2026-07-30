@@ -4,11 +4,13 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
+using Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
+using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,7 +47,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
 
                     AddWaypointMovementFor(entity, path);
 
-                    entity.AddDamageOnFinishPath(new(meleeConfig.DamageOnFinishPath));
+                    entity
+                        .AddDamageOnFinishPath(new(meleeConfig.DamageOnFinishPath))
+                        .AddGoldOnDeath(new(meleeConfig.GoldOnDeath));
 
                     ICompositeCondition mustSelfReleaseByDeath = new CompositeCondition()
                         .Add(new FuncCondition(() => entity.IsDead.Value == true))
@@ -59,7 +63,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
                         .AddMustSelfRelease(mustSelfRelease);
 
                     entity
-                        .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+                        .AddSystem(new SelfReleaseSystem(_entitiesLifeContext))
+                        .AddSystem(new EarnGoldOnDeathSystem(_container.Resolve<WalletService>()));
 
                     _brainsFactory.CreateMeleeBrain(entity);
 

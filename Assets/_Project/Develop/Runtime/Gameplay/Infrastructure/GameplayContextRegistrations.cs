@@ -53,6 +53,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateGameplayWalletService);
 
+            container.RegisterAsSingle(CreateTowersPurchaseService);
+
             container.RegisterAsSingle(CreatePlayerHealth);
 
             container.RegisterAsSingle(CreateBrainsFactory);
@@ -203,6 +205,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             };
 
             return new WalletService(currencies);
+        }
+
+        private static TowersPurchaseService CreateTowersPurchaseService(DIContainer c)
+        {
+            return new TowersPurchaseService(
+                c.Resolve<ConfigsProviderService>(),
+                c.Resolve<WalletService>());
         }
 
         private static StagesCycle CreateStagesCycle(DIContainer c)
