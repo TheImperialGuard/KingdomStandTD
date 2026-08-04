@@ -8,6 +8,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         IReadOnlyEvent Completed { get; }
         IReadOnlyEvent CanBeSkiped { get; }
 
+        float RemainingTime { get; }
+
         void Start();
         void Update(float deltaTime);
         void Cleanup();

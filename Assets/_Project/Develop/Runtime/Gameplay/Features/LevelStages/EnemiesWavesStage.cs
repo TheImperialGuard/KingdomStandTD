@@ -44,6 +44,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
         public IReadOnlyEvent CanBeSkiped => _canBeSkiped;
 
+        public float RemainingTime
+        {
+            get
+            {
+                return _timer == null ? _stageTime : _timer.CurrentTime.Value;
+            }
+        }
+
         public void Start()
         {
             if (_inProcess)

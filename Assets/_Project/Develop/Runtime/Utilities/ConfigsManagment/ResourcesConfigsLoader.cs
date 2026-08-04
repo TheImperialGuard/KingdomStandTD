@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using System;
@@ -17,6 +18,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(LevelsListConfig), "Configs/Gameplay/Levels/LevelsListConfig" },
             {typeof(TowerPlaceholderConfig), "Configs/Gameplay/Entities/Towers/TowerPlaceholderConfig" },
             {typeof(TowersListConfig), "Configs/Gameplay/Entities/Towers/TowersListConfig" },
+            {typeof(GameConfig), "Configs/Gameplay/GameConfig" },
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

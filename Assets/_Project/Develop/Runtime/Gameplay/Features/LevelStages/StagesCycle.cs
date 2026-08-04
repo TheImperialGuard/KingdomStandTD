@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.UI.Gameplay;
+﻿using Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning;
+using Assets._Project.Develop.Runtime.UI.Gameplay;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
     {
         private readonly StageProviderService _stageProviderService;
         private readonly GameplayPopupService _gameplayPopupService;
+        private readonly EarnGoldOnSkipStageService _earnGoldOnSkipStageService;
 
         private ReactiveVariable<bool> _isCycleComplete = new();
         private ReactiveVariable<bool> _stageCanBeSkiped = new();
@@ -19,13 +21,15 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         private List<IDisposable> _disposables = new();
 
         public StagesCycle(
-            StageProviderService stageProviderService, 
-            GameplayPopupService gameplayPopupService)
+            StageProviderService stageProviderService,
+            GameplayPopupService gameplayPopupService,
+            EarnGoldOnSkipStageService earnGoldOnSkipStageService)
         {
             _stageProviderService = stageProviderService;
 
             _disposables.Add(_stageProviderService.CurrentStageResult.Subscribe(OnStageResultChanged));
             _gameplayPopupService = gameplayPopupService;
+            _earnGoldOnSkipStageService = earnGoldOnSkipStageService;
         }
 
         public IReadOnlyVariable<bool> IsCycleComplete => _isCycleComplete;
@@ -105,7 +109,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         public void SwitchStage()
         {
             _stageCanBeSkiped.Value = false;
-            _stageProviderService.SwitchToNext();
+
+            _stageProviderService.SwitchToNext(out float remainingStageTime);
+
+            if (remainingStageTime > 0)
+                _earnGoldOnSkipStageService.Earn(remainingStageTime);
+
             _stageProviderService.StartCurrent();
             Debug.Log($"Запуск стейджа под номером: {_stageProviderService.CurrentStageNumber.Value}");
         }

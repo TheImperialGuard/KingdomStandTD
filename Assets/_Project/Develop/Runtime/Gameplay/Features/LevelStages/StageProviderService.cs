@@ -35,13 +35,19 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
         public bool HasNextStage() => _currentStageNumber.Value < StagesCount;
 
-        public void SwitchToNext()
+        public void SwitchToNext(out float currentStageRemainingTime)
         {
             if (HasNextStage() == false)
                 throw new InvalidOperationException();
 
+            currentStageRemainingTime = 0f;
+
             if (_currentStage != null)
+            {
+                currentStageRemainingTime = _currentStage.RemainingTime;
+
                 CleanupCurrent();
+            }
 
             _currentStageNumber.Value++;
             _currentStageResult.Value = StageResults.Uncompleted;

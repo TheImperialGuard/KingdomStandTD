@@ -5,6 +5,7 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
+using Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning;
 using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
@@ -18,7 +19,6 @@ using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Gameplay;
-using Assets._Project.Develop.Runtime.UI.Meta;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -54,6 +54,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateGameplayWalletService);
 
             container.RegisterAsSingle(CreateTowersPurchaseService);
+
+            container.RegisterAsSingle(CreateEarnGoldOnSkipStageService);
 
             container.RegisterAsSingle(CreatePlayerHealth);
 
@@ -214,11 +216,19 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<WalletService>());
         }
 
+        private static EarnGoldOnSkipStageService CreateEarnGoldOnSkipStageService(DIContainer c)
+        {
+            return new EarnGoldOnSkipStageService(
+                c.Resolve<ConfigsProviderService>(),
+                c.Resolve<WalletService>());
+        }
+
         private static StagesCycle CreateStagesCycle(DIContainer c)
         {
             return new StagesCycle(
                 c.Resolve<StageProviderService>(),
-                c.Resolve<GameplayPopupService>());
+                c.Resolve<GameplayPopupService>(),
+                c.Resolve<EarnGoldOnSkipStageService>());
         }
 
         private static GameplayPopupService CreateGameplayPopupService(DIContainer c)
