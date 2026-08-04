@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3297880050044365635}
   - component: {fileID: 4429062090245363208}
   - component: {fileID: 6033765040925884737}
+  - component: {fileID: 7573977242868936727}
   m_Layer: 0
   m_Name: UpgradeTowerPopup
   m_TagString: Untagged
@@ -59,6 +60,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635840374177859042}
   m_CullTransparentMesh: 1
+--- !u!114 &7573977242868936727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635840374177859042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2140f16da3810b9419b950d57cf97d4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup.UpgradeTowerPopupView
+  _mainGroup: {fileID: 4429062090245363208}
+  _body: {fileID: 4429062090245363208}
+  _anticlicker: {fileID: 0}
+  _animationType: 0
+  _upgradeButton: {fileID: 303186455538437430}
+  _sellButton: {fileID: 9040860437774243817}
 --- !u!1 &644556067112231915
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Popups
 {
     public abstract class PopupViewBase : MonoBehaviour, IShowableView
     {
-        public event Action CloseRequest;
+        public event Action<bool> CloseRequest;
 
         [SerializeField] private CanvasGroup _mainGroup;
         [SerializeField] private CanvasGroup _body;
@@ -26,7 +26,7 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Popups
             _mainGroup.alpha = 0f;
         }
 
-        public void OnCloseButtonClicked() => CloseRequest?.Invoke();
+        public void OnCloseButtonClicked() => CloseRequest?.Invoke(true);
 
         public Tween Show()
         {

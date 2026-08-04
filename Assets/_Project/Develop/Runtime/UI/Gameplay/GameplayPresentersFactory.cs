@@ -1,6 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
@@ -8,6 +9,8 @@ using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
+using Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup;
+using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
@@ -59,7 +62,26 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 config,
                 _container.Resolve<TowersFactory>(),
                 _container.Resolve<TowersPurchaseService>(),
-                _container.Resolve<WalletService>());
+                _container.Resolve<WalletService>(),
+                _container.Resolve<TowersPlaceholdersService>());
+        }
+
+        public UpgradeTowerPopupPresenter CreateUpgradeTowerPopupPresenter(UpgradeTowerPopupView view, Entity sourceTower)
+        {
+            ConfigsProviderService configsProviderService = _container.Resolve<ConfigsProviderService>();
+            TowersListConfig config = configsProviderService.GetConfig<TowersListConfig>();
+
+            return new UpgradeTowerPopupPresenter(
+                _coroutinesPerformer,
+                _container.Resolve<RayShooterService>(),
+                view,
+                sourceTower,
+                _container.Resolve<ResourcesAssetsLoader>(),
+                _container.Resolve<TowersFactory>(),
+                config,
+                _container.Resolve<TowersPurchaseService>(),
+                _container.Resolve<WalletService>(),
+                _container.Resolve<TowersPlaceholdersService>());
         }
     }
 }

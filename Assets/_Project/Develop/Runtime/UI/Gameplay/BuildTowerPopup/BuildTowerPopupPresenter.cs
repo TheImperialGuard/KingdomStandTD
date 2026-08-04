@@ -1,6 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
@@ -23,6 +24,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
         private readonly TowersListConfig _towersListConfig;
         private readonly TowersPurchaseService _towersPurchaseService;
         private readonly WalletService _walletService;
+        private readonly TowersPlaceholdersService _towersPlaceholdersService; 
 
         private Entity _createdTowerDemo;
         private TowerTypes _createdTowerDemoType;
@@ -37,7 +39,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             TowersListConfig towersListConfig,
             TowersFactory towersFactory,
             TowersPurchaseService towersPurchaseService,
-            WalletService walletService)
+            WalletService walletService,
+            TowersPlaceholdersService towersPlaceholdersService)
             : base(coroutinesPerformer, rayShooterService)
         {
             _view = view;
@@ -47,6 +50,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             _towersFactory = towersFactory;
             _towersPurchaseService = towersPurchaseService;
             _walletService = walletService;
+            _towersPlaceholdersService = towersPlaceholdersService;
         }
 
         protected override PopupViewBase PopupView => _view;
@@ -55,7 +59,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
         {
             base.Initialize();
 
-            _view.UpdatePosition(_towerPlaceholder.Transform.position);
+            _view.UpdateWorldPosition(_towerPlaceholder.Transform.position);
 
             _view.BuildTowerButtonClicked += OnBuildTowerButtonClicked;
 
@@ -105,13 +109,10 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
         {
             ReleaseCurrentDemo();
             ReleaseTowerPlaceholder();
-            _towersFactory.Create(_towerPlaceholder.Transform.position, config);
+            _towersFactory.Create(_towerPlaceholder.Transform.position, config, TowersFirstLevel);
         }
 
-        private void ReleaseTowerPlaceholder()
-        {
-            _towerPlaceholder.SelfReleaseRequested.Value = true; 
-        }
+        private void ReleaseTowerPlaceholder() => _towersPlaceholdersService.ReleasePlaceholder(_towerPlaceholder);
 
         private void CreateTowerDemo(TowerConfig config)
         {

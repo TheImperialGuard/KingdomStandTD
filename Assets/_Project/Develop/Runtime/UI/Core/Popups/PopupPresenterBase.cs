@@ -10,7 +10,7 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Popups
 {
     public abstract class PopupPresenterBase : IPresenter
     {
-        public event Action<PopupPresenterBase> CloseRequest;
+        public event Action<PopupPresenterBase, bool> CloseRequest;
 
         private readonly ICoroutinesPerformer _coroutinesPerformer;
         private readonly RayShooterService _rayShooterService;
@@ -73,7 +73,7 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Popups
 
         protected virtual void OnPostHide() { }
 
-        protected void OnCloseRequest() => CloseRequest?.Invoke(this);
+        protected void OnCloseRequest(bool withCallBack = true) => CloseRequest?.Invoke(this, withCallBack);
 
         private IEnumerator ProcessShow()
         {

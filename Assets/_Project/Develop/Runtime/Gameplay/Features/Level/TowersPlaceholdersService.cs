@@ -30,11 +30,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Level
                 CreatePlaceholder(transform.position);
         }
 
-        private void CreatePlaceholder(Vector3 position)
+        public void CreatePlaceholder(Vector3 position)
         {
             Entity placeholder = _entitiesFactory.CreateTowerPlaceholder(position, _placeholderConfig);
 
             _placeholders.Add(placeholder);
+        }
+
+        public void ReleasePlaceholder(Entity placeholder)
+        {
+            placeholder.SelfReleaseRequested.Value = true;
+            _placeholders.Remove(placeholder);
         }
     }
 }

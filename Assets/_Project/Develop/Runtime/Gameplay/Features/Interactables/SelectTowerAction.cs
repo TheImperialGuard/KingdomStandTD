@@ -18,7 +18,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
         public void Do()
         {
             _source.ShootingRangeZone.Show();
-            _popupService.OpenBuildTowerPopup(_source, _source.ShootingRangeZone.Hide);
+            _popupService.OpenUpgradeTowerPopup(_source, _source.ShootingRangeZone.Hide);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
+using Assets._Project.Develop.Runtime.UI.Core.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
 {
-    public class BuildTowerPopupView : PopupViewBase
+    public class BuildTowerPopupView : PopupViewBase, IWorldPositionView
     {
         public event Action<TowerTypes> BuildTowerButtonClicked;
 
@@ -15,7 +16,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
 
         private Camera _camera;
 
-        public void UpdatePosition(Vector3 worldPosition)
+        public void UpdateWorldPosition(Vector3 worldPosition)
         {
             Vector3 position = _camera.WorldToScreenPoint(worldPosition);
 

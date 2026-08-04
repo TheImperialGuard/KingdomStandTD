@@ -7,5 +7,6 @@
         public const string BuildTowerPopup = nameof(BuildTowerPopup);
         public const string StartStagesPopup = nameof(StartStagesPopup);
         public const string SkipStagePopup = nameof(SkipStagePopup);
+        public const string UpgradeTowerPopup = nameof(UpgradeTowerPopup);
     }
 }

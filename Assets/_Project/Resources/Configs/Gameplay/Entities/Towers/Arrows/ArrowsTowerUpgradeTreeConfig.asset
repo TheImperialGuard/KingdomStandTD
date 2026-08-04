@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.TowerUpgradeTreeConfig
   <TowerType>k__BackingField: 0
   <FirstLevel>k__BackingField: {fileID: 11400000, guid: 55db136ac552c724bb358371ef1dca50, type: 2}
-  <SecondLevel>k__BackingField: {fileID: 0}
-  <ThirdLevel>k__BackingField: {fileID: 0}
-  <FourthLevel>k__BackingField: {fileID: 0}
-  <FourthLevelAlt>k__BackingField: {fileID: 0}
+  <SecondLevel>k__BackingField: {fileID: 11400000, guid: 55db136ac552c724bb358371ef1dca50, type: 2}
+  <ThirdLevel>k__BackingField: {fileID: 11400000, guid: 55db136ac552c724bb358371ef1dca50, type: 2}
+  <FourthLevel>k__BackingField: {fileID: 11400000, guid: 55db136ac552c724bb358371ef1dca50, type: 2}
+  <FourthLevelAlt>k__BackingField: {fileID: 11400000, guid: 55db136ac552c724bb358371ef1dca50, type: 2}

@@ -2,6 +2,54 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 {
 	public partial class Entity
 	{
+		public Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerType TowerTypeC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerType>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.TowerTypes> TowerType => TowerTypeC.Value;
+
+		public bool TryGetTowerType(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.TowerTypes> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerType component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.TowerTypes>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTowerType()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerType() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.TowerTypes>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTowerType(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.TowerTypes> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerType() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerLevel TowerLevelC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerLevel>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> TowerLevel => TowerLevelC.Value;
+
+		public bool TryGetTowerLevel(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerLevel component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTowerLevel()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerLevel() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTowerLevel(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerLevel() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Team TeamC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Team>();
 
 		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Teams> Team => TeamC.Value;

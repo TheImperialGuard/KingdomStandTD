@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
+using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
@@ -34,7 +35,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
         }
 
-        public Entity Create(Vector3 position, TowerConfig config)
+        public Entity Create(Vector3 position, TowerConfig config, int level)
         {
             Entity entity;
 
@@ -42,6 +43,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             {
                 case ArrowsTowerConfig arrowsTowerConfig:
                     entity = _entitiesFactory.CreateArrowsTower(position, arrowsTowerConfig);
+
+                    entity
+                        .AddTowerType(new(TowerTypes.Arrows))
+                        .AddTowerLevel(new(level));
 
                     _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
 
@@ -58,15 +63,21 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
                 .AddIsInteractable()
                 .AddInteractRequest()
                 .AddInteractEvent()
-                .AddInteractiveAction(new(selectAction));
+                .AddInteractiveAction(new(selectAction))
+                .AddSelfReleaseRequested(new(false));
 
             ICompositeCondition canInteract = new CompositeCondition()
                 .Add(new FuncCondition(() => true));
 
-            entity
-                .AddCanInteract(canInteract);
+            ICompositeCondition mustSelfRelease = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.SelfReleaseRequested.Value == true));
 
             entity
+                .AddCanInteract(canInteract)
+                .AddMustSelfRelease(mustSelfRelease);
+
+            entity
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext))
                 .AddSystem(new InteractSystem());
 
             _entitiesLifeContext.Add(entity);

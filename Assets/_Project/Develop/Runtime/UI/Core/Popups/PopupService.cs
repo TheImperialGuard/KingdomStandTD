@@ -18,13 +18,14 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Popups
 
         protected abstract Transform PopupLayer { get; }
 
-        public void ClosePopup(PopupPresenterBase popup)
+        public void ClosePopup(PopupPresenterBase popup, bool withCallBack = true)
         {
             popup.CloseRequest -= ClosePopup;
 
             popup.Hide(() =>
             {
-                _presenterToInfo[popup].ClosedCallback?.Invoke();
+                if (withCallBack == true)
+                    _presenterToInfo[popup].ClosedCallback?.Invoke();
 
                 DisposeFor(popup);
                 _presenterToInfo.Remove(popup);

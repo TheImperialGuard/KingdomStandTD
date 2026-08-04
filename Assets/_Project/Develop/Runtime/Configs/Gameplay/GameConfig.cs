@@ -8,5 +8,7 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay
         [field: SerializeField, Min(0f)] public float GoldIndexForRemainingStageSeconds = 1f;
 
         [field: SerializeField, Min(0)] public int MaxGoldForSkipStage = 20;
+
+        [field: SerializeField, Min(0)] public float SellTowerGoldReturnIndex = 0.7f;
     }
 }
