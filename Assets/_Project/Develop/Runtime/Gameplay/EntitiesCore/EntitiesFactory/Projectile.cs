@@ -12,7 +12,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
 {
     public partial class EntitiesFactory
     {
-        public Entity CreateProjectile(Vector3 position, Vector3 direction, Entity owner)
+        public Entity CreateArrowProjectile(Vector3 position, Vector3 direction, Entity owner)
         {
             Entity entity = CreateEmpty();
 

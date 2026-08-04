@@ -62,7 +62,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
                 Vector2 offset = perpindicular * (-offesetBetweenProjectiles / 2f * (projectileCounts - 1) + i * offesetBetweenProjectiles);
                 Vector3 position = new Vector3(_shootPoint.position.x + offset.x, _shootPoint.position.y, _shootPoint.position.z + offset.y);
 
-                _entitiesFactory.CreateProjectile(position, direction, _shooterEntity);
+                _entitiesFactory.CreateArrowProjectile(position, direction, _shooterEntity);
             }
         }
     }
