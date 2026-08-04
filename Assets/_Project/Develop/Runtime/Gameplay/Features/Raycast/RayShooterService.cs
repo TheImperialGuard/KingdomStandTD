@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using Assets._Project.Develop.Runtime.Utilities;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
 
@@ -32,7 +33,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Raycast
         {
             Ray ray = new Ray(origin, direction);
 
-            Physics.Raycast(ray, out RaycastHit hitInfo);
+            Physics.Raycast(ray, out RaycastHit hitInfo, float.PositiveInfinity, Layers.ExcludeTriggersMask, QueryTriggerInteraction.Ignore);
 
             _lastHitInfo.Value = hitInfo;
 
