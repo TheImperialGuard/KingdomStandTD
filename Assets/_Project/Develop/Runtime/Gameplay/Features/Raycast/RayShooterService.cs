@@ -33,11 +33,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Raycast
         {
             Ray ray = new Ray(origin, direction);
 
-            Physics.Raycast(ray, out RaycastHit hitInfo, float.PositiveInfinity, Layers.ExcludeTriggersMask, QueryTriggerInteraction.Ignore);
+            Physics.Raycast(ray, out RaycastHit hitInfo, 1000f, Layers.ExcludeTriggersMask, QueryTriggerInteraction.Ignore);
 
             _lastHitInfo.Value = hitInfo;
 
-            Debug.Log($"Был выпущен луч. Поражена цель: {_lastHitInfo.Value.collider.gameObject.name}");
+            if (_lastHitInfo.Value.collider != null)
+                Debug.Log($"Был выпущен луч. Поражена цель: {_lastHitInfo.Value.collider.gameObject.name}");
         }
     }
 }
