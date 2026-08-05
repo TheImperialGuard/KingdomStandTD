@@ -13,5 +13,6 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels
         [field: SerializeField, Min(0)] public float StartDelay { get; private set; } = 0;
         [field: SerializeField, Min(0.1f)] public float DelayBetweenSpawns { get; private set; } = 1;
         [field: SerializeField, Min(1)] public int EnemiesCount { get; private set; } = 1;
+        [field: SerializeField] public Vector3 WaypointsOffset { get; private set; } = Vector3.zero;
     }
 }

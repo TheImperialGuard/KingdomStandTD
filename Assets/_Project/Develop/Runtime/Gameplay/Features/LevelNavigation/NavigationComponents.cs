@@ -1,6 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
 {
@@ -27,5 +28,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
     public class DamageOnFinishPath : IEntityComponent
     {
         public ReactiveVariable<int> Value;
+    }
+
+    public class WaypointsOffset : IEntityComponent
+    {
+        public ReactiveVariable<Vector3> Value;
     }
 }

@@ -674,6 +674,30 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.DamageOnFinishPath() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.WaypointsOffset WaypointsOffsetC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.WaypointsOffset>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> WaypointsOffset => WaypointsOffsetC.Value;
+
+		public bool TryGetWaypointsOffset(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.WaypointsOffset component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddWaypointsOffset()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.WaypointsOffset() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddWaypointsOffset(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.WaypointsOffset() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.Interactables.IsInteractable IsInteractableC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Interactables.IsInteractable>();
 
 		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsInteractable()

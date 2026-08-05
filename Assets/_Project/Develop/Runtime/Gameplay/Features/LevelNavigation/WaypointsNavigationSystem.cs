@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
 using Assets._Project.Develop.Runtime.Utilities;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +10,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
 {
     public class WaypointsNavigationSystem : IInitializableSystem, IUpdatableSystem
     {
-        private Buffer<Collider> _contacts;
+        private Transform _soure;
 
         private List<Waypoint> _waypoints;
         private List<Waypoint> _reachedWaypoints;
+        private ReactiveVariable<Vector3> _waypointsOffset;
 
         private ReactiveVariable<Waypoint> _currentWaypoint;
 
@@ -20,10 +22,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
 
         public void OnInit(Entity entity)
         {
-            _contacts = entity.ContactCollidersBuffer;
+            _soure = entity.Transform;
 
             _waypoints = entity.Waypoints;
             _reachedWaypoints = entity.ReachedWaypoints;
+            _waypointsOffset = entity.WaypointsOffset;
 
             _currentWaypoint = entity.CurrentWaypoint;
             _currentWaypoint.Value = _waypoints[0];
@@ -34,19 +37,24 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
 
         public void OnUpdate(float deltaTime)
         {
-            for (int i = 0; i < _contacts.Count; i++)
-            {
-                Collider collider = _contacts.Items[i];
+            if (IsCurrentWaypointReached() == false)
+                return;
 
-                if (collider.TryGetComponent(out Waypoint reachedWaypoint))
-                {
-                    if (_waypoints.Contains(reachedWaypoint) && _reachedWaypoints.Contains(reachedWaypoint) == false)
-                    {
-                        _reachedWaypoints.Add(reachedWaypoint);
-                        SwitchWaypoint();
-                    }    
-                }
-            }
+            _reachedWaypoints.Add(_currentWaypoint.Value);
+
+            SwitchWaypoint();
+        }
+
+        private bool IsCurrentWaypointReached()
+        {
+            Transform waypoint = _currentWaypoint.Value.transform;
+            Vector3 waypointPos = _currentWaypoint.Value.transform.position;
+
+            waypointPos += waypoint.TransformVector(_waypointsOffset.Value);
+
+            float distanceToWaypoint = (waypointPos - _soure.position).magnitude;
+
+            return distanceToWaypoint < 0.01f;
         }
 
         private void SwitchWaypoint()

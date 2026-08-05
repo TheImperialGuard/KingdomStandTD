@@ -16,6 +16,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.States
         private Transform _transform;
 
         private Vector3 _currentDirection;
+        private ReactiveVariable<Vector3> _waypointsOffset;
 
         public WaypointsMovementState(Entity entity)
         {
@@ -25,12 +26,22 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.States
             _transform = entity.Transform;
 
             _currentDirection = Vector3.zero;
+
+            if (entity.TryGetWaypointsOffset(out ReactiveVariable<Vector3> waypointsOffset))
+                _waypointsOffset = waypointsOffset;
         }
 
         public void Update(float deltaTime)
         {
-            if (_currentWaypoint != null)
-                _currentDirection = (_currentWaypoint.Value.transform.position - _transform.position).normalized;
+            if (_currentWaypoint == null)
+                return;
+
+            Transform waypoint = _currentWaypoint.Value.transform;
+            Vector3 waypointPos = waypoint.position;
+
+            waypointPos += waypoint.TransformVector(_waypointsOffset.Value);
+
+            _currentDirection = (waypointPos - _transform.position).normalized;
 
             _movementDirection.Value = _currentDirection;
             _rotationDirection.Value = _currentDirection;

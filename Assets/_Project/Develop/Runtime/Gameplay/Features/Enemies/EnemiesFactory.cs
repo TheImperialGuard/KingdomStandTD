@@ -36,7 +36,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
         }
 
-        public Entity Create(Vector3 position, EntityConfig config, IReadOnlyList<Waypoint> path)
+        public Entity Create(Vector3 position, EntityConfig config, IReadOnlyList<Waypoint> path, Vector3 waypointsOffset)
         {
             Entity entity;
 
@@ -45,7 +45,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
                 case MeleeConfig meleeConfig:
                     entity = _entitiesFactory.CreateMelee(position, meleeConfig);
 
-                    AddWaypointMovementFor(entity, path);
+                    AddWaypointMovementFor(entity, path, waypointsOffset);
 
                     entity
                         .AddDamageOnFinishPath(new(meleeConfig.DamageOnFinishPath))
@@ -81,13 +81,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
             return entity;
         }
 
-        private void AddWaypointMovementFor(Entity entity, IReadOnlyList<Waypoint> path)
+        private void AddWaypointMovementFor(Entity entity, IReadOnlyList<Waypoint> path, Vector3 waypointsOffset)
         {
             entity
                 .AddWaypoints(new(path))
                 .AddCurrentWaypoint()
                 .AddReachedWaypoints(new())
-                .AddIsPathFinished();
+                .AddIsPathFinished()
+                .AddWaypointsOffset(new(waypointsOffset));
 
             entity
                 .AddSystem(new WaypointsNavigationSystem());

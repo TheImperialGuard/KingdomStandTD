@@ -85,7 +85,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
 
             for (int i = 0; i < waveConfig.EnemiesCount; i++)
             {
-                SpawnEnemy(waveConfig.EnemyConfig, waveConfig.RoadPath.Waypoints);
+                SpawnEnemy(waveConfig.EnemyConfig, waveConfig.RoadPath.Waypoints, waveConfig.WaypointsOffset);
 
                 spawnCooldownTimer.Restart();
                 yield return new WaitUntil(() => spawnCooldownTimer.IsOver == true);
@@ -94,11 +94,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
             _completedSpawnProcesses++;
         }
 
-        private void SpawnEnemy(CharacterConfig enemyConfig, IReadOnlyList<Waypoint> waypoints)
+        private void SpawnEnemy(CharacterConfig enemyConfig, IReadOnlyList<Waypoint> waypoints, Vector3 waypointsOffset)
         {
             Vector3 spawnPos = waypoints.First().transform.position;
 
-            Entity enemy = _enemiesFactory.Create(spawnPos, enemyConfig, waypoints);
+            if (waypointsOffset != Vector3.zero)
+                spawnPos += waypointsOffset;
+
+            List<Waypoint> path = GetPathWithoutSpawnPos(waypoints);
+
+            Entity enemy = _enemiesFactory.Create(spawnPos, enemyConfig, path, waypointsOffset);
 
             _spawnedEnemies.Add(enemy);
         }
@@ -116,6 +121,21 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
         {
             if (_spawnedEnemies.Contains(entity))
                 _spawnedEnemies.Remove(entity);
+        }
+
+        private List<Waypoint> GetPathWithoutSpawnPos(IReadOnlyList<Waypoint> waypoints)
+        {
+            List<Waypoint> path = new List<Waypoint>();
+
+            for (int i = 0; i < waypoints.Count; i++)
+            {
+                if (i == 0)
+                    continue;
+
+                path.Add(waypoints[i]);
+            }
+
+            return path;
         }
     }
 }

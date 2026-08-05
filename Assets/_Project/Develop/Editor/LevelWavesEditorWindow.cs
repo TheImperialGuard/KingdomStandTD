@@ -93,7 +93,7 @@ namespace Assets._Project.Develop.Editor
                 float stageHeader = 20f;
                 float fieldsRow = 20f;
                 float wavesHeader = 18f;
-                float waveElementHeight = 86f;
+                float waveElementHeight = 128f;
                 float wavesFooter = 22f;
                 float bottomPadding = 30f;
 
@@ -190,7 +190,7 @@ namespace Assets._Project.Develop.Editor
 
             var list = new ReorderableList(_so, wavesProp, true, true, true, true);
             list.drawHeaderCallback = rect => EditorGUI.LabelField(rect, "Waves");
-            list.elementHeight = 86f;
+            list.elementHeight = 128f;
 
             list.drawElementCallback = (rect, index, isActive, isFocused) =>
             {
@@ -236,6 +236,7 @@ namespace Assets._Project.Develop.Editor
             var startDelay = wave.FindPropertyRelative("<StartDelay>k__BackingField");
             var delayBetween = wave.FindPropertyRelative("<DelayBetweenSpawns>k__BackingField");
             var enemiesCount = wave.FindPropertyRelative("<EnemiesCount>k__BackingField");
+            var waypointsOffset = wave.FindPropertyRelative("<WaypointsOffset>k__BackingField");
 
             if (characterProp != null)
                 EditorGUI.PropertyField(new Rect(x, y, leftW, 18f), characterProp, new GUIContent("Character Config"));
@@ -261,6 +262,11 @@ namespace Assets._Project.Develop.Editor
 
             if (enemiesCount != null)
                 EditorGUI.PropertyField(new Rect(x + w1 + w2 + 12f, y, w3, 18f), enemiesCount, new GUIContent("Count"));
+
+            y += 22f;
+
+            if (waypointsOffset != null)
+                EditorGUI.PropertyField(new Rect(x, y, leftW, 18f), waypointsOffset, new GUIContent("Waypoints Offset"));
         }
 
         private void DrawPrefabPreview(Rect rect, CharacterConfig config)
