@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193a5dcbb319b3a42b997ea6be380bcb, type: 3}
   m_Name: Level_1
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.LevelConfig
-  <PrefabPath>k__BackingField: Prefabs/Levels/LevelOrigin
+  <PrefabPath>k__BackingField: Prefabs/Levels/Level_1
+  <GameMode>k__BackingField: 0
   <StartGold>k__BackingField: 100
   <StartPlayerHealth>k__BackingField: 20
   <ArrowsUpgradesLevelLimit>k__BackingField: 5

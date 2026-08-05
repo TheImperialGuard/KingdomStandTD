@@ -33,6 +33,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
 
         private void OnRayShooted(RaycastHit oldHit, RaycastHit newHit)
         {
+            if (newHit.collider == null)
+                return;
+
             if (newHit.collider.gameObject.TryGetComponent(out MonoEntity monoEntity) == false)
                 return;
 
