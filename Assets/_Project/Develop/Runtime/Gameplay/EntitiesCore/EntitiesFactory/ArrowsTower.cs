@@ -26,6 +26,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddInstantShotDirection()
                 .AddAttackCooldownCurrentTime()
                 .AddAttackCooldownInitialTime(new ReactiveVariable<float>(config.AttackCooldown))
+                .AddProjectileSpeed(new(config.ProjectileSpeed))
                 .AddInAttackCooldown();
 
             ICompositeCondition canStartAttack = new CompositeCondition()

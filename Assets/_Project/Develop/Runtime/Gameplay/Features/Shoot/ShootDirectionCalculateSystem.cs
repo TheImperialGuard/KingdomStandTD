@@ -11,6 +11,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
         private ReactiveVariable<InstantShotDirectionArgs> _directionArgs;
 
         private ReactiveVariable<Entity> _currentTarget;
+        private ReactiveVariable<float> _projectileSpeed;
 
         private Transform _shootPoint;
 
@@ -18,6 +19,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
         {
             _directionArgs = entity.InstantShotDirection;
             _currentTarget = entity.CurrentTarget;
+            _projectileSpeed = entity.ProjectileSpeed;
             _shootPoint = entity.ShootPoint;
         }
 
@@ -46,7 +48,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
             Vector3 currentTargetSpeed = _currentTarget.Value.Rigidbody.linearVelocity;
             Vector3 shootPointPosition = _shootPoint.position;
 
-            float projectileSpeed = 3f;
+            float projectileSpeed = _projectileSpeed.Value;
 
             if (currentTargetSpeed == Vector3.zero)
                 return currentTargetPosition;

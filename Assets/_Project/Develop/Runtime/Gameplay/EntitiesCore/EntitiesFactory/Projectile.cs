@@ -22,7 +22,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddIsProjectile()
                 .AddOwner(new ReactiveVariable<Entity>(owner))
                 .AddMoveDirection(new ReactiveVariable<Vector3>(direction))
-                .AddMoveSpeed(new ReactiveVariable<float>(5f))
+                .AddMoveSpeed(new ReactiveVariable<float>(owner.ProjectileSpeed.Value))
                 .AddIsMoving()
                 .AddRotationDirection(new ReactiveVariable<Vector3>(direction))
                 .AddRotationSpeed(new ReactiveVariable<float>(9999))

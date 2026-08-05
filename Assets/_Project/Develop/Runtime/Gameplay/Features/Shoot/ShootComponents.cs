@@ -19,6 +19,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
         public ReactiveVariable<float> Value;
     }
 
+    public class ProjectileSpeed : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
+
     public class IsProjectile : IEntityComponent
     {
     }
