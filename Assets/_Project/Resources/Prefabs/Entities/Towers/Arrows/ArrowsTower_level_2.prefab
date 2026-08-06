@@ -381,6 +381,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArrowsTower_level_2
       objectReference: {fileID: 0}
+    - target: {fileID: 6903862146585615583, guid: 25a63a86cf4591b42a9e6e90ee21551b, type: 3}
+      propertyPath: m_Size.x
+      value: 1.039834
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903862146585615583, guid: 25a63a86cf4591b42a9e6e90ee21551b, type: 3}
+      propertyPath: m_Size.y
+      value: 1.99411
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903862146585615583, guid: 25a63a86cf4591b42a9e6e90ee21551b, type: 3}
+      propertyPath: m_Size.z
+      value: 1.041348
+      objectReference: {fileID: 0}
+    - target: {fileID: 6903862146585615583, guid: 25a63a86cf4591b42a9e6e90ee21551b, type: 3}
+      propertyPath: m_Center.y
+      value: 0.9970551
+      objectReference: {fileID: 0}
     - target: {fileID: 7594907031105049859, guid: 25a63a86cf4591b42a9e6e90ee21551b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
