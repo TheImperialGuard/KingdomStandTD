@@ -5,7 +5,7 @@ using System;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 {
-    public class RangeZoneRadiusCalcSystem : IInitializableSystem, IDisposableSystem
+    public class RangeZoneRadiusSyncSystem : IInitializableSystem, IDisposableSystem
     {
         private ShootingRangeZone _rangeZone;
         private ReactiveVariable<float> _rangeDistance;
