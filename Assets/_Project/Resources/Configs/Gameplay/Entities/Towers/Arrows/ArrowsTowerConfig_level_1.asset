@@ -17,4 +17,5 @@ MonoBehaviour:
   <Cost>k__BackingField: 70
   <AttackRange>k__BackingField: 3
   <AttackCooldown>k__BackingField: 2
-  <AttackDamage>k__BackingField: 1
+  <AttackDamage>k__BackingField: 5
+  <ProjectileSpeed>k__BackingField: 5
