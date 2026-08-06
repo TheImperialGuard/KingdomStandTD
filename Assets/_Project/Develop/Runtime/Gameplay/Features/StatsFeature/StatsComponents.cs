@@ -1,0 +1,21 @@
+﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Utilities.Reactive;
+using System.Collections.Generic;
+
+namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature
+{
+    public class BaseStats : IEntityComponent
+    {
+        public Dictionary<StatTypes, float> Value;
+    }
+
+    public class ModifiedStats : IEntityComponent
+    {
+        public Dictionary<StatTypes, float> Value;
+    }
+
+    public class AttacksPerSecond : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
+}

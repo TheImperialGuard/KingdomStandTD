@@ -26,7 +26,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
 
             entity
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext))
-                .AddSystem(new RangeZoneRadiusCalcSystem());
+                .AddSystem(new RangeZoneRadiusSyncSystem());
 
             entity.ShootingRangeZone.Show();
 

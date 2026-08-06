@@ -1,15 +1,19 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
+using Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
@@ -42,7 +46,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             switch (config)
             {
                 case ArrowsTowerConfig arrowsTowerConfig:
-                    entity = _entitiesFactory.CreateArrowsTower(position, arrowsTowerConfig);
+                    Dictionary<StatTypes, float> baseStats = new()
+                    {
+                        {StatTypes.AttacksPerSecond, arrowsTowerConfig.AttackPerSecond },
+                    };
+
+                    entity = _entitiesFactory.CreateArrowsTower(position, arrowsTowerConfig, baseStats);
 
                     entity
                         .AddTowerType(new(TowerTypes.Arrows))
