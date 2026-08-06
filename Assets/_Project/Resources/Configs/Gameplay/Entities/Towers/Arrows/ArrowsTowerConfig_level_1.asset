@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.ArrowsTowerConfig
   _damageType: 1
   <PrefabPath>k__BackingField: Prefabs/Entities/Towers/Arrows/ArrowsTower_level_1
+  <TowerName>k__BackingField: "\u0411\u0430\u0448\u043D\u044F \u043B\u0443\u0447\u043D\u0438\u043A\u043E\u0432
+    I"
   <Cost>k__BackingField: 70
   <AttackRange>k__BackingField: 3
-  <AttackCooldown>k__BackingField: 2
+  <AttackPerSecond>k__BackingField: 1.25
   <AttackDamage>k__BackingField: 5
   <ProjectileSpeed>k__BackingField: 5

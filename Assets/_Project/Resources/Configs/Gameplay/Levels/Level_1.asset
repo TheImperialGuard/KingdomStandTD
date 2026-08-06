@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.LevelConfig
   <PrefabPath>k__BackingField: Prefabs/Levels/Level_1
   <GameMode>k__BackingField: 0
-  <StartGold>k__BackingField: 100
+  <StartGold>k__BackingField: 230
   <StartPlayerHealth>k__BackingField: 20
   <ArrowsUpgradesLevelLimit>k__BackingField: 5
   <MagicUpgradesLevelLimit>k__BackingField: 5
