@@ -7,4 +7,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI
     {
         public ReactiveVariable<Entity> Value;
     }
+
+    public class MaxTargets : IEntityComponent
+    {
+        public ReactiveVariable<int> Value;
+    }
 }
