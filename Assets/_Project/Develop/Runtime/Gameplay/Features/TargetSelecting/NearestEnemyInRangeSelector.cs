@@ -1,29 +1,26 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
-using Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
-using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
-using Assets._Project.Develop.Runtime.Utilities.Conditions;
-using System.Collections;
+using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
 {
-    public class NearestEnemyInRangeSelector : ITargetSelector
+    public class NearestEnemyInRangeSelector : TargetSelector
     {
-        private Entity _source;
-
-        private Transform _sourceTransform;
-
-        public NearestEnemyInRangeSelector(Entity entity)
+        public NearestEnemyInRangeSelector(
+            Entity entity,
+            List<ReactiveVariable<Entity>> targetsForExclude = null) : base(entity, targetsForExclude)
         {
-            _source = entity;
-            _sourceTransform = entity.Transform;
         }
 
-        public Entity SelectTargetFrom(IEnumerable<Entity> targets)
+        public override Entity SelectTargetFrom(IEnumerable<Entity> targets)
         {
+            if (TargetsForExclude != null && TargetsForExclude.Any())
+            {
+                if (TryExcludeTargetsFrom(targets, TargetsForExclude, out targets) == false)
+                    return null;
+            }
+
             if (TryGetTeamMember(targets, out IEnumerable<Entity> selectedTargets) == false)
                 return null;
 
@@ -41,84 +38,26 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
             return closestTarget;
         }
 
-        private Entity GetClosestTargetFrom(IEnumerable<Entity> targets)
+        public override List<Entity> SelectMultipleTargetsFrom(IEnumerable<Entity> targets, int count)
         {
-            Entity closestTarget = targets.First();
+            List<Entity> targetsForSelecting = new List<Entity>(targets);
 
-            float minDistance = GetDistanceTo(closestTarget);
+            List<Entity> selectedTargets = new();
 
-            foreach (Entity target in targets)
+            for (int i = 0; i < count; i++)
             {
-                float distance = GetDistanceTo(target);
-
-                if (distance < minDistance)
+                if (selectedTargets.Count > 0)
                 {
-                    minDistance = distance;
-                    closestTarget = target;
+                    foreach (Entity entity in selectedTargets)
+                        targetsForSelecting.Remove(entity);
                 }
+
+                Entity target = SelectTargetFrom(targetsForSelecting);
+
+                selectedTargets.Add(target);
             }
 
-            return closestTarget;
+            return selectedTargets;
         }
-
-        private bool TryGetDamagableTargets(IEnumerable<Entity> targets, out IEnumerable<Entity> damagables)
-        {
-            damagables = GetDamagableTargetsFrom(targets);
-
-            return damagables.Any();
-        }
-
-        private IEnumerable<Entity> GetDamagableTargetsFrom(IEnumerable<Entity> targets)
-        {
-            return targets.Where(target =>
-            {
-                bool result = target.HasComponent<TakeDamageRequest>();
-
-                if (target.TryGetCanApplyDamage(out ICompositeCondition canApplyDamage))
-                {
-                    result = result && canApplyDamage.Evaluate();
-                }
-
-                return result;
-            });
-        }
-
-        private bool TryGetTargetsInRange(IEnumerable<Entity> targets, out IEnumerable<Entity> targetsInRange)
-        {
-            targetsInRange = GetTargetsInRangeFrom(targets);
-
-            return targetsInRange.Any();
-        }
-
-        private IEnumerable<Entity> GetTargetsInRangeFrom(IEnumerable<Entity> targets)
-        {
-            return targets.Where(target => GetDistanceTo(target) <= _source.InstantShootRange.Value);
-        }
-
-        private bool TryGetEnemies(IEnumerable<Entity> targets, out IEnumerable<Entity> enemies)
-        {
-            enemies = GetEnemiesFrom(targets);
-
-            return enemies.Any();
-        }
-
-        private IEnumerable<Entity> GetEnemiesFrom(IEnumerable<Entity> targets)
-        {
-            return targets.Where(target => EntitiesHelper.IsSameTeam(_source, target) == false);
-        }
-
-        private bool TryGetTeamMember(IEnumerable<Entity> targets, out IEnumerable<Entity> teamMembers)
-        {
-            teamMembers = GetTeamMemberFrom(targets);
-
-            return teamMembers.Any();
-        }
-
-        private IEnumerable<Entity> GetTeamMemberFrom(IEnumerable<Entity> targets)
-        {
-            return targets.Where(target => target.HasComponent<Team>());
-        }
-
-        private float GetDistanceTo(Entity target) => (_sourceTransform.position - target.Transform.position).magnitude;
     }
 }
