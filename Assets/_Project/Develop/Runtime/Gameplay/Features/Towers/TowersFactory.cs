@@ -3,6 +3,7 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
+using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
@@ -15,6 +16,7 @@ using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 {
@@ -43,19 +45,35 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
         {
             Entity entity;
 
+            Dictionary<StatTypes, float> baseStats = new()
+            {
+                {StatTypes.AttacksPerSecond, config.AttackPerSecond },
+            };
+
             switch (config)
             {
                 case ArrowsTowerConfig arrowsTowerConfig:
-                    Dictionary<StatTypes, float> baseStats = new()
-                    {
-                        {StatTypes.AttacksPerSecond, arrowsTowerConfig.AttackPerSecond },
-                    };
-
                     entity = _entitiesFactory.CreateArrowsTower(position, arrowsTowerConfig, baseStats);
 
                     entity
                         .AddTowerType(new(TowerTypes.Arrows))
                         .AddTowerLevel(new(level));
+
+                    _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
+
+                    break;
+
+                case RoyalArrowsTowerConfig royalArrowsTowerConfig:
+                    entity = _entitiesFactory.CreateRoyalArrowsTower(position, royalArrowsTowerConfig, baseStats);
+
+                    entity
+                        .AddTowerType(new(TowerTypes.Arrows))
+                        .AddTowerLevel(new(level))
+                        .AddAbilities(new());
+
+                    entity
+                        .AddSystem(new AbilityOnAddActivatorSystem())
+                        .AddSystem(new CreateSubTowersByMaxTargetsSystem(this));
 
                     _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
 
@@ -92,6 +110,34 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             _entitiesLifeContext.Add(entity);
 
             return entity;
+        }
+
+        public Entity CreateSubTowerFor(Entity parent, List<ReactiveVariable<Entity>> targetsForExclude = null)
+        {
+            Entity subEntity = parent.SubTowerCreator.Invoke(parent);
+
+            subEntity
+                .AddTeam(parent.Team)
+                .AddSelfReleaseRequested(new(false))
+                .AddTargetsForExclude(new(targetsForExclude));
+
+            ICompositeCondition mustSelfRelease = new CompositeCondition(LogicOperations.Or)
+                .Add(new FuncCondition(() => subEntity.SelfReleaseRequested.Value == true))
+                .Add(new FuncCondition(() => parent.SelfReleaseRequested.Value == true));
+
+            subEntity
+                .AddMustSelfRelease(mustSelfRelease);
+
+            subEntity
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+
+            _brainsFactory.CreateTowerBrain(
+                subEntity,
+                new NearestEnemyInRangeSelector(subEntity, subEntity.TargetsForExclude));
+
+            _entitiesLifeContext.Add(subEntity);
+
+            return subEntity;
         }
     }
 }

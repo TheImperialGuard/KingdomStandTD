@@ -81,6 +81,25 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Towers.IsSubTower() ); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.Towers.SubTowerCreator SubTowerCreatorC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Towers.SubTowerCreator>();
+
+		public System.Func<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity, Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> SubTowerCreator => SubTowerCreatorC.Value;
+
+		public bool TryGetSubTowerCreator(out System.Func<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity, Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.Towers.SubTowerCreator component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(System.Func<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity, Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSubTowerCreator(System.Func<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity, Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Towers.SubTowerCreator() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Team TeamC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Team>();
 
 		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Teams> Team => TeamC.Value;
@@ -1616,6 +1635,30 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMaxTargets(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
 		{
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AI.MaxTargets() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AI.TargetsForExclude TargetsForExcludeC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AI.TargetsForExclude>();
+
+		public System.Collections.Generic.List<Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity>> TargetsForExclude => TargetsForExcludeC.Value;
+
+		public bool TryGetTargetsForExclude(out System.Collections.Generic.List<Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity>> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AI.TargetsForExclude component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(System.Collections.Generic.List<Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity>>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTargetsForExclude()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AI.TargetsForExclude() { Value = new System.Collections.Generic.List<Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity>>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTargetsForExclude(System.Collections.Generic.List<Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity>> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AI.TargetsForExclude() {Value = value}); 
 		}
 
 		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Common.RigidbodyComponent RigidbodyC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Common.RigidbodyComponent>();
