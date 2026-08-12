@@ -19,6 +19,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
 
         public IReadOnlyVariable<int> CurrentLevel => _currentLevel;
 
+        public bool IsMaxLevel => CurrentLevel.Value == MaxLevel;
+
         public void AddLevel(int level)
         {
             int temp = _currentLevel.Value + level;
