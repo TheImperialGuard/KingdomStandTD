@@ -96,6 +96,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateDealDamageToPlayerService).NonLazy();
 
             container.RegisterAsSingle(CreateGameplayUIRoot).NonLazy();
+
+            container.RegisterAsSingle(CreateGameplayScreenPresenter).NonLazy();
         }
 
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c) => new();
@@ -277,6 +279,21 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 .Load<GameplayUIRoot>("UI/Gameplay/GameplayUIRoot");
 
             return GameObject.Instantiate(gameplayUIRootPrefab);
+        }
+
+        private static GameplayScreenPresenter CreateGameplayScreenPresenter(DIContainer c)
+        {
+            GameplayUIRoot uiRoot = c.Resolve<GameplayUIRoot>();
+
+            GameplayScreenView view = c
+                .Resolve<ViewsFactory>()
+                .Create<GameplayScreenView>(ViewIDs.GameplayScreen, uiRoot.HUDLayer);
+
+            GameplayScreenPresenter presenter = c
+                .Resolve<GameplayPresentersFactory>()
+                .CreateGameplayScreenPresenter(view);
+
+            return presenter;
         }
     }
 }

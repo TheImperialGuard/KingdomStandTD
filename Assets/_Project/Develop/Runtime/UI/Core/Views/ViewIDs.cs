@@ -8,5 +8,7 @@
         public const string StartStagesPopup = nameof(StartStagesPopup);
         public const string SkipStagePopup = nameof(SkipStagePopup);
         public const string UpgradeTowerPopup = nameof(UpgradeTowerPopup);
+        public const string TowerAbilitiesPopup = nameof(TowerAbilitiesPopup);
+        public const string GameplayScreen = nameof(GameplayScreen);
     }
 }

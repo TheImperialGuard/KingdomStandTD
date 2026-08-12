@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Infrastructure.DI;
+﻿using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
+using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Infrastructure.EntryPoint;
 using Assets._Project.Develop.Runtime.Meta.Infrastructure;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
@@ -57,7 +58,7 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.Boot
 
             loadingScreen.Hide();
 
-            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu, new MainMenuInputArgs(false));
+            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1));
         }
 
         private void SetupAppSettings()

@@ -17,6 +17,8 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Views
             {ViewIDs.StartStagesPopup, "UI/Gameplay/StartStagesPopup" },
             {ViewIDs.SkipStagePopup, "UI/Gameplay/SkipStagePopup" },
             {ViewIDs.UpgradeTowerPopup, "UI/Gameplay/UpgradeTowerPopup" },
+            {ViewIDs.TowerAbilitiesPopup, "UI/Gameplay/TowerAbilitiesPopup" },
+            {ViewIDs.GameplayScreen, "UI/Gameplay/GameplayScreenView" },
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)

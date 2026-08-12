@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Infrastructure.DI;
+﻿using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities;
+using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
@@ -26,6 +27,8 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle(CreateTimerServiceFactory);
 
+            container.RegisterAsSingle(CreateAbilitiesFactory);
+
             container.RegisterAsSingle(CreateConfigsProviderService);
 
             container.RegisterAsSingle(CreateSceneSwitcherService);
@@ -48,6 +51,8 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
         private static SceneLoaderService CreateSceneLoaderService(DIContainer c) => new();
 
         private static TimerServiceFactory CreateTimerServiceFactory(DIContainer c) => new(c);
+
+        private static AbilitiesFactory CreateAbilitiesFactory(DIContainer c) => new(c);
 
         private static ConfigsProviderService CreateConfigsProviderService(DIContainer c)
         {

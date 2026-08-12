@@ -18,7 +18,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
         public void Do()
         {
             _source.ShootingRangeZone.Show();
-            _popupService.OpenUpgradeTowerPopup(_source, _source.ShootingRangeZone.Hide);
+
+            if (_source.TowerLevel.Value < 4)
+                _popupService.OpenUpgradeTowerPopup(_source, _source.ShootingRangeZone.Hide);
+            else
+                _popupService.OpenTowerAbilitiesPopup(_source, _source.ShootingRangeZone.Hide);
         }
     }
 }

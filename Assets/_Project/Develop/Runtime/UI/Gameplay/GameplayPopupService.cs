@@ -4,6 +4,7 @@ using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
+using Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup;
 using System;
 using UnityEngine;
@@ -65,6 +66,17 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
             UpgradeTowerPopupView view = ViewsFactory.Create<UpgradeTowerPopupView>(ViewIDs.UpgradeTowerPopup, PopupLayer);
 
             UpgradeTowerPopupPresenter popup = _gameplayPresentersFactory.CreateUpgradeTowerPopupPresenter(view, sourceTower);
+
+            OnPopupCreated(popup, view, closedCallback);
+
+            return popup;
+        }
+
+        public TowerAbilitiesPopupPresenter OpenTowerAbilitiesPopup(Entity sourceTower, Action closedCallback = null)
+        {
+            TowerAbilitiesPopupView view = ViewsFactory.Create<TowerAbilitiesPopupView>(ViewIDs.TowerAbilitiesPopup, PopupLayer);
+
+            TowerAbilitiesPopupPresenter popup = _gameplayPresentersFactory.CreateTowerAbilitiesPopupPresenter(view, sourceTower);
 
             OnPopupCreated(popup, view, closedCallback);
 

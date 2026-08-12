@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6acca514fd5091345bc77b76c6454fb0, type: 3}
+  m_Name: AdditionalShootingTargetsAbilityConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities.AdditionalShootingTargetsAbilityConfig
+  <ID>k__BackingField: AddShootTarget
+  <LevelsCosts>k__BackingField: fa0000002c010000
+  <Name>k__BackingField: "\u0413\u0440\u0430\u0434 \u0441\u0442\u0440\u0435\u043B"
+  <Description>k__BackingField: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
+    \u0447\u0438\u0441\u043B\u043E \u043E\u0434\u043D\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E
+    \u043E\u0431\u0441\u0442\u0440\u0435\u043B\u0438\u0432\u0430\u0435\u043C\u044B\u0445
+    \u0446\u0435\u043B\u0435\u0439"
+  <Icon>k__BackingField: {fileID: 0}
+  _additionalTargetPerLevel: 1

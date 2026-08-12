@@ -83,8 +83,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
         {
             base.Dispose();
 
-            _view.UpgradeButtonClicked += OnUpgradeButtonClicked;
-            _view.SellButtonClicked += OnSellButtonClicked;
+            _view.UpgradeButtonClicked -= OnUpgradeButtonClicked;
+            _view.SellButtonClicked -= OnSellButtonClicked;
 
             _goldCurrencyDisposable.Dispose();
 
