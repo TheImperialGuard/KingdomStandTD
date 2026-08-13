@@ -3,8 +3,10 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Sensors;
+using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Utilities;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
+using Assets._Project.Develop.Runtime.Utilities.Timer;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
@@ -38,7 +40,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddIsDead()
                 .AddDeathProcessInitialTime(new(config.DeathProcessTime))
                 .AddDeathProcessCurrentTime()
-                .AddInDeathProcces();
+                .AddInDeathProcces()
+                .AddStatuses();
 
             ICompositeCondition canMove = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
@@ -64,7 +67,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddSystem(new ApplyDamageSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())
-                .AddSystem(new DisableCollidersOnDeathSystem());
+                .AddSystem(new DisableCollidersOnDeathSystem())
+                .AddSystem(new StatusesLifeCycleSystem(_container.Resolve<TimerServiceFactory>()))
+                .AddSystem(new StatusesApplierSystem(_container.Resolve<TimerServiceFactory>()));
 
             entity
                 .AddSystem(new BodyContactsDetectingSystem());

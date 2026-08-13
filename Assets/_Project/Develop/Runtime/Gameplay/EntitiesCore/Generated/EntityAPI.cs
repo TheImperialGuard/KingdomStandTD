@@ -124,6 +124,30 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Team() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.Statuses StatusesC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.Statuses>();
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StatusesList Statuses => StatusesC.Value;
+
+		public bool TryGetStatuses(out Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StatusesList value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.Statuses component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StatusesList);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStatuses()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.Statuses() { Value = new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StatusesList() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStatuses(Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StatusesList value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.Statuses() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.BaseStats BaseStatsC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.BaseStats>();
 
 		public System.Collections.Generic.Dictionary<Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatTypes, System.Single> BaseStats => BaseStatsC.Value;
@@ -844,6 +868,78 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.WaypointsOffset() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamage LastingDamageC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamage>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> LastingDamage => LastingDamageC.Value;
+
+		public bool TryGetLastingDamage(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamage component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLastingDamage()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamage() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLastingDamage(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamage() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamageInitialTime LastingDamageInitialTimeC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamageInitialTime>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> LastingDamageInitialTime => LastingDamageInitialTimeC.Value;
+
+		public bool TryGetLastingDamageInitialTime(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamageInitialTime component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLastingDamageInitialTime()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamageInitialTime() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLastingDamageInitialTime(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamageInitialTime() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamageInterval LastingDamageIntervalC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamageInterval>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> LastingDamageInterval => LastingDamageIntervalC.Value;
+
+		public bool TryGetLastingDamageInterval(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamageInterval component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLastingDamageInterval()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamageInterval() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddLastingDamageInterval(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.LastingDamage.LastingDamageInterval() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.Interactables.IsInteractable IsInteractableC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Interactables.IsInteractable>();
 
 		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsInteractable()
@@ -1194,6 +1290,30 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDisableCollidersOnDeath(System.Collections.Generic.List<UnityEngine.Collider> value)
 		{
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.DisableCollidersOnDeath() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjection.BodyContactInjectingStatuses BodyContactInjectingStatusesC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjection.BodyContactInjectingStatuses>();
+
+		public System.Collections.Generic.List<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StatusesTypes> BodyContactInjectingStatuses => BodyContactInjectingStatusesC.Value;
+
+		public bool TryGetBodyContactInjectingStatuses(out System.Collections.Generic.List<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StatusesTypes> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjection.BodyContactInjectingStatuses component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(System.Collections.Generic.List<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StatusesTypes>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBodyContactInjectingStatuses()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjection.BodyContactInjectingStatuses() { Value = new System.Collections.Generic.List<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StatusesTypes>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBodyContactInjectingStatuses(System.Collections.Generic.List<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StatusesTypes> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjection.BodyContactInjectingStatuses() {Value = value}); 
 		}
 
 		public Assets._Project.Develop.Runtime.Gameplay.Features.ContactDamage.BodyContactDamage BodyContactDamageC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.ContactDamage.BodyContactDamage>();

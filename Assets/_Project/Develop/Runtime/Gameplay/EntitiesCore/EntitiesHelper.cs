@@ -1,6 +1,8 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
+using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
+using NUnit.Framework;
 using System;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
@@ -40,6 +42,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
             }
 
             return false;
+        }
+
+        public static bool TryInjectStatusTo(Entity target, Status status)
+        {
+            if (target.TryGetStatuses(out StatusesList statuses) == false)
+                return false;
+
+            statuses.AddElement(status);
+
+            return true;
         }
 
         private static float CalculateFinalDamage(

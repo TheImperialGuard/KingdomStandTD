@@ -21,6 +21,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
                 case AdditionalShootingTargetsAbilityConfig addTargetsAbilityConfig:
                     return new AdditionalShootingTargetsAbility(addTargetsAbilityConfig, entity, currentLevel);
 
+                case PoisonedAttackAbilityConfig poisonedAttackAbilityConfig:
+                    return new PoisonedAttackAbility(entity, poisonedAttackAbilityConfig, currentLevel);
+
                 default:
                     throw new ArgumentException();
             }

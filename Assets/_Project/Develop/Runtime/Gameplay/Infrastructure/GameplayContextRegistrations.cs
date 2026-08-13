@@ -14,6 +14,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
@@ -81,6 +82,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateGameplayPresentersFactory);
 
             container.RegisterAsSingle(CreateProjectilesFactory);
+
+            container.RegisterAsSingle(CreateStatusesFactory);
 
             container.RegisterAsSingle(CreateGameplayCycle);
 
@@ -205,6 +208,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             => new(c);
 
         private static ProjectilesFactory CreateProjectilesFactory(DIContainer c)
+            => new(c);
+
+        private static StatusesFactory CreateStatusesFactory(DIContainer c)
             => new(c);
 
         private static WalletService CreateGameplayWalletService(DIContainer c)

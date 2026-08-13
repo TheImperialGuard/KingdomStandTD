@@ -1,6 +1,8 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Projectiles;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
+using Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjection;
+using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using System;
@@ -38,6 +40,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
 
                 case ProjectilesTypes.PoisonedArrow:
                     entity = _entitiesFactory.CreateArrowProjectile(position, direction, owner, config.PrefabPath);
+
+                    entity
+                        .AddLastingDamage(owner.LastingDamage)
+                        .AddLastingDamageInitialTime(owner.LastingDamageInitialTime)
+                        .AddLastingDamageInterval(owner.LastingDamageInterval)
+                        .AddBodyContactInjectingStatuses();
+
+                    entity.BodyContactInjectingStatuses.Add(StatusesTypes.LastingDamage);
+
+                    entity.AddSystem(new InjectStatusOnContactSystem(_container.Resolve<StatusesFactory>()));
+
                     break;
 
                 default:
