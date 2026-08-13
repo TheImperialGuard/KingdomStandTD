@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 6519335450213886312}
   - component: {fileID: 6746307409085666685}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

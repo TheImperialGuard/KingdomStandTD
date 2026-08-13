@@ -11,6 +11,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
@@ -78,6 +79,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateInteractiveActionsFactory);
 
             container.RegisterAsSingle(CreateGameplayPresentersFactory);
+
+            container.RegisterAsSingle(CreateProjectilesFactory);
 
             container.RegisterAsSingle(CreateGameplayCycle);
 
@@ -199,6 +202,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             => new(c);
 
         private static GameplayPresentersFactory CreateGameplayPresentersFactory(DIContainer c)
+            => new(c);
+
+        private static ProjectilesFactory CreateProjectilesFactory(DIContainer c)
             => new(c);
 
         private static WalletService CreateGameplayWalletService(DIContainer c)

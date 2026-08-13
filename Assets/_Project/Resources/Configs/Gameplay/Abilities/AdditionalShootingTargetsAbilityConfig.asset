@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: AdditionalShootingTargetsAbilityConfig
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities.AdditionalShootingTargetsAbilityConfig
   <ID>k__BackingField: AddShootTarget
-  <LevelsCosts>k__BackingField: 2c0100002c010000
-  _descriptionByLevel: []
   <Name>k__BackingField: "\u0413\u0440\u0430\u0434 \u0441\u0442\u0440\u0435\u043B"
   <Icon>k__BackingField: {fileID: 0}
+  <LevelsCosts>k__BackingField: 2c0100002c010000
+  _descriptionByLevel:
+  - "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442 \u043C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u043E\u0435
+    \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043E\u0434\u043D\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E
+    \u043E\u0431\u0441\u0442\u0440\u0435\u043B\u0438\u0432\u0430\u0435\u043C\u044B\u0445
+    \u0446\u0435\u043B\u0435\u0439"
+  - "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442 \u043C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u043E\u0435
+    \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043E\u0434\u043D\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E
+    \u043E\u0431\u0441\u0442\u0440\u0435\u043B\u0438\u0432\u0430\u0435\u043C\u044B\u0445
+    \u0446\u0435\u043B\u0435\u0439"
   _additionalTargetPerLevel: 1

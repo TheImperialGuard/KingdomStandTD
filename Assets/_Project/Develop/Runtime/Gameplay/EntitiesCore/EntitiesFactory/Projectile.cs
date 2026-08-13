@@ -12,14 +12,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
 {
     public partial class EntitiesFactory
     {
-        public Entity CreateArrowProjectile(Vector3 position, Vector3 direction, Entity owner)
+        public Entity CreateArrowProjectile(Vector3 position, Vector3 direction, Entity owner, string prefabPath)
         {
             Entity entity = CreateEmpty();
 
-            _monoEntitiesFactory.Create(entity, position, "Prefabs/Entities/Projectiles/Projectile");
+            _monoEntitiesFactory.Create(entity, position, prefabPath);
 
             entity
-                .AddIsProjectile()
                 .AddOwner(new ReactiveVariable<Entity>(owner))
                 .AddMoveDirection(new ReactiveVariable<Vector3>(direction))
                 .AddMoveSpeed(new ReactiveVariable<float>(owner.ProjectileSpeed.Value))
@@ -65,8 +64,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
-
-            _entitiesLifeContext.Add(entity);
 
             return entity;
         }

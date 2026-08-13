@@ -24,4 +24,4 @@ MonoBehaviour:
   _firstAbility:
   - {fileID: 11400000, guid: fe8a88b119bc1914d8cbb8887560beee, type: 2}
   _secondAbility:
-  - {fileID: 11400000, guid: fe8a88b119bc1914d8cbb8887560beee, type: 2}
+  - {fileID: 11400000, guid: 96ed4a815b3ee714691b7824ebe46db8, type: 2}

@@ -1,5 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Attack;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Shoot;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
@@ -32,6 +33,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddInstantShotDirection()
                 .AddAttackCooldownCurrentTime()
                 .AddAttackCooldownInitialTime()
+                .AddProjectileType(new(config.Projectile))
                 .AddProjectileSpeed(new(config.ProjectileSpeed))
                 .AddInAttackCooldown()
                 .AddAttacksPerSecond(new ReactiveVariable<float>(modifiedStats[StatTypes.AttacksPerSecond]));
@@ -48,7 +50,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddSystem(new AttackCooldownTimerSystem())
                 .AddSystem(new ShootDirectionCalculateSystem())
                 .AddSystem(new StartAttackSystem())
-                .AddSystem(new InstantShootSystem(this));
+                .AddSystem(new InstantShootSystem(_container.Resolve<ProjectilesFactory>()));
 
             return entity;
         }

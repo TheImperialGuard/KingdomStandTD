@@ -1,6 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
-using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
 using UnityEngine;
@@ -9,7 +9,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 {
     public class InstantShootSystem : IInitializableSystem, IDisposableSystem
     {
-        private readonly EntitiesFactory _entitiesFactory;
+        private readonly ProjectilesFactory _projectilesFactory;
 
         private ReactiveVariable<InstantShotDirectionArgs> _directionArgs;
 
@@ -21,9 +21,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 
         private IDisposable _attackRequestDisposable;
 
-        public InstantShootSystem(EntitiesFactory entitiesFactory)
+        public InstantShootSystem(ProjectilesFactory projectilesFactory)
         {
-            _entitiesFactory = entitiesFactory;
+            _projectilesFactory = projectilesFactory;
         }
 
         public void OnInit(Entity entity)
@@ -62,7 +62,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
                 Vector2 offset = perpindicular * (-offesetBetweenProjectiles / 2f * (projectileCounts - 1) + i * offesetBetweenProjectiles);
                 Vector3 position = new Vector3(_shootPoint.position.x + offset.x, _shootPoint.position.y, _shootPoint.position.z + offset.y);
 
-                _entitiesFactory.CreateArrowProjectile(position, direction, _shooterEntity);
+                _projectilesFactory.Create(_shooterEntity.ProjectileType.Value, position, direction, _shooterEntity);
             }
         }
     }
