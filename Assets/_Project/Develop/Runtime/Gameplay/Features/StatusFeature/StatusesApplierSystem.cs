@@ -13,7 +13,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
         private Entity _entity;
         private StatusesList _statuses;
 
-        private Dictionary<Status, TimerService> _activeStatuses;
+        private Dictionary<Status, TimerService> _activeStatuses = new();
 
         public StatusesApplierSystem(TimerServiceFactory timerServiceFactory)
         {
@@ -54,6 +54,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
 
         private void OnStatusAdded(Status status)
         {
+            if (_activeStatuses.ContainsKey(status))
+                return;
+
             TimerService timer = _timerServiceFactory.Create(status.Interval.Value);
 
             _activeStatuses.Add(status, timer);

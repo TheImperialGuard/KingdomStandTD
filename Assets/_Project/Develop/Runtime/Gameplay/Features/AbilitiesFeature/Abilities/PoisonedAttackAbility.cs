@@ -12,7 +12,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
         public PoisonedAttackAbility(
             Entity entity,
             PoisonedAttackAbilityConfig config,
-            int currentLevel) : base(config.ID, config.MaxLevel, currentLevel)
+            int currentLevel) : base(config.ID, currentLevel, config.MaxLevel)
         {
             _entity = entity;
             _config = config;

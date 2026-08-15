@@ -11,6 +11,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.Timer
         private float _cooldown;
 
         private ReactiveEvent _cooldownEnded;
+        private ReactiveEvent<TimerService> _cooldownEndedWithTimer;
 
         private ReactiveVariable<float> _currentTime;
 
@@ -25,10 +26,12 @@ namespace Assets._Project.Develop.Runtime.Utilities.Timer
             _coroutinePerformer = coroutinePerformer;
 
             _cooldownEnded = new ReactiveEvent();
+            _cooldownEndedWithTimer = new ReactiveEvent<TimerService>();
             _currentTime = new ReactiveVariable<float>();
         }
 
         public IReadOnlyEvent CooldownEnded => _cooldownEnded;
+        public IReadOnlyEvent<TimerService> CooldownEndedWithTimer => _cooldownEndedWithTimer;
         public IReadOnlyVariable<float> CurrentTime => _currentTime;
         public bool IsOver => _currentTime.Value <= 0;
 
@@ -61,6 +64,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.Timer
             }
 
             _cooldownEnded.Invoke();
+            _cooldownEndedWithTimer.Invoke(this);
         }
     }
 }

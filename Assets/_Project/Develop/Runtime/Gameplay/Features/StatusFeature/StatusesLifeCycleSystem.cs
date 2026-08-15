@@ -1,17 +1,21 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
 using Assets._Project.Develop.Runtime.Utilities.Timer;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
 {
-    public class StatusesLifeCycleSystem : IInitializableSystem, IUpdatableSystem, IDisposableSystem
+    public class StatusesLifeCycleSystem : IInitializableSystem, IDisposableSystem
     {
         private readonly TimerServiceFactory _timerServiceFactory;
 
         private StatusesList _statuses;
 
         private Dictionary<Status, TimerService> _activeStatuses = new();
+
+        private Dictionary<TimerService, IDisposable> _timerCooldownEndedDisposablesWithTimers = new();
 
         public StatusesLifeCycleSystem(TimerServiceFactory timerServiceFactory)
         {
@@ -26,24 +30,19 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
             _statuses.Removed += OnStatusRemoved;
         }
 
-        public void OnUpdate(float deltaTime)
-        {
-            foreach (KeyValuePair<Status, TimerService> activeStatus in  _activeStatuses)
-            {
-                if (activeStatus.Value.IsOver)
-                {
-                    _statuses.RemoveElement(activeStatus.Key);
-                }
-            }    
-        }
-
         public void OnDispose()
         {
             foreach (TimerService timerService in _activeStatuses.Values)
                 timerService.Dispose();
 
+            foreach (IDisposable disposable in _timerCooldownEndedDisposablesWithTimers.Values)
+                disposable.Dispose();
+
             _statuses.Added -= OnStatusAdded;
             _statuses.Removed -= OnStatusRemoved;
+
+            _activeStatuses.Clear();
+            _timerCooldownEndedDisposablesWithTimers.Clear();
         }
 
         private void OnStatusAdded(Status status)
@@ -56,14 +55,29 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
 
             TimerService timer = _timerServiceFactory.Create(status.InitialTime.Value);
 
+            _timerCooldownEndedDisposablesWithTimers.Add(timer, timer.CooldownEndedWithTimer.Subscribe(OnTimerCooldownEnded));
+
             _activeStatuses.Add(status, timer);
 
             timer.Restart();
         }
 
+        private void OnTimerCooldownEnded(TimerService timer)
+        {
+            Status status = _activeStatuses.First(kvp => kvp.Value == timer).Key;
+
+            _statuses.RemoveElement(status);
+        }
+
         private void OnStatusRemoved(Status status)
         {
-            _activeStatuses[status].Dispose();
+            TimerService timer = _activeStatuses[status];
+
+            _timerCooldownEndedDisposablesWithTimers[timer].Dispose();
+            _timerCooldownEndedDisposablesWithTimers.Remove(timer);
+
+            timer.Dispose();
+
             _activeStatuses.Remove(status);
         }
     }

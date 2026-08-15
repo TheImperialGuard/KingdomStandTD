@@ -152,6 +152,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
             {
                 Ability newAbility = _abilitiesFactory.CreateAbilityFor(_sourceTower, abilityWithInfo.config, 1);
                 _sourceTower.Abilities.Add(newAbility);
+                Debug.Log($"Создана спосоьность уровня: {newAbility.CurrentLevel.Value}");
+                Debug.Log($"Макс уровень: {newAbility.MaxLevel}");
                 return;
             }
 
