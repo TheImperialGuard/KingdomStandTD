@@ -15,3 +15,4 @@ MonoBehaviour:
   _projectilesConfigs:
   - {fileID: 11400000, guid: 67ea96ed5a98d1c478fd437a5d430c32, type: 2}
   - {fileID: 11400000, guid: a59a34735d8322f4e864d780b1911286, type: 2}
+  - {fileID: 11400000, guid: 5f082099071a0fb47b341a4c92b12f4e, type: 2}

@@ -3,6 +3,7 @@
     public enum ProjectilesTypes
     {
         Arrow,
-        PoisonedArrow
+        PoisonedArrow,
+        Magic
     }
 }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08fdc830b895d8d428c4b1ecb7d238da, type: 3}
+  m_Name: MagicTowerConfig_level_3
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.MagicTowerConfig
+  _damageType: 2
+  <PrefabPath>k__BackingField: Prefabs/Entities/Towers/Magic/MagicTower_level_3
+  <TowerName>k__BackingField: "\u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u0430\u044F
+    \u0431\u0430\u0448\u043D\u044F III"
+  <Cost>k__BackingField: 240
+  <AttackRange>k__BackingField: 3.1
+  <AttackPerSecond>k__BackingField: 0.66
+  <AttackDamage>k__BackingField: 52
+  <ProjectileSpeed>k__BackingField: 1
+  <Projectile>k__BackingField: 2

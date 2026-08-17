@@ -56,6 +56,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
             return brain;
         }
 
+        public StateMachineBrain CreateMagicProjectileBrain(Entity entity)
+        {
+            AIStateMachine stateMachine = CreateMoveRotateToTargetStateMachine(entity);
+
+            StateMachineBrain brain = new(stateMachine);
+
+            _brainsContext.SetBrainsFor(entity, brain);
+
+            return brain;
+        }
+
         private AIStateMachine CreateWaypointMovementStateMachine(Entity entity)
         {
             WaypointsMovementState waypointsMovementState = new(entity);
@@ -63,6 +74,20 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
             AIStateMachine stateMachine = new AIStateMachine();
 
             stateMachine.AddState(waypointsMovementState);
+
+            return stateMachine;
+        }
+
+        private AIStateMachine CreateMoveRotateToTargetStateMachine(Entity entity)
+        {
+            MoveToTargetState moveToTargetState = new(entity);
+            RotateToTargetState rotateToTargetState = new(entity);
+
+            AIParallelState moveRotateToTargetState = new AIParallelState(moveToTargetState, rotateToTargetState);
+
+            AIStateMachine stateMachine = new AIStateMachine();
+
+            stateMachine.AddState(moveRotateToTargetState);
 
             return stateMachine;
         }

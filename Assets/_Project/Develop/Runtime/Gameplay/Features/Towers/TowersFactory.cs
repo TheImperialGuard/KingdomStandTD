@@ -1,6 +1,4 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay;
-using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
-using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature;
@@ -16,7 +14,6 @@ using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 {
@@ -74,6 +71,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
                     entity
                         .AddSystem(new AbilityOnAddActivatorSystem())
                         .AddSystem(new CreateSubTowersByMaxTargetsSystem(this));
+
+                    _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
+
+                    break;
+
+                case MagicTowerConfig magicTowerConfig:
+                    entity = _entitiesFactory.CreateMagicTower(position, magicTowerConfig, baseStats);
+
+                    entity
+                        .AddTowerType(new(TowerTypes.Magic))
+                        .AddTowerLevel(new(level));
 
                     _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
 

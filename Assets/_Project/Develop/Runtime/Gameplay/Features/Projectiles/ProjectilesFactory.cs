@@ -1,7 +1,9 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Projectiles;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
+using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjection;
+using Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
@@ -15,6 +17,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
         private readonly DIContainer _container;
 
         private readonly EntitiesFactory _entitiesFactory;
+        private readonly BrainsFactory _brainsFactory;
         private readonly EntitiesLifeContext _entitiesLifeContext;
         private readonly ConfigsProviderService _configsProviderService;
 
@@ -22,6 +25,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
         {
             _container = container;
             _entitiesFactory = _container.Resolve<EntitiesFactory>();
+            _brainsFactory = _container.Resolve<BrainsFactory>();
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _configsProviderService = _container.Resolve<ConfigsProviderService>();
         }
@@ -50,6 +54,22 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
                     entity.BodyContactInjectingStatuses.Add(StatusesTypes.LastingDamage);
 
                     entity.AddSystem(new InjectStatusOnContactSystem(_container.Resolve<StatusesFactory>()));
+
+                    break;
+
+                case ProjectilesTypes.Magic:
+                    if (config is MagicProjectileConfig magicProjectileConfig == false)
+                        throw new ArgumentException($"Config with projectile type {ProjectilesTypes.Magic} is not {nameof(MagicProjectileConfig)}");
+
+                    entity = _entitiesFactory.CreateArrowProjectile(position, direction, owner, config.PrefabPath);
+
+                    entity
+                        .AddSpeedAcceleration(new(magicProjectileConfig.SpeedAcceleration))
+                        .AddCurrentTarget(new(owner.CurrentTarget.Value));
+
+                    entity.AddSystem(new ApplyAccelerationToSpeedSystem());
+
+                    _brainsFactory.CreateMagicProjectileBrain(entity);
 
                     break;
 
