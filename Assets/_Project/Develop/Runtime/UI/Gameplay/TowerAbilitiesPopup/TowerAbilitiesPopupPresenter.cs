@@ -23,7 +23,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
         private readonly Entity _sourceTower;
 
         private readonly AbilitiesFactory _abilitiesFactory;
-        private readonly TowersListConfig _towersListConfig;
+        private readonly TowersAbilitiesListConfig _towersAbilitiesListConfig;
         private readonly TowersPurchaseService _towersPurchaseService;
         private readonly WalletService _walletService;
         private readonly TowersPlaceholdersService _towersPlaceholdersService;
@@ -42,7 +42,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
             RayShooterService rayShooterService,
             TowerAbilitiesPopupView view,
             Entity sourceTower,
-            TowersListConfig towersListConfig,
+            TowersAbilitiesListConfig towersAbilitiesListConfig,
             TowersPurchaseService towersPurchaseService,
             WalletService walletService,
             TowersPlaceholdersService towersPlaceholdersService,
@@ -51,7 +51,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
         {
             _view = view;
             _sourceTower = sourceTower;
-            _towersListConfig = towersListConfig;
+            _towersAbilitiesListConfig = towersAbilitiesListConfig;
             _towersPurchaseService = towersPurchaseService;
             _walletService = walletService;
             _towersPlaceholdersService = towersPlaceholdersService;
@@ -165,13 +165,10 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
 
         private void SetCurrentAbilities()
         {
-            TowerConfig config = _towersListConfig.GetBy(TowerType, _sourceTower.TowerLevel.Value);
+            TowersAbilitiesConfig config = _towersAbilitiesListConfig.GetBy(TowerType);
 
-            if (config is IHasAbilitiesTowerConfig hasAbilitiesTowerConfig == false)
-                throw new ArgumentException("Tower config has not abilities support");
-
-            IReadOnlyList<AbilityConfig> firsConfigsGroup = hasAbilitiesTowerConfig.FirstAbilityGroup;
-            IReadOnlyList<AbilityConfig> secondConfigsGroup = hasAbilitiesTowerConfig.SecondAbilityGroup;
+            IReadOnlyList<AbilityConfig> firsConfigsGroup = config.FirstAbilityGroup;
+            IReadOnlyList<AbilityConfig> secondConfigsGroup = config.SecondAbilityGroup;
 
             _currentFirstAbilityWithInfo = GetCurrentAbilityWithInfo(firsConfigsGroup);
             _currentSecondAbilityWithInfo = GetCurrentAbilityWithInfo(secondConfigsGroup);

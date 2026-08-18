@@ -16,7 +16,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
         public AdditionalShootingTargetsAbility(
             AdditionalShootingTargetsAbilityConfig config,
             Entity entity,
-            int currentLevel) : base(config.ID, currentLevel, config.MaxLevel)
+            int currentLevel) 
+            : base(config.ID, currentLevel, config.MaxLevel)
         {
             _config = config;
             _entity = entity;

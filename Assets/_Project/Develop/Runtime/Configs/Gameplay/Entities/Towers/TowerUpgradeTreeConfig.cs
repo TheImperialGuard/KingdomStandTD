@@ -6,10 +6,10 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers
     public class TowerUpgradeTreeConfig : ScriptableObject
     {
         [field: SerializeField] public TowerTypes TowerType { get; private set; }
-        [field: SerializeField] public TowerConfig FirstLevel { get; private set; }
-        [field: SerializeField] public TowerConfig SecondLevel { get; private set; }
-        [field: SerializeField] public TowerConfig ThirdLevel { get; private set; }
-        [field: SerializeField] public TowerConfig FourthLevel { get; private set; }
-        [field: SerializeField] public TowerConfig FourthLevelAlt { get; private set; }
+        [field: SerializeField] public ShootingTowerConfig FirstLevel { get; private set; }
+        [field: SerializeField] public ShootingTowerConfig SecondLevel { get; private set; }
+        [field: SerializeField] public ShootingTowerConfig ThirdLevel { get; private set; }
+        [field: SerializeField] public ShootingTowerConfig FourthLevel { get; private set; }
+        [field: SerializeField] public ShootingTowerConfig FourthLevelAlt { get; private set; }
     }
 }

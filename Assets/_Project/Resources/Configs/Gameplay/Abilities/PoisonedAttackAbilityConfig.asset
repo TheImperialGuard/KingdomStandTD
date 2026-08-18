@@ -28,9 +28,9 @@ MonoBehaviour:
   - "\u041F\u043E\u0432\u044B\u0448\u0430\u0435\u0442 \u0443\u0440\u043E\u043D \u043E\u0442
     \u043E\u0442\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F"
   _poisonDamage:
-  - 25
-  - 25
-  - 45
+  - 5
+  - 5
+  - 10
   _poisonEffectTimeByLevel:
   - 3
   - 5

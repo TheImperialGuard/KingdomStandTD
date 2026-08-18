@@ -89,7 +89,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
 
         private void OnBuildTowerButtonClicked(TowerTypes type)
         {
-            TowerConfig config = _towersListConfig.GetBy(type, TowersFirstLevel);
+            ShootingTowerConfig config = _towersListConfig.GetBy(type, TowersFirstLevel);
 
             if (_createdTowerDemo == null || type != _createdTowerDemoType)
             {
@@ -105,7 +105,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             OnCloseRequest();
         }
 
-        private void BuildTower(TowerConfig config)
+        private void BuildTower(ShootingTowerConfig config)
         {
             ReleaseCurrentDemo();
             ReleaseTowerPlaceholder();
@@ -114,7 +114,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
 
         private void ReleaseTowerPlaceholder() => _towersPlaceholdersService.ReleasePlaceholder(_towerPlaceholder);
 
-        private void CreateTowerDemo(TowerConfig config)
+        private void CreateTowerDemo(ShootingTowerConfig config)
         {
             ReleaseCurrentDemo();
             _createdTowerDemo = _entitiesFactory.CreateTowerDemo(_towerPlaceholder.Transform.position, config);

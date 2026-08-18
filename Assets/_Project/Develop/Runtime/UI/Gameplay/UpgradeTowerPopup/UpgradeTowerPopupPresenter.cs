@@ -105,7 +105,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
         {
             _sellClicks = 0;
 
-            TowerConfig config = _towersListConfig.GetBy(TowerType, NextTowerLevel);
+            ShootingTowerConfig config = _towersListConfig.GetBy(TowerType, NextTowerLevel);
 
             if (_rangeDemo == null)
             {
@@ -142,7 +142,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
                 _view.SwitchUpgradeInteractable(false);
         }
 
-        private void UpgradeTower(TowerConfig config)
+        private void UpgradeTower(ShootingTowerConfig config)
         {
             ReleaseRangeDemo();
 
@@ -152,7 +152,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
             OnCloseRequest(false);
         }
 
-        private void CreateRangeDemo(TowerConfig config)
+        private void CreateRangeDemo(ShootingTowerConfig config)
         {
             ShootingRangeZone zonePrefab = _resourcesAssetsLoader.Load<ShootingRangeZone>(RangeZonePrefabPath);
 

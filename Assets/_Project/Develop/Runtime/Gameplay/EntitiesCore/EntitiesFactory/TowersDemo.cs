@@ -8,7 +8,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
 {
     public partial class EntitiesFactory
     {
-        public Entity CreateTowerDemo(Vector3 position, TowerConfig config)
+        public Entity CreateTowerDemo(Vector3 position, ShootingTowerConfig config)
         {
             Entity entity = CreateEmpty();
 

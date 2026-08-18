@@ -1,13 +1,16 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
+using System;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities
 {
-    public class PoisonedAttackAbility : Ability
+    public class PoisonedAttackAbility : Ability, IDisposable
     {
         private readonly Entity _entity;
         private readonly PoisonedAttackAbilityConfig _config;
+
+        private IDisposable _currentLevelChangedDisposable;
 
         public PoisonedAttackAbility(
             Entity entity,
@@ -20,11 +23,25 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
 
         public override void Activate()
         {
-            _entity.AddLastingDamage(new(_config.GetDamageByLevel(CurrentLevel.Value)));
-            _entity.AddLastingDamageInitialTime(new(_config.GetEffectTimeByLevel(CurrentLevel.Value)));
-            _entity.AddLastingDamageInterval(new(_config.GetEffectIntervalByLevel(CurrentLevel.Value)));
-
             _entity.ProjectileType.Value = ProjectilesTypes.PoisonedArrow;
+
+            SetupLastingDamage(CurrentLevel.Value);
+
+            _currentLevelChangedDisposable = CurrentLevel.Subscribe(OnCurrentLevelChaged);
+        }
+
+        public void Dispose()
+        {
+            _currentLevelChangedDisposable.Dispose();
+        }
+
+        private void OnCurrentLevelChaged(int previousLevel, int newLevel) => SetupLastingDamage(newLevel);
+
+        private void SetupLastingDamage(int level)
+        {
+            _entity.LastingDamage.Value = _config.GetDamageByLevel(level);
+            _entity.LastingDamageInitialTime.Value = _config.GetEffectTimeByLevel(level);
+            _entity.LastingDamageInterval.Value = _config.GetEffectIntervalByLevel(level);
         }
     }
 }

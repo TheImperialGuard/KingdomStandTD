@@ -10,14 +10,14 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers
     {
         [SerializeField] private List<TowerUpgradeTreeConfig> _upgradeTreeConfigs;
 
-        public TowerConfig GetBy(TowerTypes towerType, int towerLevel)
+        public ShootingTowerConfig GetBy(TowerTypes towerType, int towerLevel)
         {
             TowerUpgradeTreeConfig towerTree = _upgradeTreeConfigs.First((tree) => tree.TowerType == towerType);
 
             if (towerTree == null)
                 throw new ArgumentException($"Not found upgrades config for tower type: {towerType}");
 
-            TowerConfig towerConfig = towerLevel switch
+            ShootingTowerConfig towerConfig = towerLevel switch
             {
                 1 => towerTree.FirstLevel,
                 2 => towerTree.SecondLevel,

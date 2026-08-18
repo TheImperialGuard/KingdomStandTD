@@ -12,7 +12,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
 {
     public partial class EntitiesFactory
     {
-        public Entity CreateArrowsTower(Vector3 position, ArrowsTowerConfig config, Dictionary<StatTypes, float> baseStats)
+        public Entity CreateShootingTower(Vector3 position, ShootingTowerConfig config, Dictionary<StatTypes, float> baseStats)
         {
             Entity entity = CreateEmpty();
 

@@ -28,7 +28,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 
         public bool TryBuyTower(TowerTypes type, int level)
         {
-            TowerConfig towerConfig = _towersListConfig.GetBy(type, level);
+            ShootingTowerConfig towerConfig = _towersListConfig.GetBy(type, level);
 
             if (_wallet.Enough(CurrencyTypes.Gold, towerConfig.Cost) == false)
                 return false;
@@ -42,7 +42,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 
         public void Sell(TowerTypes type, int level)
         {
-            TowerConfig towerConfig = _towersListConfig.GetBy(type, level);
+            ShootingTowerConfig towerConfig = _towersListConfig.GetBy(type, level);
 
             GameConfig gameConfig = _configsProviderService.GetConfig<GameConfig>();
 
@@ -55,7 +55,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 
         public bool EnoughGoldFor(TowerTypes type, int level)
         {
-            TowerConfig towerConfig = _towersListConfig.GetBy(type, level);
+            ShootingTowerConfig towerConfig = _towersListConfig.GetBy(type, level);
 
             return _wallet.Enough(CurrencyTypes.Gold, towerConfig.Cost);
         }

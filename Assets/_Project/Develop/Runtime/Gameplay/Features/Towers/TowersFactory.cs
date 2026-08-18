@@ -38,7 +38,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
         }
 
-        public Entity Create(Vector3 position, TowerConfig config, int level)
+        public Entity Create(Vector3 position, ShootingTowerConfig config, int level)
         {
             Entity entity;
 
@@ -47,53 +47,36 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
                 {StatTypes.AttacksPerSecond, config.AttackPerSecond },
             };
 
-            switch (config)
+            entity = _entitiesFactory.CreateShootingTower(position, config, baseStats);
+
+            if (level >= 4)
             {
-                case ArrowsTowerConfig arrowsTowerConfig:
-                    entity = _entitiesFactory.CreateArrowsTower(position, arrowsTowerConfig, baseStats);
-
-                    entity
-                        .AddTowerType(new(TowerTypes.Arrows))
-                        .AddTowerLevel(new(level));
-
-                    _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
-
-                    break;
-
-                case RoyalArrowsTowerConfig royalArrowsTowerConfig:
-                    entity = _entitiesFactory.CreateRoyalArrowsTower(position, royalArrowsTowerConfig, baseStats);
-
-                    entity
-                        .AddTowerType(new(TowerTypes.Arrows))
-                        .AddTowerLevel(new(level))
-                        .AddAbilities(new());
-
-                    entity
-                        .AddSystem(new AbilityOnAddActivatorSystem())
-                        .AddSystem(new CreateSubTowersByMaxTargetsSystem(this));
-
-                    _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
-
-                    break;
-
-                case MagicTowerConfig magicTowerConfig:
-                    entity = _entitiesFactory.CreateMagicTower(position, magicTowerConfig, baseStats);
-
-                    entity
-                        .AddTowerType(new(TowerTypes.Magic))
-                        .AddTowerLevel(new(level));
-
-                    _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
-
-                    break;
-
-                default:
-                    throw new ArgumentException($"Not support {config.GetType()} type config");
-            }
+                entity
+                    .AddAbilities()
+                    .AddSystem(new AbilityOnAddActivatorSystem());
             
+                switch (config.TowerType)
+                {
+                    case TowerTypes.Arrows:
+                        entity
+                            .AddMaxTargets(new(1))
+                            .AddSubTowerCreator(_entitiesFactory.CreateSubArrowsEntity)
+                            .AddSystem(new CreateSubTowersByMaxTargetsSystem(this))
+                            .AddLastingDamage(new())
+                            .AddLastingDamageInitialTime(new())
+                            .AddLastingDamageInterval(new());
+
+                        break;
+                }
+            }
+
+            _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
+
             IInteractAction selectAction = _interactiveActionsFactory.CreateSelectTowerAction(entity);
 
             entity
+                .AddTowerType(new(config.TowerType))
+                .AddTowerLevel(new(level))
                 .AddTeam(new ReactiveVariable<Teams>(Teams.Allies))
                 .AddIsInteractable()
                 .AddInteractRequest()
@@ -102,7 +85,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
                 .AddSelfReleaseRequested(new(false));
 
             ICompositeCondition canInteract = new CompositeCondition()
-                .Add(new FuncCondition(() => true));
+                .Add(new FuncCondition(() => entity.SelfReleaseRequested.Value == false));
 
             ICompositeCondition mustSelfRelease = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.SelfReleaseRequested.Value == true));

@@ -91,7 +91,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
         public TowerAbilitiesPopupPresenter CreateTowerAbilitiesPopupPresenter(TowerAbilitiesPopupView view, Entity sourceTower)
         {
             ConfigsProviderService configsProviderService = _container.Resolve<ConfigsProviderService>();
-            TowersListConfig config = configsProviderService.GetConfig<TowersListConfig>();
+            TowersAbilitiesListConfig config = configsProviderService.GetConfig<TowersAbilitiesListConfig>();
 
             return new TowerAbilitiesPopupPresenter(
                 _coroutinesPerformer,

@@ -13,13 +13,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 
         private ReactiveVariable<InstantShotDirectionArgs> _directionArgs;
 
-        private ReactiveEvent _attackRequest;
-        private ReactiveEvent _endAttackEvent;
+        private ReactiveEvent _attackDelayEndEvent;
 
         private Entity _shooterEntity;
         private Transform _shootPoint;
 
-        private IDisposable _attackRequestDisposable;
+        private IDisposable _attackDelayDisposable;
 
         public InstantShootSystem(ProjectilesFactory projectilesFactory)
         {
@@ -28,27 +27,24 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 
         public void OnInit(Entity entity)
         {
-            _attackRequest = entity.StartAttackRequest;
-            _endAttackEvent = entity.EndAttackEvent;
+            _attackDelayEndEvent = entity.AttackDelayEndEvent;
 
             _directionArgs = entity.InstantShotDirection;
 
             _shooterEntity = entity;
             _shootPoint = entity.ShootPoint;
 
-            _attackRequestDisposable = _attackRequest.Subscribe(OnAttackRequest);
+            _attackDelayDisposable = _attackDelayEndEvent.Subscribe(OnAttackDelayEnd);
         }
 
         public void OnDispose()
         {
-            _attackRequestDisposable.Dispose();
+            _attackDelayDisposable.Dispose();
         }
 
-        private void OnAttackRequest()
+        private void OnAttackDelayEnd()
         {
             Shoot(_directionArgs.Value.Direction, _directionArgs.Value.ProjectileCounts);
-
-            _endAttackEvent.Invoke();
         }
 
         private void Shoot(Vector3 direction, int projectileCounts)
