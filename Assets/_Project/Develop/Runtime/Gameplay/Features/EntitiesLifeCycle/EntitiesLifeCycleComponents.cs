@@ -6,6 +6,17 @@ using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle
 {
+    public class SpawnProcessTimer : IEntityComponent
+    {
+        public ReactiveVariable<float> InitialTime;
+        public ReactiveVariable<float> CurrentTime;
+    }
+
+    public class InSpawnProcess : IEntityComponent
+    {
+        public ReactiveVariable<bool> Value;
+    }
+
     public class CurrentHealth : IEntityComponent
     {
         public ReactiveVariable<float> Value;
