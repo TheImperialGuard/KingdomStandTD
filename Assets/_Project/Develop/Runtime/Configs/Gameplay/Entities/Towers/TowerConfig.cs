@@ -17,6 +17,10 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers
 
         [field: SerializeField, Min(0)] public float AttackPerSecond { get; private set; } = 1f;
 
+        [field: SerializeField, Min(0)] public float AttackProcessTime { get; private set; } = 1f;
+        [field: SerializeField, Min(0)] public float AttackDelayTime { get; private set; } = 0.75f;
+        [field: SerializeField, Min(0)] public float AttackCooldown { get; private set; } = 1f;
+
         [field: SerializeField, Min(0)] public float AttackDamage { get; private set; } = 2f;
 
         public DamageTypes DamageType => _damageType;

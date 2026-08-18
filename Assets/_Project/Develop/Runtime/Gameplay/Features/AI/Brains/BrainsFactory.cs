@@ -39,7 +39,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
                 .Add(entity.CanStartAttack)
                 .Add(new FuncCondition(() => entity.InstantShotDirection.Value != null));
 
-            ICondition fromAttackTriggerToFindTargetStateCondition = new FuncCondition(() => entity.CanStartAttack.Evaluate() == false);
+            ICondition fromAttackTriggerToFindTargetStateCondition = new FuncCondition(() => entity.InAttackProcess.Value == false);
 
             AIStateMachine stateMachine = new AIStateMachine();
 

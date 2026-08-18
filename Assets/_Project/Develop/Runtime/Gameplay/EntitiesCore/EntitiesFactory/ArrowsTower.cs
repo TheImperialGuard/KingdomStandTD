@@ -24,33 +24,45 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddBaseStats(baseStats)
                 .AddModifiedStats(modifiedStats)
                 .AddCurrentTarget()
+                .AddAttackProcessInitialTime(new ReactiveVariable<float>(config.AttackProcessTime))
+                .AddAttackProcessModifiedTime(new ReactiveVariable<float>(config.AttackProcessTime))
+                .AddAttackProcessCurrentTime()
+                .AddInAttackProcess()
                 .AddStartAttackRequest()
                 .AddStartAttackEvent()
                 .AddEndAttackEvent()
+                .AddAttackDelayTime(new ReactiveVariable<float>(config.AttackDelayTime))
+                .AddAttackDelayModifiedTime(new ReactiveVariable<float>(config.AttackDelayTime))
+                .AddAttackDelayEndEvent()
                 .AddInstantAttackDamage(new ReactiveVariable<float>(config.AttackDamage))
                 .AddInstantAttackDamageType(new(config.DamageType))
                 .AddInstantShootRange(new ReactiveVariable<float>(config.AttackRange))
                 .AddInstantShotDirection()
                 .AddAttackCooldownCurrentTime()
-                .AddAttackCooldownInitialTime()
+                .AddAttackCooldownInitialTime(new ReactiveVariable<float>(config.AttackCooldown))
+                .AddAttackCooldownModifiedTime(new ReactiveVariable<float>(config.AttackCooldown))
+                .AddInAttackCooldown()
                 .AddProjectileType(new(config.Projectile))
                 .AddProjectileSpeed(new(config.ProjectileSpeed))
-                .AddInAttackCooldown()
                 .AddAttacksPerSecond(new ReactiveVariable<float>(modifiedStats[StatTypes.AttacksPerSecond]));
 
             ICompositeCondition canStartAttack = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.InAttackCooldown.Value == false));
+                .Add(new FuncCondition(() => entity.InAttackCooldown.Value == false))
+                .Add(new FuncCondition(() => entity.InAttackProcess.Value == false));
 
             entity
                 .AddCanStartAttack(canStartAttack);
 
             entity
                 .AddSystem(new RangeZoneRadiusSyncSystem())
-                .AddSystem(new AttackCooldownByAttackPerSecondStatSyncSystem())
-                .AddSystem(new AttackCooldownTimerSystem())
+                .AddSystem(new AttackTimeByAttackPerSecondStatSyncSystem())
                 .AddSystem(new ShootDirectionCalculateSystem())
                 .AddSystem(new StartAttackSystem())
-                .AddSystem(new InstantShootSystem(_container.Resolve<ProjectilesFactory>()));
+                .AddSystem(new AttackProcessTimerSystem())
+                .AddSystem(new AttackDelayEndTriggerSystem())
+                .AddSystem(new InstantShootSystem(_container.Resolve<ProjectilesFactory>()))
+                .AddSystem(new EndAttackSystem())
+                .AddSystem(new AttackCooldownTimerSystem());
 
             return entity;
         }

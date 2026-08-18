@@ -2,7 +2,6 @@
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
-using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Attack
 {
@@ -42,14 +41,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Attack
             if (CooldownIsOver())
             {
                 _inAttackCooldown.Value = false;
-                Debug.Log("Кулдаун закончился");
             }
         }
 
         private void OnEndAttack()
         {
-            Debug.Log("Кулдаун НАЧАЛСЯ");
-
             _currentTime.Value = _initialTime.Value;
 
             _inAttackCooldown.Value = true;

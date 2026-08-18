@@ -46,7 +46,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
 
             entity
                 .AddSystem(new RangeZoneRadiusSyncSystem())
-                .AddSystem(new AttackCooldownByAttackPerSecondStatSyncSystem())
+                .AddSystem(new AttackTimeByAttackPerSecondStatSyncSystem())
                 .AddSystem(new AttackCooldownTimerSystem())
                 .AddSystem(new ShootDirectionCalculateSystem())
                 .AddSystem(new StartAttackSystem())
