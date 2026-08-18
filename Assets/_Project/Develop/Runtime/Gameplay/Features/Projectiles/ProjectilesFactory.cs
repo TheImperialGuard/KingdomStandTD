@@ -3,9 +3,11 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjection;
+using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using System;
 using UnityEngine;
@@ -64,9 +66,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
                     entity = _entitiesFactory.CreateArrowProjectile(position, direction, owner, config.PrefabPath);
 
                     entity
+                        .AddSpawnProcessTimer(new(magicProjectileConfig.SpawnProcessTime), new())
+                        .AddInSpawnProcess()
                         .AddSpeedAcceleration(new(magicProjectileConfig.SpeedAcceleration))
                         .AddCurrentTarget(new(owner.CurrentTarget.Value));
 
+                    entity.CanMove.Add(new FuncCondition(() => entity.InSpawnProcess.Value == false));
+
+                    entity.AddSystem(new SpawnProcessTimerSystem());
                     entity.AddSystem(new ApplyAccelerationToSpeedSystem());
 
                     _brainsFactory.CreateMagicProjectileBrain(entity);

@@ -42,8 +42,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning
                 return;
 
             _wallet.Add(CurrencyTypes.Gold, _goldOnDeath.Value);
-
-            Debug.Log($"Заработано золото: {_goldOnDeath.Value}. Всего: {_wallet.GetCurrency(CurrencyTypes.Gold).Value}");
         }
     }
 }

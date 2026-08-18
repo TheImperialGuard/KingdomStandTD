@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Projectiles.MagicProjectileConfig
   <Type>k__BackingField: 2
   <PrefabPath>k__BackingField: Prefabs/Entities/Projectiles/MagicSphere
-  <SpeedAcceleration>k__BackingField: 4
+  <SpeedAcceleration>k__BackingField: 10
+  <SpawnProcessTime>k__BackingField: 0.5
