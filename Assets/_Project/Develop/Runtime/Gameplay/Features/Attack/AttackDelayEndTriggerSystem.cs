@@ -1,53 +1,20 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
-using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
-using Assets._Project.Develop.Runtime.Utilities.Reactive;
-using System;
+using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Common;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Attack
 {
-    public class AttackDelayEndTriggerSystem : IInitializableSystem, IDisposableSystem
+    public class AttackDelayEndTriggerSystem : DelayEndTriggerSystem
     {
-        private ReactiveEvent _attackDelayEndEvent;
-        private ReactiveEvent _startAttackEvent;
-
-        private ReactiveVariable<float> _delay;
-        private ReactiveVariable<float> _attackProcessCurrentTime;
-
-        private bool _alreadyAttacked;
-
-        private IDisposable _timerDisposable;
-        private IDisposable _startAttackDisposable;
-
-        public void OnInit(Entity entity)
+        public override void OnInit(Entity entity)
         {
-            _attackDelayEndEvent = entity.AttackDelayEndEvent;
-            _startAttackEvent = entity.StartAttackEvent;
+            DelayEndEvent = entity.AttackDelayEndEvent;
+            StartProcessEvent = entity.StartAttackEvent;
 
-            _delay = entity.AttackDelayModifiedTime;
-            _attackProcessCurrentTime = entity.AttackProcessCurrentTime;
+            Delay = entity.AttackDelayModifiedTime;
+            ProcessCurrentTime = entity.AttackProcessCurrentTime;
 
-            _timerDisposable = _attackProcessCurrentTime.Subscribe(OnTimerChanged);
-            _startAttackDisposable = _startAttackEvent.Subscribe(OnStartAttack);
+            ProcessTimerDisposable = ProcessCurrentTime.Subscribe(OnTimerChanged);
+            StartProcessEventDisposable = StartProcessEvent.Subscribe(OnStartProcess);
         }
-
-        public void OnDispose()
-        {
-            _timerDisposable.Dispose();
-            _startAttackDisposable.Dispose();
-        }
-
-        private void OnTimerChanged(float arg1, float currentTime)
-        {
-            if (_alreadyAttacked)
-                return;
-
-            if (currentTime >= _delay.Value)
-            {
-                _attackDelayEndEvent.Invoke();
-                _alreadyAttacked = true;
-            }
-        }
-
-        private void OnStartAttack() => _alreadyAttacked = false;
     }
 }
