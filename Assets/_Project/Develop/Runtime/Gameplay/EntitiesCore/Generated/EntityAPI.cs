@@ -1994,6 +1994,442 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityCooldownTimer() {InitialTime = initialTime, ModifiedTime = modifiedTime, CurrentTime = currentTime}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InFirstAbilityCooldown InFirstAbilityCooldownC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InFirstAbilityCooldown>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> InFirstAbilityCooldown => InFirstAbilityCooldownC.Value;
+
+		public bool TryGetInFirstAbilityCooldown(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InFirstAbilityCooldown component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInFirstAbilityCooldown()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InFirstAbilityCooldown() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInFirstAbilityCooldown(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InFirstAbilityCooldown() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InSecondAbilityCooldown InSecondAbilityCooldownC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InSecondAbilityCooldown>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> InSecondAbilityCooldown => InSecondAbilityCooldownC.Value;
+
+		public bool TryGetInSecondAbilityCooldown(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InSecondAbilityCooldown component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInSecondAbilityCooldown()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InSecondAbilityCooldown() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInSecondAbilityCooldown(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InSecondAbilityCooldown() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartFirstAbilityRequest StartFirstAbilityRequestC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartFirstAbilityRequest>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent StartFirstAbilityRequest => StartFirstAbilityRequestC.Value;
+
+		public bool TryGetStartFirstAbilityRequest(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartFirstAbilityRequest component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartFirstAbilityRequest()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartFirstAbilityRequest() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartFirstAbilityRequest(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartFirstAbilityRequest() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartFirstAbilityEvent StartFirstAbilityEventC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartFirstAbilityEvent>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent StartFirstAbilityEvent => StartFirstAbilityEventC.Value;
+
+		public bool TryGetStartFirstAbilityEvent(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartFirstAbilityEvent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartFirstAbilityEvent()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartFirstAbilityEvent() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartFirstAbilityEvent(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartFirstAbilityEvent() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartSecondAbilityRequest StartSecondAbilityRequestC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartSecondAbilityRequest>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent StartSecondAbilityRequest => StartSecondAbilityRequestC.Value;
+
+		public bool TryGetStartSecondAbilityRequest(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartSecondAbilityRequest component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartSecondAbilityRequest()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartSecondAbilityRequest() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartSecondAbilityRequest(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartSecondAbilityRequest() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartSecondAbilityEvent StartSecondAbilityEventC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartSecondAbilityEvent>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent StartSecondAbilityEvent => StartSecondAbilityEventC.Value;
+
+		public bool TryGetStartSecondAbilityEvent(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartSecondAbilityEvent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartSecondAbilityEvent()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartSecondAbilityEvent() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStartSecondAbilityEvent(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.StartSecondAbilityEvent() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.CanStartFirstAbility CanStartFirstAbilityC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.CanStartFirstAbility>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition CanStartFirstAbility => CanStartFirstAbilityC.Value;
+
+		public bool TryGetCanStartFirstAbility(out Assets._Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.CanStartFirstAbility component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanStartFirstAbility(Assets._Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.CanStartFirstAbility() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.CanStartSecondAbility CanStartSecondAbilityC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.CanStartSecondAbility>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition CanStartSecondAbility => CanStartSecondAbilityC.Value;
+
+		public bool TryGetCanStartSecondAbility(out Assets._Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.CanStartSecondAbility component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanStartSecondAbility(Assets._Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.CanStartSecondAbility() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityProcessTimer FirstAbilityProcessTimerC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityProcessTimer>();
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFirstAbilityProcessTimer(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> initialTime,Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> modifiedTime,Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> currentTime)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityProcessTimer() {InitialTime = initialTime, ModifiedTime = modifiedTime, CurrentTime = currentTime}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityProcessTimer SecondAbilityProcessTimerC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityProcessTimer>();
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSecondAbilityProcessTimer(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> initialTime,Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> modifiedTime,Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> currentTime)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityProcessTimer() {InitialTime = initialTime, ModifiedTime = modifiedTime, CurrentTime = currentTime}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InFirstAbilityProcess InFirstAbilityProcessC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InFirstAbilityProcess>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> InFirstAbilityProcess => InFirstAbilityProcessC.Value;
+
+		public bool TryGetInFirstAbilityProcess(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InFirstAbilityProcess component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInFirstAbilityProcess()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InFirstAbilityProcess() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInFirstAbilityProcess(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InFirstAbilityProcess() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InSecondAbilityProcess InSecondAbilityProcessC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InSecondAbilityProcess>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> InSecondAbilityProcess => InSecondAbilityProcessC.Value;
+
+		public bool TryGetInSecondAbilityProcess(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InSecondAbilityProcess component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInSecondAbilityProcess()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InSecondAbilityProcess() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInSecondAbilityProcess(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.InSecondAbilityProcess() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EndFirstAbilityEvent EndFirstAbilityEventC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EndFirstAbilityEvent>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent EndFirstAbilityEvent => EndFirstAbilityEventC.Value;
+
+		public bool TryGetEndFirstAbilityEvent(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EndFirstAbilityEvent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEndFirstAbilityEvent()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EndFirstAbilityEvent() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEndFirstAbilityEvent(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EndFirstAbilityEvent() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EndSecondAbilityEvent EndSecondAbilityEventC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EndSecondAbilityEvent>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent EndSecondAbilityEvent => EndSecondAbilityEventC.Value;
+
+		public bool TryGetEndSecondAbilityEvent(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EndSecondAbilityEvent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEndSecondAbilityEvent()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EndSecondAbilityEvent() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEndSecondAbilityEvent(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EndSecondAbilityEvent() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayTime FirstAbilityDelayTimeC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayTime>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> FirstAbilityDelayTime => FirstAbilityDelayTimeC.Value;
+
+		public bool TryGetFirstAbilityDelayTime(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayTime component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFirstAbilityDelayTime()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayTime() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFirstAbilityDelayTime(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayTime() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayTime SecondAbilityDelayTimeC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayTime>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> SecondAbilityDelayTime => SecondAbilityDelayTimeC.Value;
+
+		public bool TryGetSecondAbilityDelayTime(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayTime component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSecondAbilityDelayTime()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayTime() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSecondAbilityDelayTime(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayTime() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayModifiedTime SecondAbilityDelayModifiedTimeC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayModifiedTime>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> SecondAbilityDelayModifiedTime => SecondAbilityDelayModifiedTimeC.Value;
+
+		public bool TryGetSecondAbilityDelayModifiedTime(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayModifiedTime component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSecondAbilityDelayModifiedTime()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayModifiedTime() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSecondAbilityDelayModifiedTime(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayModifiedTime() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayModifiedTime FirstAbilityDelayModifiedTimeC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayModifiedTime>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> FirstAbilityDelayModifiedTime => FirstAbilityDelayModifiedTimeC.Value;
+
+		public bool TryGetFirstAbilityDelayModifiedTime(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayModifiedTime component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFirstAbilityDelayModifiedTime()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayModifiedTime() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFirstAbilityDelayModifiedTime(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayModifiedTime() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayEndEvent SecondAbilityDelayEndEventC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayEndEvent>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent SecondAbilityDelayEndEvent => SecondAbilityDelayEndEventC.Value;
+
+		public bool TryGetSecondAbilityDelayEndEvent(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayEndEvent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSecondAbilityDelayEndEvent()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayEndEvent() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSecondAbilityDelayEndEvent(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityDelayEndEvent() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayEndEvent FirstAbilityDelayEndEventC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayEndEvent>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent FirstAbilityDelayEndEvent => FirstAbilityDelayEndEventC.Value;
+
+		public bool TryGetFirstAbilityDelayEndEvent(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayEndEvent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFirstAbilityDelayEndEvent()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayEndEvent() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFirstAbilityDelayEndEvent(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayEndEvent() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.AI.CurrentTarget CurrentTargetC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AI.CurrentTarget>();
 
 		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> CurrentTarget => CurrentTargetC.Value;
