@@ -18,7 +18,7 @@ MonoBehaviour:
   <TowerName>k__BackingField: "\u0411\u0430\u0448\u043D\u044F \u043A\u043E\u0440\u043E\u043B\u0435\u0432\u0441\u043A\u0438\u0445
     \u043B\u0443\u0447\u043D\u0438\u043A\u043E\u0432"
   <Cost>k__BackingField: 230
-  <AttackRange>k__BackingField: 4
+  <AttackRange>k__BackingField: 4.5
   <AttackPerSecond>k__BackingField: 1.9
   <AttackProcessTime>k__BackingField: 0.2
   <AttackDelayTime>k__BackingField: 0.1

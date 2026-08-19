@@ -198,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 309908454665629572, guid: effb650189dc5714e9e9801b1cfb3991, type: 3}
       propertyPath: m_Intensity
-      value: 0.231217
+      value: 0.4292311
       objectReference: {fileID: 0}
     - target: {fileID: 496487244642044110, guid: effb650189dc5714e9e9801b1cfb3991, type: 3}
       propertyPath: m_Materials.Array.size
@@ -291,6 +291,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9027514048236820045, guid: effb650189dc5714e9e9801b1cfb3991, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2068039729392741995}
+    - targetCorrespondingSourceObject: {fileID: 9027514048236820045, guid: effb650189dc5714e9e9801b1cfb3991, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7762811516167798675}
     - targetCorrespondingSourceObject: {fileID: 6566140890059193891, guid: effb650189dc5714e9e9801b1cfb3991, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4139973274109686257}
@@ -318,6 +321,20 @@ MonoBehaviour:
   _toPos: {x: 0, y: 0, z: 0}
   _toRotation: {x: 0, y: 0, z: 0, w: 0}
   _toScale: {x: 0.1, y: 0.1, z: 0.1}
+--- !u!114 &7762811516167798675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049800104280493553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3f388c1e616ab48b17780b35b7a27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.SelfReleaseEffectView
+  _effectPrefab: {fileID: 856168683895632989, guid: 82e7a72c34e591e489de36771becb963, type: 3}
+  _effectSpawnPoint: {fileID: 1049800104280493558}
 --- !u!4 &1049800104280493558 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9027514048236820042, guid: effb650189dc5714e9e9801b1cfb3991, type: 3}

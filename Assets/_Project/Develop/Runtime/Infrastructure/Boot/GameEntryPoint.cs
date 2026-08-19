@@ -52,13 +52,13 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.Boot
             else
                 playerDataProvider.Reset();
 
-            yield return new WaitForSeconds(1);
+            yield return null;
 
             Debug.Log("Завершается инициализация сервисов");
 
             loadingScreen.Hide();
 
-            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1));
+            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(2));
         }
 
         private void SetupAppSettings()

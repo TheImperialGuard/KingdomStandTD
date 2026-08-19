@@ -69,7 +69,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
                         .AddSpawnProcessTimer(new(magicProjectileConfig.SpawnProcessTime), new())
                         .AddInSpawnProcess()
                         .AddSpeedAcceleration(new(magicProjectileConfig.SpeedAcceleration))
-                        .AddCurrentTarget(new(owner.CurrentTarget.Value));
+                        .AddCurrentTarget(new(owner.CurrentTarget.Value))
+                        .AddSelfReleaseRequested(new(false));
 
                     entity.CanMove.Add(new FuncCondition(() => entity.InSpawnProcess.Value == false));
 

@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3f4129d72bf236468233815e2718efa, type: 3}
-  m_Name: ArrowsTowerConfig_level_3
+  m_Name: MagicTowerConfig_level_4
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.ShootingTowerConfig
-  _damageType: 1
-  <TowerType>k__BackingField: 0
-  <PrefabPath>k__BackingField: Prefabs/Entities/Towers/Arrows/ArrowsTower_level_3
-  <TowerName>k__BackingField: "\u0411\u0430\u0448\u043D\u044F \u043B\u0443\u0447\u043D\u0438\u043A\u043E\u0432
-    III"
-  <Cost>k__BackingField: 160
-  <AttackRange>k__BackingField: 4
-  <AttackPerSecond>k__BackingField: 1.754386
+  _damageType: 2
+  <TowerType>k__BackingField: 1
+  <PrefabPath>k__BackingField: Prefabs/Entities/Towers/Magic/MagicTower_level_4
+  <TowerName>k__BackingField: "\u0411\u0430\u0448\u043D\u044F \u0432\u044B\u0441\u0448\u0435\u0439
+    \u043C\u0430\u0433\u0438\u0438"
+  <Cost>k__BackingField: 270
+  <AttackRange>k__BackingField: 3.5
+  <AttackPerSecond>k__BackingField: 0.5
   <AttackProcessTime>k__BackingField: 0.2
   <AttackDelayTime>k__BackingField: 0.1
   <AttackCooldown>k__BackingField: 1
-  <Projectile>k__BackingField: 0
-  <AttackDamage>k__BackingField: 13
-  <ProjectileSpeed>k__BackingField: 5
+  <Projectile>k__BackingField: 2
+  <AttackDamage>k__BackingField: 108
+  <ProjectileSpeed>k__BackingField: 1

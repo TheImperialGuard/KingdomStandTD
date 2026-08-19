@@ -3,6 +3,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.AI.States;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
+using Assets._Project.Develop.Runtime.Utilities.Reactive;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
 {
@@ -58,7 +59,22 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
 
         public StateMachineBrain CreateMagicProjectileBrain(Entity entity)
         {
-            AIStateMachine stateMachine = CreateMoveRotateToTargetStateMachine(entity);
+            AIStateMachine movementState = CreateMoveRotateToTargetStateMachine(entity);
+
+            SelfReleaseTriggerState selfReleaseTriggerState = new SelfReleaseTriggerState(entity);
+
+            ReactiveVariable<Entity> currentTarget = entity.CurrentTarget;
+
+            ICompositeCondition fromMovementToSelfReleaseStateCondition = new CompositeCondition(LogicOperations.Or)
+                .Add(new FuncCondition(() => currentTarget.Value == null))
+                .Add(new FuncCondition(() => currentTarget.Value.IsDead.Value == true));
+
+            AIStateMachine stateMachine = new AIStateMachine();
+
+            stateMachine.AddState(movementState);
+            stateMachine.AddState(selfReleaseTriggerState);
+
+            stateMachine.AddTransition(movementState, selfReleaseTriggerState, fromMovementToSelfReleaseStateCondition);
 
             StateMachineBrain brain = new(stateMachine);
 
