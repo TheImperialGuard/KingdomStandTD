@@ -895,7 +895,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 3b94d90c66f36024b937c884d541a969, type: 2}
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _enemiesWavesStageConfigs.Array.data[0]._enemiesWaveConfigs.Array.data[0].<EnemiesCount>k__BackingField
-      value: 20
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _enemiesWavesStageConfigs.Array.data[0]._enemiesWaveConfigs.Array.data[0].<DelayBetweenSpawns>k__BackingField

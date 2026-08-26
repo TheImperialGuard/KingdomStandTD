@@ -23,4 +23,10 @@ MonoBehaviour:
     \u043F\u0435\u0440\u0435\u0437\u0430\u0440\u044F\u0434\u043A\u0438 \u043D\u0430\u0432\u044B\u043A\u0430"
   - "\u0423\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442 \u0432\u0440\u0435\u043C\u044F
     \u043F\u0435\u0440\u0435\u0437\u0430\u0440\u044F\u0434\u043A\u0438 \u043D\u0430\u0432\u044B\u043A\u0430"
-  _cooldownPerLevel: []
+  _cooldownPerLevel:
+  - 20
+  - 18
+  - 16
+  <ProjectileType>k__BackingField: 3
+  InitialTime: 1.5
+  Delay: 1

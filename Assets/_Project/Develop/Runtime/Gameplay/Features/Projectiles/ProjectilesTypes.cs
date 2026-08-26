@@ -4,6 +4,7 @@
     {
         Arrow,
         PoisonedArrow,
-        Magic
+        Magic,
+        MagicTrail
     }
 }

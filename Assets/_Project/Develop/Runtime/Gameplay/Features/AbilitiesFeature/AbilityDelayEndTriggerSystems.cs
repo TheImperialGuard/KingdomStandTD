@@ -3,7 +3,7 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Common;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
 {
-    public class FirstAbilityDelayEndTriggerSystems : DelayEndTriggerSystem
+    public class FirstAbilityDelayEndTriggerSystem : DelayEndTriggerSystem
     {
         public override void OnInit(Entity entity)
         {
@@ -18,7 +18,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
         }
     }
 
-    public class SecondAbilityDelayEndTriggerSystems : DelayEndTriggerSystem
+    public class SecondAbilityDelayEndTriggerSystem : DelayEndTriggerSystem
     {
         public override void OnInit(Entity entity)
         {

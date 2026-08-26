@@ -3,7 +3,7 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Common;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
 {
-    public class EndFirstAbilitySystems : EndProcessSystem
+    public class EndFirstAbilitySystem : EndProcessSystem
     {
         public override void OnInit(Entity entity)
         {
@@ -18,7 +18,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
         }
     }
 
-    public class EndSecondAbilitySystems : EndProcessSystem
+    public class EndSecondAbilitySystem : EndProcessSystem
     {
         public override void OnInit(Entity entity)
         {

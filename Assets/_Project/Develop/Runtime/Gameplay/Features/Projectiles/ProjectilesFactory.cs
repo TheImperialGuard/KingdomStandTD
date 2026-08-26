@@ -81,6 +81,20 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
 
                     break;
 
+                case ProjectilesTypes.MagicTrail:
+                    entity = _entitiesFactory.CreateArrowProjectile(position, direction, owner, config.PrefabPath);
+
+                    entity
+                        .AddCurrentTarget(new(owner.CurrentTarget.Value))
+                        .AddSelfReleaseRequested(new(false));
+
+                    _brainsFactory.CreateMagicProjectileBrain(entity);
+
+                    entity.MoveSpeed.Value = 20f;
+                    entity.BodyContactDamage.Value = 99999f;
+
+                    break;
+
                 default:
                     throw new ArgumentException($"Projectile type of {type} not supported in factory");
             }

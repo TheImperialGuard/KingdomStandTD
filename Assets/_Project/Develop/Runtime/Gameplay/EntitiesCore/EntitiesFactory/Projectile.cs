@@ -31,6 +31,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddContactEntitiesBuffer(new Buffer<Entity>(64))
                 .AddDeathMask(Layers.EnviromentMask)
                 .AddIsTouchDeathMask()
+                .AddIsTouchAnotherTeam()
                 .AddBodyContactDamage(new ReactiveVariable<float>(owner.InstantAttackDamage.Value))
                 .AddInstantAttackDamageType(new(owner.InstantAttackDamageType.Value))
                 .AddTeam(new ReactiveVariable<Teams>(owner.Team.Value));
@@ -42,11 +43,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
             ICompositeCondition mustDie = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.IsTouchDeathMask.Value));
+                .Add(new FuncCondition(() => entity.IsTouchDeathMask.Value), 0)
+                .Add(new FuncCondition(() => entity.IsTouchAnotherTeam.Value), 10, LogicOperations.Or);
 
-            ICompositeCondition mustSelfRelease = new CompositeCondition(LogicOperations.Or)
-                .Add(new FuncCondition(() => entity.IsDead.Value))
-                .Add(new FuncCondition(() => entity.ContactEntitiesBuffer.Count >= 1));
+            ICompositeCondition mustSelfRelease = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value));
 
             entity
                 .AddCanMove(canMove)
@@ -61,6 +62,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
                 .AddSystem(new DealDamageOnContactSystem())
                 .AddSystem(new DeathMaskTouchDetectorSystem())
+                .AddSystem(new AnotherTeamTouchDetectorSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));

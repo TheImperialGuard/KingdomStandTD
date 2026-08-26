@@ -27,8 +27,6 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle(CreateTimerServiceFactory);
 
-            container.RegisterAsSingle(CreateAbilitiesFactory);
-
             container.RegisterAsSingle(CreateConfigsProviderService);
 
             container.RegisterAsSingle(CreateSceneSwitcherService);
@@ -51,8 +49,6 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
         private static SceneLoaderService CreateSceneLoaderService(DIContainer c) => new();
 
         private static TimerServiceFactory CreateTimerServiceFactory(DIContainer c) => new(c);
-
-        private static AbilitiesFactory CreateAbilitiesFactory(DIContainer c) => new(c);
 
         private static ConfigsProviderService CreateConfigsProviderService(DIContainer c)
         {

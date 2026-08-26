@@ -1,5 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using System;
 
@@ -23,6 +24,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
 
                 case PoisonedAttackAbilityConfig poisonedAttackAbilityConfig:
                     return new PoisonedAttackAbility(entity, poisonedAttackAbilityConfig, currentLevel);
+
+                case OneShotAttackAbilityConfig oneShotAttackAbilityConfig:
+                    return new OneShotAttackAbility(entity, oneShotAttackAbilityConfig, currentLevel, _container.Resolve<ProjectilesFactory>());
 
                 default:
                     throw new ArgumentException();

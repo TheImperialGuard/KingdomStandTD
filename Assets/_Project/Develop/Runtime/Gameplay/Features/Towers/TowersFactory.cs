@@ -67,6 +67,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
                             .AddLastingDamageInterval(new());
 
                         break;
+
+                    case TowerTypes.Magic:
+
+                        break;
                 }
             }
 

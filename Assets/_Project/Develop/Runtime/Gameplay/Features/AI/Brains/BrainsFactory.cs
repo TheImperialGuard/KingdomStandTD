@@ -37,7 +37,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
             AttackTriggerState attackTriggerState = new AttackTriggerState(entity);
 
             ICompositeCondition fromFindTargetToAttackTriggerStateCondition = new CompositeCondition()
-                .Add(entity.CanStartAttack)
+                .Add(new FuncCondition(() => entity.CurrentTarget.Value != null))
                 .Add(new FuncCondition(() => entity.InstantShotDirection.Value != null));
 
             ICondition fromAttackTriggerToFindTargetStateCondition = new FuncCondition(() => entity.InAttackProcess.Value == false);

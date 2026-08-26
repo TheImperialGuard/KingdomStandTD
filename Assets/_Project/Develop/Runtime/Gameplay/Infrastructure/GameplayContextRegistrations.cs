@@ -3,6 +3,7 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
+using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning;
@@ -84,6 +85,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateProjectilesFactory);
 
             container.RegisterAsSingle(CreateStatusesFactory);
+
+            container.RegisterAsSingle(CreateAbilitiesFactory);
 
             container.RegisterAsSingle(CreateGameplayCycle);
 
@@ -211,6 +214,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             => new(c);
 
         private static StatusesFactory CreateStatusesFactory(DIContainer c)
+            => new(c);
+
+        private static AbilitiesFactory CreateAbilitiesFactory(DIContainer c) 
             => new(c);
 
         private static WalletService CreateGameplayWalletService(DIContainer c)
