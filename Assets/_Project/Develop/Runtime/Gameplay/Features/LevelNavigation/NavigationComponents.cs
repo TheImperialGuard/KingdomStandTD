@@ -34,4 +34,19 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
     {
         public ReactiveVariable<Vector3> Value;
     }
+
+    public class CurrentPathDistance : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
+
+    public class TotalPathDistance : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
+
+    public class TraveledPathDistance : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
 }

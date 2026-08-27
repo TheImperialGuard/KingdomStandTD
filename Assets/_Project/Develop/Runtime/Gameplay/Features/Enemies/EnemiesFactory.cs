@@ -88,10 +88,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
                 .AddCurrentWaypoint()
                 .AddReachedWaypoints(new())
                 .AddIsPathFinished()
-                .AddWaypointsOffset(new(waypointsOffset));
+                .AddWaypointsOffset(new(waypointsOffset))
+                .AddTotalPathDistance()
+                .AddCurrentPathDistance()
+                .AddTraveledPathDistance();
 
             entity
-                .AddSystem(new WaypointsNavigationSystem());
+                .AddSystem(new WaypointsNavigationSystem())
+                .AddSystem(new PathDistanceCalcSystem());
         }
     }
 }
