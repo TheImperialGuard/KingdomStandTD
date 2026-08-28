@@ -5,6 +5,7 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
+using Assets._Project.Develop.Runtime.Gameplay.Features.AOE;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning;
 using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
@@ -96,6 +97,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateRayShooterService);
 
+            container.RegisterAsSingle(CreateAreaEntitiesDetectorService);
+
             container.RegisterAsSingle(CreatePlayerInteractsService);
 
             container.RegisterAsSingle(CreateGameplayPopupService);
@@ -162,6 +165,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private static RayShooterService CreateRayShooterService(DIContainer c)
         {
             return new RayShooterService(c.Resolve<IInputService>());
+        }
+
+        private static AreaEntitiesDetectorService CreateAreaEntitiesDetectorService(DIContainer c)
+        {
+            return new AreaEntitiesDetectorService(c.Resolve<CollidersRegistryService>());
         }
 
         private static DesktopInput CreateDesktopInput(DIContainer c)
