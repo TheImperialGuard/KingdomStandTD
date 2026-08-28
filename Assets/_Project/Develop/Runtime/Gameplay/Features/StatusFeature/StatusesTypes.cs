@@ -3,5 +3,6 @@
     public enum StatusesTypes
     {
         LastingDamage,
+        Stun,
     }
 }

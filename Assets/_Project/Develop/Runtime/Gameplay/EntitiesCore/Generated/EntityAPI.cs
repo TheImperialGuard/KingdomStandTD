@@ -148,6 +148,30 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.Statuses() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.IsStunned IsStunnedC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.IsStunned>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> IsStunned => IsStunnedC.Value;
+
+		public bool TryGetIsStunned(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.IsStunned component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsStunned()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.IsStunned() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsStunned(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.IsStunned() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.BaseStats BaseStatsC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.BaseStats>();
 
 		public System.Collections.Generic.Dictionary<Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatTypes, System.Single> BaseStats => BaseStatsC.Value;

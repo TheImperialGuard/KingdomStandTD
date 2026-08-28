@@ -19,5 +19,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
 
             takeDamageRequest.Invoke(_damage.Value);
         }
+
+        public void OnAdd(Entity entity)
+        {
+        }
+
+        public void OnRemove(Entity entity)
+        {
+        }
     }
 }

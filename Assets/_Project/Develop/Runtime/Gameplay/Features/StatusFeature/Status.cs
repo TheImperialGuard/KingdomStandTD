@@ -30,5 +30,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
         public StatusesTypes Type => _type;
 
         public void ApplyEffect() => _statusEffect.Apply(_source);
+        public void OnAdd() => _statusEffect.OnAdd(_source);
+        public void OnRemove() => _statusEffect.OnRemove(_source);
     }
 }

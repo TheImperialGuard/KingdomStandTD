@@ -24,7 +24,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddMoveSpeed(new(config.MoveSpeed))
                 .AddIsMoving()
                 .AddRotationDirection()
-                .AddRotationSpeed(new(config.RotateSpeed));
+                .AddRotationSpeed(new(config.RotateSpeed))
+                .AddIsStunned();
 
             entity
                 .AddContactsDetectingMask(Layers.TriggersMask)
@@ -44,7 +45,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddStatuses();
 
             ICompositeCondition canMove = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+                .Add(new FuncCondition(() => entity.IsDead.Value == false))
+                .Add(new FuncCondition(() => entity.IsStunned.Value == false));
 
             ICompositeCondition canRotate = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));

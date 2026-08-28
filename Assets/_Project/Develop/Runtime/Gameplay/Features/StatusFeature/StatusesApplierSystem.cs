@@ -57,6 +57,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
             if (_activeStatuses.ContainsKey(status))
                 return;
 
+            status.OnAdd();
+
             TimerService timer = _timerServiceFactory.Create(status.Interval.Value);
 
             _activeStatuses.Add(status, timer);
@@ -66,6 +68,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
 
         private void OnStatusRemoved(Status status)
         {
+            status.OnRemove();
             _activeStatuses[status].Dispose();
             _activeStatuses.Remove(status);
         }

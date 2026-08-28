@@ -13,28 +13,23 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
             _container = container;
         }
 
-        public Status CreateFor(Entity entity, StatusesTypes type, Entity source)
+        public Status CreateFor(Entity entity, StatusesTypes type, Entity source, float initialTime, float interval)
         {
             Status status;
-            IStatusEffect statusEffect;
 
-            switch (type)
+            IStatusEffect statusEffect = type switch
             {
-                case StatusesTypes.LastingDamage:
-                    statusEffect = new TakeDamageStatusEffect(source.LastingDamage);
+                StatusesTypes.LastingDamage => new TakeDamageStatusEffect(source.LastingDamage),
+                StatusesTypes.Stun => new StunStatusEffect(),
+                _ => throw new ArgumentException($"{type} not supported in statuses factory"),
+            };
 
-                    status = new Status(
-                        statusEffect, 
-                        entity, 
-                        source.LastingDamageInitialTime.Value, 
-                        source.LastingDamageInterval.Value,
-                        type);
-
-                    break;
-
-                default:
-                    throw new ArgumentException($"{type} not supported in statuses factory");
-            }
+            status = new Status(
+                statusEffect,
+                entity,
+                initialTime,
+                interval,
+                type);
 
             return status;
         }

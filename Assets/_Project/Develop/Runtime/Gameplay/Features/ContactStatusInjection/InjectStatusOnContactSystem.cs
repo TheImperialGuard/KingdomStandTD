@@ -69,7 +69,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjecti
         {
             foreach (StatusesTypes statusType in _statutesForInject)
             {
-                Status status = _statusesFactory.CreateFor(contactEntity, statusType, _source);
+                Status status = _statusesFactory.CreateFor(
+                    contactEntity, 
+                    statusType, 
+                    _source, 
+                    _source.LastingDamageInitialTime.Value,
+                    _source.LastingDamageInterval.Value);
 
                 EntitiesHelper.TryInjectStatusTo(contactEntity, status);
             }
