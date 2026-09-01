@@ -30,6 +30,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature
             if (_canMove.Evaluate() == false)
             {
                 _rigidbody.linearVelocity = Vector3.zero;
+                _isMoving.Value = false;
                 return;
             }
 

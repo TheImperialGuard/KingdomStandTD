@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbdb076637a8694a9dadd594829ec46, type: 3}
+  m_Name: StunAbilityConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities.StunAbilityConfig
+  <ID>k__BackingField: Stun
+  <Name>k__BackingField: "\u0421\u0442\u0430\u043D"
+  <Icon>k__BackingField: {fileID: 0}
+  <LevelsCosts>k__BackingField: 2c0100009600000096000000
+  _descriptionByLevel:
+  - "\u0421\u0442\u0430\u043D \u043D\u0430 1 \u0441\u0435\u043A"
+  - "\u0421\u0442\u0430\u043D \u043D\u0430 2 \u0441\u0435\u043A"
+  - "\u0421\u0442\u0430\u043D \u043D\u0430 3 \u0441\u0435\u043A"
+  _stunTimePerLevel:
+  - 2
+  - 3
+  - 4
+  Radius: 0.8
+  InitialTime: 1
+  Delay: 0.1
+  Cooldown: 12

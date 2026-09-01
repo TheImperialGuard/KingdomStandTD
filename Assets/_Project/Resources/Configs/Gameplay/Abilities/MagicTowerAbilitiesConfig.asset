@@ -15,5 +15,5 @@ MonoBehaviour:
   _firstAbility:
   - {fileID: 11400000, guid: f28e8cae272183f4386fc9c75645abe6, type: 2}
   _secondAbility:
-  - {fileID: 11400000, guid: 96ed4a815b3ee714691b7824ebe46db8, type: 2}
+  - {fileID: 11400000, guid: 2dc1943e555196f42b03ff1ff3a940ee, type: 2}
   Tower: 1

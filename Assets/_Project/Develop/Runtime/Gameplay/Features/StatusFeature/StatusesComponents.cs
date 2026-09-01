@@ -12,4 +12,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
     {
         public ReactiveVariable<bool> Value;
     }
+
+    public class StunDuration : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
 }

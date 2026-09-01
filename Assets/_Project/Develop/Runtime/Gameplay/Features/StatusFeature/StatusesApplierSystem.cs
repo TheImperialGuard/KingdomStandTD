@@ -35,9 +35,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
             {
                 if (activeStatus.Value.IsOver)
                 {
-                    Debug.Log($"{_entity.Transform.gameObject.name} получил урон от отравления, было хп: {_entity.CurrentHealth.Value}");
                     activeStatus.Key.ApplyEffect();
-                    Debug.Log($"Осталось хп: {_entity.CurrentHealth.Value}");
                     activeStatus.Value.Restart();
                 }
             }
