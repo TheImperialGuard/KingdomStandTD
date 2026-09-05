@@ -5,13 +5,15 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Shoot;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,29 +51,18 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 
             entity = _entitiesFactory.CreateShootingTower(position, config, baseStats);
 
+            if (config.TowerType == TowerTypes.Cannon)
+            {
+                AddBallisticShooter(entity);
+            }
+            else
+            {
+                AddBaseShooter(entity);
+            }
+
             if (level >= 4)
             {
-                entity
-                    .AddAbilities()
-                    .AddSystem(new AbilityOnAddActivatorSystem());
-            
-                switch (config.TowerType)
-                {
-                    case TowerTypes.Arrows:
-                        entity
-                            .AddMaxTargets(new(1))
-                            .AddSubTowerCreator(_entitiesFactory.CreateSubArrowsEntity)
-                            .AddSystem(new CreateSubTowersByMaxTargetsSystem(this))
-                            .AddLastingDamage(new())
-                            .AddLastingDamageInitialTime(new())
-                            .AddLastingDamageInterval(new());
-
-                        break;
-
-                    case TowerTypes.Magic:
-
-                        break;
-                }
+                AddAbilitiesFor(entity, config);
             }
 
             _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
@@ -133,6 +124,67 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             _entitiesLifeContext.Add(subEntity);
 
             return subEntity;
+        }
+
+        private void AddBaseShooter(Entity entity)
+        {
+            entity
+                .AddInstantShotDirection();
+
+            ICompositeCondition canStartAttack = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.InAttackCooldown.Value == false))
+                .Add(new FuncCondition(() => entity.InAttackProcess.Value == false));
+
+            entity
+                .AddCanStartAttack(canStartAttack);
+
+            entity
+                .AddSystem(new ShootDirectionCalculateSystem())
+                .AddSystem(new InstantShootSystem(_container.Resolve<ProjectilesFactory>()));
+        }
+
+        private void AddBallisticShooter(Entity entity)
+        {
+            entity
+                .AddBallisticTrajectory(new())
+                .AddBallisticTrajectoryMaxHeight(new(2.5f));
+
+            ICompositeCondition canStartAttack = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.InAttackCooldown.Value == false))
+                .Add(new FuncCondition(() => entity.InAttackProcess.Value == false))
+                .Add(new FuncCondition(() => entity.BallisticTrajectory.Value.isValid == true));
+
+            entity
+                .AddCanStartAttack(canStartAttack);
+
+            entity
+                .AddSystem(new BallisticTrajectoryCalculateSystem())
+                .AddSystem(new BallisticShootSystem(_container.Resolve<ProjectilesFactory>()));
+        }
+
+        private void AddAbilitiesFor(Entity entity, ShootingTowerConfig config)
+        {
+            entity
+                .AddAbilities()
+                .AddSystem(new AbilityOnAddActivatorSystem());
+
+            switch (config.TowerType)
+            {
+                case TowerTypes.Arrows:
+                    entity
+                        .AddMaxTargets(new(1))
+                        .AddSubTowerCreator(_entitiesFactory.CreateSubArrowsEntity)
+                        .AddSystem(new CreateSubTowersByMaxTargetsSystem(this))
+                        .AddLastingDamage(new())
+                        .AddLastingDamageInitialTime(new())
+                        .AddLastingDamageInterval(new());
+
+                    break;
+
+                case TowerTypes.Magic:
+
+                    break;
+            }
         }
     }
 }

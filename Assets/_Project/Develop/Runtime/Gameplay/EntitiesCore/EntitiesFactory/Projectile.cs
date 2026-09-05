@@ -69,5 +69,42 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
 
             return entity;
         }
+
+        public Entity CreateBallisticProjectile(Vector3 position, Vector3 direction, Entity owner, string prefabPath)
+        {
+            Entity entity = CreateEmpty();
+
+            _monoEntitiesFactory.Create(entity, position, prefabPath);
+
+            entity
+                .AddOwner(new ReactiveVariable<Entity>(owner))
+                .AddIsDead()
+                .AddContactsDetectingMask(Layers.EnviromentMask)
+                .AddContactCollidersBuffer(new Buffer<Collider>(64))
+                .AddDeathMask(Layers.EnviromentMask)
+                .AddIsTouchDeathMask()
+                .AddInstantAttackDamage(new ReactiveVariable<float>(owner.InstantAttackDamage.Value))
+                .AddInstantAttackDamageType(new(owner.InstantAttackDamageType.Value))
+                .AddTeam(new ReactiveVariable<Teams>(owner.Team.Value));
+
+            ICompositeCondition mustDie = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsTouchDeathMask.Value), 0);
+
+            ICompositeCondition mustSelfRelease = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value));
+
+            entity
+                .AddMustDie(mustDie)
+                .AddMustSelfRelease(mustSelfRelease);
+
+            entity
+                .AddSystem(new BodyContactsDetectingSystem())
+                .AddSystem(new DeathMaskTouchDetectorSystem())
+                .AddSystem(new DeathSystem())
+                .AddSystem(new DisableCollidersOnDeathSystem())
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+
+            return entity;
+        }
     }
 }

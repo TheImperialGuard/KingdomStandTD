@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
 
@@ -41,5 +42,15 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
     public class ShootingRangeZoneComponent : IEntityComponent
     {
         public ShootingRangeZone Value;
+    }
+
+    public class BallisticTrajectory : IEntityComponent
+    {
+        public ReactiveVariable<TrajectoryResult> Value;
+    }
+
+    public class BallisticTrajectoryMaxHeight : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
     }
 }

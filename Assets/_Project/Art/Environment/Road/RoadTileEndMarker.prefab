@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1994874380458115161}
   - component: {fileID: 3170793876968755196}
   - component: {fileID: 856840008477457206}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 8028930599813473682}
   - component: {fileID: 6477944273385229783}
   - component: {fileID: 8400601592418789744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: flag (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 3117344713423432421}
   - component: {fileID: 2084272816190170432}
   - component: {fileID: 4253689828594700682}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tile-straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8022090397862926618}
-  m_Layer: 0
+  - component: {fileID: 5463225054140392112}
+  - component: {fileID: 3351707366593233635}
+  m_Layer: 8
   m_Name: RoadTileEndMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,3 +306,51 @@ Transform:
   - {fileID: 8028930599813473682}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &5463225054140392112
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5392887319112880975}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!65 &3351707366593233635
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5392887319112880975}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.2212503, z: 2.0370731}
+  m_Center: {x: 0, y: 0.100000024, z: 0}

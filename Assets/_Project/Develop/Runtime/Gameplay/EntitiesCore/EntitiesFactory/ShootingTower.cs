@@ -37,7 +37,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddInstantAttackDamage(new ReactiveVariable<float>(config.AttackDamage))
                 .AddInstantAttackDamageType(new(config.DamageType))
                 .AddInstantShootRange(new ReactiveVariable<float>(config.AttackRange))
-                .AddInstantShotDirection()
                 .AddAttackCooldownCurrentTime()
                 .AddAttackCooldownInitialTime(new ReactiveVariable<float>(config.AttackCooldown))
                 .AddAttackCooldownModifiedTime(new ReactiveVariable<float>(config.AttackCooldown))
@@ -46,21 +45,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddProjectileSpeed(new(config.ProjectileSpeed))
                 .AddAttacksPerSecond(new ReactiveVariable<float>(modifiedStats[StatTypes.AttacksPerSecond]));
 
-            ICompositeCondition canStartAttack = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.InAttackCooldown.Value == false))
-                .Add(new FuncCondition(() => entity.InAttackProcess.Value == false));
-
-            entity
-                .AddCanStartAttack(canStartAttack);
-
             entity
                 .AddSystem(new RangeZoneRadiusSyncSystem())
                 .AddSystem(new AttackTimeByAttackPerSecondStatSyncSystem())
-                .AddSystem(new ShootDirectionCalculateSystem())
                 .AddSystem(new StartAttackSystem())
                 .AddSystem(new AttackProcessTimerSystem())
                 .AddSystem(new AttackDelayEndTriggerSystem())
-                .AddSystem(new InstantShootSystem(_container.Resolve<ProjectilesFactory>()))
                 .AddSystem(new EndAttackSystem())
                 .AddSystem(new AttackCooldownTimerSystem());
 

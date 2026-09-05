@@ -228,7 +228,7 @@ PrefabInstance:
     - target: {fileID: 6674499055720179359, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
       propertyPath: _shootPoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3937925626431216512}
     - target: {fileID: 6903862146585615583, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
       propertyPath: m_Size.x
       value: 0.8970246

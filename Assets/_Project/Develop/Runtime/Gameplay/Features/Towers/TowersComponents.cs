@@ -28,4 +28,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
     {
         public Func<Entity, Entity> Value;
     }
+
+    public class IsDemo : IEntityComponent
+    {
+    }
 }

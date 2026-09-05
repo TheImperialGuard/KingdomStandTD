@@ -10,7 +10,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
     {
         public Entity CreateTowerDemo(Vector3 position, ShootingTowerConfig config)
         {
-            Entity entity = CreateEmpty();
+            Entity entity = CreateEmpty().AddIsDemo();
 
             _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
 

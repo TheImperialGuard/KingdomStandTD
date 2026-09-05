@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
+using Assets._Project.Develop.Runtime.Gameplay.Features.AOE;
 using Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjection;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature;
@@ -92,6 +93,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
 
                     entity.MoveSpeed.Value = 20f;
                     entity.BodyContactDamage.Value = 99999f;
+
+                    break;
+
+                case ProjectilesTypes.Cannonball:
+                    if (config is CannonballProjectileConfig cannonProjectileConfig == false)
+                        throw new ArgumentException($"Config with projectile type {ProjectilesTypes.Cannonball} is not {nameof(CannonballProjectileConfig)}");
+
+                    entity = _entitiesFactory.CreateBallisticProjectile(position, direction, owner, config.PrefabPath);
+
+                    entity.AddAreaEffectRadius(new(cannonProjectileConfig.DamageAreaRadius));
+                    entity.AddSystem(new DealAreaDamageOnDeathSystem(_container.Resolve<AreaEntitiesDetectorService>()));
 
                     break;
 

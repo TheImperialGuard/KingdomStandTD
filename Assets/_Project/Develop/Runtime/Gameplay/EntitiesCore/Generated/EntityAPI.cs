@@ -100,6 +100,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Towers.SubTowerCreator() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.Towers.IsDemo IsDemoC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Towers.IsDemo>();
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsDemo()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Towers.IsDemo() ); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Team TeamC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Team>();
 
 		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Teams> Team => TeamC.Value;
@@ -426,6 +433,54 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddShootingRangeZone(Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootingRangeZone value)
 		{
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootingRangeZoneComponent() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.BallisticTrajectory BallisticTrajectoryC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.BallisticTrajectory>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic.TrajectoryResult> BallisticTrajectory => BallisticTrajectoryC.Value;
+
+		public bool TryGetBallisticTrajectory(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic.TrajectoryResult> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.BallisticTrajectory component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic.TrajectoryResult>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBallisticTrajectory()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.BallisticTrajectory() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic.TrajectoryResult>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBallisticTrajectory(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic.TrajectoryResult> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.BallisticTrajectory() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.BallisticTrajectoryMaxHeight BallisticTrajectoryMaxHeightC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.BallisticTrajectoryMaxHeight>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> BallisticTrajectoryMaxHeight => BallisticTrajectoryMaxHeightC.Value;
+
+		public bool TryGetBallisticTrajectoryMaxHeight(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.BallisticTrajectoryMaxHeight component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBallisticTrajectoryMaxHeight()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.BallisticTrajectoryMaxHeight() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddBallisticTrajectoryMaxHeight(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.BallisticTrajectoryMaxHeight() {Value = value}); 
 		}
 
 		public Assets._Project.Develop.Runtime.Gameplay.Features.Sensors.BodyCollider BodyColliderC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Sensors.BodyCollider>();

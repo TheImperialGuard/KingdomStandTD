@@ -5,6 +5,7 @@
         Arrow,
         PoisonedArrow,
         Magic,
-        MagicTrail
+        MagicTrail,
+        Cannonball
     }
 }
