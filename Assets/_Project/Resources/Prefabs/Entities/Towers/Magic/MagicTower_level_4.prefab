@@ -391,10 +391,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2093499151868481992, guid: 503c0531fe43b8b49a52ff0e06b56ff8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7744823074613144286}
+    - targetCorrespondingSourceObject: {fileID: 2093499151868481992, guid: 503c0531fe43b8b49a52ff0e06b56ff8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 509420307566014790}
   m_SourcePrefab: {fileID: 100100000, guid: 503c0531fe43b8b49a52ff0e06b56ff8, type: 3}
 --- !u!4 &3486579403700989012 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6581817337344777674, guid: 503c0531fe43b8b49a52ff0e06b56ff8, type: 3}
+  m_PrefabInstance: {fileID: 7725255015500820894}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &7203834816377758388 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 634082964295291690, guid: 503c0531fe43b8b49a52ff0e06b56ff8, type: 3}
   m_PrefabInstance: {fileID: 7725255015500820894}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8518564066607292502 stripped
@@ -429,6 +437,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.AOE.StunAbilityCastingView
   _effectPrefab: {fileID: 7159884806192553960, guid: 3de47c9328e4a06498ba45788555d7b4, type: 3}
   _effectSpawnPoint: {fileID: 5452625987737461176}
+--- !u!114 &509420307566014790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8518564066607292502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c110c2473810b49ad2856cd2ff063f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.OneShotAbilityEffectView
+  _audioSource: {fileID: 7203834816377758388}
+  _audioClip: {fileID: 8300000, guid: 0f6ab549b6ddffc4cbaba17795b6974a, type: 3}
+  _pitchUpperLimit: 1.05
+  _pitchLowerLimit: 0.95
 --- !u!1001 &8697379390278311033
 PrefabInstance:
   m_ObjectHideFlags: 0
