@@ -9,6 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6581817337344777674}
+  - component: {fileID: 5963648906830348561}
+  - component: {fileID: 1542435640672529320}
+  - component: {fileID: 4504322608042137813}
+  - component: {fileID: 5207520992287583593}
   m_Layer: 0
   m_Name: ViewContainer
   m_TagString: Untagged
@@ -31,6 +35,62 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7594907031105049859}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5963648906830348561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093499151868481992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1adea0358e7e84d93f58421248efca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.AI.RotateToTargetView
+  _rotatable: {fileID: 0}
+  _speed: 900
+--- !u!114 &1542435640672529320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093499151868481992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcbd7c4e96302b4abcf25fbb8d1e4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic.CannonBallisticDirectionView
+  _rotatable: {fileID: 0}
+  _speed: 900
+--- !u!114 &4504322608042137813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093499151868481992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce28fe45a5e801f44915a13d0a3294dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Attack.AttackEffectView
+  _effectPrefab: {fileID: 1964314624386401011, guid: 7a1fcc8c4971cbd4e915fbed152588a5, type: 3}
+  _effectSpawnPoint: {fileID: 0}
+--- !u!114 &5207520992287583593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093499151868481992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce28fe45a5e801f44915a13d0a3294dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Attack.AttackEffectView
+  _effectPrefab: {fileID: 3818302674703711868, guid: 1ed2ffa816f46d04da7d63ed41be6aca, type: 3}
+  _effectSpawnPoint: {fileID: 0}
 --- !u!1 &3891846149284200393
 GameObject:
   m_ObjectHideFlags: 0

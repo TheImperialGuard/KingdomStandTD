@@ -253,10 +253,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1542435640672529320, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
+      propertyPath: _rotatable
+      value: 
+      objectReference: {fileID: 8621184487969400299}
     - target: {fileID: 3891846149284200393, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
       propertyPath: m_Name
       value: CannonTower_level_1
       objectReference: {fileID: 0}
+    - target: {fileID: 4504322608042137813, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
+      propertyPath: _effectSpawnPoint
+      value: 
+      objectReference: {fileID: 3937925626431216512}
+    - target: {fileID: 5207520992287583593, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
+      propertyPath: _effectSpawnPoint
+      value: 
+      objectReference: {fileID: 6909760386669684954}
+    - target: {fileID: 5963648906830348561, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
+      propertyPath: _rotatable
+      value: 
+      objectReference: {fileID: 6113502718597256476}
     - target: {fileID: 6674499055720179359, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
       propertyPath: _shootPoint
       value: 
@@ -319,81 +335,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6581817337344777674, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6113502718597256476}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2093499151868481992, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4342871904683194625}
-    - targetCorrespondingSourceObject: {fileID: 2093499151868481992, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4338184466508755234}
-    - targetCorrespondingSourceObject: {fileID: 2093499151868481992, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7498555376910134409}
-    - targetCorrespondingSourceObject: {fileID: 2093499151868481992, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 661755548646581057}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
---- !u!1 &4290754099534479744 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2093499151868481992, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
-  m_PrefabInstance: {fileID: 2775985925350363208}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4342871904683194625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4290754099534479744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d1adea0358e7e84d93f58421248efca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.AI.RotateToTargetView
-  _rotatable: {fileID: 6113502718597256476}
-  _speed: 900
---- !u!114 &4338184466508755234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4290754099534479744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dcbd7c4e96302b4abcf25fbb8d1e4a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic.CannonBallisticDirectionView
-  _rotatable: {fileID: 8621184487969400299}
-  _speed: 900
---- !u!114 &7498555376910134409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4290754099534479744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce28fe45a5e801f44915a13d0a3294dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Attack.AttackEffectView
-  _effectPrefab: {fileID: 1964314624386401011, guid: 7a1fcc8c4971cbd4e915fbed152588a5, type: 3}
-  _effectSpawnPoint: {fileID: 3937925626431216512}
---- !u!114 &661755548646581057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4290754099534479744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce28fe45a5e801f44915a13d0a3294dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Attack.AttackEffectView
-  _effectPrefab: {fileID: 3818302674703711868, guid: 1ed2ffa816f46d04da7d63ed41be6aca, type: 3}
-  _effectSpawnPoint: {fileID: 6909760386669684954}
 --- !u!4 &9066035783375211906 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6581817337344777674, guid: 4097a822f08509047a142a6dc23022f4, type: 3}
