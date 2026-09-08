@@ -82,9 +82,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private void SetMusicFor(LevelResults results)
         {
             if (results == LevelResults.Defeat)
-                _musicSwitcherService.SwitchFor(MusicContexts.GameplayDefeat);
+                _musicSwitcherService.SwitchFor(MusicContexts.GameplayDefeat, false);
             else
-                _musicSwitcherService.SwitchFor(MusicContexts.GameplayWin);
+                _musicSwitcherService.SwitchFor(MusicContexts.GameplayWin, false);
         }
 
         private void ShowEndLevelPopup(LevelResults results)

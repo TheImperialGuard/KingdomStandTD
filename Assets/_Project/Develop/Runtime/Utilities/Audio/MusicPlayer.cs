@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Utilities.Audio
@@ -16,5 +17,10 @@ namespace Assets._Project.Develop.Runtime.Utilities.Audio
         public void Play() => _audioSource.Play();
 
         public void Stop() => _audioSource.Stop();
+
+        internal void SetLoop(bool value)
+        {
+            _audioSource.loop = value;
+        }
     }
 }

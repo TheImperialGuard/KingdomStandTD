@@ -14,10 +14,12 @@ namespace Assets._Project.Develop.Runtime.Utilities.Audio
             _musicConfig = musicConfig;
         }
 
-        public void SwitchFor(MusicContexts context)
+        public void SwitchFor(MusicContexts context, bool IsLoop = true)
         {
             AudioClip clip = _musicConfig.GetClipFor(context);
             Play(clip);
+
+            _musicPlayer.SetLoop(IsLoop);
         }
 
         private void Play(AudioClip clip)
