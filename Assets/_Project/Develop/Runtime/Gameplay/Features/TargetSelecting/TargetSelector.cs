@@ -48,6 +48,26 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
             return closestTarget;
         }
 
+        protected Entity GetClosestToFinishTargetFrom(IEnumerable<Entity> targets)
+        {
+            Entity closestTargetToFinish = targets.First();
+
+            float minDistanceToFinish = closestTargetToFinish.CurrentPathDistance.Value;
+
+            foreach (Entity target in targets)
+            {
+                float distance = target.CurrentPathDistance.Value;
+
+                if (distance < minDistanceToFinish)
+                {
+                    minDistanceToFinish = distance;
+                    closestTargetToFinish = target;
+                }
+            }
+
+            return closestTargetToFinish;
+        }
+
         protected bool TryExcludeTargetsFrom(IEnumerable<Entity> targets, List<ReactiveVariable<Entity>> targetsForExclude, out IEnumerable<Entity> filteredTargets)
         {
             filteredTargets = ExcludeTargetsFrom(targets, targetsForExclude);

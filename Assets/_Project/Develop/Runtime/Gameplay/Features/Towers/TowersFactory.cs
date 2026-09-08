@@ -67,7 +67,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
                 AddAbilitiesFor(entity, config);
             }
 
-            _brainsFactory.CreateTowerBrain(entity, new NearestEnemyInRangeSelector(entity));
+            _brainsFactory.CreateTowerBrain(entity, new ClosestToFinishEnemyInRangeSelector(entity));
 
             IInteractAction selectAction = _interactiveActionsFactory.CreateSelectTowerAction(entity);
 
@@ -121,7 +121,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 
             _brainsFactory.CreateTowerBrain(
                 subEntity,
-                new NearestEnemyInRangeSelector(subEntity, subEntity.TargetsForExclude));
+                new ClosestToFinishEnemyInRangeSelector(subEntity, subEntity.TargetsForExclude));
 
             _entitiesLifeContext.Add(subEntity);
 
