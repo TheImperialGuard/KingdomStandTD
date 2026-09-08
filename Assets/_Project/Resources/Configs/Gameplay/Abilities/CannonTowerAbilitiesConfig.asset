@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9941190ccc0e21041bdceaa0441330f7, type: 3}
+  m_Name: CannonTowerAbilitiesConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.TowersAbilitiesConfig
+  _firstAbility:
+  - {fileID: 11400000, guid: fe8a88b119bc1914d8cbb8887560beee, type: 2}
+  _secondAbility:
+  - {fileID: 11400000, guid: 96ed4a815b3ee714691b7824ebe46db8, type: 2}
+  Tower: 0
