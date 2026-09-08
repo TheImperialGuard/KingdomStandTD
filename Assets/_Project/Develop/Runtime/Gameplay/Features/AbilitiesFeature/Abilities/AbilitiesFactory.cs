@@ -33,6 +33,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
                 case StunAbilityConfig stunAbilityConfig:
                     return new StunAbility(entity, stunAbilityConfig, currentLevel, _container.Resolve<AreaEntitiesDetectorService>(), _container.Resolve<StatusesFactory>());
 
+                case AttackStunAbilityConfig attackStunAbilityConfig:
+                    return new  AttackStunAbility(entity, attackStunAbilityConfig, currentLevel);
+
+                case ProjectileFragmentsAbilityConfig projectileFragmentsAbilityConfig:
+                    return new ProjectileFragmentsAbility(entity, projectileFragmentsAbilityConfig, currentLevel);
+
                 default:
                     throw new ArgumentException();
             }

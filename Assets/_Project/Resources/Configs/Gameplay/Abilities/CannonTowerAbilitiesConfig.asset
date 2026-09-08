@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CannonTowerAbilitiesConfig
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.TowersAbilitiesConfig
   _firstAbility:
-  - {fileID: 11400000, guid: fe8a88b119bc1914d8cbb8887560beee, type: 2}
+  - {fileID: 11400000, guid: 91f5eeca279ab25438b222b4b6f719f0, type: 2}
   _secondAbility:
-  - {fileID: 11400000, guid: 96ed4a815b3ee714691b7824ebe46db8, type: 2}
-  Tower: 0
+  - {fileID: 11400000, guid: 22fab2f9e59289b4e87c4b46190f609e, type: 2}
+  Tower: 2

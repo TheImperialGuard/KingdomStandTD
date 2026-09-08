@@ -3,12 +3,14 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
+using Assets._Project.Develop.Runtime.Gameplay.Features.AOE;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Shoot;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
@@ -147,7 +149,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
         {
             entity
                 .AddBallisticTrajectory(new())
-                .AddBallisticTrajectoryMaxHeight(new(2.5f));
+                .AddBallisticTrajectoryMaxHeight(new(2.5f))
+                .AddMustStunOnAttack(new(false))
+                .AddMustCreateFragmentsOnProjectileDeath(new(false));
 
             ICompositeCondition canStartAttack = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.InAttackCooldown.Value == false))
@@ -159,7 +163,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 
             entity
                 .AddSystem(new BallisticTrajectoryCalculateSystem())
-                .AddSystem(new BallisticShootSystem(_container.Resolve<ProjectilesFactory>()));
+                .AddSystem(new BallisticShootSystem(
+                    _container.Resolve<ProjectilesFactory>(),
+                    _container.Resolve<AreaEntitiesDetectorService>(),
+                    _container.Resolve<StatusesFactory>()));
         }
 
         private void AddAbilitiesFor(Entity entity, ShootingTowerConfig config)
@@ -183,6 +190,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 
                 case TowerTypes.Magic:
 
+                    break;
+
+                case TowerTypes.Cannon:
+
+                    break;
+
+                case TowerTypes.Barracks:
                     break;
             }
         }

@@ -1,18 +1,19 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
+using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.WSA;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
 {
-    public class DealAreaDamageOnDeathSystem : IInitializableSystem, IDisposableSystem
+    public class StunEnemiesInAreaOnDeathSystem : IInitializableSystem, IDisposableSystem
     {
         private readonly AreaEntitiesDetectorService _areaEntitiesDetectorService;
+        private readonly StatusesFactory _statusesFactory;
 
-        private ReactiveVariable<float> _damage;
+        private ReactiveVariable<float> _stunDuration;
         private ReactiveVariable<float> _areaRadius;
 
         private Entity _source;
@@ -22,14 +23,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
 
         private IDisposable _isDeadDisposable;
 
-        public DealAreaDamageOnDeathSystem(AreaEntitiesDetectorService areaEntitiesDetectorService)
+        public StunEnemiesInAreaOnDeathSystem(
+            AreaEntitiesDetectorService areaEntitiesDetectorService, 
+            StatusesFactory statusesFactory)
         {
             _areaEntitiesDetectorService = areaEntitiesDetectorService;
+            _statusesFactory = statusesFactory;
         }
 
         public void OnInit(Entity entity)
         {
-            _damage = entity.InstantAttackDamage;
+            _stunDuration = entity.StunDuration;
             _areaRadius = entity.AreaEffectRadius;
 
             _source = entity;
@@ -48,10 +52,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
         private void OnIsDeadChanged(bool arg1, bool isDead)
         {
             if (isDead == true)
-                DealAreaDamage();
+                StunEnemiesInArea();
         }
 
-        private void DealAreaDamage()
+        private void StunEnemiesInArea()
         {
             List<Entity> entities = _areaEntitiesDetectorService.GetEntitiesInArea(
                 _deathPoint.position,
@@ -59,8 +63,26 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
 
             foreach (Entity entityInArea in entities)
             {
-                EntitiesHelper.TryTakeDamageFrom(_source, entityInArea, _damage.Value);
+                if (entityInArea.TryGetIsStunned(out ReactiveVariable<bool> isStunned) == false)
+                    continue;
+
+                if (isStunned.Value == true)
+                    continue;
+
+                Stun(entityInArea);
             }
+        }
+
+        private void Stun(Entity entity)
+        {
+            Status status = _statusesFactory.CreateFor(
+                entity,
+                StatusesTypes.Stun,
+                _source,
+                _stunDuration.Value,
+                _stunDuration.Value);
+
+            entity.Statuses.AddElement(status);
         }
     }
 }

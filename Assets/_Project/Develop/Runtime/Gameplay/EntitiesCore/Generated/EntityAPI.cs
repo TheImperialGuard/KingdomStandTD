@@ -2677,6 +2677,102 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AOE.AreaEffectRadius() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AOE.MustStunOnAttack MustStunOnAttackC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AOE.MustStunOnAttack>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> MustStunOnAttack => MustStunOnAttackC.Value;
+
+		public bool TryGetMustStunOnAttack(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AOE.MustStunOnAttack component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMustStunOnAttack()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AOE.MustStunOnAttack() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMustStunOnAttack(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AOE.MustStunOnAttack() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AOE.MustCreateFragmentsOnProjectileDeath MustCreateFragmentsOnProjectileDeathC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AOE.MustCreateFragmentsOnProjectileDeath>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> MustCreateFragmentsOnProjectileDeath => MustCreateFragmentsOnProjectileDeathC.Value;
+
+		public bool TryGetMustCreateFragmentsOnProjectileDeath(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AOE.MustCreateFragmentsOnProjectileDeath component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMustCreateFragmentsOnProjectileDeath()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AOE.MustCreateFragmentsOnProjectileDeath() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddMustCreateFragmentsOnProjectileDeath(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AOE.MustCreateFragmentsOnProjectileDeath() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AOE.FragmentsDamage FragmentsDamageC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AOE.FragmentsDamage>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> FragmentsDamage => FragmentsDamageC.Value;
+
+		public bool TryGetFragmentsDamage(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AOE.FragmentsDamage component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFragmentsDamage()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AOE.FragmentsDamage() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFragmentsDamage(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AOE.FragmentsDamage() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AOE.FragmentsCount FragmentsCountC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AOE.FragmentsCount>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> FragmentsCount => FragmentsCountC.Value;
+
+		public bool TryGetFragmentsCount(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AOE.FragmentsCount component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFragmentsCount()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AOE.FragmentsCount() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFragmentsCount(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AOE.FragmentsCount() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.AI.CurrentTarget CurrentTargetC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AI.CurrentTarget>();
 
 		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> CurrentTarget => CurrentTargetC.Value;
