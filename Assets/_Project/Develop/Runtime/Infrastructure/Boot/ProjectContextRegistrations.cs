@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Infrastructure.DI;
+﻿using Assets._Project.Develop.Runtime.Configs;
+using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
@@ -44,6 +45,8 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
 
             container.RegisterAsSingle(CreateLevelsProgressionService).NonLazy();
+
+            container.RegisterAsSingle(CreateMusicSwitcherService);
         }
 
         private static ResourcesAssetsLoader CreateResourcesAssetsLoader(DIContainer c) => new();
@@ -96,6 +99,15 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
         private static LevelsProgressionService CreateLevelsProgressionService(DIContainer c)
         {
             return new LevelsProgressionService(c.Resolve<PlayerDataProvider>());
+        }
+
+        private static MusicSwitcherService CreateMusicSwitcherService(DIContainer c)
+        {
+            ConfigsProviderService configProviderService = c.Resolve<ConfigsProviderService>();
+
+            MusicConfig config = configProviderService.GetConfig<MusicConfig>();
+
+            return new MusicSwitcherService(c.Resolve<MusicPlayer>(), config);
         }
 
         private static CoroutinesPerformer CreateCoroutinesPerformer(DIContainer c)

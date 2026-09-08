@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
+using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup
 
         private readonly StagesCycle _stagesCycle;
         private readonly StageProviderService _stageProviderService;
+        private readonly MusicSwitcherService _musicSwitcherService;
 
         private int _clicks;
 
@@ -26,12 +28,14 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup
             ICoroutinesPerformer coroutinesPerformer,
             StagesCycle stagesCycle,
             RayShooterService rayShooterService,
-            StageProviderService stageProviderService)
+            StageProviderService stageProviderService,
+            MusicSwitcherService musicSwitcherService)
             : base(coroutinesPerformer, rayShooterService)
         {
             _view = view;
             _stagesCycle = stagesCycle;
             _stageProviderService = stageProviderService;
+            _musicSwitcherService = musicSwitcherService;
         }
 
         protected override PopupViewBase PopupView => _view;
@@ -65,6 +69,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup
         {
             if (_clicks++ > 0)
             {
+                _musicSwitcherService.SwitchFor(MusicContexts.GameplayBattle);
                 _stagesCycle.Launch();
                 OnCloseRequest();
             }

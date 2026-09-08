@@ -15,6 +15,7 @@ using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
+using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
@@ -39,7 +40,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _coroutinesPerformer,
                 _container.Resolve<StagesCycle>(),
                 _container.Resolve<RayShooterService>(),
-                _container.Resolve<StageProviderService>());
+                _container.Resolve<StageProviderService>(),
+                _container.Resolve<MusicSwitcherService>());
         }
 
         public SkipStagePopupPresenter CreateSkipStagePopupPresenter(SkipStagePopupView view)

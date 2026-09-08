@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
+using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using System;
@@ -16,6 +17,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private readonly LevelsProgressionService _levelsProgressionService;
         private readonly TowersPlaceholdersService _towersPlaceholdersService;
         private readonly PlayerInteractsService _playerInteractsService;
+        private MusicSwitcherService _musicSwitcherService;
 
         private readonly GameModes _gameModeType;
         private readonly int _levelNumber;
@@ -32,7 +34,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             LevelsProgressionService levelsProgressionService,
             int levelNumber,
             TowersPlaceholdersService towersPlaceholdersService,
-            PlayerInteractsService playerInteractsService)
+            PlayerInteractsService playerInteractsService,
+            MusicSwitcherService musicSwitcherService)
         {
             _gameModesFactory = gameModesFactory;
             _coroutinesPerformer = coroutinesPerformer;
@@ -42,6 +45,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _levelNumber = levelNumber;
             _towersPlaceholdersService = towersPlaceholdersService;
             _playerInteractsService = playerInteractsService;
+            _musicSwitcherService = musicSwitcherService;
         }
 
         public void Prepare()
@@ -67,10 +71,20 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         {
             _playerInteractsService.Disable();
 
+            SetMusicFor(results);
+
             if (results != LevelResults.Defeat)
                 SaveLevelResults(results);
 
             ShowEndLevelPopup(results);
+        }
+
+        private void SetMusicFor(LevelResults results)
+        {
+            if (results == LevelResults.Defeat)
+                _musicSwitcherService.SwitchFor(MusicContexts.GameplayDefeat);
+            else
+                _musicSwitcherService.SwitchFor(MusicContexts.GameplayWin);
         }
 
         private void ShowEndLevelPopup(LevelResults results)

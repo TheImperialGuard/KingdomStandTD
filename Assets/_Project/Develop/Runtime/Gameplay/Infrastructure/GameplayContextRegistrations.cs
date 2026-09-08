@@ -24,6 +24,7 @@ using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Gameplay;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
+using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
@@ -159,7 +160,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<LevelsProgressionService>(),
                 _inputArgs.LevelNumber,
                 c.Resolve<TowersPlaceholdersService>(),
-                c.Resolve<PlayerInteractsService>());
+                c.Resolve<PlayerInteractsService>(),
+                c.Resolve<MusicSwitcherService>());
         }
 
         private static RayShooterService CreateRayShooterService(DIContainer c)

@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537b32bdaea21d740b702af486c35979, type: 3}
   m_Name: MusicConfig
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.MusicConfig
+  _mainMenuClip: {fileID: 8300000, guid: 139af99a607ad334ebbfa96dfb5a56b0, type: 3}
+  _gameplayPrepareClip: {fileID: 8300000, guid: 6554681ce8ac76b47a4991558e88a662, type: 3}
+  _gameplayBattleClip: {fileID: 8300000, guid: bd66b834c4368cc499607579a5c8359a, type: 3}
+  _gameplayBossfightClip: {fileID: 8300000, guid: a5a64469868aa0a44bdca59d1604d999, type: 3}
+  _gameplayWinClip: {fileID: 8300000, guid: 41fe2da095f9e5446b3a5805c82d7db8, type: 3}
+  _gameplayDefeatClip: {fileID: 8300000, guid: 0aaf97d170ecdbc46adbdad2b8c1d2ef, type: 3}

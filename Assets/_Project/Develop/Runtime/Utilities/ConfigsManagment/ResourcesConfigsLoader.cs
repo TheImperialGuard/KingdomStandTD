@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay;
+﻿using Assets._Project.Develop.Runtime.Configs;
+using Assets._Project.Develop.Runtime.Configs.Gameplay;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Projectiles;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
@@ -22,6 +23,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(GameConfig), "Configs/Gameplay/GameConfig" },
             {typeof(ProjectilesListConfig), "Configs/Gameplay/Entities/Projectiles/ProjectilesListConfig" },
             {typeof(TowersAbilitiesListConfig), "Configs/Gameplay/Entities/Towers/TowersAbilitiesListConfig" },
+            {typeof(MusicConfig), "Configs/MusicConfig" },
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

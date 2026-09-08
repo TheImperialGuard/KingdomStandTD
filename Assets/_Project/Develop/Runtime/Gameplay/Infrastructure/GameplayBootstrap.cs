@@ -5,6 +5,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Infrastructure;
+using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 using System;
@@ -22,6 +23,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private AIBrainsContext _brainsContext;
         private GameplayCycle _gameplayCycle;
         private RayShooterService _rayShooterService;
+        private MusicSwitcherService _musicSwitcherService;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -45,6 +47,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _brainsContext = _container.Resolve<AIBrainsContext>();
             _rayShooterService = _container.Resolve<RayShooterService>();
             _gameplayCycle = _container.Resolve<GameplayCycle>();
+            _musicSwitcherService = _container.Resolve<MusicSwitcherService>();
 
             _gameplayCycle.Prepare();
 
@@ -54,6 +57,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         public override void Run()
         {
             Debug.Log("Старт геймплейной сцены");
+
+            _musicSwitcherService.SwitchFor(MusicContexts.GameplayPrepare);
 
             _gameplayCycle.Launch();
         }
