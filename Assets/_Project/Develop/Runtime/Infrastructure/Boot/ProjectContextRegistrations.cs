@@ -1,8 +1,8 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities;
-using Assets._Project.Develop.Runtime.Infrastructure.DI;
+﻿using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
+using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment;
@@ -38,6 +38,8 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle<ISaveLoadService>(CreateSaveLoadService);
 
             container.RegisterAsSingle<ICoroutinesPerformer>(CreateCoroutinesPerformer);
+
+            container.RegisterAsSingle(CreateMusicPlayer).NonLazy();
 
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
 
@@ -114,6 +116,16 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
                 .Load<StandardLoadingScreen>("Utilities/StandardLoadingScreen");
 
             return GameObject.Instantiate(standardLoadingScreen);
+        }
+
+        private static MusicPlayer CreateMusicPlayer(DIContainer c)
+        {
+            ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
+
+            MusicPlayer musicPlayerPrefab = resourcesAssetsLoader
+                .Load<MusicPlayer>("Utilities/Audio/MusicPlayer");
+
+            return GameObject.Instantiate(musicPlayerPrefab);
         }
     }
 }
