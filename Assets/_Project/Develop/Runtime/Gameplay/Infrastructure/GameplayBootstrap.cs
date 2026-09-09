@@ -1,5 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
+using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Infrastructure;
@@ -24,6 +25,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private GameplayCycle _gameplayCycle;
         private RayShooterService _rayShooterService;
         private MusicSwitcherService _musicSwitcherService;
+        private CameraMover _cameraMover;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -48,6 +50,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _rayShooterService = _container.Resolve<RayShooterService>();
             _gameplayCycle = _container.Resolve<GameplayCycle>();
             _musicSwitcherService = _container.Resolve<MusicSwitcherService>();
+            _cameraMover = _container.Resolve<CameraMover>();
 
             _gameplayCycle.Prepare();
 
@@ -69,6 +72,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _entitiesLifeContext?.Update(Time.deltaTime);
             _brainsContext?.Update(Time.deltaTime);
             _rayShooterService?.Update(Time.deltaTime);
+            _cameraMover?.Update(Time.deltaTime);
 
             if (Input.GetKeyDown(KeyCode.M))
             {

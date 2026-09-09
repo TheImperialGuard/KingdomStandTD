@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
@@ -111,6 +112,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateGameplayUIRoot).NonLazy();
 
             container.RegisterAsSingle(CreateGameplayScreenPresenter).NonLazy();
+
+            container.RegisterAsSingle(CreateCameraMover);
         }
 
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c) => new();
@@ -274,6 +277,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             int maxValue = _levelConfig.StartPlayerHealth;
 
             return new PlayerHealth(maxValue, maxValue);
+        }
+
+        private static CameraMover CreateCameraMover(DIContainer c)
+        {
+            Camera camera = Camera.main;
+            BoundedOrthoCamera boundedOrthoCamera = camera.GetComponent<BoundedOrthoCamera>();
+
+            ConfigsProviderService configsProviderService = c.Resolve<ConfigsProviderService>();
+            CameraConfig cameraConfig = configsProviderService.GetConfig<CameraConfig>();
+
+            return new CameraMover(boundedOrthoCamera, cameraConfig, c.Resolve<IInputService>());
         }
 
         private static Level CreateLevel(DIContainer c)

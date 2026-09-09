@@ -381,7 +381,6 @@ GameObject:
   - component: {fileID: 1532640565}
   - component: {fileID: 1532640564}
   - component: {fileID: 1532640567}
-  - component: {fileID: 1532640568}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -457,7 +456,7 @@ Transform:
   m_GameObject: {fileID: 1532640563}
   serializedVersion: 2
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: 15, z: -13.54}
+  m_LocalPosition: {x: 1.71, y: 15, z: -13.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -507,24 +506,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &1532640568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1532640563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e9d5afd0f1ab11408aa67340ce902dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BoundedOrthoCamera
-  worldMin: {x: -11, y: -11}
-  worldMax: {x: 11, y: 11.15}
-  groundY: 0
-  minResolutionWidth: 1920
-  minResolutionHeight: 1080
-  drawGizmos: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

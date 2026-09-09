@@ -9,5 +9,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
         bool RayShotRequested { get; }
 
         Ray CameraRay { get; }
+
+        Vector3 CameraDelta { get; }
     }
 }

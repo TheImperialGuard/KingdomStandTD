@@ -6586,6 +6586,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4986550167813630104, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _towersPositions.Array.size
       value: 9
@@ -6782,9 +6786,20 @@ PrefabInstance:
       propertyPath: _enemiesWavesStageConfigs.Array.data[2]._enemiesWaveConfigs.Array.data[0].<DelayBetweenSpawns>k__BackingField
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6069095111444205672, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.9875
+      objectReference: {fileID: 0}
+    - target: {fileID: 6069095111444205672, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2441183050223072060, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7460657327208419015}
     - targetCorrespondingSourceObject: {fileID: 7306896459573293697, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6104929661984133199}
@@ -7238,9 +7253,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9217051213537815537, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1017290316941072321}
-    - targetCorrespondingSourceObject: {fileID: 2441183050223072060, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7460657327208419015}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
 --- !u!4 &2692246364450128538 stripped
