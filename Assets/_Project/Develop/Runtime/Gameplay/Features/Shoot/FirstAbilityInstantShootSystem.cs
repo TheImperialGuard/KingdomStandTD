@@ -46,6 +46,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 
         private void OnAbilityDelayEnd()
         {
+            if (_directionArgs.Value == null)
+                return;
+
             Vector3 shootDirection = _directionArgs.Value.Direction;
 
             if (_currentTarget.Value.Transform != null)
