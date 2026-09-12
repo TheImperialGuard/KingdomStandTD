@@ -1,7 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
-using Assets._Project.Develop.Runtime.UI.Meta.MainMenu;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
@@ -45,9 +44,6 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
             Debug.Log("Старт сцены главного меню");
 
             _musicSwitcherService.SwitchFor(MusicContexts.MainMenu);
-
-            if (_inputArgs.MustPlayActiveLevelAnimation == true)
-                _container.Resolve<MainMenuScreenPresenter>().ShowLastLevelAnimation();
         }
 
         private void Update()

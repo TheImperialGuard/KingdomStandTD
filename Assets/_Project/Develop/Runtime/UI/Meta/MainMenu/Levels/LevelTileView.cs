@@ -19,8 +19,11 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
         [SerializeField] private List<Image> _starFillers;
 
-        [SerializeField] private Color _activeColor;
+        [SerializeField] private Sprite _activeSprite;
+        [SerializeField] private Sprite _completedSprite;
+
         [SerializeField] private Color _completedColor;
+        [SerializeField] private Color _activeColor;
 
         public Tween Show()
         {
@@ -42,9 +45,17 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
         public void SetLevel(string level) => _levelNumberText.text = level;
 
-        public void SetComplete() => _background.color = _completedColor;
+        public void SetComplete()
+        {
+            _background.sprite = _completedSprite;
+            _background.color = _completedColor;
+        }
 
-        public void SetActive() => _background.color = _activeColor;
+        public void SetActive()
+        {
+            _background.sprite = _activeSprite;
+            _background.color = _activeColor;
+        }
 
         public void SetResults(LevelResults results)
         {

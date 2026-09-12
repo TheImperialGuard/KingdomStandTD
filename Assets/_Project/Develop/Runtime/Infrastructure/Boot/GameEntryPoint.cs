@@ -58,7 +58,7 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.Boot
 
             loadingScreen.Hide();
 
-            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(2));
+            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu, new MainMenuInputArgs());
         }
 
         private void SetupAppSettings()

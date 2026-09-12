@@ -10,5 +10,6 @@
         public const string UpgradeTowerPopup = nameof(UpgradeTowerPopup);
         public const string TowerAbilitiesPopup = nameof(TowerAbilitiesPopup);
         public const string GameplayScreen = nameof(GameplayScreen);
+        public const string LevelsMenuPopup = nameof(LevelsMenuPopup);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Infrastructure.DI;
+﻿using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
+using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu;
@@ -30,12 +31,19 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
 
         public MainMenuScreenPresenter CreateMainMenuScreen(MainMenuScreenView view)
         {
-            return new MainMenuScreenPresenter(
-                view,
+            return new MainMenuScreenPresenter(view, _container.Resolve<MainMenuPopupService>());
+        }
+
+        public LevelsMenuPopupPresenter CreateLevelsMenuPopupPresenter(LevelsMenuPopupView view)
+        {
+            return new LevelsMenuPopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                _container.Resolve<RayShooterService>(),
                 this,
                 _container.Resolve<ViewsFactory>(),
                 _container.Resolve<LevelsProgressionService>(),
-                _container.Resolve<ConfigsProviderService>());
+                _container.Resolve<ConfigsProviderService>(),
+                view);
         }
     }
 }

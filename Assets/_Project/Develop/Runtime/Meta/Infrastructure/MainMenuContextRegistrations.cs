@@ -17,6 +17,8 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
 
             container.RegisterAsSingle(CreateMainMenuPresentersFactory);
 
+            container.RegisterAsSingle(CreateMainMenuPopupService);
+
             container.RegisterAsSingle(CreateMainMenuUIRoot).NonLazy();
 
             container.RegisterAsSingle(CreateMainMenuScreenPresenter).NonLazy();
@@ -25,6 +27,14 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
         private static MainMenuPresentersFactory CreateMainMenuPresentersFactory(DIContainer c)
         {
             return new MainMenuPresentersFactory(c);
+        }
+
+        private static MainMenuPopupService CreateMainMenuPopupService(DIContainer c)
+        {
+            return new MainMenuPopupService(
+                c.Resolve<ViewsFactory>(),
+                c.Resolve<MainMenuUIRoot>(),
+                c.Resolve<MainMenuPresentersFactory>());
         }
 
         private static MainMenuUIRoot CreateMainMenuUIRoot(DIContainer c)
