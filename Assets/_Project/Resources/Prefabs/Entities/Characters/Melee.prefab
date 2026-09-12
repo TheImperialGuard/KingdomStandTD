@@ -110,6 +110,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6124554419225658301, guid: de9a22f950a83ca43be03ed29b15b26a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124554419225658301, guid: de9a22f950a83ca43be03ed29b15b26a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324594810904732169, guid: de9a22f950a83ca43be03ed29b15b26a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.511
+      objectReference: {fileID: 0}
     - target: {fileID: 8144761594807049000, guid: de9a22f950a83ca43be03ed29b15b26a, type: 3}
       propertyPath: m_Name
       value: Melee
@@ -252,7 +264,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0

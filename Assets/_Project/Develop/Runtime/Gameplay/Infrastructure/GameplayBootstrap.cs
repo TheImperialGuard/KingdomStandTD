@@ -68,18 +68,18 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private void Update()
         {
+            _cameraMover?.Update(Time.deltaTime);
             _gameplayCycle?.Update(Time.deltaTime);
+            _rayShooterService?.Update(Time.deltaTime);
             _entitiesLifeContext?.Update(Time.deltaTime);
             _brainsContext?.Update(Time.deltaTime);
-            _rayShooterService?.Update(Time.deltaTime);
-            _cameraMover?.Update(Time.deltaTime);
 
             if (Input.GetKeyDown(KeyCode.M))
             {
                 SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
                 ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
 
-                coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu, new MainMenuInputArgs(true)));
+                coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu, new MainMenuInputArgs()));
             }
         }
     }

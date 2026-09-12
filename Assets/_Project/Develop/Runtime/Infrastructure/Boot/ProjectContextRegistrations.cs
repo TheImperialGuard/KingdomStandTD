@@ -1,4 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Configs;
+using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
@@ -47,6 +49,10 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateLevelsProgressionService).NonLazy();
 
             container.RegisterAsSingle(CreateMusicSwitcherService);
+
+            container.RegisterAsSingle(CreateRayShooterService);
+
+            container.RegisterAsSingle<IInputService>(CreateDesktopInput);
         }
 
         private static ResourcesAssetsLoader CreateResourcesAssetsLoader(DIContainer c) => new();
@@ -72,6 +78,11 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
                 c);
         }
 
+        private static RayShooterService CreateRayShooterService(DIContainer c)
+        {
+            return new RayShooterService(c.Resolve<IInputService>());
+        }
+
         private static ViewsFactory CreateViewsFactory(DIContainer c)
         {
             return new ViewsFactory(c.Resolve<ResourcesAssetsLoader>());
@@ -94,6 +105,11 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             ISaveLoadService saveLoadService = c.Resolve<ISaveLoadService>();
 
             return new PlayerDataProvider(saveLoadService);
+        }
+
+        private static DesktopInput CreateDesktopInput(DIContainer c)
+        {
+            return new DesktopInput();
         }
 
         private static LevelsProgressionService CreateLevelsProgressionService(DIContainer c)

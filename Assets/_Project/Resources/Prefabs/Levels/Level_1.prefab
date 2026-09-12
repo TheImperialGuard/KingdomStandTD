@@ -6542,6 +6542,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3841413558229190651, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4200356943254671965, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: m_Name
       value: Level_1
@@ -6589,6 +6593,10 @@ PrefabInstance:
     - target: {fileID: 4986550167813630104, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586361489619154003, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.015
       objectReference: {fileID: 0}
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _towersPositions.Array.size

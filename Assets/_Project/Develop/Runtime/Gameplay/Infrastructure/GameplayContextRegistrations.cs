@@ -97,15 +97,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateTowersPlaceholdersService);
 
-            container.RegisterAsSingle(CreateRayShooterService);
-
             container.RegisterAsSingle(CreateAreaEntitiesDetectorService);
 
             container.RegisterAsSingle(CreatePlayerInteractsService);
 
             container.RegisterAsSingle(CreateGameplayPopupService);
-
-            container.RegisterAsSingle<IInputService>(CreateDesktopInput);
 
             container.RegisterAsSingle(CreateDealDamageToPlayerService).NonLazy();
 
@@ -167,19 +163,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<MusicSwitcherService>());
         }
 
-        private static RayShooterService CreateRayShooterService(DIContainer c)
-        {
-            return new RayShooterService(c.Resolve<IInputService>());
-        }
-
         private static AreaEntitiesDetectorService CreateAreaEntitiesDetectorService(DIContainer c)
         {
             return new AreaEntitiesDetectorService(c.Resolve<CollidersRegistryService>());
-        }
-
-        private static DesktopInput CreateDesktopInput(DIContainer c)
-        {
-            return new DesktopInput();
         }
 
         private static PlayerInteractsService CreatePlayerInteractsService(DIContainer c)
