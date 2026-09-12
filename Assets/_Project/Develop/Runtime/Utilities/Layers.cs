@@ -13,5 +13,8 @@ namespace Assets._Project.Develop.Runtime.Utilities
 
         public static readonly int Enviroment = LayerMask.NameToLayer("Enviroment");
         public static readonly LayerMask EnviromentMask = 1 << Enviroment;
+
+        public static readonly int DeathZone = LayerMask.NameToLayer("DeathZone");
+        public static readonly LayerMask DeathZoneMask = 1 << DeathZone;
     }
 }

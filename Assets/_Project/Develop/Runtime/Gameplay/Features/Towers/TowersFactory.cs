@@ -53,9 +53,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 
             entity = _entitiesFactory.CreateShootingTower(position, config, baseStats);
 
+            ITargetSelector targetSelector = new ClosestToFinishEnemyInRangeSelector(entity);
+
             if (config.TowerType == TowerTypes.Cannon)
             {
                 AddBallisticShooter(entity);
+
+                targetSelector = new NearestEnemyInRangeSelector(entity);
             }
             else
             {
@@ -67,7 +71,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
                 AddAbilitiesFor(entity, config);
             }
 
-            _brainsFactory.CreateTowerBrain(entity, new ClosestToFinishEnemyInRangeSelector(entity));
+            _brainsFactory.CreateTowerBrain(entity, targetSelector);
 
             IInteractAction selectAction = _interactiveActionsFactory.CreateSelectTowerAction(entity);
 

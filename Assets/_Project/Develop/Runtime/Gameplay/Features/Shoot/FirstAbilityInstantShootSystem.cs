@@ -12,6 +12,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
         private readonly ProjectilesFactory _projectilesFactory;
 
         private ReactiveVariable<InstantShotDirectionArgs> _directionArgs;
+        private ReactiveVariable<Entity> _currentTarget;
 
         private ReactiveEvent _firstAbilityDelayEndEvent;
 
@@ -30,6 +31,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
             _firstAbilityDelayEndEvent = entity.FirstAbilityDelayEndEvent;
 
             _directionArgs = entity.InstantShotDirection;
+            _currentTarget = entity.CurrentTarget;
 
             _shooterEntity = entity;
             _shootPoint = entity.ShootPoint;
@@ -44,7 +46,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 
         private void OnAbilityDelayEnd()
         {
-            Shoot(_directionArgs.Value.Direction, _directionArgs.Value.ProjectileCounts);
+            Vector3 shootDirection = _directionArgs.Value.Direction;
+
+            if (_currentTarget.Value.Transform != null)
+                shootDirection = (_currentTarget.Value.Transform.position - _shootPoint.position).normalized;
+
+            Shoot(shootDirection, _directionArgs.Value.ProjectileCounts);
         }
 
         private void Shoot(Vector3 direction, int projectileCounts)

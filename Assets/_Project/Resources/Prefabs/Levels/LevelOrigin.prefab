@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 5586361489619154003}
   - component: {fileID: 3841413558229190651}
   - component: {fileID: 2393551051085630041}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: LowerDeathMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}

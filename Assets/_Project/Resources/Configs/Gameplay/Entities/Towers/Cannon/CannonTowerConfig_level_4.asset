@@ -17,7 +17,7 @@ MonoBehaviour:
   <PrefabPath>k__BackingField: Prefabs/Entities/Towers/Cannon/CannonTower_level_4
   <TowerName>k__BackingField: "\u0426\u0430\u0440\u044C-\u043F\u0443\u0448\u043A\u0430"
   <Cost>k__BackingField: 400
-  <AttackRange>k__BackingField: 2.8
+  <AttackRange>k__BackingField: 3.8
   <AttackPerSecond>k__BackingField: 0.2857143
   <AttackProcessTime>k__BackingField: 0.2
   <AttackDelayTime>k__BackingField: 0.1
