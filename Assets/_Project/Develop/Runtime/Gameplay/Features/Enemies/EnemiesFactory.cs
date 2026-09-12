@@ -59,6 +59,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
                         .Add(new FuncCondition(() => entity.IsPathFinished.Value == true))
                         .Add(mustSelfReleaseByDeath);
 
+                    entity.CanApplyDamage.Add(new FuncCondition(() => entity.IsPathFinished.Value == false));
+
                     entity
                         .AddMustSelfRelease(mustSelfRelease);
 

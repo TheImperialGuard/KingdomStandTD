@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
+using System.Net;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic
@@ -16,6 +17,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic
 
         private Transform _shootPoint;
 
+        private Vector3 _previousTargetPos;
+
         public void OnInit(Entity entity)
         {
             _trajectoryResult = entity.BallisticTrajectory;
@@ -25,6 +28,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic
             _trajectoryMaxHeight = entity.BallisticTrajectoryMaxHeight;
 
             _shootPoint = entity.ShootPoint;
+
+            _previousTargetPos = Vector3.zero;
         }
 
         public void OnUpdate(float deltaTime)
@@ -45,6 +50,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic
         {
             if (_currentTarget.Value.TryGetAimingPoint(out Transform aimingPoint) == false)
                 throw new Exception($"Not found aiming point for target: {_currentTarget.Value.Transform.gameObject.name}");
+
+            if (aimingPoint == null)
+                return _previousTargetPos;
 
             Vector3 currentTargetPosition = aimingPoint.position;
             Vector3 currentTargetSpeed = _currentTarget.Value.Rigidbody.linearVelocity;
@@ -98,6 +106,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.Ballistic
                 // Цель будет в этой позиции через flightTime секунд
                 predictedTargetPosition = currentTargetPosition + currentTargetSpeed * flightTime;
             }
+
+            _previousTargetPos = predictedTargetPosition;
 
             return predictedTargetPosition;
         }

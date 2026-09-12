@@ -15,12 +15,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 
         private Transform _shootPoint;
 
+        private Vector3 _previousTargetPos;
+
         public void OnInit(Entity entity)
         {
             _directionArgs = entity.InstantShotDirection;
             _currentTarget = entity.CurrentTarget;
             _projectileSpeed = entity.ProjectileSpeed;
             _shootPoint = entity.ShootPoint;
+
+            _previousTargetPos = Vector3.zero;
         }
 
         public void OnUpdate(float deltaTime)
@@ -44,6 +48,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
             if (_currentTarget.Value.TryGetAimingPoint(out Transform aimingPoint) == false)
                 throw new Exception($"Not found aiming point for target: {_currentTarget.Value.Transform.gameObject.name}");
 
+            if (aimingPoint == null)
+                return _previousTargetPos;
+
             Vector3 currentTargetPosition = aimingPoint.position;
             Vector3 currentTargetSpeed = _currentTarget.Value.Rigidbody.linearVelocity;
             Vector3 shootPointPosition = _shootPoint.position;
@@ -56,6 +63,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
             float timeToTarget = Vector3.Distance(shootPointPosition, currentTargetPosition) / projectileSpeed;
 
             Vector3 leadPoint = currentTargetPosition + currentTargetSpeed * timeToTarget;
+
+            _previousTargetPos = leadPoint;
 
             return leadPoint;
         }

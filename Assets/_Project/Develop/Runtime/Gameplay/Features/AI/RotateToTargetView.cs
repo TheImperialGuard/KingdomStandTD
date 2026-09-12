@@ -30,7 +30,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI
             if (_isInit == false)
                 return;
 
-            if (_currentTarget.Value != null)
+            if (_currentTarget.Value != null && _currentTarget.Value.Transform != null)
             {
                 Vector3 directionToTarget = _currentTarget.Value.Transform.position - _rotatable.position;
                 directionToTarget.y = 0;
