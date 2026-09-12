@@ -4,13 +4,16 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.UI.CommonViews;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.GoldWallet;
+using Assets._Project.Develop.Runtime.UI.Gameplay.PlayerHealthDisplay;
 using Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup;
+using Assets._Project.Develop.Runtime.UI.Gameplay.StagesStatus;
 using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup;
@@ -115,6 +118,16 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
         public GoldWalletPresenter CreateGoldWalletPresenter(IconTextView view)
         {
             return new GoldWalletPresenter(view, _container.Resolve<WalletService>());
+        }
+
+        public PlayerHealthPresenter CreatePlayerHealthPresenter(IconTextView view)
+        {
+            return new PlayerHealthPresenter(view, _container.Resolve<PlayerHealth>());
+        }
+
+        public StagesStatusPresenter CreateStagesStatusPresenter(IconTextView view)
+        {
+            return new StagesStatusPresenter(view, _container.Resolve<StageProviderService>());
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.UI.Core.Presenters;
 using Assets._Project.Develop.Runtime.UI.Gameplay.GoldWallet;
+using Assets._Project.Develop.Runtime.UI.Gameplay.PlayerHealthDisplay;
+using Assets._Project.Develop.Runtime.UI.Gameplay.StagesStatus;
 using System.Collections.Generic;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay
@@ -25,6 +27,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
         public void Initialize()
         {
             CreateGoldWallet();
+            CreateStagesStatus();
+            CreatePlayerHealth();
 
             foreach (IPresenter presenter in _childPresenters)
                 presenter.Initialize();
@@ -43,6 +47,20 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
             GoldWalletPresenter goldWalletPresenter = _gameplayPresentersFactory.CreateGoldWalletPresenter(_screenView.GoldWalletView);
 
             _childPresenters.Add(goldWalletPresenter);
+        }
+
+        private void CreateStagesStatus()
+        {
+            StagesStatusPresenter stagesStatusPresenter = _gameplayPresentersFactory.CreateStagesStatusPresenter(_screenView.StagesStatusView);
+
+            _childPresenters.Add(stagesStatusPresenter);
+        }
+
+        private void CreatePlayerHealth()
+        {
+            PlayerHealthPresenter playerHealthPresenter = _gameplayPresentersFactory.CreatePlayerHealthPresenter(_screenView.PlayerHealthView);
+
+            _childPresenters.Add(playerHealthPresenter);
         }
     }
 }
