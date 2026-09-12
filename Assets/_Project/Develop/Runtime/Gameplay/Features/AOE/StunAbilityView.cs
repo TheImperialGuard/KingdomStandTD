@@ -29,7 +29,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
         {
             base.Cleanup(entity);
 
-            _abilityDelayEndDisposable.Dispose();
+            _abilityDelayEndDisposable?.Dispose();
             _entity.Abilities.Added -= OnAbilityAdded;
         }
 
