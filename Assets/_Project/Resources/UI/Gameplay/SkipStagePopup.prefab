@@ -92,72 +92,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8458699400958245632, guid: 5175b5738c8fc2f4e90faaeb0f003446, type: 3}
-      propertyPath: m_text
-      value: "\u0421\u043A\u0438\u043F"
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7684916800414372465, guid: 5175b5738c8fc2f4e90faaeb0f003446, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2612434547882967606, guid: 5175b5738c8fc2f4e90faaeb0f003446, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3577091994668631659}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5175b5738c8fc2f4e90faaeb0f003446, type: 3}
---- !u!225 &1735340386082014064 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 7957218207891086404, guid: 5175b5738c8fc2f4e90faaeb0f003446, type: 3}
-  m_PrefabInstance: {fileID: 8536745914664001332}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4580308240454645462 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5325536511515912674, guid: 5175b5738c8fc2f4e90faaeb0f003446, type: 3}
-  m_PrefabInstance: {fileID: 8536745914664001332}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!1 &5924949644304276738 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2612434547882967606, guid: 5175b5738c8fc2f4e90faaeb0f003446, type: 3}
-  m_PrefabInstance: {fileID: 8536745914664001332}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3577091994668631659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5924949644304276738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e374cc993a299545a51e25c2d665d61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup.SkipStagePopupView
-  _mainGroup: {fileID: 1735340386082014064}
-  _body: {fileID: 1735340386082014064}
-  _anticlicker: {fileID: 0}
-  _animationType: 0
-  _startButton: {fileID: 4580308240454645462}
-  _infoContainer: {fileID: 8027213355936306374}
-  _wavesEnemiesText: {fileID: 8370623411544056886}
---- !u!224 &8027213355936306374 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1810158060871240690, guid: 5175b5738c8fc2f4e90faaeb0f003446, type: 3}
-  m_PrefabInstance: {fileID: 8536745914664001332}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8370623411544056886 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 167460614698334978, guid: 5175b5738c8fc2f4e90faaeb0f003446, type: 3}
-  m_PrefabInstance: {fileID: 8536745914664001332}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
