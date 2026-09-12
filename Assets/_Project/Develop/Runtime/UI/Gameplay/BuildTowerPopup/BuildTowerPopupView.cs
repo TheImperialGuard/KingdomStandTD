@@ -30,6 +30,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             towerButton.SwitchInteractableOn(value);
         }
 
+        public void SetPriceFor(TowerTypes type, string value)
+        {
+            BuildTowerButton towerButton = _towersButtons.Where((button) => button.TowerType == type).First();
+
+            towerButton.SetPrice(value);
+        }
+
         private void Awake()
         {
             _camera = Camera.main;

@@ -199,9 +199,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
                 case TowerTypes.Cannon:
 
                     break;
-
-                case TowerTypes.Barracks:
-                    break;
             }
         }
     }

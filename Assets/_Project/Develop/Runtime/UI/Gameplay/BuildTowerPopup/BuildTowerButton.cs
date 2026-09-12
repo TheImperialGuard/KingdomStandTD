@@ -1,6 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
         [SerializeField] private TowerTypes _towerType;
 
         [SerializeField] private Button _button;
+        [SerializeField] private TMP_Text _price;
 
         public TowerTypes TowerType => _towerType;
 
@@ -27,6 +29,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
         }
 
         public void SwitchInteractableOn(bool value) => _button.interactable = value;
+
+        public void SetPrice(string value) => _price.text = value;
 
         public void OnDispose()
         {

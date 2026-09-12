@@ -1,5 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using System;
@@ -58,6 +59,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             ShootingTowerConfig towerConfig = _towersListConfig.GetBy(type, level);
 
             return _wallet.Enough(CurrencyTypes.Gold, towerConfig.Cost);
+        }
+
+        public int GetPriceFor(TowerTypes type, int level)
+        {
+            ShootingTowerConfig towerConfig = _towersListConfig.GetBy(type, level);
+
+            return towerConfig.Cost;
         }
 
         private int CalculateGoldForSell(int cost, float sellTowerGoldReturnIndex)

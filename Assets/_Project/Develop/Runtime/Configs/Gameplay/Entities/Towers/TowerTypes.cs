@@ -4,7 +4,6 @@
     {
         Arrows,
         Magic,
-        Cannon,
-        Barracks
+        Cannon
     }
 }

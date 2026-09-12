@@ -66,6 +66,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             _goldCurrencyDisposable = _walletService.GetCurrency(CurrencyTypes.Gold)
                 .Subscribe(OnGoldChanged);
 
+            SetPrices();
             OnGoldChanged(0, 0);
         }
 
@@ -136,6 +137,14 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
                     _view.SwitchInteractableFor(type, true);
                 else
                     _view.SwitchInteractableFor(type, false);
+            }
+        }
+
+        private void SetPrices()
+        {
+            foreach (TowerTypes type in Enum.GetValues(typeof(TowerTypes)))
+            {
+                _view.SetPriceFor(type, _towersPurchaseService.GetPriceFor(type, TowersFirstLevel).ToString());
             }
         }
     }
