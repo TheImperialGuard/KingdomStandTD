@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6229450594109588068}
   - component: {fileID: 9219323842771847182}
+  - component: {fileID: 8093945928627435455}
   m_Layer: 0
   m_Name: ViewContainer
   m_TagString: Untagged
@@ -46,6 +47,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles.ProjectileTrailView
   _trailPrefab: {fileID: 5771433491063656381, guid: d053bd3ebe529a041b188915b71679b2, type: 3}
   _projectile: {fileID: 6229450594109588068}
+--- !u!114 &8093945928627435455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7169966893108194617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3f388c1e616ab48b17780b35b7a27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.DeathEffectView
+  _effectPrefab: {fileID: 2987656906170772972, guid: 3b4e851b123a4a54aaa7d17981503fed, type: 3}
+  _effectSpawnPoint: {fileID: 7291159091627897364}
 --- !u!1 &7798298027441660720
 GameObject:
   m_ObjectHideFlags: 0
