@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 6062578369849076117}
   - component: {fileID: 5479572635871729869}
   - component: {fileID: 7736556817025644998}
+  - component: {fileID: 4404465710396825051}
   m_Layer: 5
   m_Name: MainMenuScreenView
   m_TagString: Untagged
@@ -180,6 +181,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.UI.Meta.MainMenu.MainMenuScreenView
   _openLevelsMenuButton: {fileID: 8168155293079672952}
+--- !u!114 &4404465710396825051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4154466212925895798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa3207aa67bad54fbc35ba65907a089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.UI.SafeAreaContainer
 --- !u!1 &9202485483076190327
 GameObject:
   m_ObjectHideFlags: 0
