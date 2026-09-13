@@ -54,6 +54,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             Debug.Log($"Башня продана. Текущее золото: {_wallet.GetCurrency(CurrencyTypes.Gold).Value}");
         }
 
+        public int GetGoldAmountForSell(TowerTypes type, int level)
+        {
+            ShootingTowerConfig towerConfig = _towersListConfig.GetBy(type, level);
+
+            GameConfig gameConfig = _configsProviderService.GetConfig<GameConfig>();
+
+            int goldForSell = CalculateGoldForSell(towerConfig.Cost, gameConfig.SellTowerGoldReturnIndex);
+
+            return goldForSell;
+        }
+
         public bool EnoughGoldFor(TowerTypes type, int level)
         {
             ShootingTowerConfig towerConfig = _towersListConfig.GetBy(type, level);

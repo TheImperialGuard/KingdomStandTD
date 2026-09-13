@@ -4,7 +4,9 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
+using Assets._Project.Develop.Runtime.UI.CommonViews;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
+using Assets._Project.Develop.Runtime.UI.Functional;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using System;
@@ -29,6 +31,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
         private Entity _createdTowerDemo;
         private TowerTypes _createdTowerDemoType;
         private IDisposable _goldCurrencyDisposable;
+        private IDisposable _cameraMovedDisposable;
 
         public BuildTowerPopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
@@ -66,8 +69,17 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             _goldCurrencyDisposable = _walletService.GetCurrency(CurrencyTypes.Gold)
                 .Subscribe(OnGoldChanged);
 
+            Camera camera = Camera.main;
+            _cameraMovedDisposable = camera.GetComponent<BoundedOrthoCamera>().CameraMoved.Subscribe(OnCameraMoved);
+
+            _view.HideInfoContainer();
             SetPrices();
             OnGoldChanged(0, 0);
+        }
+
+        private void OnCameraMoved()
+        {
+            _view.UpdateWorldPosition(_towerPlaceholder.Transform.position);
         }
 
         public override void Dispose()
@@ -76,6 +88,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
 
             _view.BuildTowerButtonClicked -= OnBuildTowerButtonClicked;
             _goldCurrencyDisposable.Dispose();
+            _cameraMovedDisposable.Dispose();
 
             ReleaseCurrentDemo();
         }
@@ -95,6 +108,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             if (_createdTowerDemo == null || type != _createdTowerDemoType)
             {
                 CreateTowerDemo(config);
+                ShowInfo(config);
                 _createdTowerDemoType = type;
                 return;
             }
@@ -104,6 +118,22 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
 
             BuildTower(config);
             OnCloseRequest();
+        }
+
+        private void ShowInfo(ShootingTowerConfig config)
+        {
+            _view.SetupInfoContainer(config.TowerName, config.TowerDesc);
+
+            RelativeUIPositions position = GetPosForInfoContainer();
+
+            _view.ShowInfoContainer(position);
+        }
+
+        private RelativeUIPositions GetPosForInfoContainer()
+        {
+            RelativeUIPositions popupPosition = UIHelper.GetRelativePositionFor(_view.GetComponent<RectTransform>());
+
+            return popupPosition == RelativeUIPositions.Left ? RelativeUIPositions.Right : RelativeUIPositions.Left;
         }
 
         private void BuildTower(ShootingTowerConfig config)

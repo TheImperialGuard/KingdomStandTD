@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+using Assets._Project.Develop.Runtime.UI.CommonViews;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using System;
@@ -14,6 +15,9 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
 
         [SerializeField] private List<BuildTowerButton> _towersButtons;
 
+        [SerializeField] private TitleWithTextView _leftInfoContainer;
+        [SerializeField] private TitleWithTextView _rightInfoContainer;
+
         private Camera _camera;
 
         public void UpdateWorldPosition(Vector3 worldPosition)
@@ -21,6 +25,26 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             Vector3 position = _camera.WorldToScreenPoint(worldPosition);
 
             transform.position = position;
+        }
+
+        public void SetupInfoContainer(string title, string desc)
+        {
+            _leftInfoContainer.SetTitle(title);
+            _rightInfoContainer.SetTitle(title);
+
+            _leftInfoContainer.SetText(desc);
+            _rightInfoContainer.SetText(desc);
+        }
+
+        public void ShowInfoContainer(RelativeUIPositions position)
+        {
+            GetContainerBy(position).gameObject.SetActive(true);
+        }
+
+        public void HideInfoContainer()
+        {
+            _leftInfoContainer.gameObject.SetActive(false);
+            _rightInfoContainer.gameObject.SetActive(false);
         }
 
         public void SwitchInteractableFor(TowerTypes type, bool value)
@@ -63,6 +87,16 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
         private void OnBuildTowerButtonClicked(TowerTypes type)
         {
             BuildTowerButtonClicked?.Invoke(type);
+        }
+
+        private TitleWithTextView GetContainerBy(RelativeUIPositions position)
+        {
+            return position switch
+            {
+                RelativeUIPositions.Left => _leftInfoContainer,
+                RelativeUIPositions.Right => _rightInfoContainer,
+                _ => throw new NotImplementedException(),
+            };
         }
     }
 }

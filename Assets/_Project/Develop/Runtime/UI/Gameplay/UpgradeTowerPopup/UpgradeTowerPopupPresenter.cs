@@ -4,12 +4,15 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Shoot;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
+using Assets._Project.Develop.Runtime.UI.CommonViews;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
+using Assets._Project.Develop.Runtime.UI.Functional;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using System;
 using UnityEngine;
+using static UnityEngine.Rendering.STP;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
 {
@@ -74,6 +77,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
             _goldCurrencyDisposable = _walletService.GetCurrency(CurrencyTypes.Gold)
                 .Subscribe(OnGoldChanged);
 
+            _view.HideInfoContainer();
+            SetPrices();
             OnGoldChanged(0, 0);
 
             _sellClicks = 0;
@@ -110,6 +115,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
             if (_rangeDemo == null)
             {
                 CreateRangeDemo(config);
+                _view.HideInfoContainer();
+                ShowInfo(config);
                 return;
             }
 
@@ -120,12 +127,45 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
             OnCloseRequest();
         }
 
+        private void ShowInfo(ShootingTowerConfig config)
+        {
+            _view.SetupInfoContainer(config.TowerName, config.TowerDesc);
+
+            RelativeUIPositions position = GetPosForInfoContainer();
+
+            _view.ShowInfoContainer(position);
+        }
+
+        private void ShowSellInfo()
+        {
+            string title = "Продать башню?";
+            string goldAmount = _towersPurchaseService.GetGoldAmountForSell(TowerType, _sourceTower.TowerLevel.Value).ToString();
+            string desc = "Вы получите золото за продажу: " + goldAmount;
+
+            _view.SetupInfoContainer(title, desc);
+
+            RelativeUIPositions position = GetPosForInfoContainer();
+
+            _view.ShowInfoContainer(position);
+        }
+
+        private RelativeUIPositions GetPosForInfoContainer()
+        {
+            RelativeUIPositions popupPosition = UIHelper.GetRelativePositionFor(_view.GetComponent<RectTransform>());
+
+            return popupPosition == RelativeUIPositions.Left ? RelativeUIPositions.Right : RelativeUIPositions.Left;
+        }
+
         private void OnSellButtonClicked()
         {
             ReleaseRangeDemo();
 
             if (_sellClicks++ == 0)
+            {
+                _view.HideInfoContainer();
+                ShowSellInfo();
                 return;
+            }
 
             _towersPurchaseService.Sell(TowerType, _sourceTower.TowerLevel.Value);
 
@@ -173,5 +213,10 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
         private void ReleaseSource() => _sourceTower.SelfReleaseRequested.Value = true;
 
         private void CreateTowerPlaceholder() => _towersPlaceholdersService.CreatePlaceholder(_sourceTower.Transform.position);
+
+        private void SetPrices()
+        {
+            _view.SetUpgradePrice(_towersPurchaseService.GetPriceFor(TowerType, NextTowerLevel).ToString());
+        }
     }
 }

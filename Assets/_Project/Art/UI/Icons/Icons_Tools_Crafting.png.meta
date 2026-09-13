@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b6e17131ca9179242a50fc57ddd993a4
+guid: 7bf1b0edaa1c2e54195600de6ce899fb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,35 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Icons_RPG_0
+      name: Icons_Tools_Crafting_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
+        y: 224
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee49010c6ec643b48948dc4c7263828e
+      internalID: 1934142383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_1
+      rect:
+        serializedVersion: 2
+        x: 17
         y: 241
         width: 14
-        height: 15
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,36 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2aba57d35a03a0246abd0f1356d75c4f
-      internalID: -901303212
+      spriteID: b2e02b46bef22f945b367ba086b141e5
+      internalID: 1553853733
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_1
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 241
-        width: 11
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 51d49d71fbb0671449c18383f558d9fd
-      internalID: -167968635
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_2
+      name: Icons_Tools_Crafting_2
       rect:
         serializedVersion: 2
         x: 33
@@ -182,150 +182,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e51f4ae853bb8d14780f66f14552378b
-      internalID: 805954628
+      spriteID: 1988262a8872df844b743ada0014e658
+      internalID: -692500319
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_3
+      name: Icons_Tools_Crafting_3
       rect:
         serializedVersion: 2
         x: 49
         y: 241
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0043bcfda3e659e44b39017ce70e07d8
-      internalID: 1607152880
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_4
-      rect:
-        serializedVersion: 2
-        x: 65
-        y: 240
-        width: 14
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 30affeeb9f7d0f34591b6d82dedf81e4
-      internalID: -290587046
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 240
-        width: 15
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e3a78fcdb7026a94c86ea07244e5064e
-      internalID: -1680983307
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_6
-      rect:
-        serializedVersion: 2
-        x: 97
-        y: 241
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6059d18c2ef76584da7c978d93fceb7d
-      internalID: 492788068
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_7
-      rect:
-        serializedVersion: 2
-        x: 130
-        y: 240
-        width: 12
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 51ce1e505c9130d42bf7ee53e5e7e601
-      internalID: 362477344
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_8
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 240
-        width: 15
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b7003220667ce0f4fb7f471d3c9cb333
-      internalID: -1400915407
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_9
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 225
         width: 13
         height: 13
       alignment: 0
@@ -336,19 +204,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c00409257b62e44eb7b168668064e71
-      internalID: -1973601522
+      spriteID: 9e5e3197b7c175b439e1874ad80f129a
+      internalID: 1190363148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_10
+      name: Icons_Tools_Crafting_4
       rect:
         serializedVersion: 2
-        x: 18
-        y: 225
-        width: 11
+        x: 65
+        y: 241
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b225a6faa0068394a89e0b65deefb4aa
+      internalID: -1527607038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 241
+        width: 14
         height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -358,63 +248,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f60d75de1d96b94794fbeade8545f16
-      internalID: -1520234101
+      spriteID: 5c57ca1240beeca4485177a057801a53
+      internalID: 976832500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_11
+      name: Icons_Tools_Crafting_6
       rect:
         serializedVersion: 2
-        x: 34
-        y: 225
-        width: 12
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 14f5c5ef0d6c0ab41aea480a47eaaa08
-      internalID: -840332020
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_12
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 224
-        width: 15
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eb3f4590a37d0a84da1b24b51c91cce6
-      internalID: -1536391412
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_13
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 224
-        width: 16
+        x: 96
+        y: 240
+        width: 29
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -424,19 +270,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 782953bf2e5e8ff4d9cf7858f4c7fb73
-      internalID: -1205268905
+      spriteID: 9aecb78fcf6e40648ac72905dea8a536
+      internalID: -539874892
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_14
+      name: Icons_Tools_Crafting_7
       rect:
         serializedVersion: 2
-        x: 97
+        x: 144
+        y: 240
+        width: 48
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d5403aec417d1f4aa103e53c9a02a25
+      internalID: -303049048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_8
+      rect:
+        serializedVersion: 2
+        x: 17
         y: 225
-        width: 13
+        width: 15
         height: 13
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -446,20 +314,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33c74c52dd462214c8690cddf9f6182a
-      internalID: -994287895
+      spriteID: d20dbab17a75e0044a59073601233448
+      internalID: -1603381094
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_15
+      name: Icons_Tools_Crafting_9
       rect:
         serializedVersion: 2
-        x: 117
-        y: 229
-        width: 6
-        height: 6
+        x: 33
+        y: 227
+        width: 15
+        height: 11
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -468,20 +336,152 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08238d5d9de020349bf8e8fb7df33da7
-      internalID: 814860635
+      spriteID: c8acbf06712d4ab4eab1d7905610e254
+      internalID: 875475912
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_16
+      name: Icons_Tools_Crafting_10
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 225
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c73cf1b72f89264498b61606f9f024c5
+      internalID: -1634214532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_11
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 225
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4687c142613937a42b6b37e3ba1552ae
+      internalID: 763085859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_12
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 209
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 490bcba18d48def46924016e37fa6b91
+      internalID: 1216315777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_13
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 224
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e26967912d5bcd4e8b3f9f3610ddf58
+      internalID: 222268192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_14
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 227
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24e65b27c8566ec49bea607f16ce9fe6
+      internalID: 152316378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_15
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 226
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f6f85ead79a72b4ca41f2f8d3122136
+      internalID: 152693436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_16
       rect:
         serializedVersion: 2
         x: 1
-        y: 209
-        width: 14
-        height: 14
+        y: 208
+        width: 15
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -490,20 +490,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99d267cbe6cf66e4e9d9c8ea3c574265
-      internalID: 2092885310
+      spriteID: a2fc3adb8926d844cb38bfc43db5f050
+      internalID: -2136558683
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_17
+      name: Icons_Tools_Crafting_17
       rect:
         serializedVersion: 2
-        x: 17
-        y: 209
-        width: 14
-        height: 14
+        x: 16
+        y: 208
+        width: 15
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -512,19 +512,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de4d2b639cf0c01419635173ddf0636b
-      internalID: 494749376
+      spriteID: 567dfe890ae70574fa9903c211351ecc
+      internalID: -700926805
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_18
+      name: Icons_Tools_Crafting_18
       rect:
         serializedVersion: 2
         x: 33
         y: 209
-        width: 15
+        width: 27
         height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -534,18 +534,216 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1383175b152e954bbfbd0c2b34adedc
-      internalID: -265504756
+      spriteID: abb85ffce44fcd344bffcbaec61ffe8c
+      internalID: 1609151796
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_19
+      name: Icons_Tools_Crafting_19
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 209
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b85102a40a5022a44b701396aad4fd6d
+      internalID: -766662335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_20
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 211
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f76fb5a8ca466f3438a6a73a6200d4cb
+      internalID: 1597026742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_21
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 208
+        width: 31
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e17b20f086a79b48bcad04058b89f9e
+      internalID: -1106991230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_22
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 210
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4fcf238c88f6f746a8e6d24911f18f2
+      internalID: 544129033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_23
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 210
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 452fd4a9ec7873c488d5741fef398c21
+      internalID: 2004712956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_24
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 193
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daf5ef27226c87c4ca4ad9931e800b5a
+      internalID: 368792838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_25
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 193
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eca13e44505c2eb4b921373b136390d7
+      internalID: -1950554515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_26
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 193
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35a5b05661a63f148a70b53d60cd8212
+      internalID: 196278727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_27
       rect:
         serializedVersion: 2
         x: 48
-        y: 208
+        y: 192
+        width: 31
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74c0753f0b1eb8e42b1ec41169c013ce
+      internalID: 57226479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_28
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 192
         width: 32
         height: 16
       alignment: 0
@@ -556,1274 +754,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a696252f8768bdc46bc9b597f62186f9
-      internalID: -281137413
+      spriteID: da345d4d1d9ec3a4e8f6f5285cbeb4ea
+      internalID: -1124362629
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_20
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 209
-        width: 13
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 59de932dd5928074aac9c84c6e09f5ba
-      internalID: 775418904
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_21
-      rect:
-        serializedVersion: 2
-        x: 97
-        y: 209
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 90d75217366c68f428ddee4a16ffb70f
-      internalID: -1682963699
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_22
-      rect:
-        serializedVersion: 2
-        x: 130
-        y: 193
-        width: 12
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9d81daec8a3beae4ea2de8598a2fef88
-      internalID: -1376891117
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_23
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 193
-        width: 11
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b9b01cc89e4d47e4d9f19d19785f99bf
-      internalID: -465490112
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_24
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 195
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0079d1231d270d3469ef8e46f2080af4
-      internalID: -1854004576
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_25
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 193
-        width: 14
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fef30ca535d487b479215dc8a0a6c035
-      internalID: 1998500593
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_26
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 192
-        width: 12
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ab199430bba6d72448267ffed45f40f3
-      internalID: 1489878704
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_27
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 193
-        width: 12
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fcf019adf12d578479b7f4b8fb1793c7
-      internalID: 33799808
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_28
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 193
-        width: 16
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f1259ae99cdadb6449c27088090f8f3f
-      internalID: 1482882142
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_29
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 197
-        width: 16
-        height: 7
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c5afb0130c2ceda4fa1d3efc698771fa
-      internalID: 778563489
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_30
-      rect:
-        serializedVersion: 2
-        x: 161
-        y: 192
-        width: 13
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 37c4e7c0c3aae8144a99cec5c2282257
-      internalID: -1749854621
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_31
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 178
-        width: 15
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5e2206b5af5e8114eaefb0feff73cc12
-      internalID: -1176442110
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_32
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 177
-        width: 13
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bf711740023a4844a85cd9b5a070df3b
-      internalID: 610230351
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_33
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 176
-        width: 11
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d222c820ccdd9434396050ca31475ec8
-      internalID: 1994681913
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_34
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 161
-        width: 13
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cd0634b617c525f45ae3d38b11728271
-      internalID: -1868220419
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_35
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 161
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 30add5bca2e479949a22aee74709b427
-      internalID: -1534386060
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_36
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 161
-        width: 15
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4e10208392f432d4ba2eb964c847731c
-      internalID: 591327366
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_37
-      rect:
-        serializedVersion: 2
-        x: 49
-        y: 162
-        width: 13
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a40e73f37a368944d912a7c8597de18a
-      internalID: 1579213465
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_38
-      rect:
-        serializedVersion: 2
-        x: 65
-        y: 162
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: afc6e3ea0e40ec3489cf9c0bf8ba8561
-      internalID: 1176225157
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_39
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 161
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 386ce93150c916043b6d9d7fac2f976f
-      internalID: 1059841599
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_40
-      rect:
-        serializedVersion: 2
-        x: 97
-        y: 161
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b4845391ba145e74ca718b2184f7b97d
-      internalID: -1167556464
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_41
-      rect:
-        serializedVersion: 2
-        x: 113
-        y: 161
-        width: 13
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 35486db4927677f45a5fa590f00d67ae
-      internalID: -1511992888
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_42
-      rect:
-        serializedVersion: 2
-        x: 129
-        y: 162
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 030050d3b4599f349a33df5a168293c2
-      internalID: -553096001
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_43
-      rect:
-        serializedVersion: 2
-        x: 145
-        y: 160
-        width: 13
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 377b4282013efff4e9812b13c037805f
-      internalID: -845006515
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_44
-      rect:
-        serializedVersion: 2
-        x: 162
-        y: 163
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: df4a159a51d190940b2c06cc87ed8dde
-      internalID: -1586202364
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_45
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 161
-        width: 15
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 71b84acc1bd68234684b6dfb27ff45de
-      internalID: -1274202954
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_46
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 162
-        width: 16
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8a11dd46c45947543b06cd320b874c73
-      internalID: -716161621
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_47
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 144
-        width: 30
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f32a101be3b17848a2f0d8aea07c6d9
-      internalID: 673742330
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_48
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 145
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 95223694786f2854196238f8086d6b29
-      internalID: -2116561777
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_49
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 147
-        width: 11
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 271b6a00d8c5d3d4c98bc193551676f8
-      internalID: -838981362
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_50
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 147
-        width: 12
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a77fe884ea88bf14783ef4ac71244f09
-      internalID: -1943859720
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_51
-      rect:
-        serializedVersion: 2
-        x: 83
-        y: 147
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: daedfacb773c3864da15a5b8c4fae06c
-      internalID: 1964047555
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_52
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 147
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5aae41ba76a41b648abaa15d1ce3bf8c
-      internalID: 732844527
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_53
-      rect:
-        serializedVersion: 2
-        x: 114
-        y: 147
-        width: 11
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3d769a0fe039a524aaf03da07166d82f
-      internalID: 2090620180
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_54
-      rect:
-        serializedVersion: 2
-        x: 130
-        y: 147
-        width: 11
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db1afb8b4e749804fa6b5d7e40f262b8
-      internalID: 330911610
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_55
-      rect:
-        serializedVersion: 2
-        x: 146
-        y: 145
-        width: 11
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 83fc644803e7cf74bbbeaedc5ffe345f
-      internalID: -470333278
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_56
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 145
-        width: 15
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 893eff13ed23d7f45a3fbb15fcf9740f
-      internalID: 256622400
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_57
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 145
-        width: 16
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 50cf0bb7aef42254f8b90482e14dfe26
-      internalID: -101108034
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_58
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 130
-        width: 16
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7cff5c62bb70e284b9bc6ddc0900fd02
-      internalID: -1751437841
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_59
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 129
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f814a230292ace54eb6a63e52efc27c5
-      internalID: 1914950309
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_60
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 130
-        width: 15
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 34a95d1ab273cd344a366f8007283178
-      internalID: 659939304
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_61
-      rect:
-        serializedVersion: 2
-        x: 51
-        y: 128
-        width: 10
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f0981d7ef945d644eb997bc2ffbb3c65
-      internalID: -937747051
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_62
-      rect:
-        serializedVersion: 2
-        x: 67
-        y: 128
-        width: 10
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3dd5955ee76500f4a9f0ccb1171c3164
-      internalID: 792825362
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_63
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 130
-        width: 15
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: af9a4afbad5574c4b958c38dd67d63ce
-      internalID: 1182817626
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_64
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 128
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bbd40080a2386214a9e0714f5273fd28
-      internalID: 1442316522
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_65
-      rect:
-        serializedVersion: 2
-        x: 113
-        y: 129
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f88d476bae87e5549bc93d1fc12910ec
-      internalID: 908909088
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_66
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 131
-        width: 15
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6627cfe1df9d84440b7db20d5f2fdb34
-      internalID: 1744616110
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_67
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 113
-        width: 13
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 742396428cf92ef42b899e3b9a949349
-      internalID: -990975512
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_68
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 36b729422c629e54dbe68d8cb6c1d75e
-      internalID: -13284633
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_69
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 114
-        width: 11
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ce1c7804c7d6dde408d3bcf4da3d2085
-      internalID: -1782362195
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_70
-      rect:
-        serializedVersion: 2
-        x: 65
-        y: 112
-        width: 14
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d66e25f2b0da46545a2fec9512fb144a
-      internalID: -751109102
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_71
-      rect:
-        serializedVersion: 2
-        x: 97
-        y: 113
-        width: 15
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 16ee9392724e44c4388c8e629ec0c6e0
-      internalID: 1320944164
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_72
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cf790479b46aab243b0857efa2f74413
-      internalID: 1747471586
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_73
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6414378c329bda94e9670cdb35cd5db0
-      internalID: -842194120
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_74
-      rect:
-        serializedVersion: 2
-        x: 47
-        y: 97
-        width: 17
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6d65c0248d01a004fae1af6cd2fad082
-      internalID: -458480704
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_75
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 97
-        width: 12
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 05674043bc27b1f4a914d57f9d41646c
-      internalID: 1445309720
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_76
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 98
-        width: 16
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 18b3d37f5d899e744bf1dab2b4b88590
-      internalID: -1332080489
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_77
+      name: Icons_Tools_Crafting_29
       rect:
         serializedVersion: 2
         x: 112
-        y: 96
+        y: 193
         width: 16
-        height: 16
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1832,18 +776,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d611b4307d957154e9a0c76b06e3a1ea
-      internalID: -280115816
+      spriteID: a285c7ebf163a89428426bded1b13f9b
+      internalID: 1778577858
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_78
+      name: Icons_Tools_Crafting_30
       rect:
         serializedVersion: 2
-        x: 1
-        y: 65
+        x: 129
+        y: 193
         width: 14
         height: 14
       alignment: 0
@@ -1854,42 +798,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9da6e197781c51145bfc39ada957c42b
-      internalID: 377181689
+      spriteID: 3f60b74660d3994488afb618d80c26b1
+      internalID: 1081560220
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_79
+      name: Icons_Tools_Crafting_31
       rect:
         serializedVersion: 2
-        x: 17
-        y: 65
-        width: 14
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b3a8b03ea3d2d984086681fd0ca85b30
-      internalID: -373478451
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_80
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 81
+        x: 144
+        y: 193
         width: 15
-        height: 15
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1898,84 +820,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5f741f81f04b0d4590d8b83bb4dcf74
-      internalID: 364571217
+      spriteID: fed175e8cc6697d4cb2fc11697673739
+      internalID: -629798934
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_81
+      name: Icons_Tools_Crafting_32
       rect:
         serializedVersion: 2
-        x: 128
-        y: 79
-        width: 16
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b599f3a114f8bfd4493d3c514e6fb8b8
-      internalID: 690533070
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_82
-      rect:
-        serializedVersion: 2
-        x: 147
-        y: 67
-        width: 9
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e6ebcb6a046c39d4a9c91517ccf1b9d1
-      internalID: 775341496
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_83
-      rect:
-        serializedVersion: 2
-        x: 162
-        y: 66
-        width: 11
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8042814ea45e8648b047ea9ef1327a5
-      internalID: -745535746
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_84
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 64
+        x: 160
+        y: 192
         width: 15
         height: 16
       alignment: 0
@@ -1986,20 +842,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 758b54cd13bc80e47bd4c622fb66a333
-      internalID: 150975326
+      spriteID: eaae4072042f7db4fb55e17404bd1ac8
+      internalID: 1313311853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_85
+      name: Icons_Tools_Crafting_33
       rect:
         serializedVersion: 2
-        x: 193
-        y: 65
-        width: 14
-        height: 15
+        x: 178
+        y: 194
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2008,20 +864,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0699e02a6380b124d945cee312f5b7bb
-      internalID: -689886010
+      spriteID: 9a218859fee11324ca950cd0e49e2e5f
+      internalID: 55707592
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_86
+      name: Icons_Tools_Crafting_34
       rect:
         serializedVersion: 2
         x: 2
-        y: 50
-        width: 12
-        height: 13
+        y: 176
+        width: 13
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2030,18 +886,84 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b639d92a234da704aa28b701698da237
-      internalID: -918900255
+      spriteID: d7904efb9b72c614e967eb5a1fb1a93a
+      internalID: -1359313513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_87
+      name: Icons_Tools_Crafting_35
       rect:
         serializedVersion: 2
         x: 17
-        y: 49
+        y: 162
+        width: 14
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cebcda05eaf751846a1220564d54a3e2
+      internalID: 1608167880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_36
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 177
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dae7cdf8c6223ca488b7d5f9f2945ef1
+      internalID: -232670598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_37
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 177
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 871c2be38f265d542984dca81864474d
+      internalID: -1415979573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_38
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 177
         width: 13
         height: 14
       alignment: 0
@@ -2052,18 +974,282 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e9c462d4c305234a890352e9bc22dc4
-      internalID: -2084070523
+      spriteID: d23834cc0c9cb5645b3c18a3aeed2b36
+      internalID: 321254058
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_88
+      name: Icons_Tools_Crafting_39
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 176
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eec863f890f13b47bbba01acbd9f54d
+      internalID: 1980657018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_40
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e39aeebf25f3af4cb76e82158cc1400
+      internalID: -1719070243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_41
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 177
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4906e1e902caf3b4781735c19720945f
+      internalID: 664372046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_42
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 177
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18332be99be1a4c4a8a0e8c9bd304c75
+      internalID: -240082931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_43
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 178
+        width: 32
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68eefcf92825e804ba8d8612e5b192d9
+      internalID: -1150063659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_44
       rect:
         serializedVersion: 2
         x: 1
-        y: 36
+        y: 161
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a04873ae60dc1e44aad54edae6efe052
+      internalID: -435879960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_45
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 162
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8fbf63f6a3efa148bb24417ae15c236
+      internalID: 736110883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_46
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 161
+        width: 31
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a67eaad107e287f439d9d9d1f07bf1d3
+      internalID: -472118358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_47
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 162
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91e946fe1d3c1b6499ac2b53ae437575
+      internalID: 1869770643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_48
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 161
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c57dcf610ba075142b7c92118a2a888a
+      internalID: 1766357998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_49
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 161
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa0e4de2e1ab656409493f66db796c1b
+      internalID: -1340390191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_50
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 161
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d35bbb6528b8dca4da087e676af278e0
+      internalID: 247842412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_51
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 164
         width: 14
         height: 8
       alignment: 0
@@ -2074,20 +1260,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 584c3584ea20c3a4dbf480dbe753d30c
-      internalID: -1683934472
+      spriteID: 7cee53a9b89813a4a861dde75c61455e
+      internalID: 1727034967
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_89
+      name: Icons_Tools_Crafting_52
       rect:
         serializedVersion: 2
-        x: 17
-        y: 34
-        width: 14
-        height: 12
+        x: 160
+        y: 162
+        width: 31
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2096,20 +1282,42 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9003e63b61d9ca54e8181136ed63cef3
-      internalID: 1477875627
+      spriteID: 7642ccc9d99eac24fbb8cc6d3ec80f3e
+      internalID: -1786358658
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_90
+      name: Icons_Tools_Crafting_53
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 164
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7817f0ba51819744bf7abac97c7f211
+      internalID: 2099917089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_54
       rect:
         serializedVersion: 2
         x: 32
-        y: 34
+        y: 128
         width: 16
-        height: 12
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2118,20 +1326,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37b43b12eeeb90b4da4b7927372601a8
-      internalID: 1462563547
+      spriteID: 29f4ace1c1a040046989cb2ef8c7d120
+      internalID: -197979449
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_91
+      name: Icons_Tools_Crafting_55
       rect:
         serializedVersion: 2
-        x: 66
-        y: 33
-        width: 12
-        height: 13
+        x: 64
+        y: 144
+        width: 32
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2140,20 +1348,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f3a756392ca89846b49cd06258348ea
-      internalID: 849081245
+      spriteID: 69585f69c8c1a03459f2a4ab3e21f460
+      internalID: 179263760
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_92
+      name: Icons_Tools_Crafting_56
       rect:
         serializedVersion: 2
-        x: 82
-        y: 33
-        width: 12
-        height: 13
+        x: 97
+        y: 145
+        width: 13
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2162,18 +1370,40 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 503a9ac431f112c429bbc34e579bef26
-      internalID: -180657491
+      spriteID: 3ffab91d4a46e7b4888df73868ad752f
+      internalID: -448386987
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_93
+      name: Icons_Tools_Crafting_57
       rect:
         serializedVersion: 2
-        x: 98
-        y: 33
+        x: 113
+        y: 145
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18ddcb83e1825d6448491b2a669764b8
+      internalID: 1094033329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_58
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 146
         width: 13
         height: 12
       alignment: 0
@@ -2184,19 +1414,327 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29da8e45d396fb14882858287b4c05b7
-      internalID: -1605282000
+      spriteID: d8502f15de7b1964c882973796bc42ca
+      internalID: 1503847153
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_94
+      name: Icons_Tools_Crafting_59
       rect:
         serializedVersion: 2
-        x: 113
-        y: 33
+        x: 144
+        y: 144
+        width: 48
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dc32fee8b646384eb4fef43bbddd62a
+      internalID: 152653410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_60
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 129
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4664e47789be2164688d1347ebe1246f
+      internalID: 92783468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_61
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 126
+        width: 17
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43db4c3f5283d494e9353a201493d43f
+      internalID: 210540726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_62
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 129
+        width: 30
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 742f867c033499f4994fe817d234457f
+      internalID: -480606317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_63
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 129
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa0baaa72e4c4574c8e6dd146de06437
+      internalID: -1639100790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_64
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 129
         width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52fd20e8a8e586349bf46d80165825f7
+      internalID: 739333567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_65
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12eea399329ef8249bd2bef454f812f7
+      internalID: 1410973702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_66
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 129
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21acc9bc289632149b34b731344f7293
+      internalID: -1850132482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_67
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 131
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8088c33d3eb44344a36fc5435247905
+      internalID: -1719818248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_68
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 128
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a586dd9a03d23fc46906a988aba20e79
+      internalID: 2087337222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_69
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 114
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8edb1bf4a55b0744995d0bcc17c751d
+      internalID: -662975168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_70
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 114
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b13ea337741bdb4d85182d940bbf1ab
+      internalID: -1008154150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_71
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 113
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc1f28e04bec3824aa9de17b20312070
+      internalID: 1098629523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_72
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 113
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4d95c0630527e743afd6cde7e4aa283
+      internalID: -1275282924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_73
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 114
+        width: 16
         height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2206,20 +1744,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12443760294ae924a910c2bc4705f1a5
-      internalID: 1566846049
+      spriteID: a0cfa53eb875ffb4895c5e2717d0d6bd
+      internalID: -1002002312
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_95
+      name: Icons_Tools_Crafting_74
       rect:
         serializedVersion: 2
-        x: 130
-        y: 32
-        width: 12
-        height: 16
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2228,64 +1766,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f6e3f2ed60f19b4e8e918595532b317
-      internalID: 522013854
+      spriteID: b1d420541fa7765408f040c5c6879257
+      internalID: 2085761970
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_96
-      rect:
-        serializedVersion: 2
-        x: 146
-        y: 32
-        width: 12
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 37774ef9747dbd94289b771ccb54b9b0
-      internalID: -1681906794
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_97
+      name: Icons_Tools_Crafting_75
       rect:
         serializedVersion: 2
         x: 1
-        y: 16
-        width: 14
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 12444c1b1680dc147bda6f56015c62d1
-      internalID: -152185857
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_98
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 16
+        y: 96
         width: 15
-        height: 16
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2294,127 +1788,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 448cdedf6e851df419bd66a488088421
-      internalID: 163045815
+      spriteID: 6a3c1f1f6f1f88e4a89cfc8c1d1cdd8b
+      internalID: -524897445
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_99
+      name: Icons_Tools_Crafting_76
       rect:
         serializedVersion: 2
-        x: 48
-        y: 16
-        width: 15
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a6b9d58ab56393e4d971d743abe9370c
-      internalID: -462874590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_100
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 17
-        width: 16
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e61b7b8ce876ca647aef35433b94b760
-      internalID: 824974368
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_101
-      rect:
-        serializedVersion: 2
-        x: 82
-        y: 17
-        width: 12
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 285b6ce8af8c49a4589ad7744cb4bef1
-      internalID: 383298661
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_102
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 224
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5478623cc1f42cc49afd3c9cc37bdb94
-      internalID: 1105483052
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_103
-      rect:
-        serializedVersion: 2
-        x: 111
-        y: 241
-        width: 17
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c92206ce1a5e8fd4da3ba65768716e7e
-      internalID: 273113714
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_104
-      rect:
-        serializedVersion: 2
-        x: 97
+        x: 17
         y: 96
         width: 14
         height: 16
@@ -2426,19 +1810,217 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ab7c9933d78ac54588a36cdc311928a
-      internalID: 318240172
+      spriteID: ee8a71b3215250e45a185ebc017c39ca
+      internalID: 93237453
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_105
+      name: Icons_Tools_Crafting_77
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 98
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1522ebfa404df864983cc1937fb1334b
+      internalID: -459432789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_78
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 98
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88f0b4190959c9c48b805d81aa14a9e9
+      internalID: -1675639926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_79
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bcf35c8f464e1e40ba1714106544cee
+      internalID: 450651080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_80
       rect:
         serializedVersion: 2
         x: 80
-        y: 80
-        width: 16
+        y: 98
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adce066cb7cb8d3499b18f8bbde3a39a
+      internalID: 975945223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_81
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 81
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ad1aae4856c5994281f2fe705183d67
+      internalID: 1046809274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_82
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 81
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b53c72d629b72724fa735e3c2547206b
+      internalID: -1916936420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_83
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 48
+        width: 14
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 064ef761ee62074468ac86759d71cfc8
+      internalID: 1752940713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_84
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 81
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31b475c1def6563438e2184a970f0f6c
+      internalID: -2016375580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_85
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 81
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9802475879804e144bc7737e887f2a1c
+      internalID: -587470082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_86
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 81
+        width: 15
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2448,40 +2030,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bacd7b04f2a86c41ab9c01d62b23c98
-      internalID: -1848920628
+      spriteID: a7b13a89586a443489341b9e3fe2968b
+      internalID: -1225041852
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_106
+      name: Icons_Tools_Crafting_87
       rect:
         serializedVersion: 2
-        x: 96
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 702118ef84e522d488b215fee236b8ec
-      internalID: 572979677
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_107
-      rect:
-        serializedVersion: 2
-        x: 82
-        y: 65
+        x: 98
+        y: 81
         width: 11
         height: 15
       alignment: 0
@@ -2492,18 +2052,370 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa5d7a0c0b2feca4ab339be03cf84147
-      internalID: 355352019
+      spriteID: e1c84a7eadd642f408d8fd36dafcae8c
+      internalID: 348075921
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_108
+      name: Icons_Tools_Crafting_88
       rect:
         serializedVersion: 2
-        x: 97
+        x: 0
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68a359b467e32ba4ba6785e78083cdfd
+      internalID: 222764767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_89
+      rect:
+        serializedVersion: 2
+        x: 18
         y: 65
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61497a78767bd5f4ba8585aacfb1af7c
+      internalID: 1747275338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_90
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 600c2f52397e6c44f972c85cb10fd7f4
+      internalID: -1254802955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_91
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 66
+        width: 30
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5f32d7e6f62e7b46b5e3ee472e9c9aa
+      internalID: 1218149929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_92
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 66
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70cd941e84fb4a144888bf127f6480c6
+      internalID: -1965357920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_93
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 65
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0bbd739532c1394b94fd41e6a3afe87
+      internalID: -1158738317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_94
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 66
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27d4323e38cc5f049849d865a1731530
+      internalID: -1530743146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_95
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 66
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bcaa01d4f7bc7e44bc0446a99afe436
+      internalID: 584812866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_96
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 53
+        width: 15
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 789d78f44e1874f4eb450a0ae186179e
+      internalID: -1470161481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_97
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 49
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9336adb63252af24991ca3971e10aead
+      internalID: -1529678006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_98
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 49
+        width: 30
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a0a4b0555ffb8c488b9580a11a75ef7
+      internalID: -1605896391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_99
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 49
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 671e8c149a9dd8940963270f87a71b08
+      internalID: -713650489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_100
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 33
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fa453908db68d346bbec8e01d1db8b3
+      internalID: -1818156174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_101
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 33
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ba41bec472c43745995465e1dfd26a3
+      internalID: -1680715563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_102
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 33
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b612eb644d58484a8372e93d27b851f
+      internalID: 1577970574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_103
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 33
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d0298296f83db04fa729bf08ff4f685
+      internalID: -363896061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_104
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 32
         width: 14
         height: 15
       alignment: 0
@@ -2514,184 +2426,426 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc80cd9e030da8e43a9038c6fb00a08e
-      internalID: -1499045295
+      spriteID: 105c6497cb4dd734286b1767c626c20b
+      internalID: 1672131999
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_109
+      name: Icons_Tools_Crafting_105
       rect:
         serializedVersion: 2
-        x: 113
-        y: 209
+        x: 81
+        y: 34
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e95edb288afb48842835100329cd150d
+      internalID: -1255578666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_106
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 34
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 324e28582868f6148bd0f3dbec57270b
+      internalID: 830877099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_107
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 33
+        width: 32
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 381adee1cbe990547aafe1f2af496924
+      internalID: -875102110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_108
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 17
         width: 14
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42bd438d791f70f4a8b51aa58a80b4b9
-      internalID: 1816364705
+      spriteID: 87a1b655d9f2f50478a966fd4580082f
+      internalID: -1929183654
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_110
+      name: Icons_Tools_Crafting_109
       rect:
         serializedVersion: 2
-        x: 97
-        y: 194
+        x: 17
+        y: 17
         width: 14
-        height: 12
+        height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a17dea1ee8394724ab020c1244335ecb
-      internalID: -786994470
+      spriteID: 91c1e4189aa43bf47b390e9054062ef3
+      internalID: 1492825738
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_111
-      rect:
-        serializedVersion: 2
-        x: 115
-        y: 194
-        width: 10
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c714494de160246419ad45ec336c5aaa
-      internalID: -1549458484
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_112
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 114
-        width: 15
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aa14e21475b041543891a84527276e8a
-      internalID: -556930632
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_113
-      rect:
-        serializedVersion: 2
-        x: 79
-        y: 112
-        width: 17
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 11a94bd55f8eaa64fac8ca042cc9faf3
-      internalID: 1581382841
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icons_RPG_114
+      name: Icons_Tools_Crafting_110
       rect:
         serializedVersion: 2
         x: 32
-        y: 96
+        y: 17
         width: 15
         height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 262a8fffd78d55f41ba867e0b9e85402
-      internalID: -1868773255
+      spriteID: f0db745b4778a1a4c8173e00b6205121
+      internalID: -1611475984
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_115
+      name: Icons_Tools_Crafting_111
       rect:
         serializedVersion: 2
-        x: 16
-        y: 81
-        width: 15
-        height: 15
+        x: 49
+        y: 17
+        width: 14
+        height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aec1d53848f664f42b205a69d7106f8b
-      internalID: -1931870319
+      spriteID: d4e85214587dc2749add48e63e151944
+      internalID: 1667796018
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icons_RPG_116
+      name: Icons_Tools_Crafting_112
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 0
+        width: 14
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3244e81c5ee819c48a23b0ad7c8e77c0
+      internalID: -321006675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_113
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 18
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e0a8c13c1acb4f41bce7f81f008f442
+      internalID: 204590236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_114
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 18
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c532da395fb004241836cad02776c146
+      internalID: -116587322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_115
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 18
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8092d44f699e9d44a8c3b5fb13b1aba4
+      internalID: -1614820531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_116
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 17
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f06a854af45bb2942bf08690aadd6987
+      internalID: -690999812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_117
       rect:
         serializedVersion: 2
         x: 0
-        y: 81
+        y: 0
         width: 15
         height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4839acc51975c784089f149a4736c8de
-      internalID: -828066919
+      spriteID: 7ccfdb7c63956184ea79ded8e9dbb2d5
+      internalID: -738489947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_118
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 1
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 913f8c9033388da4b8e82a22049a3e83
+      internalID: 1056124337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_119
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 31
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e73d63ef8549c24fb99d3f0969cbe4c
+      internalID: 2094572342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_120
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 2
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6048e2ada985954bb4177c87a08f76f
+      internalID: 2070492164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_121
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 2
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9e5a00b8815bd84bb08323d2594aaa1
+      internalID: -966768133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_122
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 2
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5ff8c50c24309349b8be4838edc4d15
+      internalID: -1450111493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_Tools_Crafting_123
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 1
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 052427d3bd82dac4fb3f6fbb7093c1fe
+      internalID: -7479881
       vertices: []
       indices: 
       edges: []
@@ -2700,7 +2854,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 976b3bb18cb425b4393d67dfa5ed9a4a
+    spriteID: 7dc8238280f0ae34285f477d12e1d992
     internalID: 0
     vertices: []
     indices: 
@@ -2712,123 +2866,130 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Icons_RPG_0: -901303212
-      Icons_RPG_1: -167968635
-      Icons_RPG_10: -1520234101
-      Icons_RPG_100: 824974368
-      Icons_RPG_101: 383298661
-      Icons_RPG_102: 1105483052
-      Icons_RPG_103: 273113714
-      Icons_RPG_104: 318240172
-      Icons_RPG_105: -1848920628
-      Icons_RPG_106: 572979677
-      Icons_RPG_107: 355352019
-      Icons_RPG_108: -1499045295
-      Icons_RPG_109: 1816364705
-      Icons_RPG_11: -840332020
-      Icons_RPG_110: -786994470
-      Icons_RPG_111: -1549458484
-      Icons_RPG_112: -556930632
-      Icons_RPG_113: 1581382841
-      Icons_RPG_114: -1868773255
-      Icons_RPG_115: -1931870319
-      Icons_RPG_116: -828066919
-      Icons_RPG_12: -1536391412
-      Icons_RPG_13: -1205268905
-      Icons_RPG_14: -994287895
-      Icons_RPG_15: 814860635
-      Icons_RPG_16: 2092885310
-      Icons_RPG_17: 494749376
-      Icons_RPG_18: -265504756
-      Icons_RPG_19: -281137413
-      Icons_RPG_2: 805954628
-      Icons_RPG_20: 775418904
-      Icons_RPG_21: -1682963699
-      Icons_RPG_22: -1376891117
-      Icons_RPG_23: -465490112
-      Icons_RPG_24: -1854004576
-      Icons_RPG_25: 1998500593
-      Icons_RPG_26: 1489878704
-      Icons_RPG_27: 33799808
-      Icons_RPG_28: 1482882142
-      Icons_RPG_29: 778563489
-      Icons_RPG_3: 1607152880
-      Icons_RPG_30: -1749854621
-      Icons_RPG_31: -1176442110
-      Icons_RPG_32: 610230351
-      Icons_RPG_33: 1994681913
-      Icons_RPG_34: -1868220419
-      Icons_RPG_35: -1534386060
-      Icons_RPG_36: 591327366
-      Icons_RPG_37: 1579213465
-      Icons_RPG_38: 1176225157
-      Icons_RPG_39: 1059841599
-      Icons_RPG_4: -290587046
-      Icons_RPG_40: -1167556464
-      Icons_RPG_41: -1511992888
-      Icons_RPG_42: -553096001
-      Icons_RPG_43: -845006515
-      Icons_RPG_44: -1586202364
-      Icons_RPG_45: -1274202954
-      Icons_RPG_46: -716161621
-      Icons_RPG_47: 673742330
-      Icons_RPG_48: -2116561777
-      Icons_RPG_49: -838981362
-      Icons_RPG_5: -1680983307
-      Icons_RPG_50: -1943859720
-      Icons_RPG_51: 1964047555
-      Icons_RPG_52: 732844527
-      Icons_RPG_53: 2090620180
-      Icons_RPG_54: 330911610
-      Icons_RPG_55: -470333278
-      Icons_RPG_56: 256622400
-      Icons_RPG_57: -101108034
-      Icons_RPG_58: -1751437841
-      Icons_RPG_59: 1914950309
-      Icons_RPG_6: 492788068
-      Icons_RPG_60: 659939304
-      Icons_RPG_61: -937747051
-      Icons_RPG_62: 792825362
-      Icons_RPG_63: 1182817626
-      Icons_RPG_64: 1442316522
-      Icons_RPG_65: 908909088
-      Icons_RPG_66: 1744616110
-      Icons_RPG_67: -990975512
-      Icons_RPG_68: -13284633
-      Icons_RPG_69: -1782362195
-      Icons_RPG_7: 362477344
-      Icons_RPG_70: -751109102
-      Icons_RPG_71: 1320944164
-      Icons_RPG_72: 1747471586
-      Icons_RPG_73: -842194120
-      Icons_RPG_74: -458480704
-      Icons_RPG_75: 1445309720
-      Icons_RPG_76: -1332080489
-      Icons_RPG_77: -280115816
-      Icons_RPG_78: 377181689
-      Icons_RPG_79: -373478451
-      Icons_RPG_8: -1400915407
-      Icons_RPG_80: 364571217
-      Icons_RPG_81: 690533070
-      Icons_RPG_82: 775341496
-      Icons_RPG_83: -745535746
-      Icons_RPG_84: 150975326
-      Icons_RPG_85: -689886010
-      Icons_RPG_86: -918900255
-      Icons_RPG_87: -2084070523
-      Icons_RPG_88: -1683934472
-      Icons_RPG_89: 1477875627
-      Icons_RPG_9: -1973601522
-      Icons_RPG_90: 1462563547
-      Icons_RPG_91: 849081245
-      Icons_RPG_92: -180657491
-      Icons_RPG_93: -1605282000
-      Icons_RPG_94: 1566846049
-      Icons_RPG_95: 522013854
-      Icons_RPG_96: -1681906794
-      Icons_RPG_97: -152185857
-      Icons_RPG_98: 163045815
-      Icons_RPG_99: -462874590
+      Icons_Tools_Crafting_0: 1934142383
+      Icons_Tools_Crafting_1: 1553853733
+      Icons_Tools_Crafting_10: -1634214532
+      Icons_Tools_Crafting_100: -1818156174
+      Icons_Tools_Crafting_101: -1680715563
+      Icons_Tools_Crafting_102: 1577970574
+      Icons_Tools_Crafting_103: -363896061
+      Icons_Tools_Crafting_104: 1672131999
+      Icons_Tools_Crafting_105: -1255578666
+      Icons_Tools_Crafting_106: 830877099
+      Icons_Tools_Crafting_107: -875102110
+      Icons_Tools_Crafting_108: -1929183654
+      Icons_Tools_Crafting_109: 1492825738
+      Icons_Tools_Crafting_11: 763085859
+      Icons_Tools_Crafting_110: -1611475984
+      Icons_Tools_Crafting_111: 1667796018
+      Icons_Tools_Crafting_112: -321006675
+      Icons_Tools_Crafting_113: 204590236
+      Icons_Tools_Crafting_114: -116587322
+      Icons_Tools_Crafting_115: -1614820531
+      Icons_Tools_Crafting_116: -690999812
+      Icons_Tools_Crafting_117: -738489947
+      Icons_Tools_Crafting_118: 1056124337
+      Icons_Tools_Crafting_119: 2094572342
+      Icons_Tools_Crafting_12: 1216315777
+      Icons_Tools_Crafting_120: 2070492164
+      Icons_Tools_Crafting_121: -966768133
+      Icons_Tools_Crafting_122: -1450111493
+      Icons_Tools_Crafting_123: -7479881
+      Icons_Tools_Crafting_13: 222268192
+      Icons_Tools_Crafting_14: 152316378
+      Icons_Tools_Crafting_15: 152693436
+      Icons_Tools_Crafting_16: -2136558683
+      Icons_Tools_Crafting_17: -700926805
+      Icons_Tools_Crafting_18: 1609151796
+      Icons_Tools_Crafting_19: -766662335
+      Icons_Tools_Crafting_2: -692500319
+      Icons_Tools_Crafting_20: 1597026742
+      Icons_Tools_Crafting_21: -1106991230
+      Icons_Tools_Crafting_22: 544129033
+      Icons_Tools_Crafting_23: 2004712956
+      Icons_Tools_Crafting_24: 368792838
+      Icons_Tools_Crafting_25: -1950554515
+      Icons_Tools_Crafting_26: 196278727
+      Icons_Tools_Crafting_27: 57226479
+      Icons_Tools_Crafting_28: -1124362629
+      Icons_Tools_Crafting_29: 1778577858
+      Icons_Tools_Crafting_3: 1190363148
+      Icons_Tools_Crafting_30: 1081560220
+      Icons_Tools_Crafting_31: -629798934
+      Icons_Tools_Crafting_32: 1313311853
+      Icons_Tools_Crafting_33: 55707592
+      Icons_Tools_Crafting_34: -1359313513
+      Icons_Tools_Crafting_35: 1608167880
+      Icons_Tools_Crafting_36: -232670598
+      Icons_Tools_Crafting_37: -1415979573
+      Icons_Tools_Crafting_38: 321254058
+      Icons_Tools_Crafting_39: 1980657018
+      Icons_Tools_Crafting_4: -1527607038
+      Icons_Tools_Crafting_40: -1719070243
+      Icons_Tools_Crafting_41: 664372046
+      Icons_Tools_Crafting_42: -240082931
+      Icons_Tools_Crafting_43: -1150063659
+      Icons_Tools_Crafting_44: -435879960
+      Icons_Tools_Crafting_45: 736110883
+      Icons_Tools_Crafting_46: -472118358
+      Icons_Tools_Crafting_47: 1869770643
+      Icons_Tools_Crafting_48: 1766357998
+      Icons_Tools_Crafting_49: -1340390191
+      Icons_Tools_Crafting_5: 976832500
+      Icons_Tools_Crafting_50: 247842412
+      Icons_Tools_Crafting_51: 1727034967
+      Icons_Tools_Crafting_52: -1786358658
+      Icons_Tools_Crafting_53: 2099917089
+      Icons_Tools_Crafting_54: -197979449
+      Icons_Tools_Crafting_55: 179263760
+      Icons_Tools_Crafting_56: -448386987
+      Icons_Tools_Crafting_57: 1094033329
+      Icons_Tools_Crafting_58: 1503847153
+      Icons_Tools_Crafting_59: 152653410
+      Icons_Tools_Crafting_6: -539874892
+      Icons_Tools_Crafting_60: 92783468
+      Icons_Tools_Crafting_61: 210540726
+      Icons_Tools_Crafting_62: -480606317
+      Icons_Tools_Crafting_63: -1639100790
+      Icons_Tools_Crafting_64: 739333567
+      Icons_Tools_Crafting_65: 1410973702
+      Icons_Tools_Crafting_66: -1850132482
+      Icons_Tools_Crafting_67: -1719818248
+      Icons_Tools_Crafting_68: 2087337222
+      Icons_Tools_Crafting_69: -662975168
+      Icons_Tools_Crafting_7: -303049048
+      Icons_Tools_Crafting_70: -1008154150
+      Icons_Tools_Crafting_71: 1098629523
+      Icons_Tools_Crafting_72: -1275282924
+      Icons_Tools_Crafting_73: -1002002312
+      Icons_Tools_Crafting_74: 2085761970
+      Icons_Tools_Crafting_75: -524897445
+      Icons_Tools_Crafting_76: 93237453
+      Icons_Tools_Crafting_77: -459432789
+      Icons_Tools_Crafting_78: -1675639926
+      Icons_Tools_Crafting_79: 450651080
+      Icons_Tools_Crafting_8: -1603381094
+      Icons_Tools_Crafting_80: 975945223
+      Icons_Tools_Crafting_81: 1046809274
+      Icons_Tools_Crafting_82: -1916936420
+      Icons_Tools_Crafting_83: 1752940713
+      Icons_Tools_Crafting_84: -2016375580
+      Icons_Tools_Crafting_85: -587470082
+      Icons_Tools_Crafting_86: -1225041852
+      Icons_Tools_Crafting_87: 348075921
+      Icons_Tools_Crafting_88: 222764767
+      Icons_Tools_Crafting_89: 1747275338
+      Icons_Tools_Crafting_9: 875475912
+      Icons_Tools_Crafting_90: -1254802955
+      Icons_Tools_Crafting_91: 1218149929
+      Icons_Tools_Crafting_92: -1965357920
+      Icons_Tools_Crafting_93: -1158738317
+      Icons_Tools_Crafting_94: -1530743146
+      Icons_Tools_Crafting_95: 584812866
+      Icons_Tools_Crafting_96: -1470161481
+      Icons_Tools_Crafting_97: -1529678006
+      Icons_Tools_Crafting_98: -1605896391
+      Icons_Tools_Crafting_99: -713650489
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

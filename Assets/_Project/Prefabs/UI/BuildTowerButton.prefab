@@ -200,6 +200,8 @@ MonoBehaviour:
   _towerType: 0
   _button: {fileID: 4530890448822579456}
   _price: {fileID: 3932686439427493128}
+  _disabledPriceColor: {r: 1, g: 0.33490568, b: 0.33490568, a: 1}
+  _enabledPriceColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &4530890448822579456
 MonoBehaviour:
   m_ObjectHideFlags: 0

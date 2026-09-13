@@ -17,6 +17,9 @@ MonoBehaviour:
   <PrefabPath>k__BackingField: Prefabs/Entities/Towers/Arrows/ArrowsTower_level_3
   <TowerName>k__BackingField: "\u0411\u0430\u0448\u043D\u044F \u043B\u0443\u0447\u043D\u0438\u043A\u043E\u0432
     III"
+  <TowerDesc>k__BackingField: "\u0421\u0442\u0440\u0435\u043B\u044F\u0435\u0442 \u0434\u0430\u043B\u044C\u0448\u0435,
+    \u0431\u044B\u0441\u0442\u0440\u0435\u0435 \u0438 \u043D\u0430\u043D\u043E\u0441\u0438\u0442
+    \u0431\u043E\u043B\u044C\u0448\u0435 \u0443\u0440\u043E\u043D\u0430."
   <Cost>k__BackingField: 160
   <AttackRange>k__BackingField: 4
   <AttackPerSecond>k__BackingField: 1.754386

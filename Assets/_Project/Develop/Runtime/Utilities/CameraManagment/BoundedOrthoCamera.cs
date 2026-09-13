@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using Assets._Project.Develop.Runtime.Utilities.Reactive;
+using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
 public sealed class BoundedOrthoCamera : MonoBehaviour
 {
+    public ReactiveEvent CameraMoved = new();
+
     [Header("Границы игровой области на плоскости XZ")]
     [SerializeField] private Vector2 worldMin = new(-10f, -10f);
     [SerializeField] private Vector2 worldMax = new(10f, 10f);
@@ -76,6 +79,7 @@ public sealed class BoundedOrthoCamera : MonoBehaviour
         targetPosition.y = _fixedCameraY;
 
         transform.position = ClampPosition(targetPosition);
+        CameraMoved?.Invoke();
     }
 
     /// <summary>

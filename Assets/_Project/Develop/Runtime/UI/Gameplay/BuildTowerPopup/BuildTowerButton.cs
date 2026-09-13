@@ -16,6 +16,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
 
         [SerializeField] private Button _button;
         [SerializeField] private TMP_Text _price;
+        [SerializeField] private Color _disabledPriceColor;
+        [SerializeField] private Color _enabledPriceColor;
 
         public TowerTypes TowerType => _towerType;
 
@@ -28,7 +30,11 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             _button.onClick.AddListener(OnButtonClicked);
         }
 
-        public void SwitchInteractableOn(bool value) => _button.interactable = value;
+        public void SwitchInteractableOn(bool value)
+        {
+            _button.interactable = value;
+            _price.color = value ? _enabledPriceColor : _disabledPriceColor;
+        }
 
         public void SetPrice(string value) => _price.text = value;
 

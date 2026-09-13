@@ -36,7 +36,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
 
             base.Cleanup(entity);
 
-            _abilityDelayEndEventDisposable.Dispose();
+            _abilityDelayEndEventDisposable?.Dispose();
             _entity.Abilities.Added -= OnAbilityAdded;
         }
 
