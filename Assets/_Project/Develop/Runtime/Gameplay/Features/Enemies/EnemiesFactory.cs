@@ -5,6 +5,7 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
@@ -25,6 +26,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
         private readonly BrainsFactory _brainsFactory;
 
         private readonly EntitiesLifeContext _entitiesLifeContext;
+        private readonly InteractiveActionsFactory _interactiveActionsFactory;
 
         public EnemiesFactory(DIContainer container)
         {
@@ -34,6 +36,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
             _brainsFactory = _container.Resolve<BrainsFactory>();
 
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+            _interactiveActionsFactory = _container.Resolve<InteractiveActionsFactory>();
         }
 
         public Entity Create(Vector3 position, EntityConfig config, IReadOnlyList<Waypoint> path, Vector3 waypointsOffset)
@@ -49,7 +52,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
 
                     entity
                         .AddDamageOnFinishPath(new(meleeConfig.DamageOnFinishPath))
-                        .AddGoldOnDeath(new(meleeConfig.GoldOnDeath));
+                        .AddGoldOnDeath(new(meleeConfig.GoldOnDeath))
+                        .AddEnemyName(new(meleeConfig.CharacterName));
 
                     ICompositeCondition mustSelfReleaseByDeath = new CompositeCondition()
                         .Add(new FuncCondition(() => entity.IsDead.Value == true))
@@ -76,7 +80,23 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
                     throw new ArgumentException($"Not support {config.GetType()} type config");
             }
 
-            entity.AddTeam(new ReactiveVariable<Teams>(Teams.Enemies));
+            IInteractAction selectAction = _interactiveActionsFactory.CreateSelectEnemyAction(entity);
+
+            entity
+                .AddTeam(new ReactiveVariable<Teams>(Teams.Enemies))
+                .AddIsInteractable()
+                .AddInteractRequest()
+                .AddInteractEvent()
+                .AddInteractiveAction(new(selectAction));
+
+            ICompositeCondition canInteract = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            entity
+                .AddCanInteract(canInteract);
+
+            entity
+                .AddSystem(new InteractSystem());
 
             _entitiesLifeContext.Add(entity);
 

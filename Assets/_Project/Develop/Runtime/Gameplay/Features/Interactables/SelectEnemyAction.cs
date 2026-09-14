@@ -3,15 +3,13 @@ using Assets._Project.Develop.Runtime.UI.Gameplay;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
 {
-    public class BuildTowerAction : IInteractAction
+    public class SelectEnemyAction : IInteractAction
     {
         private readonly Entity _source;
 
         private readonly GameplayPopupService _popupService;
 
-        public BuildTowerAction(
-            Entity source, 
-            GameplayPopupService popupService)
+        public SelectEnemyAction(Entity source, GameplayPopupService popupService)
         {
             _source = source;
             _popupService = popupService;
@@ -19,7 +17,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
 
         public void Do()
         {
-            _popupService.OpenBuildTowerPopup(_source);
+            _popupService.OpenEnemyInfoPopup(_source);
         }
     }
 }

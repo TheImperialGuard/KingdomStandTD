@@ -1,6 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
+using Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
@@ -77,6 +78,28 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
             TowerAbilitiesPopupView view = ViewsFactory.Create<TowerAbilitiesPopupView>(ViewIDs.TowerAbilitiesPopup, PopupLayer);
 
             TowerAbilitiesPopupPresenter popup = _gameplayPresentersFactory.CreateTowerAbilitiesPopupPresenter(view, sourceTower);
+
+            OnPopupCreated(popup, view, closedCallback);
+
+            return popup;
+        }
+
+        public TowerInfoPopupPresenter OpenTowerInfoPopup(Entity sourceTower, Action closedCallback = null)
+        {
+            BottomInfoPopupView view = ViewsFactory.Create<BottomInfoPopupView>(ViewIDs.BottomInfoPopup, PopupLayer);
+
+            TowerInfoPopupPresenter popup = _gameplayPresentersFactory.CreateTowerInfoPopupPresenter(view, sourceTower);
+
+            OnPopupCreated(popup, view, closedCallback);
+
+            return popup;
+        }
+
+        public EnemyInfoPopupPresenter OpenEnemyInfoPopup(Entity sourceTower, Action closedCallback = null)
+        {
+            BottomInfoPopupView view = ViewsFactory.Create<BottomInfoPopupView>(ViewIDs.BottomInfoPopup, PopupLayer);
+
+            EnemyInfoPopupPresenter popup = _gameplayPresentersFactory.CreateEnemyInfoPopupPresenter(view, sourceTower);
 
             OnPopupCreated(popup, view, closedCallback);
 

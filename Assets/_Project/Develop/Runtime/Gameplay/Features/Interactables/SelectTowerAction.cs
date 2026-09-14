@@ -1,5 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.UI.Gameplay;
+using Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
 {
@@ -18,6 +19,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
         public void Do()
         {
             _source.ShootingRangeZone.Show();
+
+            _popupService.OpenTowerInfoPopup(_source);
 
             if (_source.TowerLevel.Value < 4)
                 _popupService.OpenUpgradeTowerPopup(_source, _source.ShootingRangeZone.Hide);

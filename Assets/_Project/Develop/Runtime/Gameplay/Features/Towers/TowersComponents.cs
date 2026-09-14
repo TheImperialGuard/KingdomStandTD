@@ -15,6 +15,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
         public ReactiveVariable<int> Value;
     }
 
+    public class TowerName : IEntityComponent
+    {
+        public ReactiveVariable<string> Value;
+    }
+
     public class SubTowerParent : IEntityComponent
     {
         public Entity Value;

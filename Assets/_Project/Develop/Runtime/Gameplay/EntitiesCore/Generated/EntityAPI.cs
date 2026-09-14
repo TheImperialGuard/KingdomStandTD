@@ -50,6 +50,30 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerLevel() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerName TowerNameC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerName>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> TowerName => TowerNameC.Value;
+
+		public bool TryGetTowerName(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerName component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTowerName()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerName() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTowerName(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerName() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.Towers.SubTowerParent SubTowerParentC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Towers.SubTowerParent>();
 
 		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity SubTowerParent => SubTowerParentC.Value;
@@ -1520,6 +1544,30 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDisableCollidersOnDeath(System.Collections.Generic.List<UnityEngine.Collider> value)
 		{
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.DisableCollidersOnDeath() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.EnemyName EnemyNameC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.EnemyName>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> EnemyName => EnemyNameC.Value;
+
+		public bool TryGetEnemyName(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.EnemyName component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEnemyName()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.EnemyName() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEnemyName(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.EnemyName() {Value = value}); 
 		}
 
 		public Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjection.BodyContactInjectingStatuses BodyContactInjectingStatusesC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjection.BodyContactInjectingStatuses>();

@@ -78,6 +78,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             entity
                 .AddTowerType(new(config.TowerType))
                 .AddTowerLevel(new(level))
+                .AddTowerName(new(config.TowerName))
                 .AddTeam(new ReactiveVariable<Teams>(Teams.Allies))
                 .AddIsInteractable()
                 .AddInteractRequest()

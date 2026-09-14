@@ -20,6 +20,7 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Views
             {ViewIDs.TowerAbilitiesPopup, "UI/Gameplay/TowerAbilitiesPopup" },
             {ViewIDs.GameplayScreen, "UI/Gameplay/GameplayScreenView" },
             {ViewIDs.LevelsMenuPopup, "UI/Meta/MainMenu/LevelsMenuPopup" },
+            {ViewIDs.BottomInfoPopup, "UI/Gameplay/BottomInfoPopup" },
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)

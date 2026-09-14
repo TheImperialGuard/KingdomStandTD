@@ -22,7 +22,9 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Popups
 
         private void Awake()
         {
-            _anticlickerDefaultAlpha = _anticlicker.color.a;
+            if (_anticlicker != null)
+                _anticlickerDefaultAlpha = _anticlicker.color.a;
+
             _mainGroup.alpha = 0f;
         }
 

@@ -9,6 +9,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.UI.CommonViews;
+using Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.GoldWallet;
 using Assets._Project.Develop.Runtime.UI.Gameplay.PlayerHealthDisplay;
@@ -128,6 +129,25 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
         public StagesStatusPresenter CreateStagesStatusPresenter(IconTextView view)
         {
             return new StagesStatusPresenter(view, _container.Resolve<StageProviderService>());
+        }
+
+        public TowerInfoPopupPresenter CreateTowerInfoPopupPresenter(BottomInfoPopupView view, Entity sourceTower)
+        {
+            return new TowerInfoPopupPresenter(
+                _coroutinesPerformer,
+                _container.Resolve<RayShooterService>(),
+                view,
+                sourceTower,
+                _container.Resolve<EntitiesLifeContext>());
+        }
+
+        public EnemyInfoPopupPresenter CreateEnemyInfoPopupPresenter(BottomInfoPopupView view, Entity sourceTower)
+        {
+            return new EnemyInfoPopupPresenter(
+                _coroutinesPerformer,
+                _container.Resolve<RayShooterService>(),
+                view,
+                sourceTower);
         }
     }
 }
