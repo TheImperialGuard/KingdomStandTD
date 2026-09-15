@@ -54,7 +54,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
 
             float distanceToWaypoint = (waypointPos - _soure.position).magnitude;
 
-            return distanceToWaypoint < 0.01f;
+            return distanceToWaypoint <= 0.05f;
         }
 
         private void SwitchWaypoint()

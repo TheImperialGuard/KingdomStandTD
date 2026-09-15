@@ -99,7 +99,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
             Vector3 spawnPos = waypoints.First().transform.position;
 
             if (waypointsOffset != Vector3.zero)
-                spawnPos += waypointsOffset;
+                spawnPos += waypoints.First().transform.TransformVector(waypointsOffset);
 
             List<Waypoint> path = GetPathWithoutSpawnPos(waypoints);
 
