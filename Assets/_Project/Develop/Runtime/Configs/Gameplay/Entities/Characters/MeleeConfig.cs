@@ -14,5 +14,6 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters
         [field: SerializeField, Range(0, 1)] public float DamageResistanceIndex { get; private set; } = 0;
         [field: SerializeField, Min(0)] public int DamageOnFinishPath { get; private set; } = 1;
         [field: SerializeField, Min(0)] public int GoldOnDeath { get; private set; } = 10;
+        [field: SerializeField] public bool IsBoss { get; private set; } = false;
     }
 }
