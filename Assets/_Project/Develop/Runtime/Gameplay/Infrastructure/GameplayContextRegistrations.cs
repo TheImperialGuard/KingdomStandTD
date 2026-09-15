@@ -13,6 +13,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
+using Assets._Project.Develop.Runtime.Gameplay.Features.PauseFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
@@ -112,6 +113,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateStartBossMusicService).NonLazy();
 
             container.RegisterAsSingle(CreateCameraMover);
+
+            container.RegisterAsSingle(CreateTimeScalePauseService);
         }
 
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c) => new();
@@ -162,12 +165,18 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 _inputArgs.LevelNumber,
                 c.Resolve<TowersPlaceholdersService>(),
                 c.Resolve<PlayerInteractsService>(),
-                c.Resolve<MusicSwitcherService>());
+                c.Resolve<MusicSwitcherService>(),
+                c.Resolve<GameplayPopupService>());
         }
 
         private static AreaEntitiesDetectorService CreateAreaEntitiesDetectorService(DIContainer c)
         {
             return new AreaEntitiesDetectorService(c.Resolve<CollidersRegistryService>());
+        }
+
+        private static TimeScalePauseService CreateTimeScalePauseService(DIContainer c)
+        {
+            return new TimeScalePauseService();
         }
 
         private static PlayerInteractsService CreatePlayerInteractsService(DIContainer c)
@@ -209,7 +218,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             => new(c);
 
         private static GameplayPresentersFactory CreateGameplayPresentersFactory(DIContainer c)
-            => new(c);
+            => new(c, _inputArgs);
 
         private static ProjectilesFactory CreateProjectilesFactory(DIContainer c)
             => new(c);

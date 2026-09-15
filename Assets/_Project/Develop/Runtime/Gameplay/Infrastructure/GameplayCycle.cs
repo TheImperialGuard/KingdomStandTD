@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
+using Assets._Project.Develop.Runtime.UI.Gameplay;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
@@ -18,6 +19,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private readonly TowersPlaceholdersService _towersPlaceholdersService;
         private readonly PlayerInteractsService _playerInteractsService;
         private MusicSwitcherService _musicSwitcherService;
+        private GameplayPopupService _gameplayPopupService;
 
         private readonly GameModes _gameModeType;
         private readonly int _levelNumber;
@@ -35,7 +37,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             int levelNumber,
             TowersPlaceholdersService towersPlaceholdersService,
             PlayerInteractsService playerInteractsService,
-            MusicSwitcherService musicSwitcherService)
+            MusicSwitcherService musicSwitcherService,
+            GameplayPopupService gameplayPopupService)
         {
             _gameModesFactory = gameModesFactory;
             _coroutinesPerformer = coroutinesPerformer;
@@ -46,6 +49,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _towersPlaceholdersService = towersPlaceholdersService;
             _playerInteractsService = playerInteractsService;
             _musicSwitcherService = musicSwitcherService;
+            _gameplayPopupService = gameplayPopupService;
         }
 
         public void Prepare()
@@ -71,25 +75,26 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         {
             _playerInteractsService.Disable();
 
-            SetMusicFor(results);
-
-            if (results != LevelResults.Defeat)
-                SaveLevelResults(results);
-
-            ShowEndLevelPopup(results);
-        }
-
-        private void SetMusicFor(LevelResults results)
-        {
             if (results == LevelResults.Defeat)
-                _musicSwitcherService.SwitchFor(MusicContexts.GameplayDefeat, false);
+                ProcessDefeat();
             else
-                _musicSwitcherService.SwitchFor(MusicContexts.GameplayWin, false);
+                ProcessWin(results);
         }
 
-        private void ShowEndLevelPopup(LevelResults results)
+        private void ProcessWin(LevelResults results)
         {
-            // Открытие попапа
+            _musicSwitcherService.SwitchFor(MusicContexts.GameplayWin, false);
+
+            SaveLevelResults(results);
+
+            _gameplayPopupService.OpenWinPopup(results);
+        }
+
+        private void ProcessDefeat()
+        {
+            _musicSwitcherService.SwitchFor(MusicContexts.GameplayDefeat, false);
+
+            _gameplayPopupService.OpenDefeatPopup();
         }
 
         private void SaveLevelResults(LevelResults results)

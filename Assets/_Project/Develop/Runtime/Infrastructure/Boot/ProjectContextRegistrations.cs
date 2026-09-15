@@ -17,6 +17,7 @@ using Assets._Project.Develop.Runtime.Utilities.LoadingScreen;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 using Assets._Project.Develop.Runtime.Utilities.Timer;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
 {
@@ -51,6 +52,8 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateMusicSwitcherService);
 
             container.RegisterAsSingle(CreateRayShooterService);
+
+            container.RegisterAsSingle(CreateAudioHandler);
 
             container.RegisterAsSingle<IInputService>(CreateDesktopInput);
         }
@@ -124,6 +127,15 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             MusicConfig config = configProviderService.GetConfig<MusicConfig>();
 
             return new MusicSwitcherService(c.Resolve<MusicPlayer>(), config);
+        }
+
+        private static AudioHandler CreateAudioHandler(DIContainer c)
+        {
+            ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
+
+            AudioMixer audioMixer = resourcesAssetsLoader.Load<AudioMixer>("Utilities/Audio/GeneralMixer");
+
+            return new AudioHandler(audioMixer);
         }
 
         private static CoroutinesPerformer CreateCoroutinesPerformer(DIContainer c)

@@ -4,15 +4,20 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
+using Assets._Project.Develop.Runtime.Gameplay.Features.PauseFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
+using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.CommonViews;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.GoldWallet;
+using Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.PlayerHealthDisplay;
+using Assets._Project.Develop.Runtime.UI.Gameplay.ResultsPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.StagesStatus;
 using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
@@ -22,6 +27,7 @@ using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay
@@ -30,11 +36,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
     {
         private readonly DIContainer _container;
         private readonly ICoroutinesPerformer _coroutinesPerformer;
+        private readonly GameplayInputArgs _gameplayInputArgs;
 
-        public GameplayPresentersFactory(DIContainer container)
+        public GameplayPresentersFactory(DIContainer container, GameplayInputArgs gameplayInputArgs)
         {
             _container = container;
             _coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
+            _gameplayInputArgs = gameplayInputArgs;
         }
 
         public StartStagesPopupPresenter CreateStartStagesPopupPresenter(StartStagesPopupView view)
@@ -113,7 +121,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
 
         public GameplayScreenPresenter CreateGameplayScreenPresenter(GameplayScreenView view)
         {
-            return new GameplayScreenPresenter(view, this);
+            return new GameplayScreenPresenter(view, this, _container.Resolve<GameplayPopupService>());
         }
 
         public GoldWalletPresenter CreateGoldWalletPresenter(IconTextView view)
@@ -148,6 +156,38 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<RayShooterService>(),
                 view,
                 sourceTower);
+        }
+
+        public WinPopupPresenter CreateWinPopupPresenter(WinPopupView view, LevelResults results)
+        {
+            return new WinPopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                _container.Resolve<RayShooterService>(),
+                view,
+                _container.Resolve<SceneSwitcherService>(),
+                results);
+        }
+
+        public DefeatPopupPresenter CreateDefeatPopupPresenter(DefeatPopupView view)
+        {
+            return new DefeatPopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                _container.Resolve<RayShooterService>(),
+                view,
+                _container.Resolve<SceneSwitcherService>(),
+                _gameplayInputArgs);
+        }
+
+        public PausePopupPresenter CreatePausePopupPresenter(PausePopupView view)
+        {
+            return new PausePopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                _container.Resolve<RayShooterService>(),
+                view,
+                _container.Resolve<TimeScalePauseService>(),
+                _container.Resolve<SceneSwitcherService>(),
+                _gameplayInputArgs,
+                _container.Resolve<AudioHandler>());
         }
     }
 }

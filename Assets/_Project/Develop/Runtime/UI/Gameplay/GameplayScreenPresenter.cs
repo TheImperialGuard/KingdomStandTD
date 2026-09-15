@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.UI.Gameplay.GoldWallet;
 using Assets._Project.Develop.Runtime.UI.Gameplay.PlayerHealthDisplay;
 using Assets._Project.Develop.Runtime.UI.Gameplay.StagesStatus;
+using System;
 using System.Collections.Generic;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay
@@ -11,21 +12,26 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
         private readonly GameplayScreenView _screenView;
 
         private readonly GameplayPresentersFactory _gameplayPresentersFactory;
+        private readonly GameplayPopupService _gameplayPopupService;
 
         private readonly List<IPresenter> _childPresenters = new();
 
         public GameplayScreenPresenter(
-            GameplayScreenView screenView, 
-            GameplayPresentersFactory gameplayPresentersFactory)
+            GameplayScreenView screenView,
+            GameplayPresentersFactory gameplayPresentersFactory,
+            GameplayPopupService gameplayPopupService)
         {
             _screenView = screenView;
             _gameplayPresentersFactory = gameplayPresentersFactory;
+            _gameplayPopupService = gameplayPopupService;
         }
 
         public GameplayScreenView Screen => _screenView;
 
         public void Initialize()
         {
+            _screenView.PauseClicked += OnPauseClicked;
+
             CreateGoldWallet();
             CreateStagesStatus();
             CreatePlayerHealth();
@@ -36,6 +42,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
 
         public void Dispose()
         {
+            _screenView.PauseClicked -= OnPauseClicked;
+
             foreach (IPresenter presenter in _childPresenters)
                 presenter.Dispose();
 
@@ -61,6 +69,11 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
             PlayerHealthPresenter playerHealthPresenter = _gameplayPresentersFactory.CreatePlayerHealthPresenter(_screenView.PlayerHealthView);
 
             _childPresenters.Add(playerHealthPresenter);
+        }
+
+        private void OnPauseClicked()
+        {
+            _gameplayPopupService.OpenPausePopup();
         }
     }
 }

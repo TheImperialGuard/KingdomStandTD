@@ -765,7 +765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4932605604372494192, guid: 972b0b7a64180e649b8f5236360f3929, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8
+      value: -5.61
       objectReference: {fileID: 0}
     - target: {fileID: 4932605604372494192, guid: 972b0b7a64180e649b8f5236360f3929, type: 3}
       propertyPath: m_LocalRotation.w
@@ -900,7 +900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4932605604372494192, guid: 972b0b7a64180e649b8f5236360f3929, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6
+      value: -4.84
       objectReference: {fileID: 0}
     - target: {fileID: 4932605604372494192, guid: 972b0b7a64180e649b8f5236360f3929, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1033,15 +1033,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _enemiesWavesStageConfigs.Array.data[0].<StageTime>k__BackingField
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _enemiesWavesStageConfigs.Array.data[0]._enemiesWaveConfigs.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _enemiesWavesStageConfigs.Array.data[0].<TimeToSkipStage>k__BackingField
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _enemiesWavesStageConfigs.Array.data[0]._enemiesWaveConfigs.Array.data[0].<RoadPath>k__BackingField
@@ -1058,7 +1058,7 @@ PrefabInstance:
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _enemiesWavesStageConfigs.Array.data[0]._enemiesWaveConfigs.Array.data[0].<EnemyConfig>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: 3b94d90c66f36024b937c884d541a969, type: 2}
+      objectReference: {fileID: 11400000, guid: 2f4acf86a91d5b64bb2648c2d7661d9c, type: 2}
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _enemiesWavesStageConfigs.Array.data[0]._enemiesWaveConfigs.Array.data[1].<EnemyConfig>k__BackingField
       value: 
@@ -1069,7 +1069,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 3b94d90c66f36024b937c884d541a969, type: 2}
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _enemiesWavesStageConfigs.Array.data[0]._enemiesWaveConfigs.Array.data[0].<EnemiesCount>k__BackingField
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _enemiesWavesStageConfigs.Array.data[0]._enemiesWaveConfigs.Array.data[1].<EnemiesCount>k__BackingField
@@ -1089,7 +1089,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _enemiesWavesStageConfigs.Array.data[0]._enemiesWaveConfigs.Array.data[0].<DelayBetweenSpawns>k__BackingField
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5738566516802351086, guid: 0d7f64b3e6a13c8458e3a4a6e1ea79a1, type: 3}
       propertyPath: _enemiesWavesStageConfigs.Array.data[0]._enemiesWaveConfigs.Array.data[1].<DelayBetweenSpawns>k__BackingField

@@ -1,8 +1,11 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
+using Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup;
+using Assets._Project.Develop.Runtime.UI.Gameplay.ResultsPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup;
@@ -104,6 +107,39 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
             OnPopupCreated(popup, view, closedCallback);
 
             return popup;
+        }
+
+        public WinPopupPresenter OpenWinPopup(LevelResults results, Action closedCallback = null)
+        {
+            WinPopupView view = ViewsFactory.Create<WinPopupView>(ViewIDs.WinPopup, PopupLayer);
+
+            WinPopupPresenter presenter = _gameplayPresentersFactory.CreateWinPopupPresenter(view, results);
+
+            OnPopupCreated(presenter, view, closedCallback);
+
+            return presenter;
+        }
+
+        public DefeatPopupPresenter OpenDefeatPopup(Action closedCallback = null)
+        {
+            DefeatPopupView view = ViewsFactory.Create<DefeatPopupView>(ViewIDs.DefeatPopup, PopupLayer);
+
+            DefeatPopupPresenter presenter = _gameplayPresentersFactory.CreateDefeatPopupPresenter(view);
+
+            OnPopupCreated(presenter, view, closedCallback);
+
+            return presenter;
+        }
+
+        public PausePopupPresenter OpenPausePopup(Action closedCallback = null)
+        {
+            PausePopupView view = ViewsFactory.Create<PausePopupView>(ViewIDs.PausePopup, PopupLayer);
+
+            PausePopupPresenter presenter = _gameplayPresentersFactory.CreatePausePopupPresenter(view);
+
+            OnPopupCreated(presenter, view, closedCallback);
+
+            return presenter;
         }
     }
 }
