@@ -21,4 +21,4 @@ MonoBehaviour:
   <DamageResistanceType>k__BackingField: 0
   <DamageResistanceIndex>k__BackingField: 0.5
   <DamageOnFinishPath>k__BackingField: 1
-  <GoldOnDeath>k__BackingField: 3
+  <GoldOnDeath>k__BackingField: 5

@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Rogue
       objectReference: {fileID: 0}
+    - target: {fileID: 1516302838545071903, guid: 6ea7c44e7fd295a42bad38fdec2df669, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2010285631546199246, guid: 6ea7c44e7fd295a42bad38fdec2df669, type: 3}
       propertyPath: m_CastShadows
       value: 0
