@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
@@ -27,6 +28,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
                 return false;
 
             float finalDamage = CalculateFinalDamage(damage, damageType.Value, damageResistanceType.Value, damageResistanceIndex.Value);
+
+            if (target.TryGetComponent(out IsBoss isBoss))
+                finalDamage = GetDamageForBoss(finalDamage, target);
 
             takeDamageRequest.Invoke(finalDamage);
 
@@ -69,6 +73,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
             float finalDamage = damage - damage * damageResistanceIndex;
 
             return finalDamage;
+        }
+
+        private static float GetDamageForBoss(float damage, Entity target)
+        {
+            float maxDamageForApply = target.MaxHealth.Value / 3;
+
+            if (damage > maxDamageForApply)
+                return maxDamageForApply;
+
+            return damage;
         }
     }
 }

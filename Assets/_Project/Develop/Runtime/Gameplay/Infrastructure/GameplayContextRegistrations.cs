@@ -109,6 +109,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateGameplayScreenPresenter).NonLazy();
 
+            container.RegisterAsSingle(CreateStartBossMusicService).NonLazy();
+
             container.RegisterAsSingle(CreateCameraMover);
         }
 
@@ -297,6 +299,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             LevelConfig levelConfig = levelsListConfig.GetBy(levelNumber);
 
             return levelConfig;
+        }
+
+        private static StartBossMusicService CreateStartBossMusicService(DIContainer c)
+        {
+            return new StartBossMusicService(c.Resolve<MusicSwitcherService>(), c.Resolve<EntitiesLifeContext>());
         }
 
         private static GameplayUIRoot CreateGameplayUIRoot(DIContainer c)

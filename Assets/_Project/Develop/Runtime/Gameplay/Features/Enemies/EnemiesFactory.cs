@@ -72,6 +72,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
                         .AddSystem(new SelfReleaseSystem(_entitiesLifeContext))
                         .AddSystem(new EarnGoldOnDeathSystem(_container.Resolve<WalletService>()));
 
+                    if (meleeConfig.IsBoss == true)
+                        entity.AddIsBoss();
+
                     _brainsFactory.CreateMeleeBrain(entity);
 
                     break;
