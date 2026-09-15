@@ -295,6 +295,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             Level levelInstance = GameObject.Instantiate(levelPrefab);
 
+            levelInstance.CombineStaticGroup();
+
             return levelInstance;
         }
 

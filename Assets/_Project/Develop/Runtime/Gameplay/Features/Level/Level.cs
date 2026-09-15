@@ -8,8 +8,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Level
     {
         [SerializeField] private List<EnemiesWavesStageConfig> _enemiesWavesStageConfigs;
         [SerializeField] private List<Transform> _towersPositions;
+        [SerializeField] private GameObject _staticGroup;
 
         public IReadOnlyList<EnemiesWavesStageConfig> EnemiesWavesStageConfigs => _enemiesWavesStageConfigs;
         public IReadOnlyList<Transform> TowersPositions => _towersPositions;
+
+        public void CombineStaticGroup() => StaticBatchingUtility.Combine(_staticGroup);
     }
 }

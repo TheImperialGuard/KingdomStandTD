@@ -8,9 +8,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -70,9 +78,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -132,9 +148,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (45)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -194,9 +218,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 1268188692690103012, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_Name
       value: RiverStraightTile (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4226506192491692989, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_LocalPosition.x
@@ -464,9 +496,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -586,6 +626,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock-small
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2cf262c551114e4ba619e8e64801367, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -604,9 +648,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 2330674939183373110, guid: 761481ddf5fef9440b647e948266243d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9099990855208827011, guid: 761481ddf5fef9440b647e948266243d, type: 3}
       propertyPath: m_Name
       value: RiverCornerTile
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099990855208827011, guid: 761481ddf5fef9440b647e948266243d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9130454747427555265, guid: 761481ddf5fef9440b647e948266243d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -666,9 +718,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -772,6 +832,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: building_stage_A
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fb3b20cd97cfe74b87fae74a96b350f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -790,9 +854,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 2330674939183373110, guid: 761481ddf5fef9440b647e948266243d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9099990855208827011, guid: 761481ddf5fef9440b647e948266243d, type: 3}
       propertyPath: m_Name
       value: RiverCornerTile (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099990855208827011, guid: 761481ddf5fef9440b647e948266243d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9130454747427555265, guid: 761481ddf5fef9440b647e948266243d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -912,6 +984,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: building_market_red
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a8489418042e2204692974e91829045d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -990,6 +1066,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: detail-crystal-large
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 21803214548af7a4aa76bc08e6f936f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1008,9 +1088,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (48)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1130,6 +1218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock-large
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 938ee5a4dc6f370458ef89bb175ac47d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1148,9 +1240,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 4791355630024527549, guid: 510836267e0459c40bc6da22e5a19046, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6764621577256247656, guid: 510836267e0459c40bc6da22e5a19046, type: 3}
       propertyPath: m_Name
       value: TileHill (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6764621577256247656, guid: 510836267e0459c40bc6da22e5a19046, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8298675413615319955, guid: 510836267e0459c40bc6da22e5a19046, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1210,9 +1310,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1334,9 +1442,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (52)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1396,9 +1512,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (53)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1520,9 +1644,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 4791355630024527549, guid: 510836267e0459c40bc6da22e5a19046, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6764621577256247656, guid: 510836267e0459c40bc6da22e5a19046, type: 3}
       propertyPath: m_Name
       value: TileHill (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6764621577256247656, guid: 510836267e0459c40bc6da22e5a19046, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8298675413615319955, guid: 510836267e0459c40bc6da22e5a19046, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1586,6 +1718,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileForest (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 700410647496488811, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382161073030834231, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9028465741472771771, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -1644,9 +1784,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1750,6 +1898,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: building_scaffolding
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e93f8281f5f673e41a4ef77c78ee8a20, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1768,9 +1920,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1830,9 +1990,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1896,6 +2064,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileForest (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 700410647496488811, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382161073030834231, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9028465741472771771, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8
@@ -1954,9 +2130,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2016,9 +2200,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (09)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2078,9 +2270,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 1268188692690103012, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_Name
       value: RiverStraightTile (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4226506192491692989, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2184,6 +2384,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tree-high-round
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6e5f7256488a30b45ae0f20920c79d75, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2202,9 +2406,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (08)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2337,9 +2549,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 980569220975615130, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1048368026859288835, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.9875
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361069356678055024, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1519462554367575685, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: _towersPositions.Array.size
@@ -3005,9 +3225,25 @@ PrefabInstance:
       propertyPath: _enemiesWavesStageConfigs.Array.data[4]._enemiesWaveConfigs.Array.data[4].<DelayBetweenSpawns>k__BackingField
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1562081772731520586, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1562893192424765883, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590956189459994946, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1805225738622321072, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1833463932760100544, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2271648225042629107, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3049,6 +3285,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2346137982039804895, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2413308876104671848, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3068,6 +3308,14 @@ PrefabInstance:
     - target: {fileID: 2413308876104671848, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2663627569181518987, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831069849827590751, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2861439594174563869, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: _waypoints.Array.size
@@ -3105,6 +3353,30 @@ PrefabInstance:
       propertyPath: '_waypoints.Array.data[7]'
       value: 
       objectReference: {fileID: 5432135388437754981}
+    - target: {fileID: 2942718673149615071, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3041648347144550610, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3608590357092040280, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977119714168236199, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132930105492717140, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163914097157438543, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4374248677650638270, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -3112,6 +3384,14 @@ PrefabInstance:
     - target: {fileID: 4374248677650638270, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.z
       value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397758481997981415, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399053589904932919, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4701442906113241297, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3133,6 +3413,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 4885963871550079912, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4890444571187696604, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -3149,9 +3433,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 5590727844119421263, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6014180454972694248, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6018115689447710020, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6222568284319732242, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3173,6 +3465,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 6279149794965606898, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6328447753985041191, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394827487450076607, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398475506878750024, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6491268008167287258, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6755282635452181813, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4
@@ -3181,9 +3493,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -4
       objectReference: {fileID: 0}
+    - target: {fileID: 6962822075170537229, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6989558661037718326, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_Name
       value: Level_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7037318855164111133, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7249677890643000797, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3204,6 +3524,10 @@ PrefabInstance:
     - target: {fileID: 7249677890643000797, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355433558597398233, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7499922319775640346, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3233,9 +3557,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -6
       objectReference: {fileID: 0}
+    - target: {fileID: 8260416207543531142, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8342449131829604882, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_Name
       value: Path_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483142914447301274, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8505037532254426897, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3272,6 +3604,26 @@ PrefabInstance:
     - target: {fileID: 8585828498069198586, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalPosition.z
       value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8600350868409776535, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619028823213810557, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8664018600776066912, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759492070639042313, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017291258052623390, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9027642842902959901, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3427,6 +3779,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8887185359786613335, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3659537995900604750}
+    - targetCorrespondingSourceObject: {fileID: 8357717722303554457, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3965129709709170776}
     - targetCorrespondingSourceObject: {fileID: 4598741942628441066, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       insertIndex: 1
       addedObject: {fileID: 1596299325372093118}
@@ -3825,9 +4180,6 @@ PrefabInstance:
       addedObject: {fileID: 8076140058416644436}
     - targetCorrespondingSourceObject: {fileID: 5416605777506407202, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3965129709709170776}
-    - targetCorrespondingSourceObject: {fileID: 5416605777506407202, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3771336246025123871}
     - targetCorrespondingSourceObject: {fileID: 5416605777506407202, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
       insertIndex: -1
@@ -3962,6 +4314,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7427048016689540677, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
   m_PrefabInstance: {fileID: 2455962656605372839}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &5902467567489212990 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8357717722303554457, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
+  m_PrefabInstance: {fileID: 2455962656605372839}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6069453014366337032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8515834508391233967, guid: 46fdf708012a1a64a8993584ed659954, type: 3}
@@ -3995,9 +4352,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4057,9 +4422,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4119,9 +4492,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 1180832424813980009, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_Name
       value: RoadTileCorner (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8893433551216730474, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4243,9 +4624,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4345,9 +4734,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2794103006458973630, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8461611863571252895, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
       propertyPath: m_Name
       value: TileForestHalf (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461611863571252895, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4427,6 +4824,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: building_blacksmith_red
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d2cbb9d222e85d94ebd5eedf55ecbf3c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4448,6 +4849,14 @@ PrefabInstance:
     - target: {fileID: 700410647496488811, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
       propertyPath: m_Name
       value: TileForest (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 700410647496488811, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382161073030834231, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9028465741472771771, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4511,6 +4920,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileDirt (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 49997308230640896, guid: 3022632cdee807c46ac1ce6ffcc9e450, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866608684368619079, guid: 3022632cdee807c46ac1ce6ffcc9e450, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8089096630148431147, guid: 3022632cdee807c46ac1ce6ffcc9e450, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8
@@ -4551,6 +4968,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8132049292771150650, guid: 3022632cdee807c46ac1ce6ffcc9e450, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4569,9 +4990,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (41)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4631,9 +5060,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (43)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4693,9 +5130,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4755,9 +5200,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 1217351797623724771, guid: b1ceceacb81ea16468da8490b9b1e6e6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1899765191641104619, guid: b1ceceacb81ea16468da8490b9b1e6e6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308332494744449119, guid: b1ceceacb81ea16468da8490b9b1e6e6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5392887319112880975, guid: b1ceceacb81ea16468da8490b9b1e6e6, type: 3}
       propertyPath: m_Name
       value: RoadTileEndMarker (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392887319112880975, guid: b1ceceacb81ea16468da8490b9b1e6e6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8022090397862926618, guid: b1ceceacb81ea16468da8490b9b1e6e6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4890,9 +5351,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4952,9 +5421,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5014,9 +5491,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5149,9 +5634,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5211,9 +5704,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5317,6 +5818,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tent
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c529ad2651072be409eeb45d3380d001, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5395,7 +5900,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 7583766311894749829}
+    m_TransformParent: {fileID: 5902467567489212990}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 7f238c0352ef78e4c9b420e0a83e1003, type: 3}
       propertyPath: m_LocalScale.x
@@ -5415,7 +5920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7f238c0352ef78e4c9b420e0a83e1003, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.06
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7f238c0352ef78e4c9b420e0a83e1003, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5427,15 +5932,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7f238c0352ef78e4c9b420e0a83e1003, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7f238c0352ef78e4c9b420e0a83e1003, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7f238c0352ef78e4c9b420e0a83e1003, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7f238c0352ef78e4c9b420e0a83e1003, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5498,9 +6003,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5620,6 +6133,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: building_stage_C
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 489bd31a88bbf064bb53c14811252c66, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5638,9 +6155,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 1180832424813980009, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_Name
       value: RoadTileCorner (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8893433551216730474, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5700,9 +6225,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5762,9 +6295,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (55)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5886,9 +6427,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6081,6 +6630,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: building_home_A_red (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4dc0f77a11b5dcd4ca52749d1fb485f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6158,6 +6711,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f25b061a9f3c41148a18a31e382b109f, type: 3}
       propertyPath: m_Name
       value: building_church_red
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f25b061a9f3c41148a18a31e382b109f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6237,6 +6794,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock-wide
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1151059b1ab7d6d489dba539fc828171, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6255,9 +6816,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 1241554159447848906, guid: 95f06c1799fcfa244bbff4fad98a491b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2112814734901778327, guid: 95f06c1799fcfa244bbff4fad98a491b, type: 3}
       propertyPath: m_Name
       value: RoadTileCrossroadA
+      objectReference: {fileID: 0}
+    - target: {fileID: 2112814734901778327, guid: 95f06c1799fcfa244bbff4fad98a491b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3113761039987613393, guid: 95f06c1799fcfa244bbff4fad98a491b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6317,9 +6886,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6379,9 +6956,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6441,9 +7026,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6507,6 +7100,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileRocks (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 910022374873276975, guid: 000eca0b94053524ca739f262ad21d15, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232660936777391925, guid: 000eca0b94053524ca739f262ad21d15, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8958383450132642308, guid: 000eca0b94053524ca739f262ad21d15, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2
@@ -6547,6 +7148,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8992135332279208981, guid: 000eca0b94053524ca739f262ad21d15, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6565,9 +7170,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6627,9 +7240,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6748,6 +7369,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1151059b1ab7d6d489dba539fc828171, type: 3}
       propertyPath: m_Name
       value: rock-wide (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1151059b1ab7d6d489dba539fc828171, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6900,6 +7525,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: building_mine_red
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c89e9e30631e33f419f1a1d3ee648113, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6918,9 +7547,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 1268188692690103012, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_Name
       value: RiverStraightTile
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4226506192491692989, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7040,6 +7677,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock-small (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2cf262c551114e4ba619e8e64801367, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7058,9 +7699,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (37)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7120,9 +7769,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (56)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7242,6 +7899,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pallet (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6fc9887460ab4b841ab09841a206c79c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7319,6 +7980,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 21803214548af7a4aa76bc08e6f936f5, type: 3}
       propertyPath: m_Name
       value: detail-crystal-large (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 21803214548af7a4aa76bc08e6f936f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7517,9 +8182,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7579,9 +8252,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 1268188692690103012, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_Name
       value: RiverStraightTile (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4226506192491692989, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7641,9 +8322,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 2330674939183373110, guid: 761481ddf5fef9440b647e948266243d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9099990855208827011, guid: 761481ddf5fef9440b647e948266243d, type: 3}
       propertyPath: m_Name
       value: RiverCornerTile (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099990855208827011, guid: 761481ddf5fef9440b647e948266243d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9130454747427555265, guid: 761481ddf5fef9440b647e948266243d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7707,6 +8396,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoadTileSpawn (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5095888492614673453, guid: a9e3dc09eee9a93419fa93d11d06f3eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8387680396548363224, guid: a9e3dc09eee9a93419fa93d11d06f3eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7747,6 +8440,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9200662813505673359, guid: a9e3dc09eee9a93419fa93d11d06f3eb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7765,9 +8462,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 2330674939183373110, guid: 761481ddf5fef9440b647e948266243d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9099990855208827011, guid: 761481ddf5fef9440b647e948266243d, type: 3}
       propertyPath: m_Name
       value: RiverCornerTile (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099990855208827011, guid: 761481ddf5fef9440b647e948266243d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9130454747427555265, guid: 761481ddf5fef9440b647e948266243d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7827,9 +8532,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7889,9 +8602,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (57)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7951,9 +8672,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 1268188692690103012, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_Name
       value: RiverStraightTile (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4226506192491692989, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8013,9 +8742,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 1268188692690103012, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_Name
       value: RiverStraightTile (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4226506192491692989, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8075,9 +8812,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 1268188692690103012, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_Name
       value: RiverStraightTile (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4226506192491692989, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8210,9 +8955,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (49)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8374,9 +9127,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8118783135127081549, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8702639644891306604, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
       propertyPath: m_Name
       value: TileSingleTree (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702639644891306604, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8399,6 +9160,14 @@ PrefabInstance:
     - target: {fileID: 700410647496488811, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
       propertyPath: m_Name
       value: TileForest (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 700410647496488811, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382161073030834231, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9028465741472771771, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8458,9 +9227,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (44)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8520,9 +9297,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8695,9 +9480,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8118783135127081549, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8702639644891306604, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
       propertyPath: m_Name
       value: TileSingleTree (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702639644891306604, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8717,9 +9510,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8779,9 +9580,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (40)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8974,6 +9783,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock-small (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2cf262c551114e4ba619e8e64801367, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8992,9 +9805,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 1180832424813980009, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_Name
       value: RoadTileCorner (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8893433551216730474, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9127,9 +9948,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9189,9 +10018,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 1180832424813980009, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_Name
       value: RoadTileCorner (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8893433551216730474, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9251,9 +10088,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9459,9 +10304,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9561,9 +10414,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8118783135127081549, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8702639644891306604, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
       propertyPath: m_Name
       value: TileSingleTree (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702639644891306604, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9583,9 +10444,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9645,9 +10514,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (46)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9707,9 +10584,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9890,6 +10775,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 21803214548af7a4aa76bc08e6f936f5, type: 3}
       propertyPath: m_Name
       value: detail-crystal-large (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 21803214548af7a4aa76bc08e6f936f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10084,9 +10973,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2794103006458973630, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8461611863571252895, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
       propertyPath: m_Name
       value: TileForestHalf (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461611863571252895, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10208,9 +11105,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2794103006458973630, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8461611863571252895, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
       propertyPath: m_Name
       value: TileForestHalf (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461611863571252895, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10292,9 +11197,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10354,9 +11267,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10456,9 +11377,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8118783135127081549, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8702639644891306604, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
       propertyPath: m_Name
       value: TileSingleTree
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702639644891306604, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10481,6 +11410,14 @@ PrefabInstance:
     - target: {fileID: 700410647496488811, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
       propertyPath: m_Name
       value: TileForest (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 700410647496488811, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382161073030834231, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9028465741472771771, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10540,9 +11477,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (47)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10602,9 +11547,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10724,6 +11677,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pallet
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6fc9887460ab4b841ab09841a206c79c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10801,6 +11758,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 94a3014d3c8b1314bab84b2c134070c4, type: 3}
       propertyPath: m_Name
       value: building_stage_B
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 94a3014d3c8b1314bab84b2c134070c4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10880,6 +11841,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: detail-crystal-large (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 21803214548af7a4aa76bc08e6f936f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10898,9 +11863,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10960,9 +11933,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 1180832424813980009, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_Name
       value: RoadTileCorner (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8893433551216730474, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11022,9 +12003,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11084,9 +12073,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (50)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11146,9 +12143,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11208,9 +12213,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (54)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11270,9 +12283,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (51)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11332,9 +12353,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11454,6 +12483,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wheelbarrow
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 465fba2441f62b248a3e3a78e76cae32, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11534,9 +12567,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11596,9 +12637,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11724,6 +12773,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileDirt (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 49997308230640896, guid: 3022632cdee807c46ac1ce6ffcc9e450, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866608684368619079, guid: 3022632cdee807c46ac1ce6ffcc9e450, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8089096630148431147, guid: 3022632cdee807c46ac1ce6ffcc9e450, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4
@@ -11763,6 +12820,10 @@ PrefabInstance:
     - target: {fileID: 8089096630148431147, guid: 3022632cdee807c46ac1ce6ffcc9e450, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8132049292771150650, guid: 3022632cdee807c46ac1ce6ffcc9e450, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11904,6 +12965,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: detail-crystal-large (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 21803214548af7a4aa76bc08e6f936f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11922,9 +12987,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (42)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11984,9 +13057,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (32)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12046,9 +13127,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 1180832424813980009, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_Name
       value: RoadTileCorner (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8893433551216730474, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12108,9 +13197,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 2330674939183373110, guid: 761481ddf5fef9440b647e948266243d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9099990855208827011, guid: 761481ddf5fef9440b647e948266243d, type: 3}
       propertyPath: m_Name
       value: RiverCornerTile (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099990855208827011, guid: 761481ddf5fef9440b647e948266243d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9130454747427555265, guid: 761481ddf5fef9440b647e948266243d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12170,9 +13267,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 4019079079640575580, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_Name
       value: RoadTileStraight (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708421141116702028, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8690341698806794009, guid: 37cd5d45e7a7f7246beaffca6fa9ffd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12235,6 +13340,14 @@ PrefabInstance:
     - target: {fileID: 700410647496488811, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
       propertyPath: m_Name
       value: TileForest (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 700410647496488811, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382161073030834231, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9028465741472771771, guid: 85ee373138e683f4ab33d9f5666e47ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12354,6 +13467,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock-large (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 938ee5a4dc6f370458ef89bb175ac47d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12412,9 +13529,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8118783135127081549, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8702639644891306604, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
       propertyPath: m_Name
       value: TileSingleTree (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702639644891306604, guid: 0ad6c0f5539bace4e932e1dfedfb8691, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12434,9 +13559,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (39)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12496,9 +13629,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12558,9 +13699,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4974078265097072610}
     m_Modifications:
+    - target: {fileID: 2118152484271518466, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_Name
       value: EmptyTile (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994555766589172784, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6038410082640040818, guid: 1b1dbfda29a16bd4f95ca9441113dd2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12680,6 +13829,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: building_home_A_red
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4dc0f77a11b5dcd4ca52749d1fb485f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12698,9 +13851,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079382482855336636}
     m_Modifications:
+    - target: {fileID: 1268188692690103012, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_Name
       value: RiverStraightTile (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205198436175215871, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4226506192491692989, guid: 8441ab0395d33d24b80bfa7e2a13a054, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12760,9 +13921,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2145778754836257357}
     m_Modifications:
+    - target: {fileID: 1180832424813980009, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_Name
       value: RoadTileCorner (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5552839761320863788, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8893433551216730474, guid: 13bb8fde0a424bd4ebdb33c42fb4eb60, type: 3}
       propertyPath: m_LocalPosition.x
