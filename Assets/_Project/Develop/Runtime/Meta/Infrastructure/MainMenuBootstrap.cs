@@ -48,21 +48,21 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
-                ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
+            //if (Input.GetKeyDown(KeyCode.G))
+            //{
+            //    SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
+            //    ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
 
-                coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1)));
-            }
+            //    coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(1)));
+            //}
 
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                PlayerDataProvider dataProvider = _container.Resolve<PlayerDataProvider>();
-                ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
+            //if (Input.GetKeyDown(KeyCode.S))
+            //{
+            //    PlayerDataProvider dataProvider = _container.Resolve<PlayerDataProvider>();
+            //    ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
 
-                coroutinesPerformer.StartPerform(dataProvider.SaveAsync());
-            }
+            //    coroutinesPerformer.StartPerform(dataProvider.SaveAsync());
+            //}
         }
     }
 }
