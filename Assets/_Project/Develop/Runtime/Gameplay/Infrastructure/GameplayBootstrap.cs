@@ -68,7 +68,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private void Update()
         {
-            _cameraMover?.Update(Time.deltaTime);
+            _cameraMover?.Update();
             _gameplayCycle?.Update(Time.deltaTime);
             _rayShooterService?.Update(Time.deltaTime);
             _entitiesLifeContext?.Update(Time.deltaTime);

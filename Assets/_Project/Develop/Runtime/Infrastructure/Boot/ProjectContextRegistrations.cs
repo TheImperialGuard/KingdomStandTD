@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Configs;
+using Assets._Project.Develop.Runtime.Configs.Gameplay;
 using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
@@ -55,7 +56,7 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle(CreateAudioHandler);
 
-            container.RegisterAsSingle<IInputService>(CreateDesktopInput);
+            container.RegisterAsSingle(CreateInputService);
         }
 
         private static ResourcesAssetsLoader CreateResourcesAssetsLoader(DIContainer c) => new();
@@ -110,9 +111,17 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             return new PlayerDataProvider(saveLoadService);
         }
 
-        private static DesktopInput CreateDesktopInput(DIContainer c)
+        // Проверка в рантайме, а не через #if: директива UNITY_ANDROID истинна
+        // и в редакторе с андроидным таргетом, где ввод должен остаться мышиным.
+        private static IInputService CreateInputService(DIContainer c)
         {
-            return new DesktopInput();
+            if (Application.isMobilePlatform)
+                return new MobileInput();
+
+            ConfigsProviderService configsProviderService = c.Resolve<ConfigsProviderService>();
+            CameraConfig cameraConfig = configsProviderService.GetConfig<CameraConfig>();
+
+            return new DesktopInput(cameraConfig);
         }
 
         private static LevelsProgressionService CreateLevelsProgressionService(DIContainer c)
