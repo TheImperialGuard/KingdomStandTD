@@ -4,6 +4,11 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public sealed class BoundedOrthoCamera : MonoBehaviour
 {
+    // Вписываем видимую область чуть теснее границ, чтобы не балансировать
+    // на точном равенстве и всегда попадать в обычную ветку ограничения.
+    private const float FIT_SAFETY_FACTOR = 0.999f;
+    private const float ASPECT_CHANGE_TOLERANCE = 0.0001f;
+
     public ReactiveEvent CameraMoved = new();
 
     [Header("Границы игровой области на плоскости XZ")]
@@ -13,9 +18,9 @@ public sealed class BoundedOrthoCamera : MonoBehaviour
     [Header("Плоскость игровой поверхности")]
     [SerializeField] private float groundY = 0f;
 
-    [Header("Минимальный размер области")]
-    [SerializeField] private int minResolutionWidth = 1920;
-    [SerializeField] private int minResolutionHeight = 1080;
+    [Header("Пределы масштаба камеры")]
+    [SerializeField] private float _minOrthographicSize = 1f;
+    [SerializeField] private float _maxOrthographicSize = 30f;
 
     [Header("Отладка")]
     [SerializeField] private bool drawGizmos = true;
@@ -24,6 +29,7 @@ public sealed class BoundedOrthoCamera : MonoBehaviour
     private float _fixedCameraY;
     private float _fixedCameraRotationX;
     private float _fixedCameraRotationZ;
+    private float _lastAspect;
 
     private readonly Vector3[] _visibleCorners = new Vector3[4];
 
@@ -47,6 +53,8 @@ public sealed class BoundedOrthoCamera : MonoBehaviour
         }
 
         SaveFixedCameraSettings();
+
+        _lastAspect = _camera.aspect;
     }
 
     private void Start()
@@ -56,8 +64,14 @@ public sealed class BoundedOrthoCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        // Если ориентация или разрешение изменились,
-        // положение камеры необходимо перепроверить.
+        // Смена ориентации или разрешения меняет ширину видимой области,
+        // поэтому масштаб пересчитывается, а положение перепроверяется.
+        if (IsAspectChanged())
+        {
+            _lastAspect = _camera.aspect;
+            FitSizeToBounds();
+        }
+
         ClampCurrentPosition();
     }
 
@@ -129,7 +143,25 @@ public sealed class BoundedOrthoCamera : MonoBehaviour
         worldMax = newMax;
 
         NormalizeBounds();
+        FitSizeToBounds();
         CenterCamera();
+    }
+
+    /// <summary>
+    /// Подбирает размер камеры так, чтобы видимая область целиком помещалась в границы.
+    /// </summary>
+    [ContextMenu("FitSizeToBounds")]
+    public void FitSizeToBounds()
+    {
+        if (TryCalculateFitSize(out float size) == false)
+            return;
+
+        if (Mathf.Approximately(_camera.orthographicSize, size))
+            return;
+
+        _camera.orthographicSize = size;
+
+        CameraMoved?.Invoke();
     }
 
     /// <summary>
@@ -194,85 +226,60 @@ public sealed class BoundedOrthoCamera : MonoBehaviour
 
         // Для ограничения используем фактические четыре угла
         // будущей видимой области.
-        if (!TryGetVisibleCorners(targetPosition, _visibleCorners))
+        if (TryGetVisibleRect(targetPosition, out Vector2 visibleMin, out Vector2 visibleMax) == false)
         {
             return transform.position;
         }
 
-        float minVisibleX = _visibleCorners[0].x;
-        float maxVisibleX = _visibleCorners[0].x;
-        float minVisibleZ = _visibleCorners[0].z;
-        float maxVisibleZ = _visibleCorners[0].z;
-
-        for (int i = 1; i < _visibleCorners.Length; i++)
-        {
-            Vector3 corner = _visibleCorners[i];
-
-            minVisibleX = Mathf.Min(minVisibleX, corner.x);
-            maxVisibleX = Mathf.Max(maxVisibleX, corner.x);
-            minVisibleZ = Mathf.Min(minVisibleZ, corner.z);
-            maxVisibleZ = Mathf.Max(maxVisibleZ, corner.z);
-        }
-
-        float visibleWidth = maxVisibleX - minVisibleX;
-        float visibleDepth = maxVisibleZ - minVisibleZ;
-
         float boundsWidth = worldMax.x - worldMin.x;
         float boundsDepth = worldMax.y - worldMin.y;
+
+        float visibleWidth = visibleMax.x - visibleMin.x;
 
         // Если камера видит больше области, чем существует,
         // центрируем её по соответствующей оси.
         if (visibleWidth >= boundsWidth)
         {
             targetPosition.x +=
-                GetBoundsCenter().x - (minVisibleX + maxVisibleX) * 0.5f;
+                GetBoundsCenter().x - (visibleMin.x + visibleMax.x) * 0.5f;
         }
         else
         {
-            if (minVisibleX < worldMin.x)
+            if (visibleMin.x < worldMin.x)
             {
-                targetPosition.x += worldMin.x - minVisibleX;
+                targetPosition.x += worldMin.x - visibleMin.x;
             }
 
-            if (maxVisibleX > worldMax.x)
+            if (visibleMax.x > worldMax.x)
             {
-                targetPosition.x -= maxVisibleX - worldMax.x;
+                targetPosition.x -= visibleMax.x - worldMax.x;
             }
         }
 
         // После изменения X нужно снова вычислить видимую область,
         // потому что при общем наклоне камеры границы могут быть связаны.
-        if (!TryGetVisibleCorners(targetPosition, _visibleCorners))
+        if (TryGetVisibleRect(targetPosition, out visibleMin, out visibleMax) == false)
         {
             return transform.position;
         }
 
-        minVisibleZ = _visibleCorners[0].z;
-        maxVisibleZ = _visibleCorners[0].z;
-
-        for (int i = 1; i < _visibleCorners.Length; i++)
-        {
-            minVisibleZ = Mathf.Min(minVisibleZ, _visibleCorners[i].z);
-            maxVisibleZ = Mathf.Max(maxVisibleZ, _visibleCorners[i].z);
-        }
-
-        visibleDepth = maxVisibleZ - minVisibleZ;
+        float visibleDepth = visibleMax.y - visibleMin.y;
 
         if (visibleDepth >= boundsDepth)
         {
             targetPosition.z +=
-                GetBoundsCenter().y - (minVisibleZ + maxVisibleZ) * 0.5f;
+                GetBoundsCenter().y - (visibleMin.y + visibleMax.y) * 0.5f;
         }
         else
         {
-            if (minVisibleZ < worldMin.y)
+            if (visibleMin.y < worldMin.y)
             {
-                targetPosition.z += worldMin.y - minVisibleZ;
+                targetPosition.z += worldMin.y - visibleMin.y;
             }
 
-            if (maxVisibleZ > worldMax.y)
+            if (visibleMax.y > worldMax.y)
             {
-                targetPosition.z -= maxVisibleZ - worldMax.y;
+                targetPosition.z -= visibleMax.y - worldMax.y;
             }
         }
 
@@ -280,12 +287,92 @@ public sealed class BoundedOrthoCamera : MonoBehaviour
         return targetPosition;
     }
 
+    /// <summary>
+    /// Возвращает прямоугольник видимой области на плоскости XZ,
+    /// где x соответствует мировой оси X, а y — мировой оси Z.
+    /// </summary>
+    private bool TryGetVisibleRect(Vector3 cameraPosition, out Vector2 min, out Vector2 max)
+    {
+        min = Vector2.zero;
+        max = Vector2.zero;
+
+        if (TryGetVisibleCorners(cameraPosition, _visibleCorners) == false)
+        {
+            return false;
+        }
+
+        min = new Vector2(_visibleCorners[0].x, _visibleCorners[0].z);
+        max = min;
+
+        for (int i = 1; i < _visibleCorners.Length; i++)
+        {
+            Vector3 corner = _visibleCorners[i];
+
+            min = new Vector2(Mathf.Min(min.x, corner.x), Mathf.Min(min.y, corner.z));
+            max = new Vector2(Mathf.Max(max.x, corner.x), Mathf.Max(max.y, corner.z));
+        }
+
+        return true;
+    }
+
+    private bool TryCalculateFitSize(out float size)
+    {
+        size = _camera.orthographicSize;
+
+        if (TryGetVisibleRect(transform.position, out Vector2 visibleMin, out Vector2 visibleMax) == false)
+        {
+            return false;
+        }
+
+        float visibleWidth = visibleMax.x - visibleMin.x;
+        float visibleDepth = visibleMax.y - visibleMin.y;
+
+        if (visibleWidth <= 0f || visibleDepth <= 0f)
+        {
+            return false;
+        }
+
+        float boundsWidth = worldMax.x - worldMin.x;
+        float boundsDepth = worldMax.y - worldMin.y;
+
+        // Видимые размеры линейны по orthographicSize при любом наклоне камеры,
+        // поэтому достаточно отмасштабировать текущий размер.
+        float scale = Mathf.Min(boundsWidth / visibleWidth, boundsDepth / visibleDepth);
+
+        float fitSize = _camera.orthographicSize * scale * FIT_SAFETY_FACTOR;
+
+        size = Mathf.Clamp(fitSize, _minOrthographicSize, _maxOrthographicSize);
+
+        if (Mathf.Approximately(fitSize, size) == false)
+        {
+            Debug.LogWarning(
+                $"Размер камеры упёрся в предел. Желаемый: {fitSize}, применённый: {size}.",
+                this);
+        }
+
+        return true;
+    }
+
+    private bool IsAspectChanged()
+    {
+        return Mathf.Abs(_camera.aspect - _lastAspect) > ASPECT_CHANGE_TOLERANCE;
+    }
+
     private void ClampCurrentPosition()
     {
         Vector3 currentPosition = transform.position;
         currentPosition.y = _fixedCameraY;
 
-        transform.position = ClampPosition(currentPosition);
+        Vector3 clampedPosition = ClampPosition(currentPosition);
+
+        if (clampedPosition == transform.position)
+        {
+            return;
+        }
+
+        transform.position = clampedPosition;
+
+        CameraMoved?.Invoke();
     }
 
     private Vector3 GetVisibleAreaCenter(Vector3 cameraPosition)
@@ -312,53 +399,18 @@ public sealed class BoundedOrthoCamera : MonoBehaviour
 
     private void NormalizeBounds()
     {
-        worldMin = new Vector2(
+        Vector2 min = new Vector2(
             Mathf.Min(worldMin.x, worldMax.x),
             Mathf.Min(worldMin.y, worldMax.y)
         );
 
-        worldMax = new Vector2(
+        Vector2 max = new Vector2(
             Mathf.Max(worldMin.x, worldMax.x),
             Mathf.Max(worldMin.y, worldMax.y)
         );
-    }
 
-    public bool ValidateBounds()
-    {
-        float width = worldMax.x - worldMin.x;
-        float depth = worldMax.y - worldMin.y;
-
-        float aspect = GetCameraAspect();
-        float visibleWorldHeight = _camera.orthographicSize * 2f;
-        float visibleWorldWidth = visibleWorldHeight * aspect;
-
-        float minWorldUnitsPerPixel =
-            visibleWorldHeight / minResolutionHeight;
-
-        float requiredWidth = minResolutionWidth * minWorldUnitsPerPixel;
-        float requiredDepth = minResolutionHeight * minWorldUnitsPerPixel;
-
-        bool valid =
-            width >= Mathf.Max(requiredWidth, visibleWorldWidth) &&
-            depth >= Mathf.Max(requiredDepth, visibleWorldHeight);
-
-        if (!valid)
-        {
-            Debug.LogWarning(
-                $"Camera bounds are too small.\n" +
-                $"Current bounds: {width:F2} x {depth:F2}\n" +
-                $"Required approximately: {requiredWidth:F2} x {requiredDepth:F2}",
-                this);
-        }
-
-        return valid;
-    }
-
-    private float GetCameraAspect()
-    {
-        // Camera.aspect предпочтительнее Screen.width / Screen.height:
-        // он учитывает viewport самой камеры.
-        return _camera.aspect;
+        worldMin = min;
+        worldMax = max;
     }
 
 #if UNITY_EDITOR
