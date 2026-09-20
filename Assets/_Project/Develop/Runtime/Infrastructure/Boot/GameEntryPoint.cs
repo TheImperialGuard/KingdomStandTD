@@ -65,6 +65,18 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.Boot
         {
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
+
+            SetupScreenOrientation();
+        }
+
+        private void SetupScreenOrientation()
+        {
+            Screen.autorotateToPortrait = false;
+            Screen.autorotateToPortraitUpsideDown = false;
+            Screen.autorotateToLandscapeLeft = true;
+            Screen.autorotateToLandscapeRight = true;
+
+            Screen.orientation = ScreenOrientation.AutoRotation;
         }
     }
 }
