@@ -58,7 +58,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
             entity
                 .AddSystem(new RigidbodyMovementSystem())
                 .AddSystem(new RigidbodyRotationSystem())
-                .AddSystem(new BodyContactsDetectingSystem())
+                .AddSystem(new SweptBodyContactsDetectingSystem())
                 .AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
                 .AddSystem(new DealDamageOnContactSystem())
                 .AddSystem(new DeathMaskTouchDetectorSystem())
@@ -98,7 +98,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddMustSelfRelease(mustSelfRelease);
 
             entity
-                .AddSystem(new BodyContactsDetectingSystem())
+                .AddSystem(new SweptBodyContactsDetectingSystem())
                 .AddSystem(new DeathMaskTouchDetectorSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
