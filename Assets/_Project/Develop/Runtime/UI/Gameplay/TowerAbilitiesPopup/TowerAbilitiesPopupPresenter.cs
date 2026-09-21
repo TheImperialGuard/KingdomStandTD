@@ -15,7 +15,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.Rendering.STP;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
 {
@@ -39,6 +38,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
         private int _secondAbilityClicks;
 
         private IDisposable _goldCurrencyDisposable;
+        private IDisposable _cameraMovedDisposable;
 
         public TowerAbilitiesPopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
@@ -78,6 +78,9 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
             _goldCurrencyDisposable = _walletService.GetCurrency(CurrencyTypes.Gold)
                 .Subscribe(OnGoldChanged);
 
+            Camera camera = Camera.main;
+            _cameraMovedDisposable = camera.GetComponent<BoundedOrthoCamera>().CameraMoved.Subscribe(OnCameraMoved);
+
             _sellClicks = 0;
             _firstAbilityClicks = 0;
             _secondAbilityClicks = 0;
@@ -85,6 +88,11 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
             _view.HideInfoContainer();
 
             SetCurrentAbilities();
+        }
+
+        private void OnCameraMoved()
+        {
+            _view.UpdateWorldPosition(_sourceTower.Transform.position);
         }
 
         public override void Dispose()
@@ -96,6 +104,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
             _view.SellButtonClicked -= OnSellButtonClicked;
 
             _goldCurrencyDisposable.Dispose();
+            _cameraMovedDisposable.Dispose();
         }
 
         protected override void OnClickedOutside(RaycastHit oldHit, RaycastHit newHit)

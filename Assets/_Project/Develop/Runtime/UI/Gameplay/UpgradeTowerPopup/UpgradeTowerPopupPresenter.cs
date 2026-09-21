@@ -35,6 +35,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
         private int _sellClicks;
 
         private IDisposable _goldCurrencyDisposable;
+        private IDisposable _cameraMovedDisposable;
 
         public UpgradeTowerPopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
@@ -77,11 +78,19 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
             _goldCurrencyDisposable = _walletService.GetCurrency(CurrencyTypes.Gold)
                 .Subscribe(OnGoldChanged);
 
+            Camera camera = Camera.main;
+            _cameraMovedDisposable = camera.GetComponent<BoundedOrthoCamera>().CameraMoved.Subscribe(OnCameraMoved);
+
             _view.HideInfoContainer();
             SetPrices();
             OnGoldChanged(0, 0);
 
             _sellClicks = 0;
+        }
+
+        private void OnCameraMoved()
+        {
+            _view.UpdateWorldPosition(_sourceTower.Transform.position);
         }
 
         public override void Dispose()
@@ -92,6 +101,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
             _view.SellButtonClicked -= OnSellButtonClicked;
 
             _goldCurrencyDisposable.Dispose();
+            _cameraMovedDisposable.Dispose();
 
             ReleaseRangeDemo();
         }
