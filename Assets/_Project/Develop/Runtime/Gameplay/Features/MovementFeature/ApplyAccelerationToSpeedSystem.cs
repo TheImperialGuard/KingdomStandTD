@@ -15,6 +15,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature
     {
         private ReactiveVariable<float> _moveSpeed;
         private ReactiveVariable<float> _speedAcceleration;
+        private ReactiveVariable<float> _maxMoveSpeed;
         private ReactiveVariable<bool> _isMoving;
 
         public void OnInit(Entity entity)
@@ -22,6 +23,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature
             _moveSpeed = entity.MoveSpeed;
             _isMoving = entity.IsMoving;
             _speedAcceleration = entity.SpeedAcceleration;
+            _maxMoveSpeed = entity.MaxMoveSpeed;
         }
 
         public void OnUpdate(float deltaTime)
@@ -29,8 +31,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature
             if (_isMoving.Value == false)
                 return;
 
+            if (_moveSpeed.Value >= _maxMoveSpeed.Value)
+                return;
+
             float boost = _speedAcceleration.Value * deltaTime;
-            _moveSpeed.Value += boost;
+            _moveSpeed.Value = Mathf.Min(_moveSpeed.Value + boost, _maxMoveSpeed.Value);
         }
     }
 }

@@ -70,6 +70,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
                         .AddSpawnProcessTimer(new(magicProjectileConfig.SpawnProcessTime), new())
                         .AddInSpawnProcess()
                         .AddSpeedAcceleration(new(magicProjectileConfig.SpeedAcceleration))
+                        .AddMaxMoveSpeed(new(magicProjectileConfig.MaxSpeed))
                         .AddCurrentTarget(new(owner.CurrentTarget.Value))
                         .AddSelfReleaseRequested(new(false));
 

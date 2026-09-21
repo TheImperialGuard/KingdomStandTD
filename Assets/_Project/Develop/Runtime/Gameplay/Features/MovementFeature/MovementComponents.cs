@@ -20,6 +20,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature
         public ReactiveVariable<float> Value;
     }
 
+    public class MaxMoveSpeed : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
+
     public class CanMove : IEntityComponent
     {
         public ICompositeCondition Value;
