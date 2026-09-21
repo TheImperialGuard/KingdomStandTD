@@ -272,6 +272,7 @@ MonoBehaviour:
   _enemiesWavesStageConfigs: []
   _towersPositions: []
   _staticGroup: {fileID: 5521829629735399465}
+  _boundsExcludedObjects: []
 --- !u!1 &4259293092420788356
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +388,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 30, y: 0.2, z: 30}
-  m_Center: {x: 0, y: -1, z: 0}
+  m_Center: {x: 0, y: -3, z: 0}
 --- !u!54 &2393551051085630041
 Rigidbody:
   m_ObjectHideFlags: 0
