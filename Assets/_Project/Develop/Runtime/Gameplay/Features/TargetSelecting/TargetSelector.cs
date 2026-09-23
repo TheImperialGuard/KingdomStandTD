@@ -4,7 +4,6 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
@@ -24,123 +23,79 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
             _sourceTransform = entity.Transform;
         }
 
-        public abstract Entity SelectTargetFrom(IEnumerable<Entity> targets);
+        public abstract Entity SelectTargetFrom(IReadOnlyList<Entity> targets);
 
-        public abstract List<Entity> SelectMultipleTargetsFrom(IEnumerable<Entity> targets, int count);
+        public abstract List<Entity> SelectMultipleTargetsFrom(IReadOnlyList<Entity> targets, int count);
 
-        protected Entity GetClosestTargetFrom(IEnumerable<Entity> targets)
+        protected bool IsTargetExcluded(Entity target)
         {
-            Entity closestTarget = targets.First();
+            if (TargetsForExclude == null)
+                return false;
+
+            for (int i = 0; i < TargetsForExclude.Count; i++)
+            {
+                if (TargetsForExclude[i].Value == target)
+                    return true;
+            }
+
+            return false;
+        }
+
+        protected bool IsTeamMember(Entity target) => target.HasComponent<Team>();
+
+        protected bool IsEnemy(Entity target) => EntitiesHelper.IsSameTeam(_source, target) == false;
+
+        protected bool IsInShootRange(Entity target) => GetDistanceTo(target) <= _source.InstantShootRange.Value;
+
+        protected bool IsDamagable(Entity target)
+        {
+            if (target.HasComponent<TakeDamageRequest>() == false)
+                return false;
+
+            if (target.TryGetCanApplyDamage(out ICompositeCondition canApplyDamage))
+                return canApplyDamage.Evaluate();
+
+            return true;
+        }
+
+        protected Entity GetClosestTargetFrom(IReadOnlyList<Entity> targets)
+        {
+            Entity closestTarget = targets[0];
 
             float minDistance = GetDistanceTo(closestTarget);
 
-            foreach (Entity target in targets)
+            for (int i = 1; i < targets.Count; i++)
             {
-                float distance = GetDistanceTo(target);
+                float distance = GetDistanceTo(targets[i]);
 
                 if (distance < minDistance)
                 {
                     minDistance = distance;
-                    closestTarget = target;
+                    closestTarget = targets[i];
                 }
             }
 
             return closestTarget;
         }
 
-        protected Entity GetClosestToFinishTargetFrom(IEnumerable<Entity> targets)
+        protected Entity GetClosestToFinishTargetFrom(IReadOnlyList<Entity> targets)
         {
-            Entity closestTargetToFinish = targets.First();
+            Entity closestTargetToFinish = targets[0];
 
             float minDistanceToFinish = closestTargetToFinish.CurrentPathDistance.Value;
 
-            foreach (Entity target in targets)
+            for (int i = 1; i < targets.Count; i++)
             {
-                float distance = target.CurrentPathDistance.Value;
+                float distance = targets[i].CurrentPathDistance.Value;
 
                 if (distance < minDistanceToFinish)
                 {
                     minDistanceToFinish = distance;
-                    closestTargetToFinish = target;
+                    closestTargetToFinish = targets[i];
                 }
             }
 
             return closestTargetToFinish;
-        }
-
-        protected bool TryExcludeTargetsFrom(IEnumerable<Entity> targets, List<ReactiveVariable<Entity>> targetsForExclude, out IEnumerable<Entity> filteredTargets)
-        {
-            filteredTargets = ExcludeTargetsFrom(targets, targetsForExclude);
-
-            return filteredTargets.Any();
-        }
-
-        protected IEnumerable<Entity> ExcludeTargetsFrom(IEnumerable<Entity> targets, List<ReactiveVariable<Entity>> targetsForExclude)
-        {
-            List<Entity> targetsForExcludeValues = new();
-
-            foreach(ReactiveVariable<Entity> target in targetsForExclude)
-                targetsForExcludeValues.Add(target.Value);
-
-            return targets.Where(target => targetsForExcludeValues.Contains(target) == false);
-        }
-
-        protected bool TryGetDamagableTargets(IEnumerable<Entity> targets, out IEnumerable<Entity> damagables)
-        {
-            damagables = GetDamagableTargetsFrom(targets);
-
-            return damagables.Any();
-        }
-
-        protected IEnumerable<Entity> GetDamagableTargetsFrom(IEnumerable<Entity> targets)
-        {
-            return targets.Where(target =>
-            {
-                bool result = target.HasComponent<TakeDamageRequest>();
-
-                if (target.TryGetCanApplyDamage(out ICompositeCondition canApplyDamage))
-                {
-                    result = result && canApplyDamage.Evaluate();
-                }
-
-                return result;
-            });
-        }
-
-        protected bool TryGetTargetsInRange(IEnumerable<Entity> targets, out IEnumerable<Entity> targetsInRange)
-        {
-            targetsInRange = GetTargetsInRangeFrom(targets);
-
-            return targetsInRange.Any();
-        }
-
-        protected IEnumerable<Entity> GetTargetsInRangeFrom(IEnumerable<Entity> targets)
-        {
-            return targets.Where(target => GetDistanceTo(target) <= _source.InstantShootRange.Value);
-        }
-
-        protected bool TryGetEnemies(IEnumerable<Entity> targets, out IEnumerable<Entity> enemies)
-        {
-            enemies = GetEnemiesFrom(targets);
-
-            return enemies.Any();
-        }
-
-        protected IEnumerable<Entity> GetEnemiesFrom(IEnumerable<Entity> targets)
-        {
-            return targets.Where(target => EntitiesHelper.IsSameTeam(_source, target) == false);
-        }
-
-        protected bool TryGetTeamMember(IEnumerable<Entity> targets, out IEnumerable<Entity> teamMembers)
-        {
-            teamMembers = GetTeamMemberFrom(targets);
-
-            return teamMembers.Any();
-        }
-
-        protected IEnumerable<Entity> GetTeamMemberFrom(IEnumerable<Entity> targets)
-        {
-            return targets.Where(target => target.HasComponent<Team>());
         }
 
         protected float GetDistanceTo(Entity target) => (_sourceTransform.position - target.Transform.position).magnitude;

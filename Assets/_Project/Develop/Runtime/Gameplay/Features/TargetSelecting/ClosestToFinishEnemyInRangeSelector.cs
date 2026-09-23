@@ -1,63 +1,76 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
 {
     public class ClosestToFinishEnemyInRangeSelector : TargetSelector
     {
+        private readonly List<Entity> _candidates = new(64);
+
+        private readonly List<Entity> _multipleSelectionPool = new(64);
+
+        private readonly List<Entity> _multipleSelectionResult = new(8);
+
         public ClosestToFinishEnemyInRangeSelector(
             Entity entity,
             List<ReactiveVariable<Entity>> targetsForExclude = null) : base(entity, targetsForExclude)
         {
         }
 
-        public override Entity SelectTargetFrom(IEnumerable<Entity> targets)
+        public override Entity SelectTargetFrom(IReadOnlyList<Entity> targets)
         {
-            if (TargetsForExclude != null && TargetsForExclude.Any())
+            _candidates.Clear();
+
+            for (int i = 0; i < targets.Count; i++)
             {
-                if (TryExcludeTargetsFrom(targets, TargetsForExclude, out targets) == false)
-                    return null;
+                Entity target = targets[i];
+
+                if (IsTargetExcluded(target))
+                    continue;
+
+                if (IsTeamMember(target) == false)
+                    continue;
+
+                if (IsEnemy(target) == false)
+                    continue;
+
+                if (IsInShootRange(target) == false)
+                    continue;
+
+                if (IsDamagable(target) == false)
+                    continue;
+
+                _candidates.Add(target);
             }
 
-            if (TryGetTeamMember(targets, out IEnumerable<Entity> selectedTargets) == false)
+            if (_candidates.Count == 0)
                 return null;
 
-            if (TryGetEnemies(selectedTargets, out selectedTargets) == false)
-                return null;
-
-            if (TryGetTargetsInRange(selectedTargets, out selectedTargets) == false)
-                return null;
-
-            if (TryGetDamagableTargets(selectedTargets, out selectedTargets) == false)
-                return null;
-
-            Entity closestTarget = GetClosestToFinishTargetFrom(selectedTargets);
-
-            return closestTarget;
+            return GetClosestToFinishTargetFrom(_candidates);
         }
 
-        public override List<Entity> SelectMultipleTargetsFrom(IEnumerable<Entity> targets, int count)
+        public override List<Entity> SelectMultipleTargetsFrom(IReadOnlyList<Entity> targets, int count)
         {
-            List<Entity> targetsForSelecting = new List<Entity>(targets);
+            _multipleSelectionPool.Clear();
 
-            List<Entity> selectedTargets = new();
+            for (int i = 0; i < targets.Count; i++)
+                _multipleSelectionPool.Add(targets[i]);
+
+            _multipleSelectionResult.Clear();
 
             for (int i = 0; i < count; i++)
             {
-                if (selectedTargets.Count > 0)
-                {
-                    foreach (Entity entity in selectedTargets)
-                        targetsForSelecting.Remove(entity);
-                }
+                Entity target = SelectTargetFrom(_multipleSelectionPool);
 
-                Entity target = SelectTargetFrom(targetsForSelecting);
+                if (target == null)
+                    break;
 
-                selectedTargets.Add(target);
+                _multipleSelectionResult.Add(target);
+                _multipleSelectionPool.Remove(target);
             }
 
-            return selectedTargets;
+            return _multipleSelectionResult;
         }
     }
 }
