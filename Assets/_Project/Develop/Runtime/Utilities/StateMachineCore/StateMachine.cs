@@ -49,8 +49,12 @@ namespace Assets._Project.Develop.Runtime.Utilities.StateMachineCore
             if (_isRunning == false)
                 return;
 
-            foreach (StateTransition<TState> transition in _currentState.Transitions)
+            IReadOnlyList<StateTransition<TState>> transitions = _currentState.Transitions;
+
+            for (int i = 0; i < transitions.Count; i++)
             {
+                StateTransition<TState> transition = transitions[i];
+
                 if (transition.Condition.Evaluate())
                 {
                     SwitchState(transition.ToState);

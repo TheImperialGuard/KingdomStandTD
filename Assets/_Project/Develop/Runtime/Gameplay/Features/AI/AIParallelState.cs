@@ -10,8 +10,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI
 
         public void Update(float deltaTime)
         {
-            foreach (IUpdatableState state in States)
-                state.Update(deltaTime);
+            for (int i = 0; i < States.Count; i++)
+            {
+                States[i].Update(deltaTime);
+            }
         }
     }
 }
