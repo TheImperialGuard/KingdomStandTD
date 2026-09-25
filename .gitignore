@@ -73,3 +73,8 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# PluginYG2 local editor files
+/[Aa]ssets/PluginYourGames/Editor/SavesEditorYG2.json*
+/[Aa]ssets/PluginYourGames/Editor/ServerInfoYG2.json*
+/[Aa]ssets/PluginYourGames/Tools.meta
