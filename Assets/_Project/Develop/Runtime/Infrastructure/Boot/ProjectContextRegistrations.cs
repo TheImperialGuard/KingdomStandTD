@@ -5,6 +5,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
+using Assets._Project.Develop.Runtime.Utilities.Adverts;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
@@ -57,6 +58,8 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateAudioHandler);
 
             container.RegisterAsSingle(CreateInputService);
+
+            container.RegisterAsSingle(CreateAdvertsService);
         }
 
         private static ResourcesAssetsLoader CreateResourcesAssetsLoader(DIContainer c) => new();
@@ -111,8 +114,6 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             return new PlayerDataProvider(saveLoadService);
         }
 
-        // Проверка в рантайме, а не через #if: директива UNITY_ANDROID истинна
-        // и в редакторе с андроидным таргетом, где ввод должен остаться мышиным.
         private static IInputService CreateInputService(DIContainer c)
         {
             if (Application.isMobilePlatform)
@@ -122,6 +123,15 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             CameraConfig cameraConfig = configsProviderService.GetConfig<CameraConfig>();
 
             return new DesktopInput(cameraConfig);
+        }
+
+        private static IAdvertsService CreateAdvertsService(DIContainer c)
+        {
+            #if UNITY_WEBGL && YandexGamesPlatform_yg
+                        return new YGAdvertsService();
+            #else
+                        return new EmptyAdvertsService();
+            #endif
         }
 
         private static LevelsProgressionService CreateLevelsProgressionService(DIContainer c)
