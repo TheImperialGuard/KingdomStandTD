@@ -58,7 +58,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.ResultsPopup
 
         private void OnContinueClicked()
         {
-            _coroutinesPerformer.StartPerform(_sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu, new MainMenuInputArgs ()));
+            _coroutinesPerformer.StartPerform(_sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu, new MainMenuInputArgs (Scenes.Gameplay)));
             OnCloseRequest();
         }
     }

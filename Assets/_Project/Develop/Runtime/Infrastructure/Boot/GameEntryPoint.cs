@@ -1,4 +1,4 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
+﻿using System.Collections;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Infrastructure.EntryPoint;
 using Assets._Project.Develop.Runtime.Meta.Infrastructure;
@@ -7,7 +7,6 @@ using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using Assets._Project.Develop.Runtime.Utilities.LoadingScreen;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
-using System.Collections;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Infrastructure.Boot
@@ -58,7 +57,7 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.Boot
 
             loadingScreen.Hide();
 
-            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu, new MainMenuInputArgs());
+            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu, new MainMenuInputArgs(Scenes.GameEntryPoint));
         }
 
         private void SetupAppSettings()

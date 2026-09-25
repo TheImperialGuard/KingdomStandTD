@@ -1,12 +1,10 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
+﻿using System;
+using System.Collections;
 using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.Utilities.Adverts;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
-using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
-using System;
-using System.Collections;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
@@ -42,6 +40,9 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
         public override void Run()
         {
             Debug.Log("Старт сцены главного меню");
+
+            if (_inputArgs.PreviousScene == Scenes.Gameplay)
+                _container.Resolve<IAdvertsService>().OpenFullScreenAdvert();
 
             _musicSwitcherService.SwitchFor(MusicContexts.MainMenu);
         }
