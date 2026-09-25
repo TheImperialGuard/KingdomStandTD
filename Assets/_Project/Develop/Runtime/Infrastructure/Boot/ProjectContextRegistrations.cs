@@ -13,6 +13,7 @@ using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataRepository;
+using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataRepository.YG2Saves;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.KeysStorage;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.Serializers;
 using Assets._Project.Develop.Runtime.Utilities.LoadingScreen;
@@ -99,10 +100,15 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
         {
             IDataSerializer dataSerializer = new JsonSerializer();
             IDataKeysStorage dataKeysStorage = new MapDataKeysStorage();
+            IDataRepository dataRepository;
 
-            string saveFolderPath = Application.isEditor ? Application.dataPath : Application.persistentDataPath;
+            #if UNITY_WEBGL && YandexGamesPlatform_yg
+                dataRepository = new YGCloudDataRepository();
+            #else
+                string saveFolderPath = Application.isEditor ? Application.dataPath : Application.persistentDataPath;
 
-            IDataRepository dataRepository = new LocalFileDataRepository(saveFolderPath, "json");
+                dataRepository = new LocalFileDataRepository(saveFolderPath, "json");
+            #endif
 
             return new SaveLoadService(dataSerializer, dataKeysStorage, dataRepository);
         }
@@ -128,9 +134,9 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
         private static IAdvertsService CreateAdvertsService(DIContainer c)
         {
             #if UNITY_WEBGL && YandexGamesPlatform_yg
-                        return new YGAdvertsService();
+                return new YGAdvertsService();
             #else
-                        return new EmptyAdvertsService();
+                return new EmptyAdvertsService();
             #endif
         }
 

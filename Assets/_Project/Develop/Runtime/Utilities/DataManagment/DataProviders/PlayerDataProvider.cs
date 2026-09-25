@@ -10,8 +10,7 @@
         {
             return new PlayerData()
             {
-                CompletedLevels = new(),
-                //init Upgrades info
+                CompletedLevels = new()
             };
         }
     }
