@@ -1,14 +1,16 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning;
+﻿using System;
+using System.Collections.Generic;
+using Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning;
 using Assets._Project.Develop.Runtime.UI.Gameplay;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 {
     public class StagesCycle : IDisposable
     {
+        public event Action Launched;
+
         private readonly StageProviderService _stageProviderService;
         private readonly GameplayPopupService _gameplayPopupService;
         private readonly EarnGoldOnSkipStageService _earnGoldOnSkipStageService;
@@ -42,6 +44,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
             SwitchStage();
 
             _isRunning = true;
+
+            Launched?.Invoke();
         }
 
         public void SkipStage()

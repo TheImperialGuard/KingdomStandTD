@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities;
@@ -23,6 +24,7 @@ using Assets._Project.Develop.Runtime.UI.Gameplay.StagesStatus;
 using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup;
+using Assets._Project.Develop.Runtime.Utilities.Adverts;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
@@ -121,7 +123,14 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
 
         public GameplayScreenPresenter CreateGameplayScreenPresenter(GameplayScreenView view)
         {
-            return new GameplayScreenPresenter(view, this, _container.Resolve<GameplayPopupService>());
+            return new GameplayScreenPresenter(
+                view,
+                this,
+                _container.Resolve<GameplayPopupService>(),
+                _container.Resolve<IAdvertsService>(),
+                _container.Resolve<ConfigsProviderService>().GetConfig<GameConfig>(),
+                _container.Resolve<WalletService>(),
+                _container.Resolve<StagesCycle>());
         }
 
         public GoldWalletPresenter CreateGoldWalletPresenter(IconTextView view)
