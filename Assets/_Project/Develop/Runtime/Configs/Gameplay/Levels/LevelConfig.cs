@@ -1,5 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.GameMode;
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels
@@ -7,6 +7,8 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels
     [CreateAssetMenu(menuName = "Configs/Gameplay/Levels/NewLevelConfig", fileName = "LevelConfig")]
     public class LevelConfig : ScriptableObject
     {
+        [SerializeField] private List<EnemiesWavesStageConfig> _stages = new();
+
         [field: SerializeField] public string PrefabPath {  get; private set; }
         [field: SerializeField] public GameModes GameMode { get; private set; } = GameModes.Basic;
         [field: SerializeField] public int StartGold { get; private set; }
@@ -16,5 +18,7 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels
         [field: SerializeField, Range(1, 5)] public int MagicUpgradesLevelLimit { get; private set; } = 5;
         [field: SerializeField, Range(1, 5)] public int CannonUpgradesLevelLimit { get; private set; } = 5;
         [field: SerializeField, Range(1, 5)] public int BarracksUpgradesLevelLimit { get; private set; } = 5;
+
+        public IReadOnlyList<EnemiesWavesStageConfig> Stages => _stages;
     }
 }

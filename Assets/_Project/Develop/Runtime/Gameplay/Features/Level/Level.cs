@@ -1,4 +1,4 @@
-using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Level
 {
     public class Level : MonoBehaviour
     {
-        [SerializeField] private List<EnemiesWavesStageConfig> _enemiesWavesStageConfigs;
+        [SerializeField] private List<RoadPath> _roadPaths;
         [SerializeField] private List<Transform> _towersPositions;
         [SerializeField] private GameObject _staticGroup;
 
@@ -16,7 +16,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Level
         private Bounds _fieldBounds;
         private bool _hasFieldBounds;
 
-        public IReadOnlyList<EnemiesWavesStageConfig> EnemiesWavesStageConfigs => _enemiesWavesStageConfigs;
+        public IReadOnlyList<RoadPath> RoadPaths => _roadPaths;
         public IReadOnlyList<Transform> TowersPositions => _towersPositions;
 
         public Bounds FieldBounds => _fieldBounds;

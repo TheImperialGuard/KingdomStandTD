@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
@@ -92,16 +93,19 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup
 
             foreach (EnemiesWaveConfig wave in waves)
             {
-                string characterName = wave.EnemyConfig.CharacterName;
-                int count = wave.EnemiesCount;
+                foreach (WaveEnemyGroup enemyGroup in wave.EnemyGroups)
+                {
+                    string characterName = enemyGroup.EnemyConfig.CharacterName;
+                    int count = enemyGroup.Count * wave.PatternRepeats;
 
-                if (allEnemiesInWaves.ContainsKey(characterName))
-                {
-                    allEnemiesInWaves[characterName] += count;
-                }
-                else
-                {
-                    allEnemiesInWaves.Add(characterName, count);
+                    if (allEnemiesInWaves.ContainsKey(characterName))
+                    {
+                        allEnemiesInWaves[characterName] += count;
+                    }
+                    else
+                    {
+                        allEnemiesInWaves.Add(characterName, count);
+                    }
                 }
             }
 

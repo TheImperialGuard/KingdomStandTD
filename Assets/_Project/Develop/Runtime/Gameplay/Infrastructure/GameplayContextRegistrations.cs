@@ -138,14 +138,15 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<EnemiesFactory>(),
                 c.Resolve<TimerServiceFactory>(),
                 c.Resolve<ICoroutinesPerformer>(),
-                c.Resolve<EntitiesLifeContext>());
+                c.Resolve<EntitiesLifeContext>(),
+                c.Resolve<Level>().RoadPaths);
         }
 
         private static StageProviderService CreateStageProviderService(DIContainer c)
         {
             return new StageProviderService(
                 c.Resolve<StagesFactory>(),
-                c.Resolve<Level>().EnemiesWavesStageConfigs);
+                _levelConfig.Stages);
         }
 
         private static DealDamageToPlayerService CreateDealDamageToPlayerService(DIContainer c)

@@ -1,5 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
@@ -19,6 +20,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
         private readonly TimerServiceFactory _timerServiceFactory;
         private readonly ICoroutinesPerformer _coroutinesPerformer;
         private readonly EntitiesLifeContext _entitiesLifeContext;
+        private readonly IReadOnlyList<RoadPath> _roadPaths;
 
         private List<Coroutine> _activeSpawnProcesses = new();
         private List<Entity> _spawnedEnemies = new();
@@ -30,12 +32,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
             EnemiesFactory enemiesFactory,
             TimerServiceFactory timerServiceFactory,
             ICoroutinesPerformer coroutinesPerformer,
-            EntitiesLifeContext entitiesLifeContext)
+            EntitiesLifeContext entitiesLifeContext,
+            IReadOnlyList<RoadPath> roadPaths)
         {
             _enemiesFactory = enemiesFactory;
             _timerServiceFactory = timerServiceFactory;
             _coroutinesPerformer = coroutinesPerformer;
             _entitiesLifeContext = entitiesLifeContext;
+            _roadPaths = roadPaths;
 
             _entitiesLifeContext.Released += OnSomeEntityReleased;
         }
@@ -70,6 +74,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
             float startDelay = waveConfig.StartDelay;
             float spawnDelay = waveConfig.DelayBetweenSpawns;
 
+            IReadOnlyList<Waypoint> waypoints = GetRoadPath(waveConfig.PathNumber).Waypoints;
+            Vector3 waypointsOffset = PathLaneOffsets.ToLocalOffset(waveConfig.Lane);
+
             TimerService startTimer;
             TimerService spawnCooldownTimer;
 
@@ -83,15 +90,32 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
 
             spawnCooldownTimer = _timerServiceFactory.Create(spawnDelay);
 
-            for (int i = 0; i < waveConfig.EnemiesCount; i++)
+            for (int repeat = 0; repeat < waveConfig.PatternRepeats; repeat++)
             {
-                SpawnEnemy(waveConfig.EnemyConfig, waveConfig.RoadPath.Waypoints, waveConfig.WaypointsOffset);
+                foreach (WaveEnemyGroup enemyGroup in waveConfig.EnemyGroups)
+                {
+                    for (int i = 0; i < enemyGroup.Count; i++)
+                    {
+                        SpawnEnemy(enemyGroup.EnemyConfig, waypoints, waypointsOffset);
 
-                spawnCooldownTimer.Restart();
-                yield return new WaitUntil(() => spawnCooldownTimer.IsOver == true);
+                        spawnCooldownTimer.Restart();
+                        yield return new WaitUntil(() => spawnCooldownTimer.IsOver == true);
+                    }
+                }
             }
 
             _completedSpawnProcesses++;
+        }
+
+        private RoadPath GetRoadPath(PathNumber number)
+        {
+            foreach (RoadPath roadPath in _roadPaths)
+            {
+                if (roadPath.Number == number)
+                    return roadPath;
+            }
+
+            throw new InvalidOperationException($"На уровне нет дороги с номером {number}");
         }
 
         private void SpawnEnemy(CharacterConfig enemyConfig, IReadOnlyList<Waypoint> waypoints, Vector3 waypointsOffset)
