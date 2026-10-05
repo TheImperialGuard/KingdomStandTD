@@ -1,0 +1,111 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Style src="LevelEditorWindow.uss" />
+    <ui:VisualElement name="root" class="level-editor">
+        <uie:Toolbar name="toolbar">
+            <ui:VisualElement name="levelSelectorSlot" class="toolbar__level-slot" />
+            <uie:ToolbarToggle name="levelTab" text="Уровень" />
+            <uie:ToolbarToggle name="allLevelsTab" text="Все уровни" />
+            <uie:ToolbarButton name="validateAllButton" text="Проверить все уровни" tooltip="Проверка всех LevelConfig, отчёт — в консоли" />
+            <uie:ToolbarButton name="copyLevelButton" text="Копировать уровень" tooltip="Скопировать срез уровня в буфер обмена — с несохранёнными правками и анализом, как в Docs/Balance/Levels. Его можно вставить в другой уровень или в чат" />
+            <uie:ToolbarButton name="pasteButton" text="Вставить" tooltip="Вставить из буфера обмена: стейджи — после выбранного стейджа, волны — после выбранной волны, уровень целиком — после предпросмотра изменений" />
+            <uie:ToolbarSpacer class="toolbar__spacer" />
+            <ui:Label name="dirtyIndicator" text="● Не сохранено" class="toolbar__dirty-indicator toolbar__dirty-indicator--hidden" />
+            <uie:ToolbarButton name="revertButton" text="Сбросить изменения" tooltip="Вернуть уровень к последнему сохранённому состоянию. Сброс отменяется через Ctrl+Z" />
+            <uie:ToolbarButton name="saveButton" text="Сохранить" tooltip="Сохранить LevelConfig — срезы баланса обновятся сами" />
+        </uie:Toolbar>
+        <ui:VisualElement name="levelPage" class="level-editor__page">
+            <ui:VisualElement name="levelSummary" class="level-summary">
+                <ui:IntegerField name="startGoldField" label="Стартовое золото" is-delayed="true" class="level-summary__field" />
+                <ui:IntegerField name="startHealthField" label="Здоровье игрока" is-delayed="true" class="level-summary__field" />
+                <ui:Label name="levelTotalsLabel" class="level-summary__totals" />
+            </ui:VisualElement>
+            <ui:TwoPaneSplitView name="mainSplit" fixed-pane-index="0" fixed-pane-initial-dimension="320" orientation="Horizontal" view-data-key="levelEditor.mainSplit" class="level-editor__split">
+                <ui:TwoPaneSplitView name="stagesSplit" fixed-pane-index="1" fixed-pane-initial-dimension="330" orientation="Vertical" view-data-key="levelEditor.stagesSplit">
+                    <ui:VisualElement class="panel">
+                        <ui:VisualElement class="panel__header">
+                            <ui:Label text="Стейджи" class="panel__title" />
+                            <ui:Button name="addStageButton" text="+ Стейдж" tooltip="Добавить пустой стейдж в конец уровня. Остальные действия — в контекстном меню списка" class="panel__header-button" />
+                        </ui:VisualElement>
+                        <ui:ListView name="stagesList" fixed-item-height="20" selection-type="Single" reorderable="true" class="panel__list" />
+                    </ui:VisualElement>
+                    <ui:ScrollView name="stagePanel" class="panel">
+                        <ui:Label name="stageTitle" class="panel__title" />
+                        <ui:VisualElement name="stageContent">
+                            <ui:FloatField name="stageTimeField" label="Время стейджа, с" is-delayed="true" />
+                            <ui:FloatField name="skipTimeField" label="Скип через, с" is-delayed="true" tooltip="Через сколько секунд от начала стейджа игроку предложат скип" />
+                            <ui:Foldout name="enemiesFoldout" text="Враги и HP" view-data-key="levelEditor.enemiesFoldout">
+                                <ui:VisualElement name="enemiesStats" />
+                            </ui:Foldout>
+                            <ui:Foldout name="economyFoldout" text="Экономика" view-data-key="levelEditor.economyFoldout">
+                                <ui:VisualElement name="economyStats" />
+                            </ui:Foldout>
+                            <ui:Foldout name="threatFoldout" text="Угроза и плотность" value="false" view-data-key="levelEditor.threatFoldout">
+                                <ui:VisualElement name="threatStats" />
+                            </ui:Foldout>
+                            <ui:Label text="Заметка стейджа" class="panel__subtitle" />
+                            <ui:TextField name="stageNoteField" multiline="true" is-delayed="true" class="note-field" />
+                        </ui:VisualElement>
+                    </ui:ScrollView>
+                </ui:TwoPaneSplitView>
+                <ui:TwoPaneSplitView name="wavesSplit" fixed-pane-index="1" fixed-pane-initial-dimension="300" orientation="Vertical" view-data-key="levelEditor.wavesSplit">
+                    <ui:TwoPaneSplitView name="timelineSplit" fixed-pane-index="0" fixed-pane-initial-dimension="200" orientation="Vertical" view-data-key="levelEditor.timelineSplit">
+                        <ui:VisualElement class="panel">
+                            <ui:VisualElement class="panel__header">
+                                <ui:Label name="timelineTitle" class="panel__title" />
+                                <ui:VisualElement class="timeline-modes">
+                                    <ui:Button name="timelineStageModeButton" text="Стейдж" tooltip="Показать выбранный стейдж" class="timeline-modes__button" />
+                                    <ui:Button name="timelineLevelModeButton" text="Уровень" tooltip="Показать весь уровень: стейджи подряд, без скипов" class="timeline-modes__button" />
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:ScrollView name="timelineScroll" mode="Vertical" horizontal-scroller-visibility="Hidden" class="timeline-scroll" />
+                            <ui:VisualElement name="timelineLegend" class="timeline-legend" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="panel">
+                            <ui:VisualElement class="panel__header">
+                                <ui:Label name="wavesTitle" class="panel__title" />
+                                <ui:Button name="addWaveButton" text="+ Волна" tooltip="Добавить пустую волну в конец выбранного стейджа. Остальные действия — в контекстном меню таблицы" class="panel__header-button" />
+                            </ui:VisualElement>
+                            <ui:MultiColumnListView name="wavesTable" fixed-item-height="22" selection-type="Single" reorderable="true" show-alternating-row-backgrounds="ContentOnly" class="panel__list">
+                                <ui:Columns>
+                                    <ui:Column name="number" title="№" width="32" />
+                                    <ui:Column name="composition" title="Состав" width="220" stretchable="true" />
+                                    <ui:Column name="road" title="Дорога" width="160" />
+                                    <ui:Column name="lane" title="Полоса" width="80" />
+                                    <ui:Column name="startDelay" title="Старт, с" width="64" />
+                                    <ui:Column name="delay" title="Интервал, с" width="80" />
+                                    <ui:Column name="repeats" title="Повторы" width="64" />
+                                    <ui:Column name="total" title="Всего" width="52" />
+                                    <ui:Column name="spawnEnd" title="Конец спавна" width="96" />
+                                    <ui:Column name="health" title="HP" width="64" />
+                                    <ui:Column name="gold" title="Золото" width="60" />
+                                    <ui:Column name="remove" width="28" />
+                                </ui:Columns>
+                            </ui:MultiColumnListView>
+                        </ui:VisualElement>
+                    </ui:TwoPaneSplitView>
+                    <ui:TwoPaneSplitView name="detailsSplit" fixed-pane-index="1" fixed-pane-initial-dimension="360" orientation="Horizontal" view-data-key="levelEditor.detailsSplit">
+                        <ui:ScrollView name="waveDetails" class="panel">
+                            <ui:Label name="waveTitle" class="panel__title" />
+                            <ui:VisualElement name="waveDetailsContent">
+                                <ui:Label text="Шаблон: враг и количество, проходит повторами" class="panel__subtitle" />
+                                <ui:VisualElement name="groupsContainer" />
+                                <ui:Button name="addGroupButton" text="+ Группа" tooltip="Добавить группу врагов в шаблон" class="details__add-button" />
+                                <ui:IntegerField name="repeatsField" label="Повторы шаблона" is-delayed="true" />
+                                <ui:Label name="waveTotalLabel" class="details__total" />
+                                <ui:Label text="Заметка волны" class="panel__subtitle" />
+                                <ui:TextField name="waveNoteField" multiline="true" is-delayed="true" class="note-field" />
+                            </ui:VisualElement>
+                        </ui:ScrollView>
+                        <ui:VisualElement class="panel">
+                            <ui:Label name="issuesTitle" class="panel__title" />
+                            <ui:ListView name="issuesList" fixed-item-height="20" selection-type="Single" class="panel__list" />
+                        </ui:VisualElement>
+                    </ui:TwoPaneSplitView>
+                </ui:TwoPaneSplitView>
+            </ui:TwoPaneSplitView>
+        </ui:VisualElement>
+        <ui:VisualElement name="allLevelsPage" class="level-editor__page level-editor__page--hidden">
+            <ui:Label text="Сводка по всем уровням появится на подэтапе 4." class="placeholder" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

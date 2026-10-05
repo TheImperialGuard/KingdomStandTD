@@ -1,0 +1,391 @@
+:root {
+    --color-warning: #E8A33D;
+    --color-error: #E05A5A;
+    --color-road-first: #4C9AFF;
+    --color-road-second: #FF9F43;
+    --color-road-third: #2ECC71;
+    --color-lane-selected: #3A72B0;
+    --color-separator: rgba(0, 0, 0, 0.3);
+    --color-group-background: rgba(128, 128, 128, 0.1);
+    --color-icon-background: rgba(0, 0, 0, 0.15);
+}
+
+.level-editor {
+    flex-grow: 1;
+}
+
+.level-editor__page {
+    flex-grow: 1;
+}
+
+.level-editor__page--hidden {
+    display: none;
+}
+
+.level-editor__split {
+    flex-grow: 1;
+}
+
+.toolbar__level-slot {
+    flex-direction: row;
+    min-width: 220px;
+}
+
+.toolbar__level-field {
+    flex-grow: 1;
+    margin: 0 4px;
+}
+
+.toolbar__spacer {
+    flex-grow: 1;
+}
+
+.toolbar__dirty-indicator {
+    color: var(--color-warning);
+    -unity-text-align: middle-center;
+    margin: 0 6px;
+}
+
+.toolbar__dirty-indicator--hidden {
+    display: none;
+}
+
+.level-summary {
+    flex-direction: row;
+    align-items: center;
+    padding: 2px 6px;
+    border-bottom-width: 1px;
+    border-color: var(--color-separator);
+}
+
+.level-summary__field {
+    width: 200px;
+    margin-right: 12px;
+}
+
+.level-summary__field > .unity-base-field__label {
+    min-width: 120px;
+}
+
+.level-summary__totals {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.panel {
+    flex-grow: 1;
+    padding: 4px;
+}
+
+.panel__title {
+    -unity-font-style: bold;
+    margin: 2px 0 4px 2px;
+}
+
+.panel__subtitle {
+    margin: 6px 0 2px 2px;
+}
+
+.panel__header {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.panel__header > .panel__title {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-bottom: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.panel__header-button {
+    margin: 0 2px;
+}
+
+.panel__list {
+    flex-grow: 1;
+}
+
+.stage-row,
+.issue-row,
+.table-label {
+    -unity-text-align: middle-left;
+    padding-left: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.issue-row--error {
+    color: var(--color-error);
+}
+
+.issue-row--warning,
+.table-label--warning {
+    color: var(--color-warning);
+}
+
+.stats-row {
+    flex-direction: row;
+    padding: 1px 2px;
+}
+
+.stats-row--nested {
+    padding-left: 14px;
+}
+
+.stats-row__name {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.stats-row__value {
+    -unity-text-align: middle-right;
+}
+
+.stats-row--warning > .stats-row__value {
+    color: var(--color-warning);
+}
+
+.note-field {
+    min-height: 48px;
+}
+
+.note-field .unity-text-element {
+    white-space: normal;
+}
+
+.road-cell {
+    flex-direction: row;
+    align-items: center;
+}
+
+.road-swatch {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    margin: 0 2px 0 4px;
+}
+
+.road-swatch--first {
+    background-color: var(--color-road-first);
+}
+
+.road-swatch--second {
+    background-color: var(--color-road-second);
+}
+
+.road-swatch--third {
+    background-color: var(--color-road-third);
+}
+
+.road-cell__dropdown {
+    flex-grow: 1;
+    margin: 0 2px;
+}
+
+.lane-selector {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.lane-selector__button {
+    width: 22px;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+}
+
+.lane-selector__button--selected {
+    background-color: var(--color-lane-selected);
+    color: #FFFFFF;
+}
+
+.table-field {
+    margin: 1px 2px;
+}
+
+.table-remove-button {
+    margin: 1px 2px;
+    padding: 0;
+}
+
+.group-row {
+    flex-direction: row;
+    align-items: center;
+    padding: 4px;
+    margin-bottom: 4px;
+    border-radius: 4px;
+    background-color: var(--color-group-background);
+}
+
+.group-row__icon {
+    width: 56px;
+    height: 56px;
+    margin-right: 6px;
+    border-radius: 4px;
+    background-color: var(--color-icon-background);
+}
+
+.group-row__body {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.group-row__header,
+.group-row__footer {
+    flex-direction: row;
+    align-items: center;
+}
+
+.group-row__footer {
+    margin-top: 4px;
+}
+
+.group-row__enemy {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin: 0 2px;
+}
+
+.group-row__count {
+    width: 150px;
+    margin: 0 2px;
+}
+
+.group-row__count > .unity-base-field__label {
+    min-width: 76px;
+}
+
+.group-row__stats {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-left: 8px;
+    opacity: 0.75;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.group-row__button {
+    width: 22px;
+    margin: 0 1px;
+    padding: 0;
+}
+
+.details__content--hidden {
+    display: none;
+}
+
+.details__add-button {
+    align-self: flex-start;
+    margin: 2px 0 6px 0;
+}
+
+.details__total {
+    margin: 2px 0 2px 2px;
+}
+
+.placeholder {
+    margin: 12px;
+    -unity-text-align: middle-center;
+}
+
+.timeline-modes {
+    flex-direction: row;
+    margin-right: 2px;
+}
+
+.timeline-modes__button {
+    margin: 0;
+    padding: 1px 8px;
+    border-radius: 0;
+}
+
+.timeline-modes__button--selected {
+    background-color: var(--color-lane-selected);
+    color: #FFFFFF;
+}
+
+.timeline-scroll {
+    flex-grow: 1;
+}
+
+.level-timeline {
+    flex-shrink: 0;
+}
+
+.timeline-legend {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 2px;
+}
+
+.timeline-legend__item {
+    flex-direction: row;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.timeline-legend__swatch {
+    width: 10px;
+    height: 10px;
+    margin-right: 4px;
+    border-radius: 2px;
+}
+
+.paste-dialog {
+    padding: 8px;
+}
+
+.paste-dialog__header {
+    -unity-font-style: bold;
+    margin-bottom: 6px;
+    white-space: normal;
+}
+
+.paste-dialog__content {
+    flex-grow: 1;
+    padding: 4px;
+    border-width: 1px;
+    border-color: var(--color-separator);
+}
+
+.paste-dialog__section-title {
+    -unity-font-style: bold;
+    margin: 6px 0 2px 0;
+}
+
+.paste-dialog__line {
+    margin-left: 8px;
+    white-space: normal;
+}
+
+.paste-dialog__line--error {
+    color: var(--color-error);
+}
+
+.paste-dialog__line--warning {
+    color: var(--color-warning);
+}
+
+.paste-dialog__footer {
+    margin: 6px 0;
+    white-space: normal;
+}
+
+.paste-dialog__buttons {
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.paste-dialog__button {
+    min-width: 96px;
+}
