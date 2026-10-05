@@ -1,0 +1,8 @@
+.level-config-inspector__summary {
+    margin-top: 4px;
+    margin-bottom: 6px;
+}
+
+.level-config-inspector__open-button {
+    height: 24px;
+}
