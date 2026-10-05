@@ -91,10 +91,16 @@ namespace Assets._Project.Develop.Editor
 
             sb.AppendLine("}");
 
-            File.WriteAllText(OutputPath, sb.ToString());
+            string generatedCode = sb.ToString();
+
+            // Генератор запускается после каждой перезагрузки скриптов, поэтому файл пишется, только если API изменился.
+            // SaveAssets здесь не нужен: он сохранял бы все несохранённые ассеты проекта после каждой компиляции.
+            if (File.Exists(OutputPath) && File.ReadAllText(OutputPath) == generatedCode)
+                return;
+
+            File.WriteAllText(OutputPath, generatedCode);
 
             AssetDatabase.Refresh();
-            AssetDatabase.SaveAssets();
         }
 
         private static bool HasEmptyConstructor(Type type)
