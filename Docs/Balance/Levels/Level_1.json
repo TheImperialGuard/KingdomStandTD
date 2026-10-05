@@ -1,0 +1,583 @@
+{
+  "level": "Level_1",
+  "campaignNumber": 1,
+  "prefabPath": "Prefabs/Levels/Level_1",
+  "gameMode": "Basic",
+  "towerSlotsCount": 9,
+  "startGold": 265,
+  "startPlayerHealth": 20,
+  "roads": [
+    {
+      "pathNumber": "First",
+      "name": "Path",
+      "waypointsCount": 8,
+      "lengthCenter": 40.0,
+      "lengthLeft": 39.296,
+      "lengthRight": 40.711,
+      "timeToBase": {
+        "Skeleton": 40.0,
+        "SkeletonRogue": 80.0
+      }
+    }
+  ],
+  "stages": [
+    {
+      "stageTime": 30.0,
+      "timeToSkipStage": 10.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 2
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 4.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 2,
+            "health": 40.0,
+            "killGold": 10,
+            "breakthroughDamage": 2,
+            "spawnEnd": 4.0,
+            "firstArrival": 40.0,
+            "lastArrival": 44.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 1
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Right",
+          "startDelay": 2.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 1,
+            "health": 20.0,
+            "killGold": 5,
+            "breakthroughDamage": 1,
+            "spawnEnd": 2.0,
+            "firstArrival": 42.711,
+            "lastArrival": 42.711
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 2,
+        "enemiesCount": 3,
+        "enemiesByType": {
+          "Skeleton": 3
+        },
+        "health": 60.0,
+        "effectiveHealthPhysic": 60.0,
+        "effectiveHealthMagic": 60.0,
+        "healthPerSecond": 2.0,
+        "killGold": 15,
+        "maxSkipGold": 20,
+        "goldAtStartWithoutSkips": 265,
+        "goldAtStartWithMaxSkips": 265,
+        "breakthroughDamage": 3,
+        "breakthroughThreat": 0.15,
+        "spawnEnd": 4.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 44.0,
+        "peakEnemies": 3,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 2,
+            "health": 40.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Right",
+            "wavesCount": 1,
+            "enemiesCount": 1,
+            "health": 20.0
+          }
+        ]
+      }
+    },
+    {
+      "stageTime": 35.0,
+      "timeToSkipStage": 15.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 6
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 6,
+            "health": 120.0,
+            "killGold": 30,
+            "breakthroughDamage": 6,
+            "spawnEnd": 10.0,
+            "firstArrival": 40.0,
+            "lastArrival": 50.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 3
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Right",
+          "startDelay": 1.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 3,
+            "health": 60.0,
+            "killGold": 15,
+            "breakthroughDamage": 3,
+            "spawnEnd": 5.0,
+            "firstArrival": 41.711,
+            "lastArrival": 45.711
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 2,
+        "enemiesCount": 9,
+        "enemiesByType": {
+          "Skeleton": 9
+        },
+        "health": 180.0,
+        "effectiveHealthPhysic": 180.0,
+        "effectiveHealthMagic": 180.0,
+        "healthPerSecond": 5.143,
+        "killGold": 45,
+        "maxSkipGold": 20,
+        "goldAtStartWithoutSkips": 280,
+        "goldAtStartWithMaxSkips": 300,
+        "breakthroughDamage": 9,
+        "breakthroughThreat": 0.45,
+        "spawnEnd": 10.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 50.0,
+        "peakEnemies": 11,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 6,
+            "health": 120.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Right",
+            "wavesCount": 1,
+            "enemiesCount": 3,
+            "health": 60.0
+          }
+        ]
+      }
+    },
+    {
+      "stageTime": 35.0,
+      "timeToSkipStage": 15.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 9
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 9,
+            "health": 180.0,
+            "killGold": 45,
+            "breakthroughDamage": 9,
+            "spawnEnd": 16.0,
+            "firstArrival": 40.0,
+            "lastArrival": 56.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "SkeletonRogue",
+              "count": 3
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Right",
+          "startDelay": 1.0,
+          "delayBetweenSpawns": 5.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 3,
+            "health": 240.0,
+            "killGold": 45,
+            "breakthroughDamage": 3,
+            "spawnEnd": 11.0,
+            "firstArrival": 82.421,
+            "lastArrival": 92.421
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 2,
+        "enemiesCount": 12,
+        "enemiesByType": {
+          "Skeleton": 9,
+          "SkeletonRogue": 3
+        },
+        "health": 420.0,
+        "effectiveHealthPhysic": 522.857,
+        "effectiveHealthMagic": 420.0,
+        "healthPerSecond": 12.0,
+        "killGold": 90,
+        "maxSkipGold": 20,
+        "goldAtStartWithoutSkips": 325,
+        "goldAtStartWithMaxSkips": 365,
+        "breakthroughDamage": 12,
+        "breakthroughThreat": 0.6,
+        "spawnEnd": 16.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 92.421,
+        "peakEnemies": 14,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 9,
+            "health": 180.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Right",
+            "wavesCount": 1,
+            "enemiesCount": 3,
+            "health": 240.0
+          }
+        ]
+      }
+    },
+    {
+      "stageTime": 40.0,
+      "timeToSkipStage": 15.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 9
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 9,
+            "health": 180.0,
+            "killGold": 45,
+            "breakthroughDamage": 9,
+            "spawnEnd": 16.0,
+            "firstArrival": 40.0,
+            "lastArrival": 56.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "SkeletonRogue",
+              "count": 4
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Right",
+          "startDelay": 1.0,
+          "delayBetweenSpawns": 4.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 4,
+            "health": 320.0,
+            "killGold": 60,
+            "breakthroughDamage": 4,
+            "spawnEnd": 13.0,
+            "firstArrival": 82.421,
+            "lastArrival": 94.421
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 6
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Left",
+          "startDelay": 1.0,
+          "delayBetweenSpawns": 3.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 6,
+            "health": 120.0,
+            "killGold": 30,
+            "breakthroughDamage": 6,
+            "spawnEnd": 16.0,
+            "firstArrival": 40.296,
+            "lastArrival": 55.296
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 3,
+        "enemiesCount": 19,
+        "enemiesByType": {
+          "Skeleton": 15,
+          "SkeletonRogue": 4
+        },
+        "health": 620.0,
+        "effectiveHealthPhysic": 757.143,
+        "effectiveHealthMagic": 620.0,
+        "healthPerSecond": 15.5,
+        "killGold": 135,
+        "maxSkipGold": 20,
+        "goldAtStartWithoutSkips": 415,
+        "goldAtStartWithMaxSkips": 475,
+        "breakthroughDamage": 19,
+        "breakthroughThreat": 0.95,
+        "spawnEnd": 16.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 94.421,
+        "peakEnemies": 25,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 9,
+            "health": 180.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Left",
+            "wavesCount": 1,
+            "enemiesCount": 6,
+            "health": 120.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Right",
+            "wavesCount": 1,
+            "enemiesCount": 4,
+            "health": 320.0
+          }
+        ]
+      }
+    },
+    {
+      "stageTime": 30.0,
+      "timeToSkipStage": 15.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 200.0,
+            "killGold": 50,
+            "breakthroughDamage": 10,
+            "spawnEnd": 9.0,
+            "firstArrival": 40.0,
+            "lastArrival": 49.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Right",
+          "startDelay": 1.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 200.0,
+            "killGold": 50,
+            "breakthroughDamage": 10,
+            "spawnEnd": 19.0,
+            "firstArrival": 41.711,
+            "lastArrival": 59.711
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 1
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Left",
+          "startDelay": 1.0,
+          "delayBetweenSpawns": 3.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 1,
+            "health": 20.0,
+            "killGold": 5,
+            "breakthroughDamage": 1,
+            "spawnEnd": 1.0,
+            "firstArrival": 40.296,
+            "lastArrival": 40.296
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 3,
+        "enemiesCount": 21,
+        "enemiesByType": {
+          "Skeleton": 21
+        },
+        "health": 420.0,
+        "effectiveHealthPhysic": 420.0,
+        "effectiveHealthMagic": 420.0,
+        "healthPerSecond": 14.0,
+        "killGold": 105,
+        "maxSkipGold": 0,
+        "goldAtStartWithoutSkips": 550,
+        "goldAtStartWithMaxSkips": 630,
+        "breakthroughDamage": 21,
+        "breakthroughThreat": 1.05,
+        "spawnEnd": 19.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 59.711,
+        "peakEnemies": 29,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 200.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Left",
+            "wavesCount": 1,
+            "enemiesCount": 1,
+            "health": 20.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Right",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 200.0
+          }
+        ]
+      }
+    }
+  ],
+  "analysis": {
+    "stagesCount": 5,
+    "wavesCount": 12,
+    "enemiesCount": 64,
+    "enemiesByType": {
+      "Skeleton": 57,
+      "SkeletonRogue": 7
+    },
+    "health": 1700.0,
+    "effectiveHealthPhysic": 1940.0,
+    "effectiveHealthMagic": 1700.0,
+    "killGold": 390,
+    "maxSkipGold": 80,
+    "totalGoldWithoutSkips": 655,
+    "totalGoldWithMaxSkips": 735,
+    "breakthroughDamage": 64,
+    "breakthroughThreat": 3.2,
+    "durationWithoutSkips": 161.0,
+    "durationWithMaxSkips": 76.0,
+    "peakEnemies": 29,
+    "traffic": [
+      {
+        "pathNumber": "First",
+        "lane": "Center",
+        "wavesCount": 5,
+        "enemiesCount": 36,
+        "health": 720.0
+      },
+      {
+        "pathNumber": "First",
+        "lane": "Left",
+        "wavesCount": 2,
+        "enemiesCount": 7,
+        "health": 140.0
+      },
+      {
+        "pathNumber": "First",
+        "lane": "Right",
+        "wavesCount": 5,
+        "enemiesCount": 21,
+        "health": 840.0
+      }
+    ]
+  },
+  "errors": [],
+  "warnings": []
+}

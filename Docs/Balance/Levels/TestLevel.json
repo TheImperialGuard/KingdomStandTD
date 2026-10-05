@@ -1,0 +1,115 @@
+{
+  "level": "TestLevel",
+  "campaignNumber": null,
+  "prefabPath": "Prefabs/Levels/TestLevel",
+  "gameMode": "Basic",
+  "towerSlotsCount": 3,
+  "startGold": 265,
+  "startPlayerHealth": 20,
+  "roads": [
+    {
+      "pathNumber": "First",
+      "name": "Path",
+      "waypointsCount": 7,
+      "lengthCenter": 11.61,
+      "lengthLeft": 12.324,
+      "lengthRight": 10.912,
+      "timeToBase": {
+        "Gargoyle": 11.61
+      }
+    }
+  ],
+  "stages": [
+    {
+      "stageTime": 20.0,
+      "timeToSkipStage": 15.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "Gargoyle",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 100.0,
+            "killGold": 100,
+            "breakthroughDamage": 10,
+            "spawnEnd": 18.0,
+            "firstArrival": 11.61,
+            "lastArrival": 29.61
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 1,
+        "enemiesCount": 10,
+        "enemiesByType": {
+          "Gargoyle": 10
+        },
+        "health": 100.0,
+        "effectiveHealthPhysic": 100.0,
+        "effectiveHealthMagic": 100.0,
+        "healthPerSecond": 5.0,
+        "killGold": 100,
+        "maxSkipGold": 0,
+        "goldAtStartWithoutSkips": 265,
+        "goldAtStartWithMaxSkips": 265,
+        "breakthroughDamage": 10,
+        "breakthroughThreat": 0.5,
+        "spawnEnd": 18.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 29.61,
+        "peakEnemies": 6,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 100.0
+          }
+        ]
+      }
+    }
+  ],
+  "analysis": {
+    "stagesCount": 1,
+    "wavesCount": 1,
+    "enemiesCount": 10,
+    "enemiesByType": {
+      "Gargoyle": 10
+    },
+    "health": 100.0,
+    "effectiveHealthPhysic": 100.0,
+    "effectiveHealthMagic": 100.0,
+    "killGold": 100,
+    "maxSkipGold": 0,
+    "totalGoldWithoutSkips": 365,
+    "totalGoldWithMaxSkips": 365,
+    "breakthroughDamage": 10,
+    "breakthroughThreat": 0.5,
+    "durationWithoutSkips": 20.0,
+    "durationWithMaxSkips": 20.0,
+    "peakEnemies": 6,
+    "traffic": [
+      {
+        "pathNumber": "First",
+        "lane": "Center",
+        "wavesCount": 1,
+        "enemiesCount": 10,
+        "health": 100.0
+      }
+    ]
+  },
+  "errors": [],
+  "warnings": []
+}
