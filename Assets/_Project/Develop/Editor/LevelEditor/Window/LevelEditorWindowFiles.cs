@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets._Project.Develop.Editor.LevelEditor.Window
 {
-    // Макет и стили окон редактора уровней лежат рядом с их скриптами, поэтому путь к ним не зависит
+    // Макет и стили окон и инспекторов редактора уровней лежат рядом с их скриптами, поэтому путь к ним не зависит
     // от того, где в проекте находится папка редактора.
     public static class LevelEditorWindowFiles
     {

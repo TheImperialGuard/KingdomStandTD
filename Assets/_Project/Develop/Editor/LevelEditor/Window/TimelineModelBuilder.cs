@@ -25,7 +25,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         private readonly LevelStats _stats;
         private readonly LevelPrefabInfo _prefab;
         private readonly TimelineModel _model;
-        private readonly Dictionary<CharacterConfig, int> _enemySlots = new();
+        private readonly Dictionary<CharacterConfig, int> _enemyIndices = new();
         private readonly Dictionary<(PathNumber, PathLane), int> _rowIndices = new();
 
         private TimelineModelBuilder(LevelConfig config, LevelStats stats, LevelPrefabInfo prefab, TimelineMode mode)
@@ -52,42 +52,23 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             return builder._model;
         }
 
+        // Каждый враг получает свою строку легенды, даже без своего цвета: по ней его можно подсветить.
         private void AddEnemies()
         {
-            List<CharacterConfig> otherEnemies = new();
-
             foreach (CharacterConfig enemy in EnumerateEnemies())
             {
-                if (_enemySlots.Count >= TimelinePalette.EnemySlotsCount)
-                {
-                    _enemySlots.Add(enemy, TimelinePalette.NO_SLOT);
-                    otherEnemies.Add(enemy);
-                    continue;
-                }
+                int index = _model.Enemies.Count;
+                int slot = index < TimelinePalette.EnemySlotsCount ? index : TimelinePalette.NO_SLOT;
 
-                int slot = _enemySlots.Count;
-
-                _enemySlots.Add(enemy, slot);
+                _enemyIndices.Add(enemy, index);
                 _model.Enemies.Add(new TimelineEnemy
                 {
+                    Config = enemy,
                     Name = EnemyCatalog.GetDisplayName(enemy),
-                    Tooltip = EnemyCatalog.DescribeStats(enemy),
+                    Tooltip = DescribeEnemy(enemy, slot),
                     Slot = slot,
                 });
             }
-
-            if (otherEnemies.Count == 0)
-                return;
-
-            IEnumerable<string> otherNames = otherEnemies.Select(EnemyCatalog.GetDisplayName);
-            string otherNamesText = string.Join(", ", otherNames);
-
-            _model.Enemies.Add(new TimelineEnemy
-            {
-                Name = "прочие",
-                Tooltip = $"Цветов в палитре меньше, чем врагов в уровне. Серым: {otherNamesText}",
-                Slot = TimelinePalette.NO_SLOT,
-            });
         }
 
         // Враги уровня по порядку первого появления: стейдж за стейджем, волна за волной, группа за группой.
@@ -204,7 +185,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             };
 
             foreach (WaveSpawn spawn in LevelStatsCalculator.EnumerateSpawns(wave))
-                timelineWave.Spawns.Add(new TimelineSpawn(offset + spawn.Time, FindEnemySlot(spawn.Enemy)));
+                timelineWave.Spawns.Add(new TimelineSpawn(offset + spawn.Time, FindEnemyIndex(spawn.Enemy)));
 
             _model.Waves.Add(timelineWave);
         }
@@ -222,10 +203,17 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
 
         private int FindEnemySlot(CharacterConfig enemy)
         {
-            if (enemy != null && _enemySlots.TryGetValue(enemy, out int slot))
-                return slot;
+            int index = FindEnemyIndex(enemy);
 
-            return TimelinePalette.NO_SLOT;
+            return index != LevelAddress.NO_INDEX ? _model.Enemies[index].Slot : TimelinePalette.NO_SLOT;
+        }
+
+        private int FindEnemyIndex(CharacterConfig enemy)
+        {
+            if (enemy != null && _enemyIndices.TryGetValue(enemy, out int index))
+                return index;
+
+            return LevelAddress.NO_INDEX;
         }
 
         // Волны одной строки, которые пересекаются по времени, расходятся по подстрокам: жадно, в порядке начала.
@@ -268,6 +256,18 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             float duration = Math.Max(MIN_DURATION, Math.Max(stagesEnd, wavesEnd));
 
             _model.Duration = duration * (1f + DURATION_MARGIN);
+        }
+
+        private static string DescribeEnemy(CharacterConfig enemy, int slot)
+        {
+            string stats = EnemyCatalog.DescribeStats(enemy);
+
+            if (slot != TimelinePalette.NO_SLOT)
+                return stats;
+
+            int colorsCount = TimelinePalette.EnemySlotsCount;
+
+            return $"{stats}{LINE_BREAK}Показан серым: в палитре {colorsCount} цветов, а видов врагов в уровне больше";
         }
 
         private string DescribeStage(int stageIndex, EnemiesWavesStageConfig stage, StageStats stageStats, float offset, bool isLastStage)

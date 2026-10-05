@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 
 namespace Assets._Project.Develop.Editor.LevelEditor.Window
@@ -51,22 +52,24 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         public string Tooltip { get; set; }
     }
 
-    // Засечка выхода врага: время и цвет врага в палитре.
+    // Засечка выхода врага: время и номер врага в TimelineModel.Enemies, у группы без врага — LevelAddress.NO_INDEX.
     public readonly struct TimelineSpawn
     {
-        public TimelineSpawn(float time, int enemySlot)
+        public TimelineSpawn(float time, int enemyIndex)
         {
             Time = time;
-            EnemySlot = enemySlot;
+            EnemyIndex = enemyIndex;
         }
 
         public float Time { get; }
-        public int EnemySlot { get; }
+        public int EnemyIndex { get; }
     }
 
-    // Строка легенды: враг и его цвет. Врагам сверх палитры достаётся общая строка «прочие».
+    // Строка легенды: враг и его цвет. Строка есть у каждого врага — по ней врага подсвечивают на таймлайне;
+    // врагам сверх палитры достаётся серый цвет «прочих».
     public class TimelineEnemy
     {
+        public CharacterConfig Config { get; set; }
         public string Name { get; set; }
         public string Tooltip { get; set; }
         public int Slot { get; set; }

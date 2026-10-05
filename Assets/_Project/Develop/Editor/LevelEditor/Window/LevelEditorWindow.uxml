@@ -8,6 +8,7 @@
             <uie:ToolbarButton name="validateAllButton" text="Проверить все уровни" tooltip="Проверка всех LevelConfig, отчёт — в консоли" />
             <uie:ToolbarButton name="copyLevelButton" text="Копировать уровень" tooltip="Скопировать срез уровня в буфер обмена — с несохранёнными правками и анализом, как в Docs/Balance/Levels. Его можно вставить в другой уровень или в чат" />
             <uie:ToolbarButton name="pasteButton" text="Вставить" tooltip="Вставить из буфера обмена: стейджи — после выбранного стейджа, волны — после выбранной волны, уровень целиком — после предпросмотра изменений" />
+            <uie:ToolbarButton name="bulkEditButton" text="Массовые операции…" tooltip="Изменить сразу несколько стейджей с предпросмотром: количество врагов и интервал спавна — в процентах, старт волн, время стейджа и скип — сдвигом в секундах" />
             <uie:ToolbarSpacer class="toolbar__spacer" />
             <ui:Label name="dirtyIndicator" text="● Не сохранено" class="toolbar__dirty-indicator toolbar__dirty-indicator--hidden" />
             <uie:ToolbarButton name="revertButton" text="Сбросить изменения" tooltip="Вернуть уровень к последнему сохранённому состоянию. Сброс отменяется через Ctrl+Z" />
@@ -52,9 +53,9 @@
                         <ui:VisualElement class="panel">
                             <ui:VisualElement class="panel__header">
                                 <ui:Label name="timelineTitle" class="panel__title" />
-                                <ui:VisualElement class="timeline-modes">
-                                    <ui:Button name="timelineStageModeButton" text="Стейдж" tooltip="Показать выбранный стейдж" class="timeline-modes__button" />
-                                    <ui:Button name="timelineLevelModeButton" text="Уровень" tooltip="Показать весь уровень: стейджи подряд, без скипов" class="timeline-modes__button" />
+                                <ui:VisualElement class="segmented-buttons">
+                                    <ui:Button name="timelineStageModeButton" text="Стейдж" tooltip="Показать выбранный стейдж" class="segmented-buttons__button" />
+                                    <ui:Button name="timelineLevelModeButton" text="Уровень" tooltip="Показать весь уровень: стейджи подряд, без скипов" class="segmented-buttons__button" />
                                 </ui:VisualElement>
                             </ui:VisualElement>
                             <ui:ScrollView name="timelineScroll" mode="Vertical" horizontal-scroller-visibility="Hidden" class="timeline-scroll" />
@@ -105,7 +106,36 @@
             </ui:TwoPaneSplitView>
         </ui:VisualElement>
         <ui:VisualElement name="allLevelsPage" class="level-editor__page level-editor__page--hidden">
-            <ui:Label text="Сводка по всем уровням появится на подэтапе 4." class="placeholder" />
+            <ui:TwoPaneSplitView name="allLevelsSplit" fixed-pane-index="0" fixed-pane-initial-dimension="180" orientation="Vertical" view-data-key="levelEditor.allLevelsSplit" class="level-editor__split">
+                <ui:VisualElement class="panel">
+                    <ui:VisualElement class="panel__header">
+                        <ui:Label name="levelsTitle" class="panel__title" />
+                    </ui:VisualElement>
+                    <ui:MultiColumnListView name="levelsTable" fixed-item-height="22" selection-type="Single" show-alternating-row-backgrounds="ContentOnly" class="panel__list">
+                        <ui:Columns>
+                            <ui:Column name="number" title="№" width="32" />
+                            <ui:Column name="level" title="Уровень" width="140" stretchable="true" />
+                            <ui:Column name="stages" title="Стейджи" width="64" />
+                            <ui:Column name="waves" title="Волны" width="56" />
+                            <ui:Column name="enemies" title="Враги" width="56" />
+                            <ui:Column name="health" title="HP" width="64" />
+                            <ui:Column name="effectiveHealth" title="EHP физ / маг" width="120" />
+                            <ui:Column name="gold" title="Золото: старт → конец (скипы)" width="190" />
+                            <ui:Column name="duration" title="Длительность (скипы)" width="140" />
+                            <ui:Column name="threat" title="Угроза" width="60" />
+                            <ui:Column name="peak" title="Пик" width="48" />
+                            <ui:Column name="issues" title="Замечания" width="90" />
+                        </ui:Columns>
+                    </ui:MultiColumnListView>
+                </ui:VisualElement>
+                <ui:VisualElement class="panel">
+                    <ui:VisualElement class="panel__header">
+                        <ui:Label name="difficultyTitle" class="panel__title" />
+                        <ui:VisualElement name="difficultyMeasures" class="segmented-buttons" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="difficultyChartSlot" class="difficulty-chart-slot" />
+                </ui:VisualElement>
+            </ui:TwoPaneSplitView>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -131,6 +131,10 @@
     color: var(--color-warning);
 }
 
+.table-label--error {
+    color: var(--color-error);
+}
+
 .stats-row {
     flex-direction: row;
     padding: 1px 2px;
@@ -293,23 +297,18 @@
     margin: 2px 0 2px 2px;
 }
 
-.placeholder {
-    margin: 12px;
-    -unity-text-align: middle-center;
-}
-
-.timeline-modes {
+.segmented-buttons {
     flex-direction: row;
     margin-right: 2px;
 }
 
-.timeline-modes__button {
+.segmented-buttons__button {
     margin: 0;
     padding: 1px 8px;
     border-radius: 0;
 }
 
-.timeline-modes__button--selected {
+.segmented-buttons__button--selected {
     background-color: var(--color-lane-selected);
     color: #FFFFFF;
 }
@@ -322,6 +321,15 @@
     flex-shrink: 0;
 }
 
+.difficulty-chart-slot {
+    flex-grow: 1;
+}
+
+.difficulty-chart {
+    flex-grow: 1;
+    min-height: 120px;
+}
+
 .timeline-legend {
     flex-direction: row;
     flex-wrap: wrap;
@@ -331,7 +339,24 @@
 .timeline-legend__item {
     flex-direction: row;
     align-items: center;
-    margin-right: 10px;
+    margin-right: 2px;
+    padding: 1px 4px;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0);
+    border-radius: 3px;
+    cursor: link;
+}
+
+.timeline-legend__item:hover {
+    background-color: var(--color-group-background);
+}
+
+.timeline-legend__item--pinned {
+    border-color: var(--color-lane-selected);
+}
+
+.timeline-legend__item--dimmed {
+    opacity: 0.4;
 }
 
 .timeline-legend__swatch {
@@ -341,51 +366,84 @@
     border-radius: 2px;
 }
 
-.paste-dialog {
+.dialog {
     padding: 8px;
 }
 
-.paste-dialog__header {
+.dialog__header {
+    flex-shrink: 0;
     -unity-font-style: bold;
     margin-bottom: 6px;
     white-space: normal;
 }
 
-.paste-dialog__content {
+.dialog__content {
     flex-grow: 1;
+    flex-basis: 0;
     padding: 4px;
     border-width: 1px;
     border-color: var(--color-separator);
 }
 
-.paste-dialog__section-title {
+.dialog__section-title {
     -unity-font-style: bold;
     margin: 6px 0 2px 0;
 }
 
-.paste-dialog__line {
+.dialog__line {
     margin-left: 8px;
     white-space: normal;
 }
 
-.paste-dialog__line--error {
+.dialog__line--error {
     color: var(--color-error);
 }
 
-.paste-dialog__line--warning {
+.dialog__line--warning {
     color: var(--color-warning);
 }
 
-.paste-dialog__footer {
+.dialog__footer {
+    flex-shrink: 0;
     margin: 6px 0;
     white-space: normal;
 }
 
-.paste-dialog__buttons {
+.dialog__buttons {
+    flex-shrink: 0;
     flex-direction: row;
     justify-content: flex-end;
 }
 
-.paste-dialog__button {
+.dialog__button {
     min-width: 96px;
+}
+
+.bulk-edit__range {
+    flex-shrink: 0;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.bulk-edit__range-label {
+    margin: 0 4px;
+}
+
+.bulk-edit__stage-field {
+    width: 48px;
+    margin-right: 4px;
+}
+
+.bulk-edit__fields {
+    flex-shrink: 0;
+    margin-bottom: 8px;
+}
+
+.bulk-edit__field {
+    margin-bottom: 2px;
+}
+
+.bulk-edit__field > .unity-base-field__label {
+    min-width: 200px;
 }

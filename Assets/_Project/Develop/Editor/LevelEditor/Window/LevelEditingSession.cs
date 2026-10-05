@@ -282,9 +282,10 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             });
         }
 
-        // Весь уровень из буфера обмена — одним шагом Undo и без сохранения. Срез должен быть уже проверен.
-        public void ApplyLevelSlice(LevelSlice slice, IReadOnlyDictionary<string, CharacterConfig> enemies)
-            => Modify("Вставить уровень из буфера", () => LevelSliceApplier.Apply(_serializedConfig, slice, enemies));
+        // Весь уровень из среза — одним шагом Undo и без сохранения: вставка из буфера обмена и массовые операции.
+        // Срез должен быть уже проверен.
+        public void ApplyLevelSlice(LevelSlice slice, IReadOnlyDictionary<string, CharacterConfig> enemies, string undoName)
+            => Modify(undoName, () => LevelSliceApplier.Apply(_serializedConfig, slice, enemies));
 
         public void Dispose()
         {

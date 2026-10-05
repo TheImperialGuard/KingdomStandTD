@@ -37,10 +37,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             _issuesList.SetSelectionWithoutNotify(Array.Empty<int>());
             _issuesList.Rebuild();
 
-            int errorsCount = issues.Count(issue => issue.IsError);
-            int warningsCount = issues.Count - errorsCount;
-
-            _title.text = issues.Count == 0 ? "Замечаний нет" : $"Замечания: ошибок {errorsCount}, предупреждений {warningsCount}";
+            _title.text = LevelEditorTexts.DescribeIssuesCount(issues);
         }
 
         private VisualElement CreateIssueRow()
@@ -55,11 +52,9 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         {
             Label row = (Label)element;
             LevelIssue issue = _issues[index];
-            string marker = issue.IsError ? LevelEditorTexts.ERROR_MARKER : LevelEditorTexts.WARNING_MARKER;
-            string issueText = issue.ToString();
 
-            row.text = marker + issueText;
-            row.tooltip = issueText;
+            row.text = LevelEditorTexts.FormatIssue(issue);
+            row.tooltip = issue.ToString();
             row.EnableInClassList(ERROR_ROW_CLASS, issue.IsError);
             row.EnableInClassList(WARNING_ROW_CLASS, issue.IsError == false);
         }

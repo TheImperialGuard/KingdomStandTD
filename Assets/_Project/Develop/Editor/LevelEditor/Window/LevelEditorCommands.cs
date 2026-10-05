@@ -8,7 +8,8 @@ using UnityEngine;
 namespace Assets._Project.Develop.Editor.LevelEditor.Window
 {
     // Структурные правки уровня из окна: новые, дублированные, удалённые и переставленные стейджи и волны,
-    // перенос волны в другой стейдж, копирование и вставка через буфер обмена. Каждая правка — шаг Undo.
+    // перенос волны в другой стейдж, копирование и вставка через буфер обмена, массовые операции.
+    // Каждая правка — шаг Undo.
     // Перед правкой команда просит окно выбрать элемент, который получится в результате, — так выбор и данные
     // обновляются вместе, одним пересчётом окна.
     public class LevelEditorCommands
@@ -126,6 +127,28 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             Notify($"Уровень {level.name} скопирован");
         }
 
+        // Массовая операция над стейджами — в окне с предпросмотром; применяется одним шагом Undo без сохранения.
+        // Выбор стейджа и волны не меняется: стейджи и волны остаются на своих местах.
+        public void EditInBulk(int stageIndex)
+        {
+            if (IsLevelOpen == false)
+                return;
+
+            if (_session.StagesCount == 0)
+            {
+                Notify("В уровне нет стейджей — массовым операциям нечего менять");
+                return;
+            }
+
+            LevelSliceEnemies enemies = new(LevelEditorAssets.FindEnemyConfigs());
+
+            if (LevelBulkEditDialog.TryEdit(_session.Config, enemies, stageIndex, out LevelSlice editedSlice, out string description) == false)
+                return;
+
+            _session.ApplyLevelSlice(editedSlice, enemies.ByName, $"Массовая операция: {description}");
+            Notify($"Массовая операция применена ({description}), Ctrl+Z отменит её");
+        }
+
         // Что и куда вставить, решает содержимое буфера. Стейджи встают после стейджа stageIndex, а без выбранного
         // стейджа — в конец уровня. Волны встают в стейдж stageIndex после волны waveIndex, а без выбранной волны —
         // в конец стейджа. Уровень заменяет данные открытого после предпросмотра изменений.
@@ -170,7 +193,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             if (LevelPasteDialog.Confirm(preview, slice.Level) == false)
                 return;
 
-            _session.ApplyLevelSlice(slice, enemies.ByName);
+            _session.ApplyLevelSlice(slice, enemies.ByName, "Вставить уровень из буфера");
             Notify("Уровень из буфера вставлен, Ctrl+Z отменит вставку");
         }
 

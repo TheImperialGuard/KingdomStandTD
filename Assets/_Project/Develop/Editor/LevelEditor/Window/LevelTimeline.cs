@@ -8,9 +8,10 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
 {
     // Таймлайн волн на Painter2D. Слева подписи строк «дорога × полоса», сверху ось времени и полоса отметок:
     // номера стейджей в режиме уровня, «скип» и «конец» в режиме стейджа. Волна — полоска от первого до последнего
-    // врага с засечками выходов в цвете врага; спавн после конца стейджа заштрихован. Клик по волне выбирает её,
-    // в режиме уровня клик по пустому месту выбирает стейдж. Подсказки — у волн, подписей строк и отметок стейджей.
-    public class LevelTimeline : VisualElement
+    // врага с засечками выходов в цвете врага; спавн после конца стейджа заштрихован. Пока подсвечен враг из легенды,
+    // в цвете остаются только его засечки и волны, остальные гаснут. Клик по волне выбирает её, в режиме уровня
+    // клик по пустому месту выбирает стейдж. Подсказки — у волн, подписей строк и отметок стейджей.
+    public class LevelTimeline : ChartElement
     {
         private const string ROOT_CLASS = "level-timeline";
         private const string EMPTY_TEXT = "В уровне нет волн";
@@ -26,21 +27,15 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         private const float BAR_HEIGHT = 12f;
         private const float BOTTOM_PADDING = 4f;
         private const float EMPTY_HEIGHT = 40f;
-        private const float MIN_DRAWABLE_SIZE = 1f;
 
         // Полоска стоит посередине подстроки: сверху и снизу по столько же пикселей.
         private const float BAR_OFFSET = 2f;
-
-        private const float TEXT_PADDING = 3f;
-        private const float AXIS_FONT_SIZE = 10f;
-        private const float LABEL_FONT_SIZE = 11f;
 
         // Подписи оси идут не чаще, чем раз в столько пикселей; подпись не рисуется, если ей не хватает места справа.
         private const float MIN_AXIS_LABEL_SPACING = 48f;
         private const float AXIS_LABEL_WIDTH = 36f;
         private const float MARK_LABEL_WIDTH = 32f;
 
-        private const float HAIRLINE_WIDTH = 1f;
         private const float BOUNDARY_WIDTH = 1.5f;
         private const float TICK_WIDTH = 2f;
         private const float MIN_BAR_WIDTH = 4f;
@@ -49,9 +44,6 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         private const float DASH_LENGTH = 3f;
         private const float DASH_GAP = 3f;
         private const float HIT_SLOP = 3f;
-
-        // Тонкая линия ложится на середину пикселя, иначе она размывается на два пикселя.
-        private const float HALF_PIXEL = 0.5f;
 
         // Рамка выбора ложится снаружи полоски: путь рамки отступает на половину её толщины.
         private const float SELECTION_OFFSET = 1f;
@@ -67,6 +59,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         private TimelineModel _model = new();
         private int _selectedStageIndex = LevelAddress.NO_INDEX;
         private int _selectedWaveIndex = LevelAddress.NO_INDEX;
+        private int _highlightedEnemyIndex = LevelAddress.NO_INDEX;
         private TimelineWave _hoveredWave;
         private Vector2 _pointerPosition;
 
@@ -84,19 +77,30 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         }
 
         private float RowsTop => AXIS_HEIGHT + MARKS_HEIGHT;
+        private bool IsHighlighting => _highlightedEnemyIndex != LevelAddress.NO_INDEX;
 
+        // Подсветка сбрасывается: номер врага относится к старой модели, панель выставляет его заново.
         public void SetModel(TimelineModel model, int selectedStageIndex, int selectedWaveIndex)
         {
             _model = model;
             _selectedStageIndex = selectedStageIndex;
             _selectedWaveIndex = selectedWaveIndex;
+            _highlightedEnemyIndex = LevelAddress.NO_INDEX;
             _hoveredWave = null;
 
             LayoutRows();
             MarkDirtyRepaint();
         }
 
-        private static float Crisp(float value) => Mathf.Floor(value) + HALF_PIXEL;
+        // Номер врага в TimelineModel.Enemies или LevelAddress.NO_INDEX — без подсветки.
+        public void SetHighlightedEnemy(int enemyIndex)
+        {
+            if (enemyIndex == _highlightedEnemyIndex)
+                return;
+
+            _highlightedEnemyIndex = enemyIndex;
+            MarkDirtyRepaint();
+        }
 
         private static float ChooseAxisStep(float pixelsPerSecond)
         {
@@ -107,42 +111,6 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             }
 
             return _axisSteps[_axisSteps.Length - 1];
-        }
-
-        private static void AddRectPath(Painter2D painter, Rect rect)
-        {
-            painter.MoveTo(new Vector2(rect.xMin, rect.yMin));
-            painter.LineTo(new Vector2(rect.xMax, rect.yMin));
-            painter.LineTo(new Vector2(rect.xMax, rect.yMax));
-            painter.LineTo(new Vector2(rect.xMin, rect.yMax));
-            painter.ClosePath();
-        }
-
-        private static void FillRect(Painter2D painter, Rect rect, Color color)
-        {
-            painter.fillColor = color;
-            painter.BeginPath();
-            AddRectPath(painter, rect);
-            painter.Fill();
-        }
-
-        private static void StrokeRect(Painter2D painter, Rect rect, Color color, float width)
-        {
-            painter.strokeColor = color;
-            painter.lineWidth = width;
-            painter.BeginPath();
-            AddRectPath(painter, rect);
-            painter.Stroke();
-        }
-
-        private static void DrawLine(Painter2D painter, Vector2 from, Vector2 to, Color color, float width)
-        {
-            painter.strokeColor = color;
-            painter.lineWidth = width;
-            painter.BeginPath();
-            painter.MoveTo(from);
-            painter.LineTo(to);
-            painter.Stroke();
         }
 
         private static void DrawDashedVerticalLine(Painter2D painter, float x, float top, float bottom, Color color)
@@ -338,7 +306,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             {
                 Rect bar = GetWaveRect(wave, pixelsPerSecond);
 
-                FillRect(painter, bar, TimelinePalette.GetTrackColor(wave.TrackSlot));
+                FillRect(painter, bar, GetTrackColor(wave));
 
                 if (wave.OverflowStart.HasValue)
                 {
@@ -360,15 +328,20 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             }
         }
 
-        // Засечки одного врага собираются в один путь — так на каждый цвет одна заливка.
+        // Засечки одного врага собираются в один путь — так на каждого врага одна заливка.
+        // Подсвеченный враг рисуется последним, поверх приглушённых.
         private void DrawSpawnTicks(Painter2D painter, TimelineWave wave, Rect bar, float pixelsPerSecond)
         {
-            foreach (IGrouping<int, TimelineSpawn> slotSpawns in wave.Spawns.GroupBy(spawn => spawn.EnemySlot))
+            IEnumerable<IGrouping<int, TimelineSpawn>> enemiesSpawns = wave.Spawns
+                .GroupBy(spawn => spawn.EnemyIndex)
+                .OrderBy(enemySpawns => enemySpawns.Key == _highlightedEnemyIndex);
+
+            foreach (IGrouping<int, TimelineSpawn> enemySpawns in enemiesSpawns)
             {
-                painter.fillColor = TimelinePalette.GetEnemyColor(slotSpawns.Key);
+                painter.fillColor = GetSpawnColor(enemySpawns.Key);
                 painter.BeginPath();
 
-                foreach (TimelineSpawn spawn in slotSpawns)
+                foreach (TimelineSpawn spawn in enemySpawns)
                 {
                     float x = ToX(spawn.Time, pixelsPerSecond);
                     AddRectPath(painter, Rect.MinMaxRect(x, bar.yMin, x + TICK_WIDTH, bar.yMax));
@@ -377,6 +350,29 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
                 painter.Fill();
             }
         }
+
+        // Пока подсвечен враг, цветная подложка остаётся только у волн с ним, остальные — нейтральные.
+        private Color GetTrackColor(TimelineWave wave)
+        {
+            if (IsHighlighting == false)
+                return TimelinePalette.GetTrackColor(wave.TrackSlot);
+
+            if (wave.Spawns.Any(spawn => spawn.EnemyIndex == _highlightedEnemyIndex))
+                return TimelinePalette.GetEnemyTrackColor(GetEnemySlot(_highlightedEnemyIndex));
+
+            return TimelinePalette.Wash;
+        }
+
+        private Color GetSpawnColor(int enemyIndex)
+        {
+            if (IsHighlighting && enemyIndex != _highlightedEnemyIndex)
+                return TimelinePalette.Dimmed;
+
+            return TimelinePalette.GetEnemyColor(GetEnemySlot(enemyIndex));
+        }
+
+        private int GetEnemySlot(int enemyIndex)
+            => enemyIndex != LevelAddress.NO_INDEX ? _model.Enemies[enemyIndex].Slot : TimelinePalette.NO_SLOT;
 
         private void DrawAxisLabels(MeshGenerationContext context, Rect area, float pixelsPerSecond)
         {
@@ -432,9 +428,6 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
                 DrawText(context, _model.Rows[i].Label, position, LABEL_FONT_SIZE, TimelinePalette.Text);
             }
         }
-
-        private void DrawText(MeshGenerationContext context, string text, Vector2 position, float fontSize, Color color)
-            => context.DrawText(text, position, fontSize, color, resolvedStyle.unityFontDefinition.fontAsset);
 
         private TimelineWave FindWaveAt(Vector2 position)
         {

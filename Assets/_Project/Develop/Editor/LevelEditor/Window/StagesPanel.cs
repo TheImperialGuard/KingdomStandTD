@@ -170,11 +170,11 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             _enemiesSheet.AddRow(
                 "EHP против физики",
                 LevelEditorTexts.Number(stats.EffectiveHealthPhysic),
-                "Сколько физического урона нужно нанести с учётом сопротивлений");
+                LevelEditorTexts.DescribeMeasure(DifficultyMeasure.EffectiveHealthPhysic));
             _enemiesSheet.AddRow(
                 "EHP против магии",
                 LevelEditorTexts.Number(stats.EffectiveHealthMagic),
-                "Сколько магического урона нужно нанести с учётом сопротивлений");
+                LevelEditorTexts.DescribeMeasure(DifficultyMeasure.EffectiveHealthMagic));
 
             string skipTooltip = isLastStage ? "В последнем стейдже скипа нет" : "Если скипнуть, как только это разрешено";
             string goldAtStart = $"{stats.GoldAtStartWithoutSkips} (со скипами {stats.GoldAtStartWithMaxSkips})";
@@ -194,7 +194,10 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             string spawnEnd = LevelEditorTexts.Seconds(stats.SpawnEnd);
             string spawnEndText = isOverflow ? $"{spawnEnd} — позже конца стейджа" : spawnEnd;
 
-            _threatSheet.AddRow("HP в секунду", LevelEditorTexts.Number(stats.HealthPerSecond), "HP стейджа, делённое на его время");
+            _threatSheet.AddRow(
+                "HP в секунду",
+                LevelEditorTexts.Number(stats.HealthPerSecond),
+                LevelEditorTexts.DescribeMeasure(DifficultyMeasure.HealthPerSecond));
             _threatSheet.AddRow(
                 "Угроза прорыва",
                 threatText,
@@ -215,7 +218,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         {
             int index = indices.DefaultIfEmpty(LevelAddress.NO_INDEX).First();
 
-            // Клик по пустому месту снимает выделение — возвращаем выбранный стейдж.
+            // У окна стейдж выбран всегда: от него зависят остальные панели. Если список потерял выделение — возвращаем.
             if (index == LevelAddress.NO_INDEX)
             {
                 CollectionViewIndices.Select(_stagesList, _stageIndex);

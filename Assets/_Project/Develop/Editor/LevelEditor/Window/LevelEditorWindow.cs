@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Assets._Project.Develop.Editor.LevelEditor.Window
 {
-    // Окно редактора уровней: стейджи и волны LevelConfig, их статистика и замечания проверки.
-    // Окно запоминает уровень, стейдж, волну, вкладку и режим таймлайна между открытиями.
+    // Окно редактора уровней: стейджи и волны LevelConfig, их статистика и замечания проверки, а на вкладке
+    // «Все уровни» — итоги всех уровней и кривая сложности кампании. Окно запоминает уровень, стейдж, волну, вкладку,
+    // режим таймлайна и показатель кривой сложности между открытиями.
     public class LevelEditorWindow : EditorWindow
     {
         private const string MENU_PATH = "Tools/Levels/Редактор уровней";
@@ -23,6 +25,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         private const string WAVE_PREF = PREFS_PREFIX + "Wave";
         private const string TAB_PREF = PREFS_PREFIX + "Tab";
         private const string TIMELINE_MODE_PREF = PREFS_PREFIX + "TimelineMode";
+        private const string DIFFICULTY_MEASURE_PREF = PREFS_PREFIX + "DifficultyMeasure";
 
         private const string HIDDEN_PAGE_CLASS = "level-editor__page--hidden";
         private const string HIDDEN_INDICATOR_CLASS = "toolbar__dirty-indicator--hidden";
@@ -41,8 +44,8 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         private PopupField<LevelConfig> _levelField;
         private ToolbarToggle _levelTab;
         private ToolbarToggle _allLevelsTab;
-        private VisualElement _levelPage;
-        private VisualElement _allLevelsPage;
+        private VisualElement _levelPageElement;
+        private VisualElement _allLevelsPageElement;
         private Label _dirtyIndicator;
         private ToolbarButton _revertButton;
         private ToolbarButton _saveButton;
@@ -53,12 +56,34 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         private WavesTable _wavesTable;
         private WaveDetailsPanel _waveDetailsPanel;
         private IssuesPanel _issuesPanel;
+        private AllLevelsPage _allLevelsPage;
 
         private int _stageIndex = LevelAddress.NO_INDEX;
         private int _waveIndex = LevelAddress.NO_INDEX;
+        private int _tab = LEVEL_TAB;
+
+        private bool IsAllLevelsTabSelected => _tab == ALL_LEVELS_TAB;
 
         [MenuItem(MENU_PATH, false, MENU_PRIORITY)]
         public static void Open() => GetWindow<LevelEditorWindow>(WINDOW_TITLE);
+
+        // Открывает окно на вкладке уровня: из инспектора LevelConfig и по двойному щелчку на ассете.
+        public static void Open(LevelConfig level)
+        {
+            LevelEditorWindow window = GetWindow<LevelEditorWindow>(WINDOW_TITLE);
+            window.ShowLevel(level);
+        }
+
+        // Двойной щелчок по LevelConfig в окне Project открывает уровень в редакторе.
+        [OnOpenAsset]
+        private static bool OnOpenAsset(EntityId entityId)
+        {
+            if ((EditorUtility.EntityIdToObject(entityId) is LevelConfig level) == false)
+                return false;
+
+            Open(level);
+            return true;
+        }
 
         private void CreateGUI()
         {
@@ -84,6 +109,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             _wavesTable = new WavesTable(rootVisualElement, _commands);
             _waveDetailsPanel = new WaveDetailsPanel(rootVisualElement, _enemyCatalog);
             _issuesPanel = new IssuesPanel(rootVisualElement);
+            _allLevelsPage = new AllLevelsPage(rootVisualElement, LoadDifficultyMeasure());
 
             _stagesPanel.StageSelected += OnStageSelected;
             _timelinePanel.WaveChosen += OnTimelineWaveChosen;
@@ -91,6 +117,9 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             _timelinePanel.ModeChanged += OnTimelineModeChanged;
             _wavesTable.WaveSelected += OnWaveSelected;
             _issuesPanel.IssueChosen += OnIssueChosen;
+            _allLevelsPage.LevelChosen += ShowLevel;
+            _allLevelsPage.StageChosen += OnOverviewStageChosen;
+            _allLevelsPage.MeasureChanged += OnDifficultyMeasureChanged;
 
             EditorApplication.projectChanged += OnProjectChanged;
 
@@ -104,6 +133,9 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         {
             _session?.ReloadIfChangedOutside();
             RefreshDirtyState();
+
+            if (IsAllLevelsTabSelected)
+                _allLevelsPage?.RefreshIfChangedOutside(_levels, _campaign);
         }
 
         // Пока окно было не в фокусе, могли измениться враги или префаб уровня.
@@ -133,12 +165,13 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             _levelTab.RegisterValueChangedCallback(_ => SelectTab(LEVEL_TAB));
             _allLevelsTab.RegisterValueChangedCallback(_ => SelectTab(ALL_LEVELS_TAB));
 
-            _levelPage = rootVisualElement.Q<VisualElement>("levelPage");
-            _allLevelsPage = rootVisualElement.Q<VisualElement>("allLevelsPage");
+            _levelPageElement = rootVisualElement.Q<VisualElement>("levelPage");
+            _allLevelsPageElement = rootVisualElement.Q<VisualElement>("allLevelsPage");
 
             rootVisualElement.Q<ToolbarButton>("validateAllButton").clicked += OnValidateAllClicked;
             rootVisualElement.Q<ToolbarButton>("copyLevelButton").clicked += OnCopyLevelClicked;
             rootVisualElement.Q<ToolbarButton>("pasteButton").clicked += OnPasteClicked;
+            rootVisualElement.Q<ToolbarButton>("bulkEditButton").clicked += OnBulkEditClicked;
 
             _revertButton = rootVisualElement.Q<ToolbarButton>("revertButton");
             _revertButton.clicked += OnRevertClicked;
@@ -157,6 +190,29 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             _levelField.choices = _levels;
         }
 
+        // Только что созданное окно строит интерфейс позже, в CreateGUI: тогда уровень запоминается,
+        // и CreateGUI откроет его как сохранённый выбор. Уже открытый уровень не переоткрывается, выбор в нём остаётся.
+        private void ShowLevel(LevelConfig level)
+        {
+            if (_levelField == null)
+            {
+                EditorPrefs.SetString(LEVEL_PREF, GetAssetGuid(level));
+                EditorPrefs.SetInt(TAB_PREF, LEVEL_TAB);
+                SetSelection(0, 0);
+                return;
+            }
+
+            if (_levels.Contains(level) == false)
+                ReloadLevels();
+
+            bool isAlreadyOpen = _session != null && _session.Config == level;
+
+            if (isAlreadyOpen == false)
+                OpenLevel(level, isRestoringSelection: false);
+
+            SelectTab(LEVEL_TAB);
+        }
+
         private void OpenLevel(LevelConfig level, bool isRestoringSelection)
         {
             CloseSession();
@@ -164,7 +220,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             if ((level == null || _levels.Contains(level) == false) && _levels.Count > 0)
                 level = _levels[0];
 
-            _levelPage.SetEnabled(level != null);
+            _levelPageElement.SetEnabled(level != null);
 
             if (level == null)
                 return;
@@ -215,6 +271,14 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             _issuesPanel.Refresh(_session.Issues);
 
             RefreshDirtyState();
+            RefreshAllLevelsPage();
+        }
+
+        // Итоги всех уровней пересчитываются, только пока их вкладка открыта.
+        private void RefreshAllLevelsPage()
+        {
+            if (IsAllLevelsTabSelected)
+                _allLevelsPage.Refresh(_levels, _campaign);
         }
 
         // Выбор держится в пределах уровня: после удаления или Undo стейджа и волны индексы сдвигаются к ближайшим.
@@ -250,13 +314,15 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         private void SelectTab(int tab)
         {
             bool isLevelTab = tab != ALL_LEVELS_TAB;
+            _tab = isLevelTab ? LEVEL_TAB : ALL_LEVELS_TAB;
 
             _levelTab.SetValueWithoutNotify(isLevelTab);
             _allLevelsTab.SetValueWithoutNotify(isLevelTab == false);
-            _levelPage.EnableInClassList(HIDDEN_PAGE_CLASS, isLevelTab == false);
-            _allLevelsPage.EnableInClassList(HIDDEN_PAGE_CLASS, isLevelTab);
+            _levelPageElement.EnableInClassList(HIDDEN_PAGE_CLASS, isLevelTab == false);
+            _allLevelsPageElement.EnableInClassList(HIDDEN_PAGE_CLASS, isLevelTab);
 
-            EditorPrefs.SetInt(TAB_PREF, isLevelTab ? LEVEL_TAB : ALL_LEVELS_TAB);
+            EditorPrefs.SetInt(TAB_PREF, _tab);
+            RefreshAllLevelsPage();
         }
 
         private void SetSelection(int stageIndex, int waveIndex)
@@ -273,6 +339,13 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             int savedMode = EditorPrefs.GetInt(TIMELINE_MODE_PREF, (int)TimelineMode.Stage);
 
             return Enum.IsDefined(typeof(TimelineMode), savedMode) ? (TimelineMode)savedMode : TimelineMode.Stage;
+        }
+
+        private static DifficultyMeasure LoadDifficultyMeasure()
+        {
+            int savedMeasure = EditorPrefs.GetInt(DIFFICULTY_MEASURE_PREF, (int)DifficultyMeasure.Health);
+
+            return Enum.IsDefined(typeof(DifficultyMeasure), savedMeasure) ? (DifficultyMeasure)savedMeasure : DifficultyMeasure.Health;
         }
 
         private LevelConfig FindSavedLevel()
@@ -356,6 +429,16 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
 
         private void OnTimelineModeChanged(TimelineMode mode) => EditorPrefs.SetInt(TIMELINE_MODE_PREF, (int)mode);
 
+        private void OnDifficultyMeasureChanged(DifficultyMeasure measure) => EditorPrefs.SetInt(DIFFICULTY_MEASURE_PREF, (int)measure);
+
+        // Щелчок по столбику кривой сложности: уровень открывается на вкладке «Уровень» сразу на этом стейдже.
+        private void OnOverviewStageChosen(LevelConfig level, int stageIndex)
+        {
+            ShowLevel(level);
+            SetSelection(stageIndex, 0);
+            RefreshAll();
+        }
+
         // Команда выбирает элемент до правки, а окно перерисуется уже по событию правки — вместе с новым выбором.
         private void OnSelectionRequested(int stageIndex, int waveIndex) => SetSelection(stageIndex, waveIndex);
 
@@ -379,6 +462,8 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         private void OnCopyLevelClicked() => _commands.CopyLevel();
 
         private void OnPasteClicked() => _commands.Paste(_stageIndex, _waveIndex);
+
+        private void OnBulkEditClicked() => _commands.EditInBulk(_stageIndex);
 
         private void OnRevertClicked() => _session?.RevertToSaved();
 

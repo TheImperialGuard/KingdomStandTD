@@ -3,15 +3,21 @@ using UnityEngine;
 
 namespace Assets._Project.Develop.Editor.LevelEditor.Window
 {
-    // Цвета таймлайна для светлой и тёмной темы редактора. Цвета врагов — проверенная категориальная палитра
-    // скилла dataviz: восемь оттенков в постоянном порядке, для тёмной темы — свои шаги тех же оттенков.
-    // Подложка и линии — из той же палитры: на этой подложке цвета врагов и проверены.
+    // Цвета графиков окна — таймлайна и кривой сложности — для светлой и тёмной темы редактора. Цвета врагов —
+    // проверенная категориальная палитра скилла dataviz: восемь оттенков в постоянном порядке, для тёмной темы —
+    // свои шаги тех же оттенков. Подложка и линии — из той же палитры: на этой подложке цвета и проверены.
     public static class TimelinePalette
     {
         public const int NO_SLOT = -1;
 
         // Подложка полоски волны с одним видом врагов — цвет врага с такой прозрачностью.
         private const float ENEMY_TRACK_ALPHA = 0.25f;
+
+        // Всё, что не подсвечено, — приглушённый серый с такой непрозрачностью.
+        private const float DIMMED_ALPHA = 0.35f;
+
+        // График с одной серией берёт первый цвет палитры.
+        private const int MAIN_SERIES_SLOT = 0;
 
         private static readonly Color[] _lightEnemyColors =
         {
@@ -68,6 +74,10 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         public static Color Selection => IsDark ? _darkInk : _lightInk;
         public static Color Hover => IsDark ? _darkText : _lightText;
         public static Color Warning => _warning;
+        public static Color MainSeries => GetEnemyColor(MAIN_SERIES_SLOT);
+
+        // Засечки других врагов при подсветке врага, столбики других уровней при выборе уровня.
+        public static Color Dimmed => WithAlpha(_mutedInk, DIMMED_ALPHA);
 
         // Лёгкая заливка: чередование стейджей, время после конца стейджа, нейтральная подложка волны.
         public static Color Wash => IsDark ? _darkWash : _lightWash;
@@ -85,20 +95,22 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             return slot >= 0 && slot < colors.Length ? colors[slot] : _mutedInk;
         }
 
-        public static Color GetTrackColor(int slot)
-        {
-            if (slot == NO_SLOT)
-                return Wash;
+        // Подложка волны с одним видом врагов. У «прочих» она нейтральная, как у смешанной волны.
+        public static Color GetTrackColor(int slot) => slot == NO_SLOT ? Wash : GetEnemyTrackColor(slot);
 
-            Color color = GetEnemyColor(slot);
-            color.a = ENEMY_TRACK_ALPHA;
-
-            return color;
-        }
+        // Подложка в цвете врага, у «прочих» — серая: так выделяются волны подсвеченного врага.
+        public static Color GetEnemyTrackColor(int slot) => WithAlpha(GetEnemyColor(slot), ENEMY_TRACK_ALPHA);
 
         private static Color Hex(string hex)
         {
             ColorUtility.TryParseHtmlString(hex, out Color color);
+
+            return color;
+        }
+
+        private static Color WithAlpha(Color color, float alpha)
+        {
+            color.a = alpha;
 
             return color;
         }

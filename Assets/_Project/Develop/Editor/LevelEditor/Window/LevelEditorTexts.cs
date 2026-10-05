@@ -79,6 +79,70 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
                 + $" · спавн до {duration} (со скипами {durationWithSkips})";
         }
 
+        // Итог проверки уровня: заголовок панели замечаний и сводка в инспекторе LevelConfig.
+        public static string DescribeIssuesCount(IReadOnlyList<LevelIssue> issues)
+        {
+            if (issues.Count == 0)
+                return "Замечаний нет";
+
+            int errorsCount = issues.Count(issue => issue.IsError);
+            int warningsCount = issues.Count - errorsCount;
+
+            return $"Замечания: ошибок {errorsCount}, предупреждений {warningsCount}";
+        }
+
+        // «✖ Стейдж 2, волна 1: …» — замечание со значком своей серьёзности.
+        public static string FormatIssue(LevelIssue issue)
+        {
+            string marker = issue.IsError ? ERROR_MARKER : WARNING_MARKER;
+            string issueText = issue.ToString();
+
+            return $"{marker}{issueText}";
+        }
+
+        // Короткое имя показателя для переключателя и заголовка кривой сложности.
+        public static string GetMeasureName(DifficultyMeasure measure)
+        {
+            switch (measure)
+            {
+                case DifficultyMeasure.Health:
+                    return "HP";
+
+                case DifficultyMeasure.EffectiveHealthPhysic:
+                    return "EHP физ";
+
+                case DifficultyMeasure.EffectiveHealthMagic:
+                    return "EHP маг";
+
+                case DifficultyMeasure.HealthPerSecond:
+                    return "HP в секунду";
+
+                default:
+                    return measure.ToString();
+            }
+        }
+
+        public static string DescribeMeasure(DifficultyMeasure measure)
+        {
+            switch (measure)
+            {
+                case DifficultyMeasure.Health:
+                    return "Сумма HP врагов стейджа";
+
+                case DifficultyMeasure.EffectiveHealthPhysic:
+                    return "Сколько физического урона нужно нанести с учётом сопротивлений";
+
+                case DifficultyMeasure.EffectiveHealthMagic:
+                    return "Сколько магического урона нужно нанести с учётом сопротивлений";
+
+                case DifficultyMeasure.HealthPerSecond:
+                    return "HP стейджа, делённое на его время";
+
+                default:
+                    return measure.ToString();
+            }
+        }
+
         public static string DescribeRoadChoice(PathNumber number, LevelPrefabInfo prefab)
         {
             LevelRoad road = prefab.Roads.FirstOrDefault(candidate => candidate.Number == number);
