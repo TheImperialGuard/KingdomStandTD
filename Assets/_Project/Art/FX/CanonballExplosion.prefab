@@ -24121,6 +24121,7 @@ GameObject:
   - component: {fileID: 7508918179544414615}
   - component: {fileID: 5094499417701506318}
   - component: {fileID: 6319458156202595123}
+  - component: {fileID: 232539193470866857}
   m_Layer: 0
   m_Name: CanonballExplosion
   m_TagString: Untagged
@@ -29062,7 +29063,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -8626060492031919721, guid: 2a16cd6b506c8024bb658089849b5201, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: c401d00c96b512e488d2e3bf5d111509, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -29147,3 +29148,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &232539193470866857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6946503188927724478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2799d6bd0adf6bd4290162c2c62bb744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Utilities.Audio.SpawnSoundEmitter
+  _audioSource: {fileID: 6319458156202595123}
