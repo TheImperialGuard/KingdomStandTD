@@ -45,19 +45,16 @@ csharp_new_line_between_query_expression_clauses = true
 # --- ИМЕНОВАНИЕ --------------------------------------------------------------
 # Порядок правил значим: побеждает первое подходящее.
 # Поэтому const идёт раньше правила для private-полей — иначе private const
-# попал бы под _camelCase вместо UPPER_SNAKE_CASE.
+# попал бы под _camelCase вместо PascalCase.
 
-# const -> UPPER_SNAKE_CASE (при любом модификаторе доступа)
-dotnet_naming_rule.constants_are_upper_snake_case.severity = warning
-dotnet_naming_rule.constants_are_upper_snake_case.symbols = all_constants
-dotnet_naming_rule.constants_are_upper_snake_case.style = upper_snake_case
+# const -> PascalCase (при любом модификаторе доступа)
+dotnet_naming_rule.constants_are_pascal_case.severity = warning
+dotnet_naming_rule.constants_are_pascal_case.symbols = all_constants
+dotnet_naming_rule.constants_are_pascal_case.style = pascal_case
 
 dotnet_naming_symbols.all_constants.applicable_kinds = field
 dotnet_naming_symbols.all_constants.applicable_accessibilities = *
 dotnet_naming_symbols.all_constants.required_modifiers = const
-
-dotnet_naming_style.upper_snake_case.capitalization = all_upper
-dotnet_naming_style.upper_snake_case.word_separator = _
 
 # private-поля -> _camelCase (static readonly и readonly сюда же попадают)
 dotnet_naming_rule.private_fields_are_underscore_camel_case.severity = warning

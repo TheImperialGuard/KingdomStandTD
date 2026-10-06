@@ -21,7 +21,7 @@
 - `camelCase` — локальные переменные, параметры (`canMerge`, `playerMoney`).
 - `_camelCase` — `private` поля (`_coins`, `_animator`).
 - `PascalCase` — `public` и `protected` поля (protected именуем как public, без подчёркивания), **свойства** (всегда), методы, классы, интерфейсы, структуры, enum, namespace.
-- `UPPER_SNAKE_CASE` — `const` при любом модификаторе доступа (`MAX_HEALTH`, `SAVE_FILE_NAME`). Это осознанное отклонение от конвенций Microsoft, где константы пишутся `PascalCase`: в этом проекте константы намеренно выделяются капсом, чтобы их было видно на месте использования.
+- `PascalCase` — `const` при любом модификаторе доступа (`MaxHealth`, `SaveFileName`).
 - `static readonly` и `readonly` поля — **не константы**, именуем по правилу полей (`PascalCase` для public, `_camelCase` для private).
 - **Bool-методы**: `IsX` / `CanX` / `HasX` (`IsEmpty()`, `CanMerge()`). Избегаем `CheckX` — это размытое имя, в такие методы часто прокрадываются side-effects.
 - **`bool TryX(...)`** — методы, которые могут не выполниться и возвращают флаг успеха (`TryBuild`).
