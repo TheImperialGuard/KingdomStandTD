@@ -95,40 +95,15 @@ namespace Assets._Project.Develop.Editor.LevelEditor
                     road.MissingWaypointsCount++;
             }
 
-            road.HasValidPath = road.WaypointsCount >= MIN_WAYPOINTS_COUNT && road.MissingWaypointsCount == 0;
+            road.HasValidPath = RoadLanes.IsComplete(waypoints);
 
             if (road.HasValidPath == false)
                 return road;
 
             foreach (PathLane lane in Enum.GetValues(typeof(PathLane)))
-                road.Lengths[lane] = CalculateLength(waypoints, PathLaneOffsets.ToLocalOffset(lane));
+                road.Lengths[lane] = RoadLanes.CalculateLength(waypoints, lane);
 
             return road;
-        }
-
-        // Повторяет маршрут врага из WavesSpawner и WaypointsNavigationSystem: спавн в первом вейпоинте,
-        // дальше по прямой к каждому следующему; смещение полосы — в локальных осях каждого вейпоинта.
-        private static float CalculateLength(IReadOnlyList<Waypoint> waypoints, Vector3 localOffset)
-        {
-            float length = 0f;
-            Vector3 previousPoint = GetLanePoint(waypoints[0], localOffset);
-
-            for (int i = 1; i < waypoints.Count; i++)
-            {
-                Vector3 point = GetLanePoint(waypoints[i], localOffset);
-
-                length += Vector3.Distance(previousPoint, point);
-                previousPoint = point;
-            }
-
-            return length;
-        }
-
-        private static Vector3 GetLanePoint(Waypoint waypoint, Vector3 localOffset)
-        {
-            Transform waypointTransform = waypoint.transform;
-
-            return waypointTransform.position + waypointTransform.TransformVector(localOffset);
         }
     }
 }
