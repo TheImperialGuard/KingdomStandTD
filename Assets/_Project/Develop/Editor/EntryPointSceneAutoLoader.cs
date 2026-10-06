@@ -1,3 +1,4 @@
+﻿using Assets._Project.Develop.Editor.LevelEditor.Playtest;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
@@ -16,7 +17,8 @@ public static class EntryPointSceneAutoLoader
     {
         if (state == PlayModeStateChange.ExitingEditMode)
         {
-            if (EditorPrefs.GetBool(PlayFromBootstrapKey) == false)
+            // Плейтест из редактора уровней стартует с точки входа, даже если переключатель выключен
+            if (EditorPrefs.GetBool(PlayFromBootstrapKey) == false && PlaytestLaunchRequest.IsPending == false)
             {
                 EditorSceneManager.playModeStartScene = null;
                 return;
