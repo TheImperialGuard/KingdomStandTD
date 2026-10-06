@@ -1,9 +1,13 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
+using Assets._Project.Develop.Runtime.Meta.Features.Settings;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
+using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Settings;
+using Assets._Project.Develop.Runtime.UI.Settings;
+using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
@@ -44,6 +48,23 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
                 _container.Resolve<LevelsProgressionService>(),
                 _container.Resolve<ConfigsProviderService>(),
                 view);
+        }
+
+        public SettingsPopupPresenter CreateSettingsPopupPresenter(SettingsPopupView view)
+        {
+            return new SettingsPopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                _container.Resolve<RayShooterService>(),
+                view,
+                this);
+        }
+
+        public AudioSettingsPresenter CreateAudioSettingsPresenter(AudioSettingsView view)
+        {
+            return new AudioSettingsPresenter(
+                view,
+                _container.Resolve<AudioHandler>(),
+                _container.Resolve<AudioSettingsService>());
         }
     }
 }

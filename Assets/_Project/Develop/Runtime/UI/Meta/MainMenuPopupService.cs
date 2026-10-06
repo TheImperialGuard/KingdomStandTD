@@ -1,6 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
+using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Settings;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.UI.Meta
@@ -27,6 +28,17 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
             LevelsMenuPopupView view = ViewsFactory.Create<LevelsMenuPopupView>(ViewIDs.LevelsMenuPopup, PopupLayer);
 
             LevelsMenuPopupPresenter popup = _presentersFactory.CreateLevelsMenuPopupPresenter(view);
+
+            OnPopupCreated(popup, view);
+
+            return popup;
+        }
+
+        public SettingsPopupPresenter OpenSettingsPopup()
+        {
+            SettingsPopupView view = ViewsFactory.Create<SettingsPopupView>(ViewIDs.SettingsPopup, PopupLayer);
+
+            SettingsPopupPresenter popup = _presentersFactory.CreateSettingsPopupPresenter(view);
 
             OnPopupCreated(popup, view);
 

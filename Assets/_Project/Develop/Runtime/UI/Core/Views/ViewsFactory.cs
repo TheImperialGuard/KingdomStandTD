@@ -24,6 +24,7 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Views
             {ViewIDs.WinPopup, "UI/Gameplay/ResultPopup/WinPopup" },
             {ViewIDs.DefeatPopup, "UI/Gameplay/ResultPopup/DefeatPopup" },
             {ViewIDs.PausePopup, "UI/Gameplay/PausePopup" },
+            {ViewIDs.SettingsPopup, "UI/Meta/MainMenu/SettingsPopup" },
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)
