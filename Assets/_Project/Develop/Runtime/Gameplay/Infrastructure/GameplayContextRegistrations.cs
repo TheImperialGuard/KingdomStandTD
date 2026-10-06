@@ -116,6 +116,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateCameraMover);
 
             container.RegisterAsSingle(CreateTimeScalePauseService);
+
+            #if UNITY_EDITOR
+                // Плейтест из редактора уровней регистрирует здесь лог прогона
+                PlaytestHooks.ProcessRegistrations(container);
+            #endif
         }
 
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c) => new();
@@ -309,6 +314,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static LevelConfig GetLevelConfig(DIContainer c)
         {
+            #if UNITY_EDITOR
+                // Плейтест из редактора уровней: копия уровня из окна вместо уровня кампании по номеру
+                if (PlaytestHooks.TryCreateLevelConfig(out LevelConfig playtestLevelConfig))
+                    return playtestLevelConfig;
+            #endif
+
             int levelNumber = _inputArgs.LevelNumber;
 
             ConfigsProviderService configsProviderService = c.Resolve<ConfigsProviderService>();

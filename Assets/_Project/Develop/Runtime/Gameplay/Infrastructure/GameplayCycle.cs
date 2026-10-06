@@ -73,6 +73,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private void OnGameModeEnded(LevelResults results)
         {
+            #if UNITY_EDITOR
+                // Итог прогона — в лог плейтеста из редактора уровней
+                PlaytestHooks.NotifyGameEnded(results);
+            #endif
+
             _playerInteractsService.Disable();
 
             if (results == LevelResults.Defeat)
@@ -99,6 +104,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private void SaveLevelResults(LevelResults results)
         {
+            #if UNITY_EDITOR
+                // Результат плейтеста из редактора уровней в прогресс игрока не записывается
+                if (PlaytestHooks.IsPlaytestRunning)
+                    return;
+            #endif
+
             _levelsProgressionService.AddLevelResultsToCompleted(_levelNumber, results);
 
             _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());

@@ -8,6 +8,9 @@ using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using Assets._Project.Develop.Runtime.Utilities.LoadingScreen;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 using UnityEngine;
+#if UNITY_EDITOR
+using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
+#endif
 
 namespace Assets._Project.Develop.Runtime.Infrastructure.Boot
 {
@@ -56,6 +59,15 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.Boot
             Debug.Log("Завершается инициализация сервисов");
 
             loadingScreen.Hide();
+
+            #if UNITY_EDITOR
+                // Плейтест из редактора уровней: вместо главного меню сразу открывается его уровень
+                if (PlaytestHooks.TryTakeStartArgs(out GameplayInputArgs playtestArgs))
+                {
+                    yield return sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, playtestArgs);
+                    yield break;
+                }
+            #endif
 
             yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu, new MainMenuInputArgs(Scenes.GameEntryPoint));
         }

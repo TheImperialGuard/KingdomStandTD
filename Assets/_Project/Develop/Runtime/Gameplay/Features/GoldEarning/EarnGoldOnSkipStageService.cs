@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+#if UNITY_EDITOR
+using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
+#endif
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning
 {
@@ -35,6 +38,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning
             int earnedGold = CalculateEarnedGold(remainingStageTime);
 
             _walletService.Add(CurrencyTypes.Gold, earnedGold);
+
+            #if UNITY_EDITOR
+                PlaytestHooks.NotifySkipGoldEarned(earnedGold);
+            #endif
 
             Debug.Log($"Золото за скип: {earnedGold}. Всего: {_walletService.GetCurrency(CurrencyTypes.Gold).Value}");
         }

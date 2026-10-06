@@ -11,6 +11,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+#if UNITY_EDITOR
+using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
+#endif
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
 {
@@ -97,6 +100,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
                     for (int i = 0; i < enemyGroup.Count; i++)
                     {
                         SpawnEnemy(enemyGroup.EnemyConfig, waypoints, waypointsOffset);
+
+                        #if UNITY_EDITOR
+                            // SpawnEnemy только что добавил врага в конец списка
+                            PlaytestHooks.NotifyEnemySpawned(_spawnedEnemies[_spawnedEnemies.Count - 1], enemyGroup.EnemyConfig, waveConfig);
+                        #endif
 
                         spawnCooldownTimer.Restart();
                         yield return new WaitUntil(() => spawnCooldownTimer.IsOver == true);

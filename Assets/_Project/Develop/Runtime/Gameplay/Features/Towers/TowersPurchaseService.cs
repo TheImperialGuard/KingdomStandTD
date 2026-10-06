@@ -5,6 +5,9 @@ using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using System;
 using UnityEngine;
+#if UNITY_EDITOR
+using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
+#endif
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 {
@@ -36,6 +39,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 
             _wallet.Spend(CurrencyTypes.Gold, towerConfig.Cost);
 
+            #if UNITY_EDITOR
+                PlaytestHooks.NotifyTowerBought(type, level, towerConfig.Cost);
+            #endif
+
             Debug.Log($"Башня куплена. Остаток золота: {_wallet.GetCurrency(CurrencyTypes.Gold).Value}");
 
             return true;
@@ -50,6 +57,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             int goldForSell = CalculateGoldForSell(towerConfig.Cost, gameConfig.SellTowerGoldReturnIndex);
 
             _wallet.Add(CurrencyTypes.Gold, goldForSell);
+
+            #if UNITY_EDITOR
+                PlaytestHooks.NotifyTowerSold(type, level, goldForSell);
+            #endif
 
             Debug.Log($"Башня продана. Текущее золото: {_wallet.GetCurrency(CurrencyTypes.Gold).Value}");
         }

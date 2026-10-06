@@ -15,6 +15,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+#if UNITY_EDITOR
+using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
+#endif
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
 {
@@ -175,6 +178,11 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
                 return;
 
             _walletService.Spend(CurrencyTypes.Gold, abilityCost);
+
+            #if UNITY_EDITOR
+                // Покупка способности — в лог плейтеста из редактора уровней
+                PlaytestHooks.NotifyAbilityBought(TowerType, abilityWithInfo.config, abilityCost);
+            #endif
 
             ProvideAbility(abilityWithInfo);
 
