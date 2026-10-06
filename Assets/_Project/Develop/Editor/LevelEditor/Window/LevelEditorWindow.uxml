@@ -20,6 +20,12 @@
                 <ui:IntegerField name="startHealthField" label="Здоровье игрока" is-delayed="true" class="level-summary__field" />
                 <ui:Label name="levelTotalsLabel" class="level-summary__totals" />
             </ui:VisualElement>
+            <ui:VisualElement name="playtestBar" class="playtest-bar">
+                <ui:Button name="playButton" text="▶ Играть" tooltip="Запустить уровень в Play Mode сразу, без главного меню, с первого стейджа — как в игре. Играется текущее состояние уровня, вместе с несохранёнными правками; результат в прогресс не записывается" class="playtest-bar__button" />
+                <ui:Button name="playFromStageButton" text="▶ Со стейджа" tooltip="Запустить уровень с выбранного стейджа: стейджи до него пропускаются, золото на старте — из поля справа. В игре счёт волн начнётся с 1" class="playtest-bar__button" />
+                <ui:IntegerField name="playtestGoldField" label="Золото на старте" is-delayed="true" class="playtest-bar__gold" />
+                <ui:Label name="playtestStatusLabel" class="playtest-bar__status" />
+            </ui:VisualElement>
             <ui:TwoPaneSplitView name="mainSplit" fixed-pane-index="0" fixed-pane-initial-dimension="320" orientation="Horizontal" view-data-key="levelEditor.mainSplit" class="level-editor__split">
                 <ui:TwoPaneSplitView name="stagesSplit" fixed-pane-index="1" fixed-pane-initial-dimension="330" orientation="Vertical" view-data-key="levelEditor.stagesSplit">
                     <ui:VisualElement class="panel">

@@ -51,6 +51,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         private ToolbarButton _saveButton;
 
         private LevelSummaryBar _summaryBar;
+        private PlaytestBar _playtestBar;
         private StagesPanel _stagesPanel;
         private TimelinePanel _timelinePanel;
         private WavesTable _wavesTable;
@@ -104,6 +105,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             SetupToolbar();
 
             _summaryBar = new LevelSummaryBar(rootVisualElement);
+            _playtestBar = new PlaytestBar(rootVisualElement);
             _stagesPanel = new StagesPanel(rootVisualElement, _enemyCatalog, _commands);
             _timelinePanel = new TimelinePanel(rootVisualElement, LoadTimelineMode());
             _wavesTable = new WavesTable(rootVisualElement, _commands);
@@ -133,6 +135,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
         {
             _session?.ReloadIfChangedOutside();
             RefreshDirtyState();
+            _playtestBar?.RefreshPlayState();
 
             if (IsAllLevelsTabSelected)
                 _allLevelsPage?.RefreshIfChangedOutside(_levels, _campaign);
@@ -230,6 +233,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
 
             _commands.Bind(_session);
             _summaryBar.Bind(_session);
+            _playtestBar.Bind(_session);
             _stagesPanel.Bind(_session);
             _timelinePanel.Bind(_session);
             _wavesTable.Bind(_session);
@@ -264,6 +268,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Window
             ClampSelection();
 
             _summaryBar.Refresh();
+            _playtestBar.Refresh(_stageIndex);
             _stagesPanel.Refresh(_stageIndex);
             _timelinePanel.Refresh(_stageIndex, _waveIndex);
             _wavesTable.Refresh(_stageIndex, _waveIndex);

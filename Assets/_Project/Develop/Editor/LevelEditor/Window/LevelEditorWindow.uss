@@ -50,7 +50,8 @@
     display: none;
 }
 
-.level-summary {
+.level-summary,
+.playtest-bar {
     flex-direction: row;
     align-items: center;
     padding: 2px 6px;
@@ -58,21 +59,28 @@
     border-color: var(--color-separator);
 }
 
-.level-summary__field {
+.level-summary__field,
+.playtest-bar__gold {
     width: 200px;
     margin-right: 12px;
 }
 
-.level-summary__field > .unity-base-field__label {
+.level-summary__field > .unity-base-field__label,
+.playtest-bar__gold > .unity-base-field__label {
     min-width: 120px;
 }
 
-.level-summary__totals {
+.level-summary__totals,
+.playtest-bar__status {
     flex-grow: 1;
     flex-shrink: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.playtest-bar__button {
+    margin-right: 4px;
 }
 
 .panel {
