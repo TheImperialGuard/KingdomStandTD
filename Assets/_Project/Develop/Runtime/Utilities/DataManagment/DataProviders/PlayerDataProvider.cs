@@ -10,7 +10,8 @@
         {
             return new PlayerData()
             {
-                CompletedLevels = new()
+                CompletedLevels = new(),
+                AudioSettings = new()
             };
         }
     }

@@ -12,6 +12,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
+using Assets._Project.Develop.Runtime.Meta.Features.Settings;
 using Assets._Project.Develop.Runtime.UI.CommonViews;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
@@ -24,6 +25,7 @@ using Assets._Project.Develop.Runtime.UI.Gameplay.StagesStatus;
 using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup;
+using Assets._Project.Develop.Runtime.UI.Settings;
 using Assets._Project.Develop.Runtime.Utilities.Adverts;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
@@ -196,7 +198,15 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<TimeScalePauseService>(),
                 _container.Resolve<SceneSwitcherService>(),
                 _gameplayInputArgs,
-                _container.Resolve<AudioHandler>());
+                this);
+        }
+
+        public AudioSettingsPresenter CreateAudioSettingsPresenter(AudioSettingsView view)
+        {
+            return new AudioSettingsPresenter(
+                view,
+                _container.Resolve<AudioHandler>(),
+                _container.Resolve<AudioSettingsService>());
         }
     }
 }

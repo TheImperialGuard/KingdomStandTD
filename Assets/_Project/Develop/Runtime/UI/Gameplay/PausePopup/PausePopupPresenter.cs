@@ -3,7 +3,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Project.Develop.Runtime.Meta.Infrastructure;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
-using Assets._Project.Develop.Runtime.Utilities.Audio;
+using Assets._Project.Develop.Runtime.UI.Settings;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 
@@ -16,7 +16,9 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
         private readonly SceneSwitcherService _sceneSwitcherService;
         private readonly ICoroutinesPerformer _coroutinesPerformer;
         private readonly GameplayInputArgs _gameplayInputArgs;
-        private readonly AudioHandler _audioHandler;
+        private readonly GameplayPresentersFactory _presentersFactory;
+
+        private AudioSettingsPresenter _audioSettingsPresenter;
 
         public PausePopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
@@ -25,7 +27,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
             TimeScalePauseService timeScalePauseService,
             SceneSwitcherService sceneSwitcherService,
             GameplayInputArgs gameplayInputArgs,
-            AudioHandler audioHandler)
+            GameplayPresentersFactory presentersFactory)
             : base(coroutinesPerformer, rayShooterService)
         {
             _popupView = popupView;
@@ -33,7 +35,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
             _sceneSwitcherService = sceneSwitcherService;
             _coroutinesPerformer = coroutinesPerformer;
             _gameplayInputArgs = gameplayInputArgs;
-            _audioHandler = audioHandler;
+            _presentersFactory = presentersFactory;
         }
 
         protected override PopupViewBase PopupView => _popupView;
@@ -42,22 +44,12 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
         {
             base.Initialize();
 
-            _popupView.SetupMusicHandlers(_audioHandler.IsMusicOn, _audioHandler.MusicVolume);
-            _popupView.SetupSoundsHandlers(_audioHandler.IsSoundsOn, _audioHandler.SoundsVolume);
+            CreateAudioSettings();
 
             _popupView.ExitClicked += OnExitClicked;
             _popupView.RestartClicked += OnRestartClicked;
 
-            _popupView.MusicVolumeChanged += OnMusicVolumeChanged;
-            _popupView.SoundsVolumeChanged += OnSoundsVolumeChanged;
-
-            _popupView.MusicToggleChanged += OnMusicToggleChanged;
-            _popupView.SoundsToggleChanged += OnSoundsToggleChanged;
-
             _timeScalePauseService.Pause();
-
-            _popupView.SetupMusicHandlers(_audioHandler.IsMusicOn, _audioHandler.MusicVolume);
-            _popupView.SetupSoundsHandlers(_audioHandler.IsSoundsOn, _audioHandler.SoundsVolume);
         }
 
         public override void Dispose()
@@ -66,7 +58,16 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
 
             UnsubscribeFromView();
 
+            _audioSettingsPresenter.Dispose();
+
             _timeScalePauseService.Unpause();
+        }
+
+        protected override void OnPreShow()
+        {
+            base.OnPreShow();
+
+            _audioSettingsPresenter.Subscribe();
         }
 
         protected override void OnPreHide()
@@ -75,19 +76,22 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
 
             UnsubscribeFromView();
 
+            _audioSettingsPresenter.Unsubscribe();
+
             _timeScalePauseService.Unpause();
+        }
+
+        private void CreateAudioSettings()
+        {
+            _audioSettingsPresenter = _presentersFactory.CreateAudioSettingsPresenter(_popupView.AudioSettingsView);
+
+            _audioSettingsPresenter.Initialize();
         }
 
         private void UnsubscribeFromView()
         {
             _popupView.ExitClicked -= OnExitClicked;
             _popupView.RestartClicked -= OnRestartClicked;
-
-            _popupView.MusicVolumeChanged -= OnMusicVolumeChanged;
-            _popupView.SoundsVolumeChanged -= OnSoundsVolumeChanged;
-
-            _popupView.MusicToggleChanged -= OnMusicToggleChanged;
-            _popupView.SoundsToggleChanged -= OnSoundsToggleChanged;
         }
 
         private void OnExitClicked()
@@ -101,32 +105,6 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
             _coroutinesPerformer.StartPerform(
                 _sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(_gameplayInputArgs.LevelNumber)));
             OnCloseRequest();
-        }
-
-        private void OnMusicVolumeChanged(float value)
-        {
-            _audioHandler.SetMusicVolume(value);
-        }
-
-        private void OnSoundsVolumeChanged(float value)
-        {
-            _audioHandler.SetSoundsVolume(value);
-        }
-
-        private void OnMusicToggleChanged(bool value)
-        {
-            if (value == false)
-                _audioHandler.OffMusic();
-            else
-                _audioHandler.OnMusic();
-        }
-
-        private void OnSoundsToggleChanged(bool value)
-        {
-            if (value == false)
-                _audioHandler.OffSounds();
-            else
-                _audioHandler.OnSounds();
         }
     }
 }

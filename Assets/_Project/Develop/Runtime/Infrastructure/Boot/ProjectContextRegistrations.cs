@@ -5,6 +5,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
+using Assets._Project.Develop.Runtime.Meta.Features.Settings;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.Utilities.Adverts;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
@@ -60,6 +61,8 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateRayShooterService);
 
             container.RegisterAsSingle(CreateAudioHandler);
+
+            container.RegisterAsSingle(CreateAudioSettingsService).NonLazy();
 
             container.RegisterAsSingle(CreateInputService);
 
@@ -166,6 +169,14 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             AudioMixer audioMixer = resourcesAssetsLoader.Load<AudioMixer>("Utilities/Audio/GeneralMixer");
 
             return new AudioHandler(audioMixer);
+        }
+
+        private static AudioSettingsService CreateAudioSettingsService(DIContainer c)
+        {
+            return new AudioSettingsService(
+                c.Resolve<AudioHandler>(),
+                c.Resolve<PlayerDataProvider>(),
+                c.Resolve<ICoroutinesPerformer>());
         }
 
         private static CoroutinesPerformer CreateCoroutinesPerformer(DIContainer c)
