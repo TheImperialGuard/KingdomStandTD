@@ -4,8 +4,8 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
 {
     public class MainMenuScreenPresenter : IPresenter
     {
-        MainMenuScreenView _view;
-        MainMenuPopupService _popupService;
+        private readonly MainMenuScreenView _view;
+        private readonly MainMenuPopupService _popupService;
 
         public MainMenuScreenPresenter(MainMenuScreenView view, MainMenuPopupService popupService)
         {
