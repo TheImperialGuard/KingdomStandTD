@@ -13,6 +13,8 @@ namespace Assets._Project.Develop.Runtime.Utilities.DataManagment.DataRepository
         {
             _folderPath = folderPath;
             _saveFileExtention = saveFileExtention;
+
+            Directory.CreateDirectory(_folderPath);
         }
 
         public IEnumerator Exists(string key, Action<bool> onExistsResult)

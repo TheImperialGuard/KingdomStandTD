@@ -80,6 +80,9 @@ crashlytics-build.properties
 /[Aa]ssets/PluginYourGames/Tools.meta
 /[Aa]ssets/PluginYourGames/Editor/BuildLogYG2.txt*
 
+# Local game saves in the Editor (non-WebGL platforms)
+/[Ss]aves/
+
 # Local Claude skills and working docs
 /.claude/skills/
 /Docs/PerformanceAudit.md

@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Configs;
+﻿using System.IO;
+using Assets._Project.Develop.Runtime.Configs;
 using Assets._Project.Develop.Runtime.Configs.Gameplay;
 using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
@@ -26,6 +27,8 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
 {
     public class ProjectContextRegistrations
     {
+        private const string EditorSavesFolderName = "Saves";
+
         public static void Process(DIContainer container)
         {
             container.RegisterAsSingle(CreateResourcesAssetsLoader);
@@ -105,7 +108,9 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             #if UNITY_WEBGL && YandexGamesPlatform_yg
                 dataRepository = new YGCloudDataRepository();
             #else
-                string saveFolderPath = Application.isEditor ? Application.dataPath : Application.persistentDataPath;
+                string saveFolderPath = Application.isEditor
+                    ? Path.Combine(Path.GetDirectoryName(Application.dataPath), EditorSavesFolderName)
+                    : Application.persistentDataPath;
 
                 dataRepository = new LocalFileDataRepository(saveFolderPath, "json");
             #endif
