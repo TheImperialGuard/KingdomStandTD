@@ -1,9 +1,13 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using System;
+using System.Linq;
 using UnityEngine;
 #if UNITY_EDITOR
 using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
@@ -13,10 +17,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
 {
     public class TowersPurchaseService
     {
+        private const int FirstLevel = 1;
+
         private readonly ConfigsProviderService _configsProviderService;
         private readonly WalletService _wallet;
 
         private readonly TowersListConfig _towersListConfig;
+        private readonly TowersAbilitiesListConfig _towersAbilitiesListConfig;
 
         public TowersPurchaseService(
             ConfigsProviderService configsProviderService, 
@@ -26,6 +33,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             _wallet = gameplayWallet;
 
             _towersListConfig = _configsProviderService.GetConfig<TowersListConfig>();
+            _towersAbilitiesListConfig = _configsProviderService.GetConfig<TowersAbilitiesListConfig>();
 
             Debug.Log($"Начальное золото: {_wallet.GetCurrency(CurrencyTypes.Gold).Value}");
         }
@@ -48,30 +56,26 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             return true;
         }
 
-        public void Sell(TowerTypes type, int level)
+        public void Sell(Entity tower)
         {
-            ShootingTowerConfig towerConfig = _towersListConfig.GetBy(type, level);
-
-            GameConfig gameConfig = _configsProviderService.GetConfig<GameConfig>();
-
-            int goldForSell = CalculateGoldForSell(towerConfig.Cost, gameConfig.SellTowerGoldReturnIndex);
+            int goldForSell = GetGoldAmountForSell(tower);
 
             _wallet.Add(CurrencyTypes.Gold, goldForSell);
 
             #if UNITY_EDITOR
-                PlaytestHooks.NotifyTowerSold(type, level, goldForSell);
+                PlaytestHooks.NotifyTowerSold(tower.TowerType.Value, tower.TowerLevel.Value, goldForSell);
             #endif
 
             Debug.Log($"Башня продана. Текущее золото: {_wallet.GetCurrency(CurrencyTypes.Gold).Value}");
         }
 
-        public int GetGoldAmountForSell(TowerTypes type, int level)
+        public int GetGoldAmountForSell(Entity tower)
         {
-            ShootingTowerConfig towerConfig = _towersListConfig.GetBy(type, level);
-
             GameConfig gameConfig = _configsProviderService.GetConfig<GameConfig>();
 
-            int goldForSell = CalculateGoldForSell(towerConfig.Cost, gameConfig.SellTowerGoldReturnIndex);
+            int spentGold = GetSpentGoldForLevels(tower) + GetSpentGoldForAbilities(tower);
+
+            int goldForSell = CalculateGoldForSell(spentGold, gameConfig.SellTowerGoldReturnIndex);
 
             return goldForSell;
         }
@@ -88,6 +92,43 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
             ShootingTowerConfig towerConfig = _towersListConfig.GetBy(type, level);
 
             return towerConfig.Cost;
+        }
+
+        private int GetSpentGoldForLevels(Entity tower)
+        {
+            int spentGold = 0;
+
+            for (int level = FirstLevel; level <= tower.TowerLevel.Value; level++)
+                spentGold += GetPriceFor(tower.TowerType.Value, level);
+
+            return spentGold;
+        }
+
+        private int GetSpentGoldForAbilities(Entity tower)
+        {
+            if (tower.TryGetAbilities(out AbilitiesList abilities) == false)
+                return 0;
+
+            TowersAbilitiesConfig towerAbilitiesConfig = _towersAbilitiesListConfig.GetBy(tower.TowerType.Value);
+
+            int spentGold = 0;
+
+            foreach (Ability ability in abilities.Elements)
+            {
+                AbilityConfig abilityConfig = GetAbilityConfigFor(ability, towerAbilitiesConfig);
+
+                for (int level = FirstLevel; level <= ability.CurrentLevel.Value; level++)
+                    spentGold += abilityConfig.GetCostBy(level);
+            }
+
+            return spentGold;
+        }
+
+        private AbilityConfig GetAbilityConfigFor(Ability ability, TowersAbilitiesConfig towerAbilitiesConfig)
+        {
+            return towerAbilitiesConfig.FirstAbilityGroup
+                .Concat(towerAbilitiesConfig.SecondAbilityGroup)
+                .First(config => config.ID == ability.ID);
         }
 
         private int CalculateGoldForSell(int cost, float sellTowerGoldReturnIndex)

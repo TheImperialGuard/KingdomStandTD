@@ -149,7 +149,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
         private void ShowSellInfo()
         {
             string title = "Продать башню?";
-            string goldAmount = _towersPurchaseService.GetGoldAmountForSell(TowerType, _sourceTower.TowerLevel.Value).ToString();
+            string goldAmount = _towersPurchaseService.GetGoldAmountForSell(_sourceTower).ToString();
             string desc = "Вы получите золото за продажу: " + goldAmount;
 
             _view.SetupInfoContainer(title, desc);
@@ -177,7 +177,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
                 return;
             }
 
-            _towersPurchaseService.Sell(TowerType, _sourceTower.TowerLevel.Value);
+            _towersPurchaseService.Sell(_sourceTower);
 
             CreateTowerPlaceholder();
             ReleaseSource();
