@@ -4,6 +4,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,7 +21,10 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup
 
         private int _clicks;
 
+        private float _lifetime;
+
         private IDisposable _canBeSkipedDisposable;
+        private IDisposable _remainingTimeDisposable;
 
         public SkipStagePopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
@@ -46,6 +50,12 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup
             _canBeSkipedDisposable = _stagesCycle.StageCanBeSkiped.Subscribe(OnStageCanBeSkipedChange);
             _view.SetWavesEnemiesText(GetWavesEnemiesText());
 
+            IReadOnlyVariable<float> remainingTime = _stageProviderService.CurrentStageRemainingTime;
+
+            _lifetime = remainingTime.Value;
+            _view.SetLifetimeProgress(0f);
+            _remainingTimeDisposable = remainingTime.Subscribe(OnRemainingTimeChanged);
+
             _clicks = 0;
         }
 
@@ -55,6 +65,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup
 
             _view.StartButtonClicked -= OnStartButtonClicked;
             _canBeSkipedDisposable.Dispose();
+            _remainingTimeDisposable.Dispose();
         }
 
         protected override void OnClickedOutside(RaycastHit oldHit, RaycastHit newHit)
@@ -82,6 +93,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup
         {
             if (newValue == false)
                 OnCloseRequest();
+        }
+
+        private void OnRemainingTimeChanged(float oldValue, float newValue)
+        {
+            float progress = Mathf.InverseLerp(_lifetime, 0f, newValue);
+
+            _view.SetLifetimeProgress(progress);
         }
 
         private string GetWavesEnemiesText()

@@ -69,9 +69,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2612434547882967606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e374cc993a299545a51e25c2d665d61, type: 3}
+  m_Script: {fileID: 11500000, guid: c7bfc5f03e2ca4540ad21d16b86fcca5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup.SkipStagePopupView
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup.StartStagesPopupView
   _mainGroup: {fileID: 7957218207891086404}
   _body: {fileID: 7957218207891086404}
   _anticlicker: {fileID: 0}

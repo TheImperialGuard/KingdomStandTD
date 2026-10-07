@@ -20,6 +20,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         private ReactiveEvent _completed = new();
         private ReactiveEvent _canBeSkiped = new();
 
+        private ReactiveVariable<float> _remainingTime;
+
         private bool _inProcess;
 
         private TimerService _timer;
@@ -36,6 +38,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
             _stageTime = _config.StageTime;
             _timeToSkipStage = _config.TimeToSkipStage;
 
+            _remainingTime = new(_stageTime);
+
             _timerServiceFactory = timerServiceFactory;
             _wavesSpawner = wavesSpawner;
         }
@@ -44,13 +48,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
         public IReadOnlyEvent CanBeSkiped => _canBeSkiped;
 
-        public float RemainingTime
-        {
-            get
-            {
-                return _timer == null ? _stageTime : _timer.CurrentTime.Value;
-            }
-        }
+        public IReadOnlyVariable<float> RemainingTime => _remainingTime;
 
         public void Start()
         {
@@ -94,6 +92,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
         private void OnStageTimeOut() => ProcessEnd();
 
+        private void OnTimerCurrentTimeChanged(float oldTime, float newTime) => _remainingTime.Value = newTime;
+
         private void ProcessEnd()
         {
             _inProcess = false;
@@ -106,6 +106,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
             _disposables.Add(_timer);
             _disposables.Add(_timer.CooldownEnded.Subscribe(OnStageTimeOut));
+            _disposables.Add(_timer.CurrentTime.Subscribe(OnTimerCurrentTimeChanged));
         }
 
         private void StartWavesSpawnProcess()

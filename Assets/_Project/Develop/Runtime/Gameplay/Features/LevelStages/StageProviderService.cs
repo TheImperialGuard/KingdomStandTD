@@ -31,6 +31,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
         public IReadOnlyVariable<StageResults> CurrentStageResult => _currentStageResult;
 
+        public IReadOnlyVariable<float> CurrentStageRemainingTime => _currentStage.RemainingTime;
+
         public int StagesCount => _stagesConfigs.Count;
 
         public bool HasNextStage() => _currentStageNumber.Value < StagesCount;
@@ -44,7 +46,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
             if (_currentStage != null)
             {
-                currentStageRemainingTime = _currentStage.RemainingTime;
+                currentStageRemainingTime = _currentStage.RemainingTime.Value;
 
                 CleanupCurrent();
             }
