@@ -25,6 +25,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(TowersAbilitiesListConfig), "Configs/Gameplay/Entities/Towers/TowersAbilitiesListConfig" },
             {typeof(MusicConfig), "Configs/MusicConfig" },
             {typeof(CameraConfig), "Configs/Gameplay/CameraConfig" },
+            {typeof(RoutesPreviewConfig), "Configs/Gameplay/RoutesPreviewConfig" },
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

@@ -4,6 +4,7 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
+using Assets._Project.Develop.Runtime.Gameplay.Features.RoutesPreview;
 using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
@@ -24,9 +25,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private RayShooterService _rayShooterService;
         private MusicSwitcherService _musicSwitcherService;
         private CameraMover _cameraMover;
+        private RoutesPreviewService _routesPreviewService;
 
         private static readonly ProfilerMarker _markerCameraMover = new("KS.CameraMover");
         private static readonly ProfilerMarker _markerGameplayCycle = new("KS.GameplayCycle");
+        private static readonly ProfilerMarker _markerRoutesPreviewService = new("KS.RoutesPreviewService");
         private static readonly ProfilerMarker _markerRayShooterService = new("KS.RayShooterService");
         private static readonly ProfilerMarker _markerBrainsContext = new("KS.BrainsContext");
         private static readonly ProfilerMarker _markerEntitiesLifeContext = new("KS.EntitiesLifeContext");
@@ -55,6 +58,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _gameplayCycle = _container.Resolve<GameplayCycle>();
             _musicSwitcherService = _container.Resolve<MusicSwitcherService>();
             _cameraMover = _container.Resolve<CameraMover>();
+            _routesPreviewService = _container.Resolve<RoutesPreviewService>();
 
             _gameplayCycle.Prepare();
 
@@ -77,6 +81,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             using (_markerGameplayCycle.Auto())
                 _gameplayCycle?.Update(Time.deltaTime);
+
+            using (_markerRoutesPreviewService.Auto())
+                _routesPreviewService?.Update(Time.deltaTime);
 
             using (_markerRayShooterService.Auto())
                 _rayShooterService?.Update(Time.deltaTime);

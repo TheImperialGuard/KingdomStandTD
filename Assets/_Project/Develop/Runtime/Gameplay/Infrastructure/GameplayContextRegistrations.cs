@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
@@ -16,6 +17,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.PauseFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
+using Assets._Project.Develop.Runtime.Gameplay.Features.RoutesPreview;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
@@ -96,6 +98,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateGameplayCycle);
 
             container.RegisterAsSingle(CreateStagesCycle);
+
+            container.RegisterAsSingle(CreateRoutesPreviewService).NonLazy();
 
             container.RegisterAsSingle(CreateTowersPlaceholdersService);
 
@@ -266,6 +270,18 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<StageProviderService>(),
                 c.Resolve<GameplayPopupService>(),
                 c.Resolve<EarnGoldOnSkipStageService>());
+        }
+
+        private static RoutesPreviewService CreateRoutesPreviewService(DIContainer c)
+        {
+            RoutesPreviewConfig config = c.Resolve<ConfigsProviderService>().GetConfig<RoutesPreviewConfig>();
+
+            return new RoutesPreviewService(
+                c.Resolve<StagesCycle>(),
+                c.Resolve<Level>().RoadPaths,
+                _levelConfig.Stages,
+                config,
+                c.Resolve<ResourcesAssetsLoader>());
         }
 
         private static GameplayPopupService CreateGameplayPopupService(DIContainer c)
