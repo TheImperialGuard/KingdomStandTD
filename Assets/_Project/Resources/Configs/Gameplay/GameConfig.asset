@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8a186f6d6ae1941a2ccc4a9440bdd2, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.GameConfig
-  GoldIndexForRemainingStageSeconds: 1
-  MaxGoldForSkipStage: 20
+  GoldIndexForRemainingStageSeconds: 1.5
+  MaxGoldForSkipStage: 30
+  SellTowerGoldReturnIndex: 0.7
+  GoldRewardByAdvert: 100
