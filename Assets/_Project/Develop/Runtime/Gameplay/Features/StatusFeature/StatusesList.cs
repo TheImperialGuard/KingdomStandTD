@@ -17,12 +17,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
         {
             Status status = _elements.FirstOrDefault(status => status.Type == element.Type);
 
+            // Статус того же типа не дублируется: повторное наложение лишь перезапускает его таймер через Added
             if (status == null)
             {
                 status = element;
+                _elements.Add(status);
             }
-
-            _elements.Add(status);
 
             Added?.Invoke(status);
         }
