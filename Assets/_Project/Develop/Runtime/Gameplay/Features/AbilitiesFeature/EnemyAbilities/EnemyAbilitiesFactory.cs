@@ -1,6 +1,9 @@
 ﻿using System;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.AOE;
+using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.WarCryFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 
@@ -22,6 +25,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Ene
 
             switch (config)
             {
+                case WarCryAbilityConfig warCryConfig:
+                    AddWarCryTo(entity, warCryConfig);
+                    break;
+
                 default:
                     throw new ArgumentException($"Not supported {config.GetType()} enemy ability config");
             }
@@ -55,6 +62,20 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Ene
                 .AddSystem(new FirstAbilityProcessTimerSystem())
                 .AddSystem(new EndFirstAbilitySystem())
                 .AddSystem(new FirstAbilityCooldownTimerSystem());
+        }
+
+        private void AddWarCryTo(Entity entity, WarCryAbilityConfig config)
+        {
+            entity
+                .AddAreaEffectRadius(new(config.Radius))
+                .AddSpeedBoostIndex(new(config.SpeedBoostIndex))
+                .AddSpeedBoostDuration(new(config.SpeedBoostDuration))
+                .AddWarCryTargetKinds(new(config.TargetKinds));
+
+            entity
+                .AddSystem(new WarCryZoneSystem(
+                    _container.Resolve<AreaEntitiesDetectorService>(),
+                    _container.Resolve<StatusesFactory>()));
         }
     }
 }

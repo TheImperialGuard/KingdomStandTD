@@ -2,6 +2,30 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 {
 	public partial class Entity
 	{
+		public Assets._Project.Develop.Runtime.Gameplay.Features.WarCryFeature.WarCryTargetKinds WarCryTargetKindsC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.WarCryFeature.WarCryTargetKinds>();
+
+		public System.Collections.Generic.List<Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.EnemyKinds> WarCryTargetKinds => WarCryTargetKindsC.Value;
+
+		public bool TryGetWarCryTargetKinds(out System.Collections.Generic.List<Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.EnemyKinds> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.WarCryFeature.WarCryTargetKinds component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(System.Collections.Generic.List<Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.EnemyKinds>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddWarCryTargetKinds()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.WarCryFeature.WarCryTargetKinds() { Value = new System.Collections.Generic.List<Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.EnemyKinds>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddWarCryTargetKinds(System.Collections.Generic.List<Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.EnemyKinds> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.WarCryFeature.WarCryTargetKinds() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerType TowerTypeC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerType>();
 
 		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.TowerTypes> TowerType => TowerTypeC.Value;
