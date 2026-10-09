@@ -39,7 +39,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.WarCryFeature
             if (entity.TryGetWarCryTargetKinds(out _) == false)
                 return;
 
-            FitToRadius(entity.AreaEffectRadius.Value);
+            GroundQuadScaler.FitToRadius(transform, entity.AreaEffectRadius.Value);
 
             _propertyBlock = new MaterialPropertyBlock();
             _fader = new RendererFader(_renderer, _opacityId);
@@ -47,15 +47,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.WarCryFeature
             _abilityStartedDisposable = entity.StartFirstAbilityEvent.Subscribe(OnAbilityStarted);
             _abilityEndedDisposable = entity.EndFirstAbilityEvent.Subscribe(OnAbilityEnded);
             _isDeadChangedDisposable = entity.IsDead.Subscribe(OnIsDeadChanged);
-        }
-
-        private void FitToRadius(float radius)
-        {
-            float diameter = radius * 2;
-            Vector3 parentScale = transform.parent.lossyScale;
-
-            // Квадрат лежит лицом вверх, поэтому его локальная ось Y идёт вдоль оси Z родителя
-            transform.localScale = new Vector3(diameter / parentScale.x, diameter / parentScale.z, transform.localScale.z);
         }
 
         private void OnAbilityStarted()

@@ -32,5 +32,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
             _elements.Remove(element);
             Removed?.Invoke(element);
         }
+
+        public bool Has(StatusesTypes type)
+        {
+            foreach (Status status in _elements)
+            {
+                if (status.Type == type)
+                    return true;
+            }
+
+            return false;
+        }
     }
 }

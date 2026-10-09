@@ -59,18 +59,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
         private void Refresh()
         {
             foreach (StatusIcon icon in _icons)
-                icon.Image.gameObject.SetActive(HasStatus(icon.Type));
-        }
-
-        private bool HasStatus(StatusesTypes type)
-        {
-            foreach (Status status in _statuses.Elements)
-            {
-                if (status.Type == type)
-                    return true;
-            }
-
-            return false;
+                icon.Image.gameObject.SetActive(_statuses.Has(icon.Type));
         }
 
         [Serializable]
