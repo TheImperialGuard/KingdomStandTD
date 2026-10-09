@@ -1,0 +1,306 @@
+{
+  "level": "WPS",
+  "campaignNumber": null,
+  "prefabPath": "Prefabs/Levels/Level_wps_2",
+  "gameMode": "Basic",
+  "towerSlotsCount": 11,
+  "startGold": 350,
+  "startPlayerHealth": 20,
+  "roads": [
+    {
+      "pathNumber": "First",
+      "name": "Path_1",
+      "waypointsCount": 5,
+      "lengthCenter": 24.0,
+      "lengthLeft": 24.002,
+      "lengthRight": 24.005,
+      "timeToBase": {
+        "Gargoyle": 24.0,
+        "Necromancer": 24.0
+      }
+    },
+    {
+      "pathNumber": "Second",
+      "name": "Path_2",
+      "waypointsCount": 6,
+      "lengthCenter": 36.0,
+      "lengthLeft": 36.006,
+      "lengthRight": 36.002,
+      "timeToBase": {
+        "Gargoyle": 36.0,
+        "Necromancer": 36.0
+      }
+    },
+    {
+      "pathNumber": "Third",
+      "name": "Path_3",
+      "waypointsCount": 5,
+      "lengthCenter": 26.0,
+      "lengthLeft": 26.71,
+      "lengthRight": 25.297,
+      "timeToBase": {
+        "Ogre": 52.0
+      }
+    }
+  ],
+  "stages": [
+    {
+      "stageTime": 20.0,
+      "timeToSkipStage": 15.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "Gargoyle",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 100.0,
+            "killGold": 100,
+            "breakthroughDamage": 10,
+            "spawnEnd": 18.0,
+            "firstArrival": 24.0,
+            "lastArrival": 42.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Gargoyle",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 100.0,
+            "killGold": 100,
+            "breakthroughDamage": 10,
+            "spawnEnd": 18.0,
+            "firstArrival": 36.0,
+            "lastArrival": 54.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Ogre",
+              "count": 8
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Third",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 8,
+            "health": 800.0,
+            "killGold": 80,
+            "breakthroughDamage": 8,
+            "spawnEnd": 14.0,
+            "firstArrival": 52.0,
+            "lastArrival": 66.0
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 3,
+        "enemiesCount": 28,
+        "enemiesByType": {
+          "Gargoyle": 20,
+          "Ogre": 8
+        },
+        "health": 1000.0,
+        "effectiveHealthPhysic": 1000.0,
+        "effectiveHealthMagic": 1000.0,
+        "healthPerSecond": 50.0,
+        "killGold": 280,
+        "maxSkipGold": 8,
+        "goldAtStartWithoutSkips": 350,
+        "goldAtStartWithMaxSkips": 350,
+        "breakthroughDamage": 28,
+        "breakthroughThreat": 1.4,
+        "spawnEnd": 18.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 66.0,
+        "peakEnemies": 28,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 100.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 100.0
+          },
+          {
+            "pathNumber": "Third",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 8,
+            "health": 800.0
+          }
+        ]
+      }
+    },
+    {
+      "stageTime": 20.0,
+      "timeToSkipStage": 15.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "Necromancer",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 1000.0,
+            "killGold": 100,
+            "breakthroughDamage": 10,
+            "spawnEnd": 18.0,
+            "firstArrival": 24.0,
+            "lastArrival": 42.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Necromancer",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 1000.0,
+            "killGold": 100,
+            "breakthroughDamage": 10,
+            "spawnEnd": 18.0,
+            "firstArrival": 36.0,
+            "lastArrival": 54.0
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 2,
+        "enemiesCount": 20,
+        "enemiesByType": {
+          "Necromancer": 20
+        },
+        "health": 2000.0,
+        "effectiveHealthPhysic": 2000.0,
+        "effectiveHealthMagic": 2000.0,
+        "healthPerSecond": 100.0,
+        "killGold": 200,
+        "maxSkipGold": 0,
+        "goldAtStartWithoutSkips": 630,
+        "goldAtStartWithMaxSkips": 638,
+        "breakthroughDamage": 20,
+        "breakthroughThreat": 1.0,
+        "spawnEnd": 18.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 54.0,
+        "peakEnemies": 40,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 1000.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 1000.0
+          }
+        ]
+      }
+    }
+  ],
+  "analysis": {
+    "stagesCount": 2,
+    "wavesCount": 5,
+    "enemiesCount": 48,
+    "enemiesByType": {
+      "Gargoyle": 20,
+      "Necromancer": 20,
+      "Ogre": 8
+    },
+    "health": 3000.0,
+    "effectiveHealthPhysic": 3000.0,
+    "effectiveHealthMagic": 3000.0,
+    "killGold": 480,
+    "maxSkipGold": 8,
+    "totalGoldWithoutSkips": 830,
+    "totalGoldWithMaxSkips": 838,
+    "breakthroughDamage": 48,
+    "breakthroughThreat": 2.4,
+    "durationWithoutSkips": 40.0,
+    "durationWithMaxSkips": 35.0,
+    "peakEnemies": 40,
+    "traffic": [
+      {
+        "pathNumber": "First",
+        "lane": "Center",
+        "wavesCount": 2,
+        "enemiesCount": 20,
+        "health": 1100.0
+      },
+      {
+        "pathNumber": "Second",
+        "lane": "Center",
+        "wavesCount": 2,
+        "enemiesCount": 20,
+        "health": 1100.0
+      },
+      {
+        "pathNumber": "Third",
+        "lane": "Center",
+        "wavesCount": 1,
+        "enemiesCount": 8,
+        "health": 800.0
+      }
+    ]
+  },
+  "errors": [],
+  "warnings": []
+}

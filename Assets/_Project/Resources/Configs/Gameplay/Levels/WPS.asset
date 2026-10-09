@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193a5dcbb319b3a42b997ea6be380bcb, type: 3}
+  m_Name: WPS
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.LevelConfig
+  _stages:
+  - _enemiesWaveConfigs:
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 35814527bab6fa34d9b98a37d479cec2, type: 2}
+        <Count>k__BackingField: 10
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 0
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 0
+      <DelayBetweenSpawns>k__BackingField: 2
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 35814527bab6fa34d9b98a37d479cec2, type: 2}
+        <Count>k__BackingField: 10
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 1
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 0
+      <DelayBetweenSpawns>k__BackingField: 2
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: ff63194087fd89e429af04e8d66cd63f, type: 2}
+        <Count>k__BackingField: 8
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 2
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 0
+      <DelayBetweenSpawns>k__BackingField: 2
+    _note: 
+    <StageTime>k__BackingField: 20
+    <TimeToSkipStage>k__BackingField: 15
+  - _enemiesWaveConfigs:
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: dbf8c312d815bdf42a56d598a7d92f57, type: 2}
+        <Count>k__BackingField: 10
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 0
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 0
+      <DelayBetweenSpawns>k__BackingField: 2
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: dbf8c312d815bdf42a56d598a7d92f57, type: 2}
+        <Count>k__BackingField: 10
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 1
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 0
+      <DelayBetweenSpawns>k__BackingField: 2
+    _note: 
+    <StageTime>k__BackingField: 20
+    <TimeToSkipStage>k__BackingField: 15
+  <PrefabPath>k__BackingField: Prefabs/Levels/Level_wps_2
+  <GameMode>k__BackingField: 0
+  <StartGold>k__BackingField: 350
+  <StartPlayerHealth>k__BackingField: 20
+  <ArrowsUpgradesLevelLimit>k__BackingField: 5
+  <MagicUpgradesLevelLimit>k__BackingField: 5
+  <CannonUpgradesLevelLimit>k__BackingField: 5
+  <BarracksUpgradesLevelLimit>k__BackingField: 5
