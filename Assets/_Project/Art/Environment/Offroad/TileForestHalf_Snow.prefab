@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1959569632827307454
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4025369801857111980}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+      propertyPath: m_Name
+      value: snow-tile-tree-double
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+--- !u!4 &2070375239462490709 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: da1d17ab0a28f0748a6b6c0994d54b6d, type: 3}
+  m_PrefabInstance: {fileID: 1959569632827307454}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4002009768073262333
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 23927777612882769, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23927777612882769, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23927777612882769, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23927777612882769, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23927777612882769, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23927777612882769, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23927777612882769, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23927777612882769, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23927777612882769, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23927777612882769, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461611863571252895, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      propertyPath: m_Name
+      value: TileForestHalf_Snow
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 2794103006458973630, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 23927777612882769, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2070375239462490709}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+--- !u!4 &4025369801857111980 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 23927777612882769, guid: 7b6c188948929ac468637ecdd0568d1e, type: 3}
+  m_PrefabInstance: {fileID: 4002009768073262333}
+  m_PrefabAsset: {fileID: 0}
