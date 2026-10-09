@@ -11,4 +11,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
     public class IsBoss : IEntityComponent
     {
     }
+
+    public class IsFlying : IEntityComponent
+    {
+    }
 }

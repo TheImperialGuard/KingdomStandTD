@@ -1,9 +1,10 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+﻿using System.Collections.Generic;
+using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
@@ -46,6 +47,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
         protected bool IsEnemy(Entity target) => EntitiesHelper.IsSameTeam(_source, target) == false;
 
         protected bool IsInShootRange(Entity target) => GetDistanceTo(target) <= _source.InstantShootRange.Value;
+
+        protected bool IsFlying(Entity target) => target.HasComponent<IsFlying>();
 
         protected bool IsDamagable(Entity target)
         {

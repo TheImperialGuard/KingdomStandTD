@@ -1601,6 +1601,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.IsBoss() ); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.IsFlying IsFlyingC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.IsFlying>();
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsFlying()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.IsFlying() ); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjection.BodyContactInjectingStatuses BodyContactInjectingStatusesC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.ContactStatusInjection.BodyContactInjectingStatuses>();
 
 		public System.Collections.Generic.List<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StatusesTypes> BodyContactInjectingStatuses => BodyContactInjectingStatusesC.Value;

@@ -1,4 +1,6 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities;
+﻿using System;
+using System.Collections.Generic;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
@@ -12,8 +14,6 @@ using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
@@ -74,6 +74,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
 
                     if (meleeConfig.IsBoss == true)
                         entity.AddIsBoss();
+
+                    if (meleeConfig.IsFlying == true)
+                        entity.AddIsFlying();
 
                     _brainsFactory.CreateMeleeBrain(entity);
 
