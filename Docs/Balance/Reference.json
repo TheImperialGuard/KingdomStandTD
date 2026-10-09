@@ -163,6 +163,19 @@
       "isBoss": false
     },
     {
+      "asset": "SummonedSkeleton",
+      "name": "Скелет",
+      "maxHealth": 20.0,
+      "moveSpeed": 1.0,
+      "damageResistanceType": "None",
+      "damageResistanceIndex": 0.5,
+      "effectiveHealthPhysic": 20.0,
+      "effectiveHealthMagic": 20.0,
+      "goldOnDeath": 0,
+      "damageOnFinishPath": 1,
+      "isBoss": false
+    },
+    {
       "asset": "TestMelee",
       "name": "Тест",
       "maxHealth": 100.0,

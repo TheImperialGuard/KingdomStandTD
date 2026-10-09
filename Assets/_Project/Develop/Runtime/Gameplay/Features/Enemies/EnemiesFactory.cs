@@ -82,6 +82,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
                     if (meleeConfig.IsFlying == true)
                         entity.AddIsFlying();
 
+                    if (meleeConfig.SpawnProcessTime > 0)
+                        AddSpawnProcessFor(entity, meleeConfig.SpawnProcessTime);
+
                     if (meleeConfig.Ability != null)
                         _enemyAbilitiesFactory.AddAbilityTo(entity, meleeConfig.Ability);
 
@@ -131,6 +134,20 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
             entity
                 .AddSystem(new WaypointsNavigationSystem())
                 .AddSystem(new PathDistanceCalcSystem());
+        }
+
+        // Пока враг поднимается, он стоит и не принимает урон — а значит, и башни не выбирают его целью.
+        private void AddSpawnProcessFor(Entity entity, float spawnProcessTime)
+        {
+            entity
+                .AddSpawnProcessTimer(new(spawnProcessTime), new())
+                .AddInSpawnProcess();
+
+            entity.CanMove.Add(new FuncCondition(() => entity.InSpawnProcess.Value == false));
+            entity.CanApplyDamage.Add(new FuncCondition(() => entity.InSpawnProcess.Value == false));
+
+            entity
+                .AddSystem(new SpawnProcessTimerSystem());
         }
     }
 }
