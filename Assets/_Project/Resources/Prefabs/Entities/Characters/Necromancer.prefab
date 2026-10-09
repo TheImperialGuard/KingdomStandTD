@@ -459,6 +459,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6b34ddc35ef9de9428e8df8bb14d9a7e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4868102591623818940}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6b34ddc35ef9de9428e8df8bb14d9a7e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2363778140356524028}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6b34ddc35ef9de9428e8df8bb14d9a7e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6834371587038641521}
   m_SourcePrefab: {fileID: 100100000, guid: 6b34ddc35ef9de9428e8df8bb14d9a7e, type: 3}
 --- !u!4 &3108351505912409197 stripped
 Transform:
@@ -549,6 +555,35 @@ MonoBehaviour:
   _handGlowEffects:
   - {fileID: 1723133144101121285}
   - {fileID: 6968843109709989316}
+--- !u!114 &2363778140356524028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4899041953010302739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b912b99e2116e44f9ed3114e8650462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EnemyAbilities.AbilityCastAnimationView
+  _animator: {fileID: 6692435546910331070}
+  _castClip: {fileID: 2112955938044805718, guid: 6b34ddc35ef9de9428e8df8bb14d9a7e, type: 3}
+  _castTriggerKeyName: Summon
+  _castSpeedKeyName: SummonSpeed
+--- !u!114 &6834371587038641521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4899041953010302739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e926c4d4c542a3e4dbd7de145afa05b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonAnimationEventRegistrator
+  _receiver: {fileID: 4868102591623818940}
 --- !u!4 &5239714002142651817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6b34ddc35ef9de9428e8df8bb14d9a7e, type: 3}

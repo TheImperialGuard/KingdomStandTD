@@ -2,7 +2,9 @@
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AOE;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.WarCryFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
@@ -27,6 +29,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Ene
             {
                 case WarCryAbilityConfig warCryConfig:
                     AddWarCryTo(entity, warCryConfig);
+                    break;
+
+                case SummonAbilityConfig summonConfig:
+                    AddSummonTo(entity, summonConfig);
                     break;
 
                 default:
@@ -76,6 +82,19 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Ene
                 .AddSystem(new WarCryZoneSystem(
                     _container.Resolve<AreaEntitiesDetectorService>(),
                     _container.Resolve<StatusesFactory>()));
+        }
+
+        // EnemiesFactory берётся из контейнера здесь, а не в конструкторе: она сама зависит от этой фабрики.
+        private void AddSummonTo(Entity entity, SummonAbilityConfig config)
+        {
+            entity
+                .AddSummonedEnemyConfig(config.SummonedConfig)
+                .AddSummonCount(new(config.Count))
+                .AddSummonRowSpacing(new(config.RowSpacing))
+                .AddSummonColumnSpacing(new(config.ColumnSpacing));
+
+            entity
+                .AddSystem(new SummonOnAnimationEventSystem(_container.Resolve<EnemiesFactory>()));
         }
     }
 }

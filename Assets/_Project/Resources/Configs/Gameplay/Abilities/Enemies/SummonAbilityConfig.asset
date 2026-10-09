@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b8b9902ab1297a4cbe7be84e7539bc9, type: 3}
+  m_Name: SummonAbilityConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities.Enemies.SummonAbilityConfig
+  <Duration>k__BackingField: 2.3333335
+  <Cooldown>k__BackingField: 8
+  <SummonedConfig>k__BackingField: {fileID: 11400000, guid: 6d4e3317875d6a544833a4bed4eb91aa, type: 2}
+  <Count>k__BackingField: 4
+  <RowSpacing>k__BackingField: 0.5
+  <ColumnSpacing>k__BackingField: 0.5

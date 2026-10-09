@@ -42,7 +42,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
             _enemyAbilitiesFactory = _container.Resolve<EnemyAbilitiesFactory>();
         }
 
-        public Entity Create(Vector3 position, EntityConfig config, IReadOnlyList<Waypoint> path, Vector3 waypointsOffset)
+        public Entity Create(
+            Vector3 position,
+            EntityConfig config,
+            IReadOnlyList<Waypoint> path,
+            Vector3 waypointsOffset,
+            Vector3 initialLookDirection = default)
         {
             Entity entity;
 
@@ -113,6 +118,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
 
             entity
                 .AddSystem(new InteractSystem());
+
+            // Поворот применится уже в OnInit системы вращения: модель появится сразу лицом по маршруту.
+            if (initialLookDirection != Vector3.zero)
+                entity.RotationDirection.Value = initialLookDirection;
 
             _entitiesLifeContext.Add(entity);
 

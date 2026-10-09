@@ -179,6 +179,116 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature.Team() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonAnimationEventReceiverComponent SummonAnimationEventReceiverC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonAnimationEventReceiverComponent>();
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonAnimationEventReceiver SummonAnimationEventReceiver => SummonAnimationEventReceiverC.Value;
+
+		public bool TryGetSummonAnimationEventReceiver(out Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonAnimationEventReceiver value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonAnimationEventReceiverComponent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonAnimationEventReceiver);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSummonAnimationEventReceiver(Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonAnimationEventReceiver value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonAnimationEventReceiverComponent() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonedEnemyConfig SummonedEnemyConfigC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonedEnemyConfig>();
+
+		public Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters.MeleeConfig SummonedEnemyConfig => SummonedEnemyConfigC.Value;
+
+		public bool TryGetSummonedEnemyConfig(out Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters.MeleeConfig value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonedEnemyConfig component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters.MeleeConfig);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSummonedEnemyConfig(Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters.MeleeConfig value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonedEnemyConfig() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonCount SummonCountC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonCount>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> SummonCount => SummonCountC.Value;
+
+		public bool TryGetSummonCount(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonCount component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSummonCount()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonCount() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSummonCount(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonCount() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonRowSpacing SummonRowSpacingC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonRowSpacing>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> SummonRowSpacing => SummonRowSpacingC.Value;
+
+		public bool TryGetSummonRowSpacing(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonRowSpacing component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSummonRowSpacing()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonRowSpacing() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSummonRowSpacing(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonRowSpacing() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonColumnSpacing SummonColumnSpacingC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonColumnSpacing>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> SummonColumnSpacing => SummonColumnSpacingC.Value;
+
+		public bool TryGetSummonColumnSpacing(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonColumnSpacing component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSummonColumnSpacing()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonColumnSpacing() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSummonColumnSpacing(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature.SummonColumnSpacing() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.Statuses StatusesC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.Statuses>();
 
 		public Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StatusesList Statuses => StatusesC.Value;

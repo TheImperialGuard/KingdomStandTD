@@ -17,9 +17,13 @@ MonoBehaviour:
   <MoveSpeed>k__BackingField: 1
   <RotateSpeed>k__BackingField: 900
   <MaxHealth>k__BackingField: 100
+  <SpawnProcessTime>k__BackingField: 0
   <DeathProcessTime>k__BackingField: 2
   <DamageResistanceType>k__BackingField: 0
   <DamageResistanceIndex>k__BackingField: 0
   <DamageOnFinishPath>k__BackingField: 1
   <GoldOnDeath>k__BackingField: 10
   <IsBoss>k__BackingField: 0
+  <IsFlying>k__BackingField: 0
+  <Kind>k__BackingField: 0
+  <Ability>k__BackingField: {fileID: 11400000, guid: 9e3fbbd84d6baa44a87c855bcefc619e, type: 2}
