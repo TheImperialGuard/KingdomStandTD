@@ -1,7 +1,7 @@
 {
   "game": {
-    "goldIndexForRemainingStageSeconds": 1.0,
-    "maxGoldForSkipStage": 20,
+    "goldIndexForRemainingStageSeconds": 1.5,
+    "maxGoldForSkipStage": 30,
     "sellTowerGoldReturnIndex": 0.7,
     "goldRewardByAdvert": 100
   },
@@ -62,7 +62,7 @@
       "asset": "Necromancer",
       "name": "",
       "maxHealth": 100.0,
-      "moveSpeed": 5.0,
+      "moveSpeed": 1.0,
       "damageResistanceType": "None",
       "damageResistanceIndex": 0.0,
       "effectiveHealthPhysic": 100.0,
@@ -96,6 +96,19 @@
       "goldOnDeath": 10,
       "damageOnFinishPath": 1,
       "isBoss": false
+    },
+    {
+      "asset": "OrcChief",
+      "name": "Вожак орков",
+      "maxHealth": 100.0,
+      "moveSpeed": 0.5,
+      "damageResistanceType": "None",
+      "damageResistanceIndex": 0.0,
+      "effectiveHealthPhysic": 100.0,
+      "effectiveHealthMagic": 100.0,
+      "goldOnDeath": 10,
+      "damageOnFinishPath": 1,
+      "isBoss": true
     },
     {
       "asset": "Skeleton",
