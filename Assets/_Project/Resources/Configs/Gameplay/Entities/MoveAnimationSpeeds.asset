@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443f0f7e6cf12d14882ec7f42c8da394, type: 3}
+  m_Name: MoveAnimationSpeeds
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters.MoveAnimationSpeedsConfig
+  _speeds:
+  - _clip: {fileID: 7060811993321468294, guid: e708a75a305d2a34a80a6b34762709a1, type: 3}
+    _baseSpeed: 0.8
+  - _clip: {fileID: 2667949614841947897, guid: a1bd49b4921f41a4e9543326e51a6c64, type: 3}
+    _baseSpeed: 0.35
+  - _clip: {fileID: 2667949614841947897, guid: 6b34ddc35ef9de9428e8df8bb14d9a7e, type: 3}
+    _baseSpeed: 0.7
+  - _clip: {fileID: 2667949614841947897, guid: 6deddc3dc89a23d4da6c471d3601b487, type: 3}
+    _baseSpeed: 0.35
+  - _clip: {fileID: 2667949614841947897, guid: ba4f2b77104f0a84eacb0d9418bef662, type: 3}
+    _baseSpeed: 0.35
+  - _clip: {fileID: -4506558747437489242, guid: c889aa1cf251d2c4cb47897d1ba72a5e, type: 3}
+    _baseSpeed: 1

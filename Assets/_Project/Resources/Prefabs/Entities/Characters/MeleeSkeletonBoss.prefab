@@ -230,6 +230,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4fa501508ba1fd14db956ace7c7bed39, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4418346288263150423}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4fa501508ba1fd14db956ace7c7bed39, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3058880357870458852}
   m_SourcePrefab: {fileID: 100100000, guid: 4fa501508ba1fd14db956ace7c7bed39, type: 3}
 --- !u!1 &8120504359839445742 stripped
 GameObject:
@@ -300,6 +303,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage.ApplyDamageView
   _applyDamageEffectPrefab: {fileID: 8525990746615576122, guid: b85d21f3b8fed714bacf0c4fd50fa512, type: 3}
   _effectSpawnPoint: {fileID: 3606124505555659429}
+--- !u!114 &3058880357870458852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8120504359839445742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bd963a409bf2ed4cb8af133dc35fc11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.MoveAnimationSpeedView
+  _animator: {fileID: 287548098061331117}
+  _config: {fileID: 11400000, guid: 4cbee994082e78f42a842fab30df9fa8, type: 2}
+  _moveClip: {fileID: 7060811993321468294, guid: e708a75a305d2a34a80a6b34762709a1, type: 3}
+  _speedMultiplierKeyName: MoveSpeedMultiplier
 --- !u!4 &8933456231776774228 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4fa501508ba1fd14db956ace7c7bed39, type: 3}

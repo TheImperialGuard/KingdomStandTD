@@ -213,6 +213,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba4f2b77104f0a84eacb0d9418bef662, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3037850960817486731}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ba4f2b77104f0a84eacb0d9418bef662, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2305996643030930564}
   m_SourcePrefab: {fileID: 100100000, guid: ba4f2b77104f0a84eacb0d9418bef662, type: 3}
 --- !u!4 &535081333653100973 stripped
 Transform:
@@ -279,6 +282,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.CoreBurstAnimationEventReceiver
   _effect: {fileID: 2240512071803770675}
+--- !u!114 &2305996643030930564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875718198365094679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bd963a409bf2ed4cb8af133dc35fc11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.MoveAnimationSpeedView
+  _animator: {fileID: 5876301926452691927}
+  _config: {fileID: 11400000, guid: 4cbee994082e78f42a842fab30df9fa8, type: 2}
+  _moveClip: {fileID: 2667949614841947897, guid: ba4f2b77104f0a84eacb0d9418bef662, type: 3}
+  _speedMultiplierKeyName: MoveSpeedMultiplier
 --- !u!4 &4796663102772070544 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4433952765339011370, guid: ba4f2b77104f0a84eacb0d9418bef662, type: 3}
