@@ -3,5 +3,6 @@
     public enum StatTypes
     {
         AttacksPerSecond,
+        MoveSpeed,
     }
 }

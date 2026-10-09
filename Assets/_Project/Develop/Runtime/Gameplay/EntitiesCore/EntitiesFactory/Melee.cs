@@ -1,8 +1,10 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
+﻿using System.Collections.Generic;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Sensors;
+using Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Utilities;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
@@ -18,6 +20,18 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
             Entity entity = CreateEmpty();
 
             _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
+
+            Dictionary<StatTypes, float> baseStats = new()
+            {
+                { StatTypes.MoveSpeed, config.MoveSpeed },
+            };
+
+            Dictionary<StatTypes, float> modifiedStats = new(baseStats);
+
+            entity
+                .AddBaseStats(baseStats)
+                .AddModifiedStats(modifiedStats)
+                .AddStatsEffects();
 
             entity
                 .AddMoveDirection()
@@ -64,6 +78,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddMustDie(mustDie);
 
             entity
+                .AddSystem(new StatEffectsApplierSystem())
+                .AddSystem(new MoveSpeedStatSynchronizerSystem())
                 .AddSystem(new RigidbodyMovementSystem())
                 .AddSystem(new RigidbodyRotationSystem())
                 .AddSystem(new ApplyDamageSystem())

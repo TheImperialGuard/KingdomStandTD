@@ -18,4 +18,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature
     {
         public ReactiveVariable<float> Value;
     }
+
+    public class StatsEffects : IEntityComponent
+    {
+        public StatsEffectsList Value;
+    }
 }

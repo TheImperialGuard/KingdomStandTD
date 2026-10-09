@@ -227,6 +227,54 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StunDuration() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.SpeedBoostIndex SpeedBoostIndexC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.SpeedBoostIndex>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> SpeedBoostIndex => SpeedBoostIndexC.Value;
+
+		public bool TryGetSpeedBoostIndex(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.SpeedBoostIndex component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSpeedBoostIndex()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.SpeedBoostIndex() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSpeedBoostIndex(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.SpeedBoostIndex() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.SpeedBoostDuration SpeedBoostDurationC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.SpeedBoostDuration>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> SpeedBoostDuration => SpeedBoostDurationC.Value;
+
+		public bool TryGetSpeedBoostDuration(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.SpeedBoostDuration component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSpeedBoostDuration()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.SpeedBoostDuration() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSpeedBoostDuration(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.SpeedBoostDuration() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.BaseStats BaseStatsC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.BaseStats>();
 
 		public System.Collections.Generic.Dictionary<Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatTypes, System.Single> BaseStats => BaseStatsC.Value;
@@ -297,6 +345,30 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAttacksPerSecond(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
 		{
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.AttacksPerSecond() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatsEffects StatsEffectsC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatsEffects>();
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatsEffectsList StatsEffects => StatsEffectsC.Value;
+
+		public bool TryGetStatsEffects(out Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatsEffectsList value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatsEffects component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatsEffectsList);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStatsEffects()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatsEffects() { Value = new Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatsEffectsList() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStatsEffects(Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatsEffectsList value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatsEffects() {Value = value}); 
 		}
 
 		public Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootPoint ShootPointC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootPoint>();

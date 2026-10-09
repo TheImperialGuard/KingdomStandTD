@@ -21,6 +21,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
             {
                 StatusesTypes.LastingDamage => new TakeDamageStatusEffect(source.LastingDamage),
                 StatusesTypes.Stun => new StunStatusEffect(),
+                StatusesTypes.SpeedBoost => new SpeedBoostStatusEffect(source.SpeedBoostIndex),
                 _ => throw new ArgumentException($"{type} not supported in statuses factory"),
             };
 

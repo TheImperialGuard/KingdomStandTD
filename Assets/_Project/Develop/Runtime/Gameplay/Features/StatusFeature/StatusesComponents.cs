@@ -17,4 +17,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
     {
         public ReactiveVariable<float> Value;
     }
+
+    public class SpeedBoostIndex : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
+
+    public class SpeedBoostDuration : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
 }

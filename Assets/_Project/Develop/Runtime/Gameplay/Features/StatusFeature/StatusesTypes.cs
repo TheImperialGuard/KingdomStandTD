@@ -4,5 +4,6 @@
     {
         LastingDamage,
         Stun,
+        SpeedBoost,
     }
 }
