@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities.Enemies;
+using Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using UnityEngine;
 
@@ -18,5 +19,6 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters
         [field: SerializeField] public bool IsBoss { get; private set; } = false;
         [field: SerializeField] public bool IsFlying { get; private set; } = false;
         [field: SerializeField] public EnemyKinds Kind { get; private set; } = EnemyKinds.None;
+        [field: SerializeField] public EnemyAbilityConfig Ability { get; private set; }
     }
 }

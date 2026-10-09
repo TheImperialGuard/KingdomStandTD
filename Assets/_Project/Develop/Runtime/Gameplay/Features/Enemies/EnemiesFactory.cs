@@ -4,6 +4,7 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
+using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EnemyAbilities;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning;
@@ -27,6 +28,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
 
         private readonly EntitiesLifeContext _entitiesLifeContext;
         private readonly InteractiveActionsFactory _interactiveActionsFactory;
+        private readonly EnemyAbilitiesFactory _enemyAbilitiesFactory;
 
         public EnemiesFactory(DIContainer container)
         {
@@ -37,6 +39,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
 
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _interactiveActionsFactory = _container.Resolve<InteractiveActionsFactory>();
+            _enemyAbilitiesFactory = _container.Resolve<EnemyAbilitiesFactory>();
         }
 
         public Entity Create(Vector3 position, EntityConfig config, IReadOnlyList<Waypoint> path, Vector3 waypointsOffset)
@@ -78,6 +81,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
 
                     if (meleeConfig.IsFlying == true)
                         entity.AddIsFlying();
+
+                    if (meleeConfig.Ability != null)
+                        _enemyAbilitiesFactory.AddAbilityTo(entity, meleeConfig.Ability);
 
                     _brainsFactory.CreateMeleeBrain(entity);
 

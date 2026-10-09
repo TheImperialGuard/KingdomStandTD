@@ -5,6 +5,7 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities;
+using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EnemyAbilities;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AOE;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
@@ -94,6 +95,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateStatusesFactory);
 
             container.RegisterAsSingle(CreateAbilitiesFactory);
+
+            container.RegisterAsSingle(CreateEnemyAbilitiesFactory);
 
             container.RegisterAsSingle(CreateGameplayCycle);
 
@@ -237,7 +240,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private static StatusesFactory CreateStatusesFactory(DIContainer c)
             => new(c);
 
-        private static AbilitiesFactory CreateAbilitiesFactory(DIContainer c) 
+        private static AbilitiesFactory CreateAbilitiesFactory(DIContainer c)
+            => new(c);
+
+        private static EnemyAbilitiesFactory CreateEnemyAbilitiesFactory(DIContainer c)
             => new(c);
 
         private static WalletService CreateGameplayWalletService(DIContainer c)
