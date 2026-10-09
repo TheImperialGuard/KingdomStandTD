@@ -8,6 +8,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
         public ReactiveVariable<string> Value;
     }
 
+    public class EnemyKind : IEntityComponent
+    {
+        public ReactiveVariable<EnemyKinds> Value;
+    }
+
     public class IsBoss : IEntityComponent
     {
     }

@@ -53,7 +53,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
                     entity
                         .AddDamageOnFinishPath(new(meleeConfig.DamageOnFinishPath))
                         .AddGoldOnDeath(new(meleeConfig.GoldOnDeath))
-                        .AddEnemyName(new(meleeConfig.CharacterName));
+                        .AddEnemyName(new(meleeConfig.CharacterName))
+                        .AddEnemyKind(new(meleeConfig.Kind));
 
                     ICompositeCondition mustSelfReleaseByDeath = new CompositeCondition()
                         .Add(new FuncCondition(() => entity.IsDead.Value == true))

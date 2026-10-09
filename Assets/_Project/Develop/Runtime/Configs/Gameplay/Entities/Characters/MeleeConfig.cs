@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters
@@ -16,5 +17,6 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters
         [field: SerializeField, Min(0)] public int GoldOnDeath { get; private set; } = 10;
         [field: SerializeField] public bool IsBoss { get; private set; } = false;
         [field: SerializeField] public bool IsFlying { get; private set; } = false;
+        [field: SerializeField] public EnemyKinds Kind { get; private set; } = EnemyKinds.None;
     }
 }

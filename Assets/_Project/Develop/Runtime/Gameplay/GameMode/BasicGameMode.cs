@@ -1,12 +1,14 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
+﻿using System;
+using System.Collections.Generic;
+using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Gameplay;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
@@ -20,6 +22,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
         private readonly StagesCycle _stagesCycle;
         private readonly WavesSpawner _wavesSpawner;
         private readonly PlayerHealth _playerHealth;
+        private readonly EntitiesLifeContext _entitiesLifeContext;
 
         private bool _isRunning;
 
@@ -31,12 +34,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
             StagesCycle stagesCycle,
             WavesSpawner wavesSpawner,
             PlayerHealth playerHealth,
-            GameplayPopupService popupService)
+            GameplayPopupService popupService,
+            EntitiesLifeContext entitiesLifeContext)
         {
             _stagesCycle = stagesCycle;
             _wavesSpawner = wavesSpawner;
             _playerHealth = playerHealth;
             _popupService = popupService;
+            _entitiesLifeContext = entitiesLifeContext;
 
             CreateWinCondition();
         }
@@ -76,7 +81,21 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
             _winCondition
                 .Add(new FuncCondition(() => _stagesCycle.InLastStage == true))
                 .Add(new FuncCondition(() => _wavesSpawner.IsSpawnComplete == true))
-                .Add(new FuncCondition(() => _wavesSpawner.SpawnedEntitites.Count == 0));
+                .Add(new FuncCondition(() => HasAliveEnemies() == false));
+        }
+
+        // Враги появляются не только из волн (например, призыв), поэтому считаются все сущности команды врагов.
+        private bool HasAliveEnemies()
+        {
+            IReadOnlyList<Entity> entities = _entitiesLifeContext.Entities;
+
+            for (int i = 0; i < entities.Count; i++)
+            {
+                if (entities[i].TryGetTeam(out ReactiveVariable<Teams> team) && team.Value == Teams.Enemies)
+                    return true;
+            }
+
+            return false;
         }
 
         private void OnPlayerHealthChanged(int oldValue, int newValue)
