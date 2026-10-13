@@ -15,20 +15,81 @@ MonoBehaviour:
   _stages:
   - _enemiesWaveConfigs:
     - _enemyGroups:
-      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 35814527bab6fa34d9b98a37d479cec2, type: 2}
-        <Count>k__BackingField: 10
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: dbf8c312d815bdf42a56d598a7d92f57, type: 2}
+        <Count>k__BackingField: 1
+      _note: "\u0422\u0435\u0441\u0442 Summon: \u043D\u0435\u043A\u0440\u043E\u043C\u0430\u043D\u0442
+        \u043F\u043E \u0446\u0435\u043D\u0442\u0440\u0443, \u043C\u0435\u0436\u0434\u0443
+        \u043E\u0440\u043A\u0430\u043C\u0438 \u0438 \u0432\u043E\u0436\u0430\u043A\u043E\u043C"
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 0
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 2.5
+      <DelayBetweenSpawns>k__BackingField: 1
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: dbf8c312d815bdf42a56d598a7d92f57, type: 2}
+        <Count>k__BackingField: 1
+      _note: "\u0422\u0435\u0441\u0442 Summon: \u043D\u0435\u043A\u0440\u043E\u043C\u0430\u043D\u0442
+        \u043F\u043E \u043B\u0435\u0432\u043E\u0439 \u043F\u043E\u043B\u043E\u0441\u0435,
+        \u0437\u0430 \u0437\u0430\u0434\u043D\u0438\u043C\u0438 \u043E\u0440\u043A\u0430\u043C\u0438"
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 0
+      <Lane>k__BackingField: 1
+      <StartDelay>k__BackingField: 10
+      <DelayBetweenSpawns>k__BackingField: 1
+    _note: "\u0422\u0435\u0441\u0442 WarCry \u0438 Summon: \u0432\u043E\u0436\u0430\u043A
+      \u0441 \u043E\u0440\u043A\u0430\u043C\u0438 \u0438 \u0434\u0432\u0430 \u043D\u0435\u043A\u0440\u043E\u043C\u0430\u043D\u0442\u0430"
+    <StageTime>k__BackingField: 40
+    <TimeToSkipStage>k__BackingField: 5
+  - _enemiesWaveConfigs:
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 3f7d6970be668914b8bd4799f9a0f282, type: 2}
+        <Count>k__BackingField: 3
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 7b986777ae748f949a65c5063ce560f8, type: 2}
+        <Count>k__BackingField: 1
       _note: 
       <PatternRepeats>k__BackingField: 1
       <PathNumber>k__BackingField: 0
       <Lane>k__BackingField: 0
       <StartDelay>k__BackingField: 0
-      <DelayBetweenSpawns>k__BackingField: 2
-    _note: 
-    <StageTime>k__BackingField: 20
-    <TimeToSkipStage>k__BackingField: 15
+      <DelayBetweenSpawns>k__BackingField: 1
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 3f7d6970be668914b8bd4799f9a0f282, type: 2}
+        <Count>k__BackingField: 3
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 0
+      <Lane>k__BackingField: 1
+      <StartDelay>k__BackingField: 7
+      <DelayBetweenSpawns>k__BackingField: 1
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: dbf8c312d815bdf42a56d598a7d92f57, type: 2}
+        <Count>k__BackingField: 1
+      _note: "\u0422\u0435\u0441\u0442 Summon: \u043D\u0435\u043A\u0440\u043E\u043C\u0430\u043D\u0442
+        \u043F\u043E \u0446\u0435\u043D\u0442\u0440\u0443, \u043C\u0435\u0436\u0434\u0443
+        \u043E\u0440\u043A\u0430\u043C\u0438 \u0438 \u0432\u043E\u0436\u0430\u043A\u043E\u043C"
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 0
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 2.5
+      <DelayBetweenSpawns>k__BackingField: 1
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: dbf8c312d815bdf42a56d598a7d92f57, type: 2}
+        <Count>k__BackingField: 1
+      _note: "\u0422\u0435\u0441\u0442 Summon: \u043D\u0435\u043A\u0440\u043E\u043C\u0430\u043D\u0442
+        \u043F\u043E \u043B\u0435\u0432\u043E\u0439 \u043F\u043E\u043B\u043E\u0441\u0435,
+        \u0437\u0430 \u0437\u0430\u0434\u043D\u0438\u043C\u0438 \u043E\u0440\u043A\u0430\u043C\u0438"
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 0
+      <Lane>k__BackingField: 1
+      <StartDelay>k__BackingField: 10
+      <DelayBetweenSpawns>k__BackingField: 1
+    _note: "\u0422\u0435\u0441\u0442 WarCry \u0438 Summon: \u0432\u043E\u0436\u0430\u043A
+      \u0441 \u043E\u0440\u043A\u0430\u043C\u0438 \u0438 \u0434\u0432\u0430 \u043D\u0435\u043A\u0440\u043E\u043C\u0430\u043D\u0442\u0430"
+    <StageTime>k__BackingField: 40
+    <TimeToSkipStage>k__BackingField: 5
   <PrefabPath>k__BackingField: Prefabs/Levels/TestLevel
   <GameMode>k__BackingField: 0
-  <StartGold>k__BackingField: 265
+  <StartGold>k__BackingField: 1200
   <StartPlayerHealth>k__BackingField: 20
   <ArrowsUpgradesLevelLimit>k__BackingField: 5
   <MagicUpgradesLevelLimit>k__BackingField: 5

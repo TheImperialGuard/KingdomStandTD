@@ -16,7 +16,7 @@ MonoBehaviour:
   - _enemiesWaveConfigs:
     - _enemyGroups:
       - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 35814527bab6fa34d9b98a37d479cec2, type: 2}
-        <Count>k__BackingField: 10
+        <Count>k__BackingField: 5
       _note: 
       <PatternRepeats>k__BackingField: 1
       <PathNumber>k__BackingField: 0
@@ -32,21 +32,12 @@ MonoBehaviour:
       <Lane>k__BackingField: 0
       <StartDelay>k__BackingField: 0
       <DelayBetweenSpawns>k__BackingField: 2
-    - _enemyGroups:
-      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: ff63194087fd89e429af04e8d66cd63f, type: 2}
-        <Count>k__BackingField: 8
-      _note: 
-      <PatternRepeats>k__BackingField: 1
-      <PathNumber>k__BackingField: 2
-      <Lane>k__BackingField: 0
-      <StartDelay>k__BackingField: 0
-      <DelayBetweenSpawns>k__BackingField: 2
     _note: 
     <StageTime>k__BackingField: 20
     <TimeToSkipStage>k__BackingField: 15
   - _enemiesWaveConfigs:
     - _enemyGroups:
-      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: dbf8c312d815bdf42a56d598a7d92f57, type: 2}
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 0296ed55e52968c45aee7596b093f233, type: 2}
         <Count>k__BackingField: 10
       _note: 
       <PatternRepeats>k__BackingField: 1
@@ -55,7 +46,7 @@ MonoBehaviour:
       <StartDelay>k__BackingField: 0
       <DelayBetweenSpawns>k__BackingField: 2
     - _enemyGroups:
-      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: dbf8c312d815bdf42a56d598a7d92f57, type: 2}
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 3f7d6970be668914b8bd4799f9a0f282, type: 2}
         <Count>k__BackingField: 10
       _note: 
       <PatternRepeats>k__BackingField: 1
@@ -66,9 +57,9 @@ MonoBehaviour:
     _note: 
     <StageTime>k__BackingField: 20
     <TimeToSkipStage>k__BackingField: 15
-  <PrefabPath>k__BackingField: Prefabs/Levels/Level_wps_2
+  <PrefabPath>k__BackingField: Prefabs/Levels/Level_wps_3
   <GameMode>k__BackingField: 0
-  <StartGold>k__BackingField: 350
+  <StartGold>k__BackingField: 2000
   <StartPlayerHealth>k__BackingField: 20
   <ArrowsUpgradesLevelLimit>k__BackingField: 5
   <MagicUpgradesLevelLimit>k__BackingField: 5

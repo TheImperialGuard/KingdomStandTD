@@ -1,45 +1,34 @@
 {
   "level": "WPS",
   "campaignNumber": null,
-  "prefabPath": "Prefabs/Levels/Level_wps_2",
+  "prefabPath": "Prefabs/Levels/Level_wps_3",
   "gameMode": "Basic",
-  "towerSlotsCount": 11,
-  "startGold": 350,
+  "towerSlotsCount": 12,
+  "startGold": 2000,
   "startPlayerHealth": 20,
   "roads": [
     {
       "pathNumber": "First",
       "name": "Path_1",
-      "waypointsCount": 5,
-      "lengthCenter": 24.0,
-      "lengthLeft": 24.002,
-      "lengthRight": 24.005,
+      "waypointsCount": 7,
+      "lengthCenter": 51.0,
+      "lengthLeft": 51.007,
+      "lengthRight": 51.005,
       "timeToBase": {
-        "Gargoyle": 24.0,
-        "Necromancer": 24.0
+        "Gargoyle": 51.0,
+        "Skeleton": 51.0
       }
     },
     {
       "pathNumber": "Second",
       "name": "Path_2",
-      "waypointsCount": 6,
-      "lengthCenter": 36.0,
-      "lengthLeft": 36.006,
-      "lengthRight": 36.002,
+      "waypointsCount": 7,
+      "lengthCenter": 51.0,
+      "lengthLeft": 51.006,
+      "lengthRight": 51.008,
       "timeToBase": {
-        "Gargoyle": 36.0,
-        "Necromancer": 36.0
-      }
-    },
-    {
-      "pathNumber": "Third",
-      "name": "Path_3",
-      "waypointsCount": 5,
-      "lengthCenter": 26.0,
-      "lengthLeft": 26.71,
-      "lengthRight": 25.297,
-      "timeToBase": {
-        "Ogre": 52.0
+        "Gargoyle": 51.0,
+        "Orc": 51.0
       }
     }
   ],
@@ -53,7 +42,7 @@
           "groups": [
             {
               "enemy": "Gargoyle",
-              "count": 10
+              "count": 5
             }
           ],
           "patternRepeats": 1,
@@ -63,13 +52,13 @@
           "delayBetweenSpawns": 2.0,
           "note": "",
           "analysis": {
-            "enemiesCount": 10,
-            "health": 100.0,
-            "killGold": 100,
-            "breakthroughDamage": 10,
-            "spawnEnd": 18.0,
-            "firstArrival": 24.0,
-            "lastArrival": 42.0
+            "enemiesCount": 5,
+            "health": 50.0,
+            "killGold": 50,
+            "breakthroughDamage": 5,
+            "spawnEnd": 8.0,
+            "firstArrival": 51.0,
+            "lastArrival": 59.0
           }
         },
         {
@@ -91,62 +80,38 @@
             "killGold": 100,
             "breakthroughDamage": 10,
             "spawnEnd": 18.0,
-            "firstArrival": 36.0,
-            "lastArrival": 54.0
-          }
-        },
-        {
-          "groups": [
-            {
-              "enemy": "Ogre",
-              "count": 8
-            }
-          ],
-          "patternRepeats": 1,
-          "pathNumber": "Third",
-          "lane": "Center",
-          "startDelay": 0.0,
-          "delayBetweenSpawns": 2.0,
-          "note": "",
-          "analysis": {
-            "enemiesCount": 8,
-            "health": 800.0,
-            "killGold": 80,
-            "breakthroughDamage": 8,
-            "spawnEnd": 14.0,
-            "firstArrival": 52.0,
-            "lastArrival": 66.0
+            "firstArrival": 51.0,
+            "lastArrival": 69.0
           }
         }
       ],
       "analysis": {
-        "wavesCount": 3,
-        "enemiesCount": 28,
+        "wavesCount": 2,
+        "enemiesCount": 15,
         "enemiesByType": {
-          "Gargoyle": 20,
-          "Ogre": 8
+          "Gargoyle": 15
         },
-        "health": 1000.0,
-        "effectiveHealthPhysic": 1000.0,
-        "effectiveHealthMagic": 1000.0,
-        "healthPerSecond": 50.0,
-        "killGold": 280,
+        "health": 150.0,
+        "effectiveHealthPhysic": 150.0,
+        "effectiveHealthMagic": 150.0,
+        "healthPerSecond": 7.5,
+        "killGold": 150,
         "maxSkipGold": 8,
-        "goldAtStartWithoutSkips": 350,
-        "goldAtStartWithMaxSkips": 350,
-        "breakthroughDamage": 28,
-        "breakthroughThreat": 1.4,
+        "goldAtStartWithoutSkips": 2000,
+        "goldAtStartWithMaxSkips": 2000,
+        "breakthroughDamage": 15,
+        "breakthroughThreat": 0.75,
         "spawnEnd": 18.0,
         "spawnOverflow": 0.0,
-        "lastArrival": 66.0,
-        "peakEnemies": 28,
+        "lastArrival": 69.0,
+        "peakEnemies": 15,
         "traffic": [
           {
             "pathNumber": "First",
             "lane": "Center",
             "wavesCount": 1,
-            "enemiesCount": 10,
-            "health": 100.0
+            "enemiesCount": 5,
+            "health": 50.0
           },
           {
             "pathNumber": "Second",
@@ -154,13 +119,6 @@
             "wavesCount": 1,
             "enemiesCount": 10,
             "health": 100.0
-          },
-          {
-            "pathNumber": "Third",
-            "lane": "Center",
-            "wavesCount": 1,
-            "enemiesCount": 8,
-            "health": 800.0
           }
         ]
       }
@@ -173,7 +131,7 @@
         {
           "groups": [
             {
-              "enemy": "Necromancer",
+              "enemy": "Skeleton",
               "count": 10
             }
           ],
@@ -185,18 +143,18 @@
           "note": "",
           "analysis": {
             "enemiesCount": 10,
-            "health": 1000.0,
-            "killGold": 100,
+            "health": 200.0,
+            "killGold": 50,
             "breakthroughDamage": 10,
             "spawnEnd": 18.0,
-            "firstArrival": 24.0,
-            "lastArrival": 42.0
+            "firstArrival": 51.0,
+            "lastArrival": 69.0
           }
         },
         {
           "groups": [
             {
-              "enemy": "Necromancer",
+              "enemy": "Orc",
               "count": 10
             }
           ],
@@ -212,8 +170,8 @@
             "killGold": 100,
             "breakthroughDamage": 10,
             "spawnEnd": 18.0,
-            "firstArrival": 36.0,
-            "lastArrival": 54.0
+            "firstArrival": 51.0,
+            "lastArrival": 69.0
           }
         }
       ],
@@ -221,29 +179,30 @@
         "wavesCount": 2,
         "enemiesCount": 20,
         "enemiesByType": {
-          "Necromancer": 20
+          "Orc": 10,
+          "Skeleton": 10
         },
-        "health": 2000.0,
-        "effectiveHealthPhysic": 2000.0,
-        "effectiveHealthMagic": 2000.0,
-        "healthPerSecond": 100.0,
-        "killGold": 200,
+        "health": 1200.0,
+        "effectiveHealthPhysic": 1286.957,
+        "effectiveHealthMagic": 1200.0,
+        "healthPerSecond": 60.0,
+        "killGold": 150,
         "maxSkipGold": 0,
-        "goldAtStartWithoutSkips": 630,
-        "goldAtStartWithMaxSkips": 638,
+        "goldAtStartWithoutSkips": 2150,
+        "goldAtStartWithMaxSkips": 2158,
         "breakthroughDamage": 20,
         "breakthroughThreat": 1.0,
         "spawnEnd": 18.0,
         "spawnOverflow": 0.0,
-        "lastArrival": 54.0,
-        "peakEnemies": 40,
+        "lastArrival": 69.0,
+        "peakEnemies": 35,
         "traffic": [
           {
             "pathNumber": "First",
             "lane": "Center",
             "wavesCount": 1,
             "enemiesCount": 10,
-            "health": 1000.0
+            "health": 200.0
           },
           {
             "pathNumber": "Second",
@@ -258,32 +217,32 @@
   ],
   "analysis": {
     "stagesCount": 2,
-    "wavesCount": 5,
-    "enemiesCount": 48,
+    "wavesCount": 4,
+    "enemiesCount": 35,
     "enemiesByType": {
-      "Gargoyle": 20,
-      "Necromancer": 20,
-      "Ogre": 8
+      "Gargoyle": 15,
+      "Orc": 10,
+      "Skeleton": 10
     },
-    "health": 3000.0,
-    "effectiveHealthPhysic": 3000.0,
-    "effectiveHealthMagic": 3000.0,
-    "killGold": 480,
+    "health": 1350.0,
+    "effectiveHealthPhysic": 1436.957,
+    "effectiveHealthMagic": 1350.0,
+    "killGold": 300,
     "maxSkipGold": 8,
-    "totalGoldWithoutSkips": 830,
-    "totalGoldWithMaxSkips": 838,
-    "breakthroughDamage": 48,
-    "breakthroughThreat": 2.4,
+    "totalGoldWithoutSkips": 2300,
+    "totalGoldWithMaxSkips": 2308,
+    "breakthroughDamage": 35,
+    "breakthroughThreat": 1.75,
     "durationWithoutSkips": 40.0,
     "durationWithMaxSkips": 35.0,
-    "peakEnemies": 40,
+    "peakEnemies": 35,
     "traffic": [
       {
         "pathNumber": "First",
         "lane": "Center",
         "wavesCount": 2,
-        "enemiesCount": 20,
-        "health": 1100.0
+        "enemiesCount": 15,
+        "health": 250.0
       },
       {
         "pathNumber": "Second",
@@ -291,13 +250,6 @@
         "wavesCount": 2,
         "enemiesCount": 20,
         "health": 1100.0
-      },
-      {
-        "pathNumber": "Third",
-        "lane": "Center",
-        "wavesCount": 1,
-        "enemiesCount": 8,
-        "health": 800.0
       }
     ]
   },

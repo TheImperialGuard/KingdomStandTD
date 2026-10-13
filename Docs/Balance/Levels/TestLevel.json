@@ -3,110 +3,293 @@
   "campaignNumber": null,
   "prefabPath": "Prefabs/Levels/TestLevel",
   "gameMode": "Basic",
-  "towerSlotsCount": 3,
-  "startGold": 265,
+  "towerSlotsCount": 4,
+  "startGold": 1200,
   "startPlayerHealth": 20,
   "roads": [
     {
       "pathNumber": "First",
       "name": "Path",
       "waypointsCount": 7,
-      "lengthCenter": 11.61,
-      "lengthLeft": 12.324,
-      "lengthRight": 10.912,
+      "lengthCenter": 16.91,
+      "lengthLeft": 17.623,
+      "lengthRight": 16.211,
       "timeToBase": {
-        "Gargoyle": 11.61
+        "Necromancer": 16.91,
+        "Orc": 16.91,
+        "OrcChief": 33.82
       }
     }
   ],
   "stages": [
     {
-      "stageTime": 20.0,
-      "timeToSkipStage": 15.0,
-      "note": "",
+      "stageTime": 40.0,
+      "timeToSkipStage": 5.0,
+      "note": "Тест WarCry и Summon: вожак с орками и два некроманта",
       "waves": [
         {
           "groups": [
             {
-              "enemy": "Gargoyle",
-              "count": 10
+              "enemy": "Necromancer",
+              "count": 1
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 2.5,
+          "delayBetweenSpawns": 1.0,
+          "note": "Тест Summon: некромант по центру, между орками и вожаком",
+          "analysis": {
+            "enemiesCount": 1,
+            "health": 100.0,
+            "killGold": 10,
+            "breakthroughDamage": 1,
+            "spawnEnd": 2.5,
+            "firstArrival": 19.41,
+            "lastArrival": 19.41
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Necromancer",
+              "count": 1
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Left",
+          "startDelay": 10.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "Тест Summon: некромант по левой полосе, за задними орками",
+          "analysis": {
+            "enemiesCount": 1,
+            "health": 100.0,
+            "killGold": 10,
+            "breakthroughDamage": 1,
+            "spawnEnd": 10.0,
+            "firstArrival": 27.623,
+            "lastArrival": 27.623
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 2,
+        "enemiesCount": 2,
+        "enemiesByType": {
+          "Necromancer": 2
+        },
+        "health": 200.0,
+        "effectiveHealthPhysic": 200.0,
+        "effectiveHealthMagic": 200.0,
+        "healthPerSecond": 5.0,
+        "killGold": 20,
+        "maxSkipGold": 30,
+        "goldAtStartWithoutSkips": 1200,
+        "goldAtStartWithMaxSkips": 1200,
+        "breakthroughDamage": 2,
+        "breakthroughThreat": 0.1,
+        "spawnEnd": 10.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 27.623,
+        "peakEnemies": 2,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 1,
+            "health": 100.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Left",
+            "wavesCount": 1,
+            "enemiesCount": 1,
+            "health": 100.0
+          }
+        ]
+      }
+    },
+    {
+      "stageTime": 40.0,
+      "timeToSkipStage": 5.0,
+      "note": "Тест WarCry и Summon: вожак с орками и два некроманта",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "Orc",
+              "count": 3
+            },
+            {
+              "enemy": "OrcChief",
+              "count": 1
             }
           ],
           "patternRepeats": 1,
           "pathNumber": "First",
           "lane": "Center",
           "startDelay": 0.0,
-          "delayBetweenSpawns": 2.0,
+          "delayBetweenSpawns": 1.0,
           "note": "",
           "analysis": {
-            "enemiesCount": 10,
+            "enemiesCount": 4,
+            "health": 400.0,
+            "killGold": 40,
+            "breakthroughDamage": 4,
+            "spawnEnd": 3.0,
+            "firstArrival": 16.91,
+            "lastArrival": 36.82
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Orc",
+              "count": 3
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Left",
+          "startDelay": 7.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 3,
+            "health": 300.0,
+            "killGold": 30,
+            "breakthroughDamage": 3,
+            "spawnEnd": 9.0,
+            "firstArrival": 24.623,
+            "lastArrival": 26.623
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Necromancer",
+              "count": 1
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 2.5,
+          "delayBetweenSpawns": 1.0,
+          "note": "Тест Summon: некромант по центру, между орками и вожаком",
+          "analysis": {
+            "enemiesCount": 1,
             "health": 100.0,
-            "killGold": 100,
-            "breakthroughDamage": 10,
-            "spawnEnd": 18.0,
-            "firstArrival": 11.61,
-            "lastArrival": 29.61
+            "killGold": 10,
+            "breakthroughDamage": 1,
+            "spawnEnd": 2.5,
+            "firstArrival": 19.41,
+            "lastArrival": 19.41
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Necromancer",
+              "count": 1
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Left",
+          "startDelay": 10.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "Тест Summon: некромант по левой полосе, за задними орками",
+          "analysis": {
+            "enemiesCount": 1,
+            "health": 100.0,
+            "killGold": 10,
+            "breakthroughDamage": 1,
+            "spawnEnd": 10.0,
+            "firstArrival": 27.623,
+            "lastArrival": 27.623
           }
         }
       ],
       "analysis": {
-        "wavesCount": 1,
-        "enemiesCount": 10,
+        "wavesCount": 4,
+        "enemiesCount": 9,
         "enemiesByType": {
-          "Gargoyle": 10
+          "Necromancer": 2,
+          "Orc": 6,
+          "OrcChief": 1
         },
-        "health": 100.0,
-        "effectiveHealthPhysic": 100.0,
-        "effectiveHealthMagic": 100.0,
-        "healthPerSecond": 5.0,
-        "killGold": 100,
+        "health": 900.0,
+        "effectiveHealthPhysic": 952.174,
+        "effectiveHealthMagic": 900.0,
+        "healthPerSecond": 22.5,
+        "killGold": 90,
         "maxSkipGold": 0,
-        "goldAtStartWithoutSkips": 265,
-        "goldAtStartWithMaxSkips": 265,
-        "breakthroughDamage": 10,
-        "breakthroughThreat": 0.5,
-        "spawnEnd": 18.0,
+        "goldAtStartWithoutSkips": 1220,
+        "goldAtStartWithMaxSkips": 1250,
+        "breakthroughDamage": 9,
+        "breakthroughThreat": 0.45,
+        "spawnEnd": 10.0,
         "spawnOverflow": 0.0,
-        "lastArrival": 29.61,
-        "peakEnemies": 6,
+        "lastArrival": 36.82,
+        "peakEnemies": 9,
         "traffic": [
           {
             "pathNumber": "First",
             "lane": "Center",
-            "wavesCount": 1,
-            "enemiesCount": 10,
-            "health": 100.0
+            "wavesCount": 2,
+            "enemiesCount": 5,
+            "health": 500.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Left",
+            "wavesCount": 2,
+            "enemiesCount": 4,
+            "health": 400.0
           }
         ]
       }
     }
   ],
   "analysis": {
-    "stagesCount": 1,
-    "wavesCount": 1,
-    "enemiesCount": 10,
+    "stagesCount": 2,
+    "wavesCount": 6,
+    "enemiesCount": 11,
     "enemiesByType": {
-      "Gargoyle": 10
+      "Necromancer": 4,
+      "Orc": 6,
+      "OrcChief": 1
     },
-    "health": 100.0,
-    "effectiveHealthPhysic": 100.0,
-    "effectiveHealthMagic": 100.0,
-    "killGold": 100,
-    "maxSkipGold": 0,
-    "totalGoldWithoutSkips": 365,
-    "totalGoldWithMaxSkips": 365,
-    "breakthroughDamage": 10,
-    "breakthroughThreat": 0.5,
-    "durationWithoutSkips": 20.0,
-    "durationWithMaxSkips": 20.0,
-    "peakEnemies": 6,
+    "health": 1100.0,
+    "effectiveHealthPhysic": 1152.174,
+    "effectiveHealthMagic": 1100.0,
+    "killGold": 110,
+    "maxSkipGold": 30,
+    "totalGoldWithoutSkips": 1310,
+    "totalGoldWithMaxSkips": 1340,
+    "breakthroughDamage": 11,
+    "breakthroughThreat": 0.55,
+    "durationWithoutSkips": 51.0,
+    "durationWithMaxSkips": 16.0,
+    "peakEnemies": 9,
     "traffic": [
       {
         "pathNumber": "First",
         "lane": "Center",
-        "wavesCount": 1,
-        "enemiesCount": 10,
-        "health": 100.0
+        "wavesCount": 3,
+        "enemiesCount": 6,
+        "health": 600.0
+      },
+      {
+        "pathNumber": "First",
+        "lane": "Left",
+        "wavesCount": 3,
+        "enemiesCount": 5,
+        "health": 500.0
       }
     ]
   },

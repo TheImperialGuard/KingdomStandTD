@@ -15,6 +15,6 @@ MonoBehaviour:
   <Duration>k__BackingField: 2.3333335
   <Cooldown>k__BackingField: 8
   <SummonedConfig>k__BackingField: {fileID: 11400000, guid: 6d4e3317875d6a544833a4bed4eb91aa, type: 2}
-  <Count>k__BackingField: 4
+  <Count>k__BackingField: 8
   <RowSpacing>k__BackingField: 0.5
   <ColumnSpacing>k__BackingField: 0.5
