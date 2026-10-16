@@ -578,6 +578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Anticlicker
       objectReference: {fileID: 0}
+    - target: {fileID: 6559056951522792705, guid: 1e9995c3735cc32428b0345ffad28f87, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
