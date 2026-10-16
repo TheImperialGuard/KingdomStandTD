@@ -19,7 +19,7 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Views
             {ViewIDs.UpgradeTowerPopup, "UI/Gameplay/UpgradeTowerPopup" },
             {ViewIDs.TowerAbilitiesPopup, "UI/Gameplay/TowerAbilitiesPopup" },
             {ViewIDs.GameplayScreen, "UI/Gameplay/GameplayScreenView" },
-            {ViewIDs.LevelsMenuPopup, "UI/Meta/MainMenu/LevelsMenuPopup" },
+            {ViewIDs.PlayBoardPopup, "UI/Meta/MainMenu/PlayBoardPopup" },
             {ViewIDs.BottomInfoPopup, "UI/Gameplay/BottomInfoPopup" },
             {ViewIDs.WinPopup, "UI/Gameplay/ResultPopup/WinPopup" },
             {ViewIDs.DefeatPopup, "UI/Gameplay/ResultPopup/DefeatPopup" },

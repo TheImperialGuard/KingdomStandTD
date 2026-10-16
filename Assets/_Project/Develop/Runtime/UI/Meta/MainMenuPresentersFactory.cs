@@ -42,9 +42,9 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
                 _container.Resolve<HotkeysService>());
         }
 
-        public LevelsMenuPopupPresenter CreateLevelsMenuPopupPresenter(LevelsMenuPopupView view)
+        public PlayBoardPopupPresenter CreatePlayBoardPopupPresenter(PlayBoardPopupView view)
         {
-            return new LevelsMenuPopupPresenter(
+            return new PlayBoardPopupPresenter(
                 _container.Resolve<ICoroutinesPerformer>(),
                 _container.Resolve<RayShooterService>(),
                 this,

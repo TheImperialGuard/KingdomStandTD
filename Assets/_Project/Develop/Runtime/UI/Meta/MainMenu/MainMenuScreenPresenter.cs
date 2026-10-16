@@ -103,7 +103,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
             switch (panel)
             {
                 case MainMenuPanels.Play:
-                    return _popupService.OpenLevelsMenuPopup(OnPopupClosed);
+                    return _popupService.OpenPlayBoardPopup(OnPopupClosed);
 
                 case MainMenuPanels.Settings:
                     return _popupService.OpenSettingsPopup(OnPopupClosed);

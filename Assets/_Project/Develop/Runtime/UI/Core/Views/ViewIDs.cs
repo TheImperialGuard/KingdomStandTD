@@ -10,7 +10,7 @@
         public const string UpgradeTowerPopup = nameof(UpgradeTowerPopup);
         public const string TowerAbilitiesPopup = nameof(TowerAbilitiesPopup);
         public const string GameplayScreen = nameof(GameplayScreen);
-        public const string LevelsMenuPopup = nameof(LevelsMenuPopup);
+        public const string PlayBoardPopup = nameof(PlayBoardPopup);
         public const string BottomInfoPopup = nameof(BottomInfoPopup);
         public const string WinPopup = nameof(WinPopup);
         public const string DefeatPopup = nameof(DefeatPopup);

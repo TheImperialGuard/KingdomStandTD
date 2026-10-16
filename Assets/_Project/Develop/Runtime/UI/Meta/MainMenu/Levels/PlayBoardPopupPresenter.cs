@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 {
-    public class LevelsMenuPopupPresenter : PopupPresenterBase
+    public class PlayBoardPopupPresenter : PopupPresenterBase
     {
         public const string TitleName = "Уровни";
 
@@ -20,31 +20,31 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
         private readonly MainMenuPresentersFactory _presentersFactory;
         private readonly ViewsFactory _viewsFactory;
 
-        private readonly LevelsMenuPopupView _menuPopupView;
+        private readonly PlayBoardPopupView _boardView;
 
         private readonly List<LevelTilePresenter> _levelTilePresenters = new();
 
-        public LevelsMenuPopupPresenter(
+        public PlayBoardPopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
             RayShooterService rayShooterService, 
             MainMenuPresentersFactory presentersFactory,
             ViewsFactory viewsFactory,
             LevelsProgressionService levelsProgressionService,
             ConfigsProviderService configProviderService,
-            LevelsMenuPopupView menuPopupView) : base(coroutinesPerformer, rayShooterService)
+            PlayBoardPopupView boardView) : base(coroutinesPerformer, rayShooterService)
         {
             _presentersFactory = presentersFactory;
             _viewsFactory = viewsFactory;
             _levelsProgressionService = levelsProgressionService;
             _configProviderService = configProviderService;
-            _menuPopupView = menuPopupView;
+            _boardView = boardView;
         }
 
         public override void Initialize()
         {
             base.Initialize();
 
-            _menuPopupView.SetTitle(TitleName);
+            _boardView.SetTitle(TitleName);
 
             LevelsListConfig levelsListConfig = _configProviderService.GetConfig<LevelsListConfig>();
 
@@ -65,7 +65,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
             foreach (LevelTilePresenter levelTilePresenter in _levelTilePresenters)
             {
-                _menuPopupView.LevelTitlesListView.RemoveElement(levelTilePresenter.View);
+                _boardView.LevelTilesListView.RemoveElement(levelTilePresenter.View);
                 _viewsFactory.Release(levelTilePresenter.View);
                 levelTilePresenter.Dispose();
             }
@@ -73,7 +73,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             _levelTilePresenters.Clear();
         }
 
-        protected override PopupViewBase PopupView => _menuPopupView;
+        protected override PopupViewBase PopupView => _boardView;
 
         protected override void OnPreShow()
         {
@@ -95,7 +95,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
         {
             LevelTileView levelTileView = _viewsFactory.Create<LevelTileView>(ViewIDs.LevelTile);
 
-            _menuPopupView.LevelTitlesListView.AddElement(levelTileView);
+            _boardView.LevelTilesListView.AddElement(levelTileView);
 
             LevelTilePresenter levelTilePresenter = _presentersFactory.CreateLevelTilePresenter(levelTileView, levelNumber);
 

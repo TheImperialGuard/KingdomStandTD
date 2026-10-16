@@ -24,11 +24,11 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
 
         protected override Transform PopupLayer => _uiRoot.PopupsLayer;
 
-        public LevelsMenuPopupPresenter OpenLevelsMenuPopup(Action closedCallback = null)
+        public PlayBoardPopupPresenter OpenPlayBoardPopup(Action closedCallback = null)
         {
-            LevelsMenuPopupView view = ViewsFactory.Create<LevelsMenuPopupView>(ViewIDs.LevelsMenuPopup, PopupLayer);
+            PlayBoardPopupView view = ViewsFactory.Create<PlayBoardPopupView>(ViewIDs.PlayBoardPopup, PopupLayer);
 
-            LevelsMenuPopupPresenter popup = _presentersFactory.CreateLevelsMenuPopupPresenter(view);
+            PlayBoardPopupPresenter popup = _presentersFactory.CreatePlayBoardPopupPresenter(view);
 
             OnPopupCreated(popup, view, closedCallback);
 

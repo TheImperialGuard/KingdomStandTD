@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 {
-    public class LevelsMenuPopupView : PopupViewBase
+    public class PlayBoardPopupView : PopupViewBase
     {
         [SerializeField] private TMP_Text _title;
-        [SerializeField] private LevelTitlesListView _levelTitlesListView;
+        [SerializeField] private LevelTilesListView _levelTilesListView;
 
-        public LevelTitlesListView LevelTitlesListView => _levelTitlesListView;
+        public LevelTilesListView LevelTilesListView => _levelTilesListView;
 
         public void SetTitle(string title) => _title.text = title;
 
@@ -19,7 +19,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
         {
             base.ModifyShowAnimation(animation);
 
-            foreach (LevelTileView levelTileView in _levelTitlesListView.Elements)
+            foreach (LevelTileView levelTileView in _levelTilesListView.Elements)
             {
                 animation.Append(levelTileView.Show());
                 animation.AppendInterval(0.1f);

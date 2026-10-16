@@ -2,7 +2,7 @@
 
 namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 {
-    public class LevelTitlesListView : ElementsListView<LevelTileView>
+    public class LevelTilesListView : ElementsListView<LevelTileView>
     {
     }
 }
