@@ -7,6 +7,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.RoutesPreview;
 using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 using Unity.Profiling;
@@ -26,7 +27,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private MusicSwitcherService _musicSwitcherService;
         private CameraMover _cameraMover;
         private RoutesPreviewService _routesPreviewService;
+        private HotkeysService _hotkeysService;
 
+        private static readonly ProfilerMarker _markerHotkeysService = new("KS.HotkeysService");
         private static readonly ProfilerMarker _markerCameraMover = new("KS.CameraMover");
         private static readonly ProfilerMarker _markerGameplayCycle = new("KS.GameplayCycle");
         private static readonly ProfilerMarker _markerRoutesPreviewService = new("KS.RoutesPreviewService");
@@ -59,6 +62,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _musicSwitcherService = _container.Resolve<MusicSwitcherService>();
             _cameraMover = _container.Resolve<CameraMover>();
             _routesPreviewService = _container.Resolve<RoutesPreviewService>();
+            _hotkeysService = _container.Resolve<HotkeysService>();
 
             _gameplayCycle.Prepare();
 
@@ -76,6 +80,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private void Update()
         {
+            using (_markerHotkeysService.Auto())
+                _hotkeysService?.Update();
+
             using (_markerCameraMover.Auto())
                 _cameraMover?.Update();
 
