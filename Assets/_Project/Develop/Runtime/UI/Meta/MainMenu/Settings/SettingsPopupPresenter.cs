@@ -5,7 +5,7 @@ using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 
 namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Settings
 {
-    public class SettingsPopupPresenter : PopupPresenterBase
+    public class SettingsPopupPresenter : PopupPresenterBase, IMainMenuPanel
     {
         private readonly SettingsPopupView _popupView;
         private readonly MainMenuPresentersFactory _presentersFactory;
@@ -38,6 +38,9 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Settings
 
             _audioSettingsPresenter.Dispose();
         }
+
+        public void ApplyLayout(MainMenuLayout layout)
+            => _popupView.SetLayout(layout.PanelWidth, layout.PanelTop, layout.PanelRightMargin);
 
         protected override void OnPreShow()
         {

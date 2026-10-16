@@ -1,10 +1,10 @@
-﻿using Assets._Project.Develop.Runtime.UI.Core.Popups;
-using Assets._Project.Develop.Runtime.UI.Settings;
+﻿using Assets._Project.Develop.Runtime.UI.Settings;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Settings
 {
-    public class SettingsPopupView : PopupViewBase
+    // Окно «Настройки» — доска на цепях рядом с левым меню (Р-63, spec-settings.md).
+    public class SettingsPopupView : ChainBoardPopupView
     {
         [SerializeField] private AudioSettingsView _audioSettingsView;
 
