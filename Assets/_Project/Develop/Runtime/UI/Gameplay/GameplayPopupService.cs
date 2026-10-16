@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.PauseFeature;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup;
@@ -20,21 +21,28 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
     {
         private readonly GameplayUIRoot _uIRoot;
         private readonly GameplayPresentersFactory _gameplayPresentersFactory;
+        private readonly TimeScalePauseService _timeScalePauseService;
 
         public GameplayPopupService(
             ViewsFactory viewsFactory,
             ProjectPresentersFactory projectPresentersFactory,
             GameplayUIRoot uIRoot,
-            GameplayPresentersFactory gameplayPresentersFactory)
+            GameplayPresentersFactory gameplayPresentersFactory,
+            TimeScalePauseService timeScalePauseService)
             : base(viewsFactory, projectPresentersFactory)
         {
             _uIRoot = uIRoot;
             _gameplayPresentersFactory = gameplayPresentersFactory;
+            _timeScalePauseService = timeScalePauseService;
         }
 
         protected override Transform PopupLayer => _uIRoot.PopupsLayer;
 
         protected override EncyclopediaModes EncyclopediaMode => EncyclopediaModes.Standalone;
+
+        protected override void OnEncyclopediaOpened() => _timeScalePauseService.Pause();
+
+        protected override void OnEncyclopediaClosed() => _timeScalePauseService.Unpause();
 
         public StartStagesPopupPresenter OpenStartStagesPopup(Action closedCallback = null)
         {

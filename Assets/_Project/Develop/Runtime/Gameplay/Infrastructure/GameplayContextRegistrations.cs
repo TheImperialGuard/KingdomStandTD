@@ -297,7 +297,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<ViewsFactory>(),
                 c.Resolve<ProjectPresentersFactory>(),
                 c.Resolve<GameplayUIRoot>(),
-                c.Resolve<GameplayPresentersFactory>());
+                c.Resolve<GameplayPresentersFactory>(),
+                c.Resolve<TimeScalePauseService>());
         }
 
         private static PlayerHealth CreatePlayerHealth(DIContainer c)

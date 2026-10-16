@@ -43,9 +43,20 @@ namespace Assets._Project.Develop.Runtime.UI.ProjectContext
             EncyclopediaPopupPresenter popup = ProjectPresentersFactory
                 .CreateEncyclopediaPopupPresenter(view, EncyclopediaMode, startRecord);
 
-            OnPopupCreated(popup, view, closedCallback);
+            OnEncyclopediaOpened();
+
+            OnPopupCreated(popup, view, () =>
+            {
+                OnEncyclopediaClosed();
+                closedCallback?.Invoke();
+            });
 
             return popup;
         }
+
+        // Что делает сцена, пока книга открыта: в бою — пауза.
+        protected virtual void OnEncyclopediaOpened() { }
+
+        protected virtual void OnEncyclopediaClosed() { }
     }
 }
