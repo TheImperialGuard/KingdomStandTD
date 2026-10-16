@@ -1,6 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
-using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
@@ -10,27 +9,32 @@ using Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup;
+using Assets._Project.Develop.Runtime.UI.ProjectContext;
+using Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia;
 using System;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay
 {
-    public class GameplayPopupService : PopupService
+    public class GameplayPopupService : ProjectPopupService
     {
         private readonly GameplayUIRoot _uIRoot;
         private readonly GameplayPresentersFactory _gameplayPresentersFactory;
 
         public GameplayPopupService(
             ViewsFactory viewsFactory,
+            ProjectPresentersFactory projectPresentersFactory,
             GameplayUIRoot uIRoot,
             GameplayPresentersFactory gameplayPresentersFactory)
-            : base(viewsFactory)
+            : base(viewsFactory, projectPresentersFactory)
         {
             _uIRoot = uIRoot;
             _gameplayPresentersFactory = gameplayPresentersFactory;
         }
 
         protected override Transform PopupLayer => _uIRoot.PopupsLayer;
+
+        protected override EncyclopediaModes EncyclopediaMode => EncyclopediaModes.Standalone;
 
         public StartStagesPopupPresenter OpenStartStagesPopup(Action closedCallback = null)
         {

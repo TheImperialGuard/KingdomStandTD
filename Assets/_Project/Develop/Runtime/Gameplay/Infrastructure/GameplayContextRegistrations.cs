@@ -27,6 +27,7 @@ using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Gameplay;
+using Assets._Project.Develop.Runtime.UI.ProjectContext;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
@@ -294,6 +295,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         {
             return new(
                 c.Resolve<ViewsFactory>(),
+                c.Resolve<ProjectPresentersFactory>(),
                 c.Resolve<GameplayUIRoot>(),
                 c.Resolve<GameplayPresentersFactory>());
         }

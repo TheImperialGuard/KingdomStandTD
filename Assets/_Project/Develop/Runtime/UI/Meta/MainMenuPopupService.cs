@@ -1,28 +1,32 @@
 ﻿using System;
-using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Settings;
+using Assets._Project.Develop.Runtime.UI.ProjectContext;
+using Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.UI.Meta
 {
-    public class MainMenuPopupService : PopupService
+    public class MainMenuPopupService : ProjectPopupService
     {
         private readonly MainMenuUIRoot _uiRoot;
         private readonly MainMenuPresentersFactory _presentersFactory;
 
         public MainMenuPopupService(
             ViewsFactory viewsFactory,
+            ProjectPresentersFactory projectPresentersFactory,
             MainMenuUIRoot uiRoot,
             MainMenuPresentersFactory mainMenuPresentersFactory)
-            : base(viewsFactory)
+            : base(viewsFactory, projectPresentersFactory)
         {
             _uiRoot = uiRoot;
             _presentersFactory = mainMenuPresentersFactory;
         }
 
         protected override Transform PopupLayer => _uiRoot.PopupsLayer;
+
+        protected override EncyclopediaModes EncyclopediaMode => EncyclopediaModes.Menu;
 
         public PlayBoardPopupPresenter OpenPlayBoardPopup(PlayBoardSteps startStep, Action closedCallback = null)
         {

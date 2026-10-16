@@ -8,6 +8,8 @@ using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.Meta.Features.Settings;
 using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
+using Assets._Project.Develop.Runtime.UI.ProjectContext;
+using Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia;
 using Assets._Project.Develop.Runtime.Utilities.Adverts;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
@@ -70,6 +72,10 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateHotkeysService);
 
             container.RegisterAsSingle(CreateAdvertsService);
+
+            container.RegisterAsSingle(CreateProjectPresentersFactory);
+
+            container.RegisterAsSingle(CreateEncyclopediaSectionMemory);
         }
 
         private static ResourcesAssetsLoader CreateResourcesAssetsLoader(DIContainer c) => new();
@@ -104,6 +110,10 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
         {
             return new HotkeysService(c.Resolve<IInputService>());
         }
+
+        private static ProjectPresentersFactory CreateProjectPresentersFactory(DIContainer c) => new(c);
+
+        private static EncyclopediaSectionMemory CreateEncyclopediaSectionMemory(DIContainer c) => new();
 
         private static ViewsFactory CreateViewsFactory(DIContainer c)
         {

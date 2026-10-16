@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Meta;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu;
+using Assets._Project.Develop.Runtime.UI.ProjectContext;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using UnityEngine;
 
@@ -33,6 +34,7 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
         {
             return new MainMenuPopupService(
                 c.Resolve<ViewsFactory>(),
+                c.Resolve<ProjectPresentersFactory>(),
                 c.Resolve<MainMenuUIRoot>(),
                 c.Resolve<MainMenuPresentersFactory>());
         }
