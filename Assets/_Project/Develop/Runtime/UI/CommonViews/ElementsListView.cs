@@ -14,7 +14,7 @@ namespace Assets._Project.Develop.Runtime.UI.CommonViews
 
         public void AddElement(TElement element)
         {
-            element.transform.SetParent(_parent);
+            element.transform.SetParent(_parent, false);
             _elements.Add(element);
         }
 
