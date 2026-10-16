@@ -9,6 +9,8 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Hotkeys
     {
         private readonly IInputService _inputService;
         private readonly ReactiveEvent _closeRequested = new();
+        private readonly ReactiveEvent _previousRequested = new();
+        private readonly ReactiveEvent _nextRequested = new();
 
         public HotkeysService(IInputService inputService)
         {
@@ -17,10 +19,20 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Hotkeys
 
         public IReadOnlyEvent CloseRequested => _closeRequested;
 
+        public IReadOnlyEvent PreviousRequested => _previousRequested;
+
+        public IReadOnlyEvent NextRequested => _nextRequested;
+
         public void Update()
         {
             if (_inputService.CloseRequested)
                 _closeRequested.Invoke();
+
+            if (_inputService.PreviousRequested)
+                _previousRequested.Invoke();
+
+            if (_inputService.NextRequested)
+                _nextRequested.Invoke();
         }
     }
 }

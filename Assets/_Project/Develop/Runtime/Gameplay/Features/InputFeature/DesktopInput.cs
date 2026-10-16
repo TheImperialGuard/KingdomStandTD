@@ -8,6 +8,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
     {
         private const KeyCode RAY_SHOOTER_KEY_CODE = KeyCode.Mouse0;
         private const KeyCode CloseKeyCode = KeyCode.Escape;
+        private const KeyCode PreviousKeyCode = KeyCode.LeftArrow;
+        private const KeyCode NextKeyCode = KeyCode.RightArrow;
 
         private readonly CameraConfig _cameraConfig;
 
@@ -24,6 +26,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
         public Ray CameraRay => Camera.main.ScreenPointToRay(Input.mousePosition);
 
         public bool CloseRequested => Input.GetKeyDown(CloseKeyCode);
+
+        public bool PreviousRequested => Input.GetKeyDown(PreviousKeyCode);
+
+        public bool NextRequested => Input.GetKeyDown(NextKeyCode);
 
         public Vector3 CameraDelta
         {

@@ -21,5 +21,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
         /// а панель должна закрываться и тогда.
         /// </summary>
         bool CloseRequested { get; }
+
+        /// <summary>
+        /// Просьбы листать назад и вперёд — например, развороты книги. Как и CloseRequested, не зависят от IsEnabled.
+        /// </summary>
+        bool PreviousRequested { get; }
+
+        bool NextRequested { get; }
     }
 }

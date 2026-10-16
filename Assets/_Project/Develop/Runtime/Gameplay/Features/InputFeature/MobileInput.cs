@@ -47,6 +47,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
         // Клавиши Esc на телефоне в браузере нет.
         public bool CloseRequested => false;
 
+        // Стрелок тоже нет: книгу листают её кнопками.
+        public bool PreviousRequested => false;
+
+        public bool NextRequested => false;
+
         public Ray CameraRay
         {
             get
