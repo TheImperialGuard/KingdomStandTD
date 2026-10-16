@@ -4,16 +4,19 @@ using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia
 {
     // Книга энциклопедии (spec-encyclopedia.md): разворот с закладками разделов, номерами страниц и стрелками, обложка
-    // переворачивается при появлении. Место и масштаб задаёт вызывающий: в меню — расчёт раскладки меню (Р-66).
-    // Числа анимаций — в секундах и px макета.
+    // переворачивается при появлении. Место и масштаб задаёт вызывающий: в меню — расчёт раскладки меню, отдельно —
+    // сама книга по центру safe area над затемнением (Р-66). Числа анимаций — в секундах и px макета.
     public class EncyclopediaPopupView : PopupViewBase
     {
         private const float MockupToReference = 1.5f;
         private const float RiseOffset = 24f;
+        private const float StandaloneMargin = 16f;
+        private const float MaxScale = 1f;
         private const float FadeInDuration = 0.25f;
         private const float CoverFlipStart = 0.6f;
         private const float CoverFlipDuration = 0.3f;
@@ -21,10 +24,15 @@ namespace Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia
         private const float UnfoldDuration = 0.3f;
         private const float HideDuration = 0.2f;
 
+        private static readonly Vector2 Center = new(0.5f, 0.5f);
+
         public event Action<EncyclopediaSections> SectionClicked;
         public event Action PreviousClicked;
         public event Action NextClicked;
 
+        [SerializeField] private RectTransform _safeArea;
+        [SerializeField] private Image _shade;
+        [SerializeField] private CanvasGroup _closeHint;
         [SerializeField] private RectTransform _fit;
         [SerializeField] private RectTransform _book;
         [SerializeField] private CanvasGroup _bookGroup;
@@ -42,6 +50,9 @@ namespace Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia
         [SerializeField] private EncyclopediaNotePageView _notePage;
 
         [SerializeField] private List<EncyclopediaSectionStyle> _sectionStyles;
+
+        private bool _isStandalone;
+        private float _shadeAlpha;
 
         public EncyclopediaLeftPageView LeftPage => _leftPage;
 
@@ -67,11 +78,35 @@ namespace Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia
             _nextArrow.Clicked -= OnNextArrowClicked;
         }
 
+        // Корень растянут на слой попапов и меняет размер вместе с экраном, поэтому своего Update не нужно.
+        private void OnRectTransformDimensionsChange()
+        {
+            if (_isStandalone)
+                FitIntoSafeArea();
+        }
+
         // Книга с закладками прижата правым краем к полю и масштабируется от него.
         public void SetLayout(float scale, float rightMargin)
         {
             _fit.localScale = new Vector3(scale, scale, 1f);
             _fit.anchoredPosition = new Vector2(-rightMargin, _fit.anchoredPosition.y);
+        }
+
+        // Отдельно от меню: затемнение на весь экран и подсказка о закрытии под книгой, книга по центру safe area вписана в
+        // неё, но не крупнее префаба. Щелчок по затемнению зовёт OnCloseButtonClicked через EventTrigger префаба Anticlicker.
+        public void SetStandaloneLayout()
+        {
+            _isStandalone = true;
+            _shadeAlpha = _shade.color.a;
+            _shade.gameObject.SetActive(true);
+            _closeHint.gameObject.SetActive(true);
+
+            _fit.anchorMin = Center;
+            _fit.anchorMax = Center;
+            _fit.pivot = Center;
+            _fit.anchoredPosition = Vector2.zero;
+
+            FitIntoSafeArea();
         }
 
         public void SetSection(EncyclopediaSections section)
@@ -120,6 +155,13 @@ namespace Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia
                 .Insert(0f, _book.DOAnchorPosY(0f, FadeInDuration).SetEase(Ease.OutQuad))
                 .Insert(CoverFlipStart, _cover.DOScaleX(0f, CoverFlipDuration).SetEase(Ease.InQuad))
                 .Insert(UnfoldStart, _leftHalf.DOScaleX(1f, UnfoldDuration).SetEase(Ease.OutQuad));
+
+            if (_isStandalone)
+            {
+                animation
+                    .Insert(0f, _shade.DOFade(_shadeAlpha, FadeInDuration).From(0f).SetEase(Ease.OutQuad))
+                    .Insert(0f, _closeHint.DOFade(1f, FadeInDuration).From(0f).SetEase(Ease.OutQuad));
+            }
         }
 
         // Общее скрытие попапов мгновенное: книга сама гаснет и опускается (Р-24).
@@ -132,6 +174,27 @@ namespace Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia
             animation
                 .Insert(0f, _bookGroup.DOFade(0f, HideDuration).SetEase(Ease.InQuad))
                 .Insert(0f, _book.DOAnchorPosY(-riseOffset, HideDuration).SetEase(Ease.InQuad));
+
+            if (_isStandalone)
+            {
+                animation
+                    .Insert(0f, _shade.DOFade(0f, HideDuration).SetEase(Ease.InQuad))
+                    .Insert(0f, _closeHint.DOFade(0f, HideDuration).SetEase(Ease.InQuad));
+            }
+        }
+
+        // Подсказка висит под книгой, поэтому её место оставляется и сверху: книга остаётся по центру.
+        private void FitIntoSafeArea()
+        {
+            float margin = StandaloneMargin * MockupToReference * 2f;
+            Vector2 available = _safeArea.rect.size - new Vector2(margin, margin);
+
+            RectTransform closeHint = (RectTransform)_closeHint.transform;
+            float closeHintSpace = closeHint.rect.height - closeHint.anchoredPosition.y;
+            Vector2 bookSize = _fit.rect.size + new Vector2(0f, closeHintSpace * 2f);
+
+            float scale = Mathf.Min(MaxScale, available.x / bookSize.x, available.y / bookSize.y);
+            _fit.localScale = new Vector3(scale, scale, 1f);
         }
 
         private EncyclopediaSectionStyle GetStyle(EncyclopediaSections section)

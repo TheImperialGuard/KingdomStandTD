@@ -18,7 +18,7 @@ namespace Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia
 {
     // Энциклопедия: по записи на разворот, закладки меняют раздел и возвращают на первый разворот, стрелки и клавиши ← →
     // листают. Без записи для открытия книга открывается на последнем разделе (Р-22), открытие по записи тоже запоминает
-    // её раздел (Р-69). Esc книга слушает только сама по себе — в меню его ловит меню (Р-66).
+    // её раздел (Р-69). Esc и щелчок по затемнению закрывают книгу только отдельно от меню — в меню Esc ловит меню (Р-66).
     public class EncyclopediaPopupPresenter : PopupPresenterBase
     {
         private const int PagesPerSpread = 2;
@@ -80,7 +80,10 @@ namespace Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia
             _hotkeysDisposables.Add(_hotkeysService.NextRequested.Subscribe(OnNextClicked));
 
             if (_mode == EncyclopediaModes.Standalone)
+            {
                 _hotkeysDisposables.Add(_hotkeysService.CloseRequested.Subscribe(OnCloseRequested));
+                _view.SetStandaloneLayout();
+            }
 
             EncyclopediaPage startPage = GetStartPage();
             _sectionMemory.Remember(startPage.Section);
