@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e53c9ebabd53b4aa129b7ea78ec9d7, type: 3}
+  m_Name: EncyclopediaConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Encyclopedia.EncyclopediaConfig
+  _notes:
+  - {fileID: 11400000, guid: dc2ec0841ab1e514da8e7c9430e9f8b4, type: 2}
+  - {fileID: 11400000, guid: af811f35fd896c24cbc80b77b9523e58, type: 2}
+  - {fileID: 11400000, guid: faf3a3052562633449122ee1e571c103, type: 2}
+  - {fileID: 11400000, guid: 907d1cd5a702ca243968f0c43ce732cc, type: 2}
+  _towerTrees:
+  - {fileID: 11400000, guid: 41a98988f7f4ee449ab13149fbb65913, type: 2}
+  - {fileID: 11400000, guid: 1ad71d2f1c51469419d7f359f781fa1b, type: 2}
+  - {fileID: 11400000, guid: 490ef39f13e18d340b4828a366646fd2, type: 2}
+  _enemies:
+  - {fileID: 11400000, guid: 0296ed55e52968c45aee7596b093f233, type: 2}
+  - {fileID: 11400000, guid: 6f94001136c27cc41ba6a970be1de655, type: 2}
+  - {fileID: 11400000, guid: 8989fa9734e9862409d4b8d1e3ce7b24, type: 2}
+  - {fileID: 11400000, guid: 09cfb609dec7973468ddc2a581be7701, type: 2}
+  - {fileID: 11400000, guid: dbf8c312d815bdf42a56d598a7d92f57, type: 2}
+  - {fileID: 11400000, guid: 2f4acf86a91d5b64bb2648c2d7661d9c, type: 2}
+  - {fileID: 11400000, guid: 49916772b3e7e2d4e95b24d969453278, type: 2}
+  - {fileID: 11400000, guid: 3f7d6970be668914b8bd4799f9a0f282, type: 2}
+  - {fileID: 11400000, guid: 7b986777ae748f949a65c5063ce560f8, type: 2}
+  - {fileID: 11400000, guid: ff63194087fd89e429af04e8d66cd63f, type: 2}
+  - {fileID: 11400000, guid: 17626c9dc0622e249b983315d20a89de, type: 2}
+  - {fileID: 11400000, guid: 35814527bab6fa34d9b98a37d479cec2, type: 2}
+  _stats:
+  - <Stat>k__BackingField: 0
+    <Icon>k__BackingField: {fileID: 21300000, guid: 534ce08618efb2540820806039b495f4, type: 3}
+    <Caption>k__BackingField: "\u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435"
+  - <Stat>k__BackingField: 1
+    <Icon>k__BackingField: {fileID: 21300000, guid: d7522315ca6ea354293bbbe447698945, type: 3}
+    <Caption>k__BackingField: "\u0444\u0438\u0437. \u0437\u0430\u0449\u0438\u0442\u0430"
+  - <Stat>k__BackingField: 2
+    <Icon>k__BackingField: {fileID: 21300000, guid: 3cf4e69a735d2cc4ea1774037ec74d77, type: 3}
+    <Caption>k__BackingField: "\u043C\u0430\u0433. \u0437\u0430\u0449\u0438\u0442\u0430"
+  - <Stat>k__BackingField: 3
+    <Icon>k__BackingField: {fileID: 21300000, guid: ef26d0b5ab1b26b4494e6ff11e523364, type: 3}
+    <Caption>k__BackingField: "\u0437\u043E\u043B\u043E\u0442\u043E"
+  - <Stat>k__BackingField: 4
+    <Icon>k__BackingField: {fileID: 21300000, guid: effea4de02da01e4181222845b5ecd84, type: 3}
+    <Caption>k__BackingField: "\u0443\u0440\u043E\u043D \u0437\u0430\u043C\u043A\u0443"
+  - <Stat>k__BackingField: 5
+    <Icon>k__BackingField: {fileID: 21300000, guid: b51ef8db5a247f54c8bd1e3d00b0453b, type: 3}
+    <Caption>k__BackingField: "\u0444\u0438\u0437. \u0443\u0440\u043E\u043D"
+  - <Stat>k__BackingField: 6
+    <Icon>k__BackingField: {fileID: 21300000, guid: dd64b95d82758aa44a1195e3f3547786, type: 3}
+    <Caption>k__BackingField: "\u043C\u0430\u0433. \u0443\u0440\u043E\u043D"
+  - <Stat>k__BackingField: 7
+    <Icon>k__BackingField: {fileID: 21300000, guid: 069d375a62905fa41a8263fb635ed70b, type: 3}
+    <Caption>k__BackingField: "\u0430\u0442\u0430\u043A \u0432 \u0441\u0435\u043A."
+  - <Stat>k__BackingField: 8
+    <Icon>k__BackingField: {fileID: 21300000, guid: 6134afa13713b9c498d04656ffc873d1, type: 3}
+    <Caption>k__BackingField: "\u0434\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u044C"
+  <BossTrait>k__BackingField:
+    <Icon>k__BackingField: {fileID: 21300000, guid: d7424e49da080a349b970ac1dcc0ee51, type: 3}
+    <Name>k__BackingField: "\u0411\u043E\u0441\u0441"
+    <Description>k__BackingField: "\u041E\u0434\u0438\u043D \u0443\u0434\u0430\u0440
+      \u0441\u043D\u0438\u043C\u0430\u0435\u0442 \u043D\u0435 \u0431\u043E\u043B\u044C\u0448\u0435
+      \u0442\u0440\u0435\u0442\u0438 \u0435\u0433\u043E \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F."
+  <FlyingTrait>k__BackingField:
+    <Icon>k__BackingField: {fileID: 21300000, guid: 5336f96ada43f024d8f893d71de0a6d4, type: 3}
+    <Name>k__BackingField: "\u041B\u0435\u0442\u0430\u044E\u0449\u0438\u0439"
+    <Description>k__BackingField: "\u041F\u0443\u0448\u043A\u0438 \u043F\u043E \u043D\u0435\u043C\u0443
+      \u043D\u0435 \u0441\u0442\u0440\u0435\u043B\u044F\u044E\u0442."

@@ -1,4 +1,5 @@
 ﻿using Assets._Project.Develop.Runtime.Configs;
+using Assets._Project.Develop.Runtime.Configs.Encyclopedia;
 using Assets._Project.Develop.Runtime.Configs.Gameplay;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Projectiles;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
@@ -26,6 +27,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.ConfigsManagment
             {typeof(MusicConfig), "Configs/MusicConfig" },
             {typeof(CameraConfig), "Configs/Gameplay/CameraConfig" },
             {typeof(RoutesPreviewConfig), "Configs/Gameplay/RoutesPreviewConfig" },
+            {typeof(EncyclopediaConfig), "Configs/Encyclopedia/EncyclopediaConfig" },
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

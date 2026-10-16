@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8b9902ab1297a4cbe7be84e7539bc9, type: 3}
   m_Name: SummonAbilityConfig
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities.Enemies.SummonAbilityConfig
+  <Name>k__BackingField: "\u041F\u0440\u0438\u0437\u044B\u0432"
+  <Description>k__BackingField: "\u041F\u043E\u0434\u043D\u0438\u043C\u0430\u0435\u0442
+    \u0432\u043E\u043A\u0440\u0443\u0433 \u0441\u0435\u0431\u044F \u043E\u0442\u0440\u044F\u0434
+    \u0441\u043A\u0435\u043B\u0435\u0442\u043E\u0432, \u0438 \u043E\u043D\u0438 \u0438\u0434\u0443\u0442
+    \u043F\u043E \u0435\u0433\u043E \u043C\u0430\u0440\u0448\u0440\u0443\u0442\u0443."
+  <Icon>k__BackingField: {fileID: 21300000, guid: 4e0e3ca978c3e074096d24ad5bcb045c, type: 3}
   <Duration>k__BackingField: 2.3333335
   <Cooldown>k__BackingField: 8
   <SummonedConfig>k__BackingField: {fileID: 11400000, guid: 6d4e3317875d6a544833a4bed4eb91aa, type: 2}
