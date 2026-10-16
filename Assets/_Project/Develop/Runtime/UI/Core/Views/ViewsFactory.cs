@@ -25,6 +25,10 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Views
             {ViewIDs.DefeatPopup, "UI/Gameplay/ResultPopup/DefeatPopup" },
             {ViewIDs.PausePopup, "UI/Gameplay/PausePopup" },
             {ViewIDs.SettingsPopup, "UI/Meta/MainMenu/SettingsPopup" },
+            {ViewIDs.EncyclopediaPopup, "UI/ProjectContext/Encyclopedia/EncyclopediaPopup" },
+            {ViewIDs.EncyclopediaTrait, "UI/ProjectContext/Encyclopedia/EncyclopediaTraitView" },
+            {ViewIDs.EncyclopediaStatTile, "UI/ProjectContext/Encyclopedia/EncyclopediaStatTileView" },
+            {ViewIDs.EncyclopediaAbility, "UI/ProjectContext/Encyclopedia/EncyclopediaAbilityView" },
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)

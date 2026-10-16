@@ -3,6 +3,7 @@ using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Presenters;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
+using Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
@@ -70,7 +71,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
             ToggleTarget(MainMenuPanels.Play);
         }
 
-        private void OnEncyclopediaClicked() => Debug.Log("Энциклопедия ещё не подключена к меню");
+        private void OnEncyclopediaClicked() => ToggleTarget(MainMenuPanels.Encyclopedia);
 
         private void OnSettingsClicked() => ToggleTarget(MainMenuPanels.Settings);
 
@@ -119,6 +120,9 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
                 case MainMenuPanels.Settings:
                     return _popupService.OpenSettingsPopup(OnPopupClosed);
 
+                case MainMenuPanels.Encyclopedia:
+                    return _popupService.OpenEncyclopediaPopup(OnPopupClosed);
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(panel), panel, null);
             }
@@ -150,6 +154,10 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
 
             if (_openedPopup is IMainMenuPanel panel)
                 panel.ApplyLayout(layout);
+
+            // Книга общая для сцен и про меню не знает: масштаб и поле ей передаются её методом (Р-66).
+            if (_openedPopup is EncyclopediaPopupPresenter encyclopedia)
+                encyclopedia.SetMenuLayout(layout.PanelScale, layout.PanelRightMargin);
         }
 
         private void Quit()

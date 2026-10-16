@@ -23,13 +23,22 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
         private const float SettingsPanelWidth = 480f;
         private const float SettingsLeftGapShare = 0.55f;
         private const float RoundHalfUp = 0.5f;
+        private const float BookWidth = 792f;
+        private const float BookHeight = 544f;
+        private const float MinBookTop = 24f;
 
-        private MainMenuLayout(bool isMenuCollapsed, float panelWidth, float panelTop, float panelRightMargin)
+        private MainMenuLayout(
+            bool isMenuCollapsed,
+            float panelWidth,
+            float panelTop,
+            float panelRightMargin,
+            float panelScale = 1f)
         {
             IsMenuCollapsed = isMenuCollapsed;
             PanelWidth = panelWidth;
             PanelTop = panelTop;
             PanelRightMargin = panelRightMargin;
+            PanelScale = panelScale;
         }
 
         public bool IsMenuCollapsed { get; }
@@ -42,6 +51,9 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
         // Правый край панели — на этом расстоянии от правого края safe area.
         public float PanelRightMargin { get; }
 
+        // Масштаб панели, которая не тянется, а уменьшается целиком, — книги.
+        public float PanelScale { get; }
+
         // Высота экрана в макете — полная, без safe area: на телефоне эталон ниже, и доска поднимается.
         public static MainMenuLayout Calculate(Vector2 areaSize, float screenHeight, MainMenuPanels openedPanel)
         {
@@ -50,6 +62,9 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
 
             if (openedPanel == MainMenuPanels.Settings)
                 return CalculateSettings(areaWidth, panelTop);
+
+            if (openedPanel == MainMenuPanels.Encyclopedia)
+                return CalculateBook(areaWidth, areaSize.y / MockupToReference, panelTop);
 
             bool isMenuCollapsed = openedPanel != MainMenuPanels.None
                 && GetPanelRoom(areaWidth, ExpandedMenuWidth) < MinPanelRoom;
@@ -81,6 +96,27 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
                 SettingsPanelWidth * MockupToReference,
                 panelTop * MockupToReference,
                 (freeWidth - leftGap) * MockupToReference);
+        }
+
+        // Книга с закладками (spec-encyclopedia.md → «Телефон и планшет», layout() в make_book.py): меню сворачивается, если
+        // книга не помещается рядом с полным меню; не помещается и рядом с иконками — уменьшается до свободного места.
+        // Высота — safe area: макет ставит книгу по центру между верхом экрана и safe area снизу, а верхнего отступа
+        // в альбомной ориентации нет.
+        private static MainMenuLayout CalculateBook(float areaWidth, float areaHeight, float panelTop)
+        {
+            bool isMenuCollapsed = GetPanelRoom(areaWidth, ExpandedMenuWidth) < BookWidth;
+
+            float menuWidth = isMenuCollapsed ? CollapsedMenuWidth : ExpandedMenuWidth;
+            float widthScale = GetPanelRoom(areaWidth, menuWidth) / BookWidth;
+            float heightScale = (areaHeight - 2f * MinBookTop) / BookHeight;
+            float scale = Mathf.Min(1f, widthScale, heightScale);
+
+            return new MainMenuLayout(
+                isMenuCollapsed,
+                BookWidth * scale * MockupToReference,
+                panelTop * MockupToReference,
+                PanelMargin * MockupToReference,
+                scale);
         }
 
         // Место под панель — от конца полосы меню с зазором до правого поля области.

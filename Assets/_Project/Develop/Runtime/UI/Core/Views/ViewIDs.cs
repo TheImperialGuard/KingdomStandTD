@@ -16,5 +16,9 @@
         public const string DefeatPopup = nameof(DefeatPopup);
         public const string PausePopup = nameof(PausePopup);
         public const string SettingsPopup = nameof(SettingsPopup);
+        public const string EncyclopediaPopup = nameof(EncyclopediaPopup);
+        public const string EncyclopediaTrait = nameof(EncyclopediaTrait);
+        public const string EncyclopediaStatTile = nameof(EncyclopediaStatTile);
+        public const string EncyclopediaAbility = nameof(EncyclopediaAbility);
     }
 }
