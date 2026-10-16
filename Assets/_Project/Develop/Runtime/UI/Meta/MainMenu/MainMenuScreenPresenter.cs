@@ -44,6 +44,11 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
 
             _closeRequestedDisposable = _hotkeysService.CloseRequested.Subscribe(OnCloseRequested);
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+            // Из браузерной вкладки игра не выходит (Р-06).
+            _view.HideExitItem();
+#endif
+
             UpdateLayout();
         }
 

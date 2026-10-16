@@ -71,6 +71,16 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
                 item.SetCollapsed(isCollapsed);
         }
 
+        // Контейнер закреплён по центру: укороченный до низа «Настроек», он ставит три оставшиеся строки по центру (Р-81).
+        public void HideExitItem()
+        {
+            _exitItem.gameObject.SetActive(false);
+
+            RectTransform settingsItem = (RectTransform)_settingsItem.transform;
+            float height = settingsItem.rect.height - settingsItem.anchoredPosition.y;
+            _itemsContainer.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+        }
+
         private void OnPlayItemClicked() => PlayClicked?.Invoke();
 
         private void OnEncyclopediaItemClicked() => EncyclopediaClicked?.Invoke();
