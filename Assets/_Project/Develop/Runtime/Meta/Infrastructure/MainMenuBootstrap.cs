@@ -2,6 +2,8 @@
 using System.Collections;
 using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
+using Assets._Project.Develop.Runtime.UI.Meta.MainMenu;
 using Assets._Project.Develop.Runtime.Utilities.Adverts;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
@@ -15,6 +17,8 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
         private MainMenuInputArgs _inputArgs;
 
         private MusicSwitcherService _musicSwitcherService;
+        private HotkeysService _hotkeysService;
+        private MainMenuScreenPresenter _mainMenuScreenPresenter;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -33,6 +37,8 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
             Debug.Log("Инициализация сцены главного меню");
 
             _musicSwitcherService = _container.Resolve<MusicSwitcherService>();
+            _hotkeysService = _container.Resolve<HotkeysService>();
+            _mainMenuScreenPresenter = _container.Resolve<MainMenuScreenPresenter>();
 
             yield break;
         }
@@ -42,13 +48,19 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
             Debug.Log("Старт сцены главного меню");
 
             if (_inputArgs.PreviousScene == Scenes.Gameplay)
+            {
                 _container.Resolve<IAdvertsService>().OpenFullScreenAdvert();
+                _mainMenuScreenPresenter.OpenPanel(MainMenuPanels.Play);
+            }
 
             _musicSwitcherService.SwitchFor(MusicContexts.MainMenu);
         }
 
         private void Update()
         {
+            _hotkeysService?.Update();
+
+
             //if (Input.GetKeyDown(KeyCode.G))
             //{
             //    SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();

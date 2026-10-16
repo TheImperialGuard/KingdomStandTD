@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.Meta.Features.Settings;
+using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
@@ -35,7 +36,10 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
 
         public MainMenuScreenPresenter CreateMainMenuScreen(MainMenuScreenView view)
         {
-            return new MainMenuScreenPresenter(view, _container.Resolve<MainMenuPopupService>());
+            return new MainMenuScreenPresenter(
+                view,
+                _container.Resolve<MainMenuPopupService>(),
+                _container.Resolve<HotkeysService>());
         }
 
         public LevelsMenuPopupPresenter CreateLevelsMenuPopupPresenter(LevelsMenuPopupView view)

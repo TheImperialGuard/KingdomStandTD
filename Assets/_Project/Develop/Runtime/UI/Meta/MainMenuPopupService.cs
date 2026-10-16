@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.UI.Core.Popups;
+﻿using System;
+using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Settings;
@@ -23,24 +24,24 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
 
         protected override Transform PopupLayer => _uiRoot.PopupsLayer;
 
-        public LevelsMenuPopupPresenter OpenLevelsMenuPopup()
+        public LevelsMenuPopupPresenter OpenLevelsMenuPopup(Action closedCallback = null)
         {
             LevelsMenuPopupView view = ViewsFactory.Create<LevelsMenuPopupView>(ViewIDs.LevelsMenuPopup, PopupLayer);
 
             LevelsMenuPopupPresenter popup = _presentersFactory.CreateLevelsMenuPopupPresenter(view);
 
-            OnPopupCreated(popup, view);
+            OnPopupCreated(popup, view, closedCallback);
 
             return popup;
         }
 
-        public SettingsPopupPresenter OpenSettingsPopup()
+        public SettingsPopupPresenter OpenSettingsPopup(Action closedCallback = null)
         {
             SettingsPopupView view = ViewsFactory.Create<SettingsPopupView>(ViewIDs.SettingsPopup, PopupLayer);
 
             SettingsPopupPresenter popup = _presentersFactory.CreateSettingsPopupPresenter(view);
 
-            OnPopupCreated(popup, view);
+            OnPopupCreated(popup, view, closedCallback);
 
             return popup;
         }
