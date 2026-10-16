@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Presenters;
+using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
@@ -20,6 +21,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
         private MainMenuPanels _targetPanel = MainMenuPanels.None;
         private PopupPresenterBase _openedPopup;
         private bool _isClosing;
+        private PlayBoardSteps _playBoardStartStep = PlayBoardSteps.Modes;
 
         public MainMenuScreenPresenter(
             MainMenuScreenView view,
@@ -55,9 +57,18 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
             _closeRequestedDisposable.Dispose();
         }
 
-        public void OpenPanel(MainMenuPanels panel) => SetTarget(panel);
+        // Щелчок по «Играть» открывает доску на режимах, возврат из боя — сразу на уровнях (Р-23).
+        public void OpenPlayBoard(PlayBoardSteps startStep)
+        {
+            _playBoardStartStep = startStep;
+            SetTarget(MainMenuPanels.Play);
+        }
 
-        private void OnPlayClicked() => ToggleTarget(MainMenuPanels.Play);
+        private void OnPlayClicked()
+        {
+            _playBoardStartStep = PlayBoardSteps.Modes;
+            ToggleTarget(MainMenuPanels.Play);
+        }
 
         private void OnEncyclopediaClicked() => Debug.Log("Энциклопедия ещё не подключена к меню");
 
@@ -103,7 +114,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
             switch (panel)
             {
                 case MainMenuPanels.Play:
-                    return _popupService.OpenPlayBoardPopup(OnPopupClosed);
+                    return _popupService.OpenPlayBoardPopup(_playBoardStartStep, OnPopupClosed);
 
                 case MainMenuPanels.Settings:
                     return _popupService.OpenSettingsPopup(OnPopupClosed);
@@ -134,8 +145,11 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
         // открывается (Р-51): раскладка считается по открытой панели, а не по цели.
         private void UpdateLayout()
         {
-            MainMenuLayout layout = MainMenuLayout.Calculate(_view.AreaSize, _openedPanel);
+            MainMenuLayout layout = MainMenuLayout.Calculate(_view.AreaSize, _view.ScreenHeight, _openedPanel);
             _view.SetCollapsed(layout.IsMenuCollapsed);
+
+            if (_openedPopup is IMainMenuPanel panel)
+                panel.ApplyLayout(layout);
         }
 
         private void Quit()

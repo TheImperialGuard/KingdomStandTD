@@ -42,7 +42,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
                 _container.Resolve<HotkeysService>());
         }
 
-        public PlayBoardPopupPresenter CreatePlayBoardPopupPresenter(PlayBoardPopupView view)
+        public PlayBoardPopupPresenter CreatePlayBoardPopupPresenter(PlayBoardPopupView view, PlayBoardSteps startStep)
         {
             return new PlayBoardPopupPresenter(
                 _container.Resolve<ICoroutinesPerformer>(),
@@ -51,7 +51,8 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
                 _container.Resolve<ViewsFactory>(),
                 _container.Resolve<LevelsProgressionService>(),
                 _container.Resolve<ConfigsProviderService>(),
-                view);
+                view,
+                startStep);
         }
 
         public SettingsPopupPresenter CreateSettingsPopupPresenter(SettingsPopupView view)

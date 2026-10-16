@@ -22,9 +22,15 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
         [SerializeField, Min(0f)] private float _collapsedWidth = 108f;
 
         private MainMenuItemView[] _items;
+        private Canvas _canvas;
 
         // Корень вью — safe area: SafeAreaContainer подгоняет его под Screen.safeArea.
         public Vector2 AreaSize => ((RectTransform)transform).rect.size;
+
+        // Полная высота экрана в единицах эталона — высота корневого канваса.
+        public float ScreenHeight => ((RectTransform)ParentCanvas.rootCanvas.transform).rect.height;
+
+        private Canvas ParentCanvas => _canvas != null ? _canvas : _canvas = GetComponentInParent<Canvas>();
 
         private void Awake()
         {

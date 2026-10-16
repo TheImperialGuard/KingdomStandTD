@@ -4,6 +4,7 @@ using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu;
+using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
 using Assets._Project.Develop.Runtime.Utilities.Adverts;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
@@ -50,7 +51,7 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
             if (_inputArgs.PreviousScene == Scenes.Gameplay)
             {
                 _container.Resolve<IAdvertsService>().OpenFullScreenAdvert();
-                _mainMenuScreenPresenter.OpenPanel(MainMenuPanels.Play);
+                _mainMenuScreenPresenter.OpenPlayBoard(PlayBoardSteps.Campaign);
             }
 
             _musicSwitcherService.SwitchFor(MusicContexts.MainMenu);

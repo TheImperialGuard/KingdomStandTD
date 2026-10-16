@@ -35,17 +35,14 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
         public void Initialize()
         {
-            _tileView.SetLevel(_levelNumber.ToString());
+            _tileView.SetNumber(_levelNumber);
 
             if (_levelsProgressionService.IsLevelCompleted(_levelNumber))
-            {
-                _tileView.SetComplete();
-                _tileView.SetResults(_levelsProgressionService.CompletedLevels[_levelNumber]);
-            }
+                _tileView.SetCompleted(_levelsProgressionService.CompletedLevels[_levelNumber]);
+            else if (_levelsProgressionService.CanPlay(_levelNumber))
+                _tileView.SetCurrent();
             else
-            {
-                _tileView.SetActive();
-            }
+                _tileView.SetClosed();
         }
 
         public void Dispose()
