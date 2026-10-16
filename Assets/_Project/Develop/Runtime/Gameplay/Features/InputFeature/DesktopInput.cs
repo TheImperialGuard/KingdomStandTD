@@ -1,4 +1,4 @@
-using Assets._Project.Develop.Runtime.Configs.Gameplay;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,6 +7,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
     public class DesktopInput : IInputService
     {
         private const KeyCode RAY_SHOOTER_KEY_CODE = KeyCode.Mouse0;
+        private const KeyCode CloseKeyCode = KeyCode.Escape;
 
         private readonly CameraConfig _cameraConfig;
 
@@ -21,6 +22,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
             => IsEnabled && Input.GetKeyDown(RAY_SHOOTER_KEY_CODE) && IsPointerOverUI() == false;
 
         public Ray CameraRay => Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        public bool CloseRequested => Input.GetKeyDown(CloseKeyCode);
 
         public Vector3 CameraDelta
         {

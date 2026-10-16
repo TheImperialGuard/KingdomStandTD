@@ -6,6 +6,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.Meta.Features.Settings;
+using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.Utilities.Adverts;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
@@ -66,6 +67,8 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
 
             container.RegisterAsSingle(CreateInputService);
 
+            container.RegisterAsSingle(CreateHotkeysService);
+
             container.RegisterAsSingle(CreateAdvertsService);
         }
 
@@ -95,6 +98,11 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
         private static RayShooterService CreateRayShooterService(DIContainer c)
         {
             return new RayShooterService(c.Resolve<IInputService>());
+        }
+
+        private static HotkeysService CreateHotkeysService(DIContainer c)
+        {
+            return new HotkeysService(c.Resolve<IInputService>());
         }
 
         private static ViewsFactory CreateViewsFactory(DIContainer c)

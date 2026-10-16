@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -43,6 +43,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
                 return IsEnabled && _isTapPerformed;
             }
         }
+
+        // Клавиши Esc на телефоне в браузере нет.
+        public bool CloseRequested => false;
 
         public Ray CameraRay
         {

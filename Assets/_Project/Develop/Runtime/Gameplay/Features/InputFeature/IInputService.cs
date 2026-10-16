@@ -15,5 +15,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
         /// Реализация сама учитывает скорость и время кадра, потребитель применяет значение как есть.
         /// </summary>
         Vector3 CameraDelta { get; }
+
+        /// <summary>
+        /// Просьба закрыть открытую панель интерфейса. Не зависит от IsEnabled: тот выключает игровой ввод,
+        /// а панель должна закрываться и тогда.
+        /// </summary>
+        bool CloseRequested { get; }
     }
 }
