@@ -454,6 +454,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5036824087606322732, guid: 2866a55eb30b2f148b2636d344c9f7e8, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8143899753949864289, guid: 2866a55eb30b2f148b2636d344c9f7e8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -755,6 +759,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8545528868307997808}
     m_Modifications:
+    - target: {fileID: 5036824087606322732, guid: 2866a55eb30b2f148b2636d344c9f7e8, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8143899753949864289, guid: 2866a55eb30b2f148b2636d344c9f7e8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

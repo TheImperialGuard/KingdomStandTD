@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities.StunAbilityConfig
   <ID>k__BackingField: Stun
   <Name>k__BackingField: "\u041C\u043E\u0440\u043E\u0437\u043D\u044B\u0439 \u0448\u0442\u043E\u0440\u043C"
-  <Icon>k__BackingField: {fileID: 1816364705, guid: b6e17131ca9179242a50fc57ddd993a4, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: edd798520d0098247b53e7dc15f24fcc, type: 3}
   <LevelsCosts>k__BackingField: 960000006400000064000000
   _descriptionByLevel:
   - "\u0417\u0430\u043C\u043E\u0440\u0430\u0436\u0438\u0432\u0430\u0435\u0442 \u0432\u0440\u0430\u0433\u043E\u0432
