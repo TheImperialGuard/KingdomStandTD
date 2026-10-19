@@ -2,12 +2,13 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
+namespace Assets._Project.Develop.Runtime.UI.CommonViews
 {
-    // Доска на цепях (Р-59): правая панель меню, которая падает сверху и уезжает вверх при закрытии. Ширину, верх и правый
-    // отступ задаёт общий расчёт раскладки, содержимое доски — дело наследника. Числа — в px макета.
+    // Доска на цепях (Р-59): панель, которая падает сверху и уезжает вверх при закрытии. Ширину, верх и правый отступ
+    // задаёт расчёт раскладки сцены, содержимое доски — дело наследника. Числа — в px макета.
     public abstract class ChainBoardPopupView : PopupViewBase
     {
+        private const float MockupToReference = 1.5f;
         private const float ChainOverlap = 20f;
         private const float DropHeight = 560f;
         private const float DropOvershoot = 12f;
@@ -36,7 +37,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
             _panel.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, panelWidth);
             _board.anchoredPosition = new Vector2(0f, -panelTop);
 
-            float chainHeight = panelTop + ChainOverlap * MainMenuLayout.MockupToReference;
+            float chainHeight = panelTop + ChainOverlap * MockupToReference;
             _leftChain.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, chainHeight);
             _rightChain.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, chainHeight);
 
@@ -50,7 +51,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
         {
             base.ModifyShowAnimation(animation);
 
-            float scale = MainMenuLayout.MockupToReference;
+            float scale = MockupToReference;
 
             // Падение kbdrop: сверху с перелётом вниз на 72% времени, затем на место.
             _swing.anchoredPosition = Vector2.up * DropHeight * scale;
@@ -70,7 +71,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
             base.ModifyHideAnimation(animation);
 
             animation.Append(_swing
-                .DOAnchorPosY(DropHeight * MainMenuLayout.MockupToReference, RaiseDuration)
+                .DOAnchorPosY(DropHeight * MockupToReference, RaiseDuration)
                 .SetEase(Ease.InQuad));
         }
     }
