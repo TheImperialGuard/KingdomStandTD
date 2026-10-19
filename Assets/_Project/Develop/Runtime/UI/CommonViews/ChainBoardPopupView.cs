@@ -28,6 +28,9 @@ namespace Assets._Project.Develop.Runtime.UI.CommonViews
 
         protected RectTransform Board => _board;
 
+        // Уезжает ли доска вверх при закрытии; без подъёма окно исчезает сразу (пауза боя, Р-15).
+        protected virtual bool RaisesOnHide => true;
+
         public void SetLayout(float panelWidth, float panelTop, float panelRightMargin)
         {
             HasLayout = true;
@@ -69,6 +72,9 @@ namespace Assets._Project.Develop.Runtime.UI.CommonViews
         protected override void ModifyHideAnimation(Sequence animation)
         {
             base.ModifyHideAnimation(animation);
+
+            if (RaisesOnHide == false)
+                return;
 
             animation.Append(_swing
                 .DOAnchorPosY(DropHeight * MockupToReference, RaiseDuration)

@@ -1,7 +1,9 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.Features.PauseFeature;
+﻿using System;
+using Assets._Project.Develop.Runtime.Gameplay.Features.PauseFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Project.Develop.Runtime.Meta.Infrastructure;
+using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Settings;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -17,8 +19,10 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
         private readonly ICoroutinesPerformer _coroutinesPerformer;
         private readonly GameplayInputArgs _gameplayInputArgs;
         private readonly GameplayPresentersFactory _presentersFactory;
+        private readonly HotkeysService _hotkeysService;
 
         private AudioSettingsPresenter _audioSettingsPresenter;
+        private IDisposable _closeRequestedDisposable;
 
         public PausePopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
@@ -27,7 +31,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
             TimeScalePauseService timeScalePauseService,
             SceneSwitcherService sceneSwitcherService,
             GameplayInputArgs gameplayInputArgs,
-            GameplayPresentersFactory presentersFactory)
+            GameplayPresentersFactory presentersFactory,
+            HotkeysService hotkeysService)
             : base(coroutinesPerformer, rayShooterService)
         {
             _popupView = popupView;
@@ -36,6 +41,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
             _coroutinesPerformer = coroutinesPerformer;
             _gameplayInputArgs = gameplayInputArgs;
             _presentersFactory = presentersFactory;
+            _hotkeysService = hotkeysService;
         }
 
         protected override PopupViewBase PopupView => _popupView;
@@ -46,6 +52,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
 
             CreateAudioSettings();
 
+            _popupView.ContinueClicked += OnContinueClicked;
             _popupView.ExitClicked += OnExitClicked;
             _popupView.RestartClicked += OnRestartClicked;
 
@@ -56,7 +63,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
         {
             base.Dispose();
 
-            UnsubscribeFromView();
+            UnsubscribeFromInput();
 
             _audioSettingsPresenter.Dispose();
 
@@ -68,13 +75,16 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
             base.OnPreShow();
 
             _audioSettingsPresenter.Subscribe();
+
+            // Esc закрывает паузу на компьютере, как «Продолжить» (Р-15).
+            _closeRequestedDisposable = _hotkeysService.CloseRequested.Subscribe(OnContinueClicked);
         }
 
         protected override void OnPreHide()
         {
             base.OnPreHide();
 
-            UnsubscribeFromView();
+            UnsubscribeFromInput();
 
             _audioSettingsPresenter.Unsubscribe();
 
@@ -88,11 +98,17 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
             _audioSettingsPresenter.Initialize();
         }
 
-        private void UnsubscribeFromView()
+        private void UnsubscribeFromInput()
         {
+            _popupView.ContinueClicked -= OnContinueClicked;
             _popupView.ExitClicked -= OnExitClicked;
             _popupView.RestartClicked -= OnRestartClicked;
+
+            _closeRequestedDisposable?.Dispose();
+            _closeRequestedDisposable = null;
         }
+
+        private void OnContinueClicked() => OnCloseRequest();
 
         private void OnExitClicked()
         {

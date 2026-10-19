@@ -5,17 +5,11 @@ using UnityEngine.UI;
 namespace Assets._Project.Develop.Runtime.UI.Functional
 {
     // На телефоне делает интерфейс крупнее: уменьшает эталон у CanvasScaler в режиме Expand. Ширина эталона — самое узкое
-    // окно, в котором раскладка помещается целиком: шире масштаб идёт по высоте, уже — по ширине (Р-78).
-    // Телефон — логическая высота игровой области ниже порога: в браузере в CSS-точках, в редакторе в пикселях окна Game.
+    // окно, в котором раскладка помещается целиком: шире масштаб идёт по высоте, уже — по ширине (Р-78). Числа эталона и
+    // признак телефона — MenuCanvasScale: по ним же пауза боя считает масштаб меню.
     [RequireComponent(typeof(CanvasScaler))]
     public class PhoneScaleSwitcher : MonoBehaviour
     {
-        [SerializeField, Min(1)] private int _phoneHeightThreshold = 480;
-        [SerializeField, Min(1)] private int _defaultReferenceWidth = 1440;
-        [SerializeField, Min(1)] private int _defaultReferenceHeight = 1080;
-        [SerializeField, Min(1)] private int _phoneReferenceWidth = 1280;
-        [SerializeField, Min(1)] private int _phoneReferenceHeight = 960;
-
         private CanvasScaler _canvasScaler;
 
         public int LogicalHeight { get; private set; }
@@ -47,14 +41,9 @@ namespace Assets._Project.Develop.Runtime.UI.Functional
         private void UpdateMode()
         {
             LogicalHeight = BrowserScreen.LogicalHeight;
-            IsPhone = LogicalHeight < _phoneHeightThreshold;
+            IsPhone = MenuCanvasScale.IsPhone(LogicalHeight);
         }
 
-        private void ApplyReferenceHeight()
-        {
-            _canvasScaler.referenceResolution = IsPhone
-                ? new Vector2(_phoneReferenceWidth, _phoneReferenceHeight)
-                : new Vector2(_defaultReferenceWidth, _defaultReferenceHeight);
-        }
+        private void ApplyReferenceHeight() => _canvasScaler.referenceResolution = MenuCanvasScale.GetReference(IsPhone);
     }
 }

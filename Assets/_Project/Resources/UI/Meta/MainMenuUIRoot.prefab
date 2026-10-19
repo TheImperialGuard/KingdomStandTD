@@ -102,11 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a898462e4598f4cba216da0e35ce71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.UI.Functional.PhoneScaleSwitcher
-  _phoneHeightThreshold: 480
-  _defaultReferenceWidth: 1440
-  _defaultReferenceHeight: 1080
-  _phoneReferenceWidth: 1280
-  _phoneReferenceHeight: 960
 --- !u!114 &7958532085848483113
 MonoBehaviour:
   m_ObjectHideFlags: 0
