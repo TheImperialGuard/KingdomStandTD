@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using Assets._Project.Develop.Runtime.Utilities.Text;
 using System;
 using UnityEngine;
 
@@ -43,11 +44,18 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup
 
         private void SetupInfo()
         {
-            _view.SetTitle(_sourceTower.TowerName.Value);
-            _view.SetTowerDesc(_sourceTower.InstantAttackDamage.Value.ToString(), _sourceTower.InstantAttackDamageType.Value);
+            _view.SetTowerInfo(
+                NonBreakingSpace.BeforeTrailingNumber(_sourceTower.TowerName.Value),
+                _sourceTower.InstantAttackDamageType.Value,
+                DecimalText.Format(_sourceTower.AttacksPerSecond.Value),
+                DecimalText.Format(_sourceTower.InstantShootRange.Value));
+
+            UpdateDamage();
         }
 
-        private void OnDamageChanged(float arg1, float damage) => SetupInfo();
+        private void UpdateDamage() => _view.SetTowerDamage(DecimalText.Format(_sourceTower.InstantAttackDamage.Value));
+
+        private void OnDamageChanged(float arg1, float damage) => UpdateDamage();
 
         public override void Dispose()
         {

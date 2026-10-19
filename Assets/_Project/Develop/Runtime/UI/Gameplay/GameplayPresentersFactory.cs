@@ -161,13 +161,14 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<EntitiesLifeContext>());
         }
 
-        public EnemyInfoPopupPresenter CreateEnemyInfoPopupPresenter(BottomInfoPopupView view, Entity sourceTower)
+        public EnemyInfoPopupPresenter CreateEnemyInfoPopupPresenter(BottomInfoPopupView view, Entity sourceEnemy)
         {
             return new EnemyInfoPopupPresenter(
                 _coroutinesPerformer,
                 _container.Resolve<RayShooterService>(),
                 view,
-                sourceTower);
+                sourceEnemy,
+                _container.Resolve<EntitiesLifeContext>());
         }
 
         public WinPopupPresenter CreateWinPopupPresenter(WinPopupView view, LevelResults results)
