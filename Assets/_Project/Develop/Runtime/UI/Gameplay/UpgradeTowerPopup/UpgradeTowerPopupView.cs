@@ -1,93 +1,35 @@
 ﻿using Assets._Project.Develop.Runtime.UI.CommonViews;
-using Assets._Project.Develop.Runtime.UI.Core.Popups;
-using Assets._Project.Develop.Runtime.UI.Core.Views;
+using Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups;
 using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
 {
-    public class UpgradeTowerPopupView : PopupViewBase, IWorldPositionView
+    public class UpgradeTowerPopupView : TowerPopupViewBase
     {
-        public event Action UpgradeButtonClicked;
-        public event Action SellButtonClicked;
-        
-        [SerializeField] private Button _upgradeButton;
-        [SerializeField] private Button _sellButton;
-        [SerializeField] private TMP_Text _upgradePrice;
-        [SerializeField] private Color _disabledPriceColor;
-        [SerializeField] private Color _enabledPriceColor;
+        public event Action<UpgradeTowerPopupButtons> ButtonClicked;
 
-        [SerializeField] private TitleWithTextView _leftInfoContainer;
-        [SerializeField] private TitleWithTextView _rightInfoContainer;
+        [SerializeField] private TowerMedallionView _upgradeButton;
+        [SerializeField] private MedallionButtonView _sellButton;
 
-        private Camera _camera;
+        public void SetUpgradeButton(MedallionStates state, int cost) => _upgradeButton.Set(state, cost);
 
-        public void UpdateWorldPosition(Vector3 worldPosition)
-        {
-            Vector3 position = _camera.WorldToScreenPoint(worldPosition);
-
-            transform.position = position;
-        }
-
-        public void SetupInfoContainer(string title, string desc)
-        {
-            _leftInfoContainer.SetTitle(title);
-            _rightInfoContainer.SetTitle(title);
-
-            _leftInfoContainer.SetText(desc);
-            _rightInfoContainer.SetText(desc);
-        }
-
-        public void ShowInfoContainer(RelativeUIPositions position)
-        {
-            GetContainerBy(position).gameObject.SetActive(true);
-        }
-
-        public void HideInfoContainer()
-        {
-            _leftInfoContainer.gameObject.SetActive(false);
-            _rightInfoContainer.gameObject.SetActive(false);
-        }
-
-        public void SwitchUpgradeInteractable(bool value)
-        {
-            _upgradeButton.interactable = value;
-            _upgradePrice.color = value ? _enabledPriceColor : _disabledPriceColor;
-        }
-
-        public void SetUpgradePrice(string value) => _upgradePrice.text = value;
-
-        private void Awake()
-        {
-            _camera = Camera.main;
-        }
+        public void SetSellButton(MedallionStates state) => _sellButton.SetState(state);
 
         private void OnEnable()
         {
-            _upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
-            _sellButton.onClick.AddListener(OnSellButtonClicked);
+            _upgradeButton.Clicked += OnUpgradeButtonClicked;
+            _sellButton.Clicked += OnSellButtonClicked;
         }
 
         private void OnDisable()
         {
-            _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
-            _sellButton.onClick.RemoveListener(OnSellButtonClicked);
+            _upgradeButton.Clicked -= OnUpgradeButtonClicked;
+            _sellButton.Clicked -= OnSellButtonClicked;
         }
 
-        private TitleWithTextView GetContainerBy(RelativeUIPositions position)
-        {
-            return position switch
-            {
-                RelativeUIPositions.Left => _leftInfoContainer,
-                RelativeUIPositions.Right => _rightInfoContainer,
-                _ => throw new NotImplementedException(),
-            };
-        }
+        private void OnUpgradeButtonClicked() => ButtonClicked?.Invoke(UpgradeTowerPopupButtons.Upgrade);
 
-        private void OnSellButtonClicked() => SellButtonClicked?.Invoke();
-
-        private void OnUpgradeButtonClicked() => UpgradeButtonClicked?.Invoke();
+        private void OnSellButtonClicked() => ButtonClicked?.Invoke(UpgradeTowerPopupButtons.Sell);
     }
 }

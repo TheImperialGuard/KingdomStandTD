@@ -4,34 +4,26 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
-using Assets._Project.Develop.Runtime.UI.CommonViews;
-using Assets._Project.Develop.Runtime.UI.Core.Popups;
-using Assets._Project.Develop.Runtime.UI.Functional;
+using Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using Assets._Project.Develop.Runtime.Utilities.Text;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using System;
-using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
 {
-    public class BuildTowerPopupPresenter : PopupPresenterBase
+    // Постройка на пустом месте: заряд кнопки ставит призрак башни, второе нажатие строит башню I уровня.
+    public class BuildTowerPopupPresenter : TowerPopupPresenterBase<TowerTypes>
     {
         private const int TowersFirstLevel = 1;
 
         private readonly BuildTowerPopupView _view;
 
-        private readonly Entity _towerPlaceholder;
         private readonly EntitiesFactory _entitiesFactory;
         private readonly TowersFactory _towersFactory;
         private readonly TowersListConfig _towersListConfig;
-        private readonly TowersPurchaseService _towersPurchaseService;
-        private readonly WalletService _walletService;
-        private readonly TowersPlaceholdersService _towersPlaceholdersService; 
 
-        private Entity _createdTowerDemo;
-        private TowerTypes _createdTowerDemoType;
-        private IDisposable _goldCurrencyDisposable;
-        private IDisposable _cameraMovedDisposable;
+        private Entity _towerDemo;
 
         public BuildTowerPopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
@@ -44,138 +36,82 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             TowersPurchaseService towersPurchaseService,
             WalletService walletService,
             TowersPlaceholdersService towersPlaceholdersService)
-            : base(coroutinesPerformer, rayShooterService)
+            : base(
+                coroutinesPerformer,
+                rayShooterService,
+                view,
+                towerPlaceholder,
+                towersPurchaseService,
+                towersPlaceholdersService,
+                walletService)
         {
             _view = view;
-            _towerPlaceholder = towerPlaceholder;
             _entitiesFactory = entitiesFactory;
             _towersListConfig = towersListConfig;
             _towersFactory = towersFactory;
-            _towersPurchaseService = towersPurchaseService;
-            _walletService = walletService;
-            _towersPlaceholdersService = towersPlaceholdersService;
         }
-
-        protected override PopupViewBase PopupView => _view;
 
         public override void Initialize()
         {
             base.Initialize();
 
-            _view.UpdateWorldPosition(_towerPlaceholder.Transform.position);
-
-            _view.BuildTowerButtonClicked += OnBuildTowerButtonClicked;
-
-            _goldCurrencyDisposable = _walletService.GetCurrency(CurrencyTypes.Gold)
-                .Subscribe(OnGoldChanged);
-
-            Camera camera = Camera.main;
-            _cameraMovedDisposable = camera.GetComponent<BoundedOrthoCamera>().CameraMoved.Subscribe(OnCameraMoved);
-
-            _view.HideInfoContainer();
-            SetPrices();
-            OnGoldChanged(0, 0);
-        }
-
-        private void OnCameraMoved()
-        {
-            _view.UpdateWorldPosition(_towerPlaceholder.Transform.position);
+            _view.ButtonClicked += OnButtonClicked;
         }
 
         public override void Dispose()
         {
             base.Dispose();
 
-            _view.BuildTowerButtonClicked -= OnBuildTowerButtonClicked;
-            _goldCurrencyDisposable.Dispose();
-            _cameraMovedDisposable.Dispose();
+            _view.ButtonClicked -= OnButtonClicked;
 
-            ReleaseCurrentDemo();
+            ReleaseTowerDemo();
         }
 
-        protected override void OnClickedOutside(RaycastHit oldHit, RaycastHit newHit)
+        protected override void RefreshButtons()
         {
-            base.OnClickedOutside(oldHit, newHit);
-
-            ReleaseCurrentDemo();
-            OnCloseRequest();
+            foreach (TowerTypes type in Enum.GetValues(typeof(TowerTypes)))
+                _view.SetButton(type, GetStateFor(type), TowersPurchaseService.GetPriceFor(type, TowersFirstLevel));
         }
 
-        private void OnBuildTowerButtonClicked(TowerTypes type)
+        protected override bool IsAvailable(TowerTypes type) => TowersPurchaseService.EnoughGoldFor(type, TowersFirstLevel);
+
+        protected override TowerTipContent GetTip(TowerTypes type)
         {
             ShootingTowerConfig config = _towersListConfig.GetBy(type, TowersFirstLevel);
 
-            if (_createdTowerDemo == null || type != _createdTowerDemoType)
-            {
-                CreateTowerDemo(config);
-                ShowInfo(config);
-                _createdTowerDemoType = type;
-                return;
-            }
+            return new TowerTipContent(NonBreakingSpace.BeforeTrailingNumber(config.TowerName), config.TowerDesc);
+        }
 
-            if (_towersPurchaseService.TryBuyTower(type, TowersFirstLevel) == false)
+        protected override void OnArmed(TowerTypes type)
+        {
+            ShootingTowerConfig config = _towersListConfig.GetBy(type, TowersFirstLevel);
+
+            _towerDemo = _entitiesFactory.CreateTowerDemo(Source.Transform.position, config);
+        }
+
+        protected override void OnDisarmed(TowerTypes type) => ReleaseTowerDemo();
+
+        protected override void Activate(TowerTypes type)
+        {
+            if (TowersPurchaseService.TryBuyTower(type, TowersFirstLevel) == false)
                 return;
 
-            BuildTower(config);
+            ShootingTowerConfig config = _towersListConfig.GetBy(type, TowersFirstLevel);
+
+            ReleaseTowerDemo();
+            TowersPlaceholdersService.ReleasePlaceholder(Source);
+            _towersFactory.Create(Source.Transform.position, config, TowersFirstLevel);
+
             OnCloseRequest();
         }
 
-        private void ShowInfo(ShootingTowerConfig config)
+        private void ReleaseTowerDemo()
         {
-            _view.SetupInfoContainer(config.TowerName, config.TowerDesc);
+            if (_towerDemo == null)
+                return;
 
-            RelativeUIPositions position = GetPosForInfoContainer();
-
-            _view.ShowInfoContainer(position);
-        }
-
-        private RelativeUIPositions GetPosForInfoContainer()
-        {
-            RelativeUIPositions popupPosition = UIHelper.GetRelativePositionFor(_view.GetComponent<RectTransform>());
-
-            return popupPosition == RelativeUIPositions.Left ? RelativeUIPositions.Right : RelativeUIPositions.Left;
-        }
-
-        private void BuildTower(ShootingTowerConfig config)
-        {
-            ReleaseCurrentDemo();
-            ReleaseTowerPlaceholder();
-            _towersFactory.Create(_towerPlaceholder.Transform.position, config, TowersFirstLevel);
-        }
-
-        private void ReleaseTowerPlaceholder() => _towersPlaceholdersService.ReleasePlaceholder(_towerPlaceholder);
-
-        private void CreateTowerDemo(ShootingTowerConfig config)
-        {
-            ReleaseCurrentDemo();
-            _createdTowerDemo = _entitiesFactory.CreateTowerDemo(_towerPlaceholder.Transform.position, config);
-        }
-
-        private void ReleaseCurrentDemo()
-        {
-            if (_createdTowerDemo != null)
-            {
-                _createdTowerDemo.SelfReleaseRequested.Value = true;
-            }
-        }
-
-        private void OnGoldChanged(int oldValue, int newValue)
-        {
-            foreach (TowerTypes type in Enum.GetValues(typeof(TowerTypes)))
-            {
-                if (_towersPurchaseService.EnoughGoldFor(type, TowersFirstLevel))
-                    _view.SwitchInteractableFor(type, true);
-                else
-                    _view.SwitchInteractableFor(type, false);
-            }
-        }
-
-        private void SetPrices()
-        {
-            foreach (TowerTypes type in Enum.GetValues(typeof(TowerTypes)))
-            {
-                _view.SetPriceFor(type, _towersPurchaseService.GetPriceFor(type, TowersFirstLevel).ToString());
-            }
+            _towerDemo.SelfReleaseRequested.Value = true;
+            _towerDemo = null;
         }
     }
 }

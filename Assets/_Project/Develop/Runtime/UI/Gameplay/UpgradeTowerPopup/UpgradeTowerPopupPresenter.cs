@@ -4,201 +4,153 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Shoot;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
-using Assets._Project.Develop.Runtime.UI.CommonViews;
-using Assets._Project.Develop.Runtime.UI.Core.Popups;
-using Assets._Project.Develop.Runtime.UI.Functional;
+using Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using Assets._Project.Develop.Runtime.Utilities.Text;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using System;
 using UnityEngine;
-using static UnityEngine.Rendering.STP;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
 {
-    public class UpgradeTowerPopupPresenter : PopupPresenterBase
+    // Улучшение башни I–III уровня и продажа. Заряд улучшения показывает поверх текущего круга дальности круг следующего
+    // уровня (Р-19).
+    public class UpgradeTowerPopupPresenter : TowerPopupPresenterBase<UpgradeTowerPopupButtons>
     {
         private const string RangeZonePrefabPath = "Prefabs/Entities/Towers/ShootingRangeZone";
 
         private readonly UpgradeTowerPopupView _view;
 
-        private readonly Entity _sourceTower;
-
         private readonly ResourcesAssetsLoader _resourcesAssetsLoader;
         private readonly TowersFactory _towersFactory;
         private readonly TowersListConfig _towersListConfig;
-        private readonly TowersPurchaseService _towersPurchaseService;
-        private readonly WalletService _walletService;
-        private readonly TowersPlaceholdersService _towersPlaceholdersService;
 
         private ShootingRangeZone _rangeDemo;
-        private int _sellClicks;
-
-        private IDisposable _goldCurrencyDisposable;
-        private IDisposable _cameraMovedDisposable;
 
         public UpgradeTowerPopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
             RayShooterService rayShooterService,
-            UpgradeTowerPopupView view, 
-            Entity sourceTower, 
-            ResourcesAssetsLoader resourcesAssetsLoader, 
-            TowersFactory towersFactory, 
-            TowersListConfig towersListConfig, 
-            TowersPurchaseService towersPurchaseService, 
-            WalletService walletService, 
-            TowersPlaceholdersService towersPlaceholdersService) :
-            base(coroutinesPerformer, rayShooterService)
+            UpgradeTowerPopupView view,
+            Entity sourceTower,
+            ResourcesAssetsLoader resourcesAssetsLoader,
+            TowersFactory towersFactory,
+            TowersListConfig towersListConfig,
+            TowersPurchaseService towersPurchaseService,
+            WalletService walletService,
+            TowersPlaceholdersService towersPlaceholdersService)
+            : base(
+                coroutinesPerformer,
+                rayShooterService,
+                view,
+                sourceTower,
+                towersPurchaseService,
+                towersPlaceholdersService,
+                walletService)
         {
             _view = view;
-            _sourceTower = sourceTower;
             _resourcesAssetsLoader = resourcesAssetsLoader;
             _towersFactory = towersFactory;
             _towersListConfig = towersListConfig;
-            _towersPurchaseService = towersPurchaseService;
-            _walletService = walletService;
-            _towersPlaceholdersService = towersPlaceholdersService;
         }
 
-        public TowerTypes TowerType => _sourceTower.TowerType.Value;
+        public TowerTypes TowerType => Source.TowerType.Value;
 
-        protected override PopupViewBase PopupView => _view;
+        private int NextTowerLevel => Source.TowerLevel.Value + 1;
 
-        private int NextTowerLevel => _sourceTower.TowerLevel.Value + 1;
+        private ShootingTowerConfig NextLevelConfig => _towersListConfig.GetBy(TowerType, NextTowerLevel);
 
         public override void Initialize()
         {
             base.Initialize();
 
-            _view.UpdateWorldPosition(_sourceTower.Transform.position);
-
-            _view.UpgradeButtonClicked += OnUpgradeButtonClicked;
-            _view.SellButtonClicked += OnSellButtonClicked;
-
-            _goldCurrencyDisposable = _walletService.GetCurrency(CurrencyTypes.Gold)
-                .Subscribe(OnGoldChanged);
-
-            Camera camera = Camera.main;
-            _cameraMovedDisposable = camera.GetComponent<BoundedOrthoCamera>().CameraMoved.Subscribe(OnCameraMoved);
-
-            _view.HideInfoContainer();
-            SetPrices();
-            OnGoldChanged(0, 0);
-
-            _sellClicks = 0;
-        }
-
-        private void OnCameraMoved()
-        {
-            _view.UpdateWorldPosition(_sourceTower.Transform.position);
+            _view.ButtonClicked += OnButtonClicked;
         }
 
         public override void Dispose()
         {
             base.Dispose();
 
-            _view.UpgradeButtonClicked -= OnUpgradeButtonClicked;
-            _view.SellButtonClicked -= OnSellButtonClicked;
-
-            _goldCurrencyDisposable.Dispose();
-            _cameraMovedDisposable.Dispose();
+            _view.ButtonClicked -= OnButtonClicked;
 
             ReleaseRangeDemo();
         }
 
-        protected override void OnClickedOutside(RaycastHit oldHit, RaycastHit newHit)
+        protected override void RefreshButtons()
         {
-            base.OnClickedOutside(oldHit, newHit);
+            int upgradeCost = TowersPurchaseService.GetPriceFor(TowerType, NextTowerLevel);
 
-            _sellClicks = 0;
-
-            ReleaseRangeDemo();
-            OnCloseRequest();
+            _view.SetUpgradeButton(GetStateFor(UpgradeTowerPopupButtons.Upgrade), upgradeCost);
+            _view.SetSellButton(GetStateFor(UpgradeTowerPopupButtons.Sell));
         }
 
-        private void OnUpgradeButtonClicked()
+        protected override bool IsAvailable(UpgradeTowerPopupButtons button)
         {
-            _sellClicks = 0;
-
-            ShootingTowerConfig config = _towersListConfig.GetBy(TowerType, NextTowerLevel);
-
-            if (_rangeDemo == null)
+            switch (button)
             {
-                CreateRangeDemo(config);
-                _view.HideInfoContainer();
-                ShowInfo(config);
-                return;
+                case UpgradeTowerPopupButtons.Upgrade:
+                    return TowersPurchaseService.EnoughGoldFor(TowerType, NextTowerLevel);
+
+                case UpgradeTowerPopupButtons.Sell:
+                    return true;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(button));
             }
-
-            if (_towersPurchaseService.TryBuyTower(TowerType, NextTowerLevel) == false)
-                return;
-
-            UpgradeTower(config);
-            OnCloseRequest();
         }
 
-        private void ShowInfo(ShootingTowerConfig config)
+        protected override TowerTipContent GetTip(UpgradeTowerPopupButtons button)
         {
-            _view.SetupInfoContainer(config.TowerName, config.TowerDesc);
-
-            RelativeUIPositions position = GetPosForInfoContainer();
-
-            _view.ShowInfoContainer(position);
-        }
-
-        private void ShowSellInfo()
-        {
-            string title = "Продать башню?";
-            string goldAmount = _towersPurchaseService.GetGoldAmountForSell(_sourceTower).ToString();
-            string desc = "Вы получите золото за продажу: " + goldAmount;
-
-            _view.SetupInfoContainer(title, desc);
-
-            RelativeUIPositions position = GetPosForInfoContainer();
-
-            _view.ShowInfoContainer(position);
-        }
-
-        private RelativeUIPositions GetPosForInfoContainer()
-        {
-            RelativeUIPositions popupPosition = UIHelper.GetRelativePositionFor(_view.GetComponent<RectTransform>());
-
-            return popupPosition == RelativeUIPositions.Left ? RelativeUIPositions.Right : RelativeUIPositions.Left;
-        }
-
-        private void OnSellButtonClicked()
-        {
-            ReleaseRangeDemo();
-
-            if (_sellClicks++ == 0)
+            switch (button)
             {
-                _view.HideInfoContainer();
-                ShowSellInfo();
-                return;
+                case UpgradeTowerPopupButtons.Upgrade:
+                    return new TowerTipContent(
+                        NonBreakingSpace.BeforeTrailingNumber(NextLevelConfig.TowerName),
+                        NextLevelConfig.TowerDesc);
+
+                case UpgradeTowerPopupButtons.Sell:
+                    return GetSellTip();
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(button));
             }
-
-            _towersPurchaseService.Sell(_sourceTower);
-
-            CreateTowerPlaceholder();
-            ReleaseSource();
-            OnCloseRequest(false);
         }
 
-        private void OnGoldChanged(int arg1, int arg2)
+        protected override void OnArmed(UpgradeTowerPopupButtons button)
         {
-            if (_towersPurchaseService.EnoughGoldFor(TowerType, NextTowerLevel))
-                _view.SwitchUpgradeInteractable(true);
-            else
-                _view.SwitchUpgradeInteractable(false);
+            if (button == UpgradeTowerPopupButtons.Upgrade)
+                CreateRangeDemo(NextLevelConfig);
         }
 
-        private void UpgradeTower(ShootingTowerConfig config)
+        protected override void OnDisarmed(UpgradeTowerPopupButtons button) => ReleaseRangeDemo();
+
+        protected override void Activate(UpgradeTowerPopupButtons button)
         {
+            switch (button)
+            {
+                case UpgradeTowerPopupButtons.Upgrade:
+                    UpgradeTower();
+                    break;
+
+                case UpgradeTowerPopupButtons.Sell:
+                    SellSource();
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(button));
+            }
+        }
+
+        private void UpgradeTower()
+        {
+            if (TowersPurchaseService.TryBuyTower(TowerType, NextTowerLevel) == false)
+                return;
+
             ReleaseRangeDemo();
 
-            _towersFactory.Create(_sourceTower.Transform.position, config, NextTowerLevel);
+            _towersFactory.Create(Source.Transform.position, NextLevelConfig, NextTowerLevel);
 
-            ReleaseSource();
+            Source.SelfReleaseRequested.Value = true;
             OnCloseRequest(false);
         }
 
@@ -206,7 +158,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
         {
             ShootingRangeZone zonePrefab = _resourcesAssetsLoader.Load<ShootingRangeZone>(RangeZonePrefabPath);
 
-            _rangeDemo = GameObject.Instantiate(zonePrefab, _sourceTower.Transform.position, Quaternion.identity);
+            _rangeDemo = GameObject.Instantiate(zonePrefab, Source.Transform.position, Quaternion.identity);
 
             _rangeDemo.SetRange(config.AttackRange);
             _rangeDemo.Show();
@@ -218,15 +170,6 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
                 GameObject.Destroy(_rangeDemo.gameObject);
 
             _rangeDemo = null;
-        }
-
-        private void ReleaseSource() => _sourceTower.SelfReleaseRequested.Value = true;
-
-        private void CreateTowerPlaceholder() => _towersPlaceholdersService.CreatePlaceholder(_sourceTower.Transform.position);
-
-        private void SetPrices()
-        {
-            _view.SetUpgradePrice(_towersPurchaseService.GetPriceFor(TowerType, NextTowerLevel).ToString());
         }
     }
 }

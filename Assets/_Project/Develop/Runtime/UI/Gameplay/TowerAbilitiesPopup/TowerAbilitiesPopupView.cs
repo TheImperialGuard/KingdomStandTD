@@ -1,142 +1,72 @@
 ﻿using Assets._Project.Develop.Runtime.UI.CommonViews;
-using Assets._Project.Develop.Runtime.UI.Core.Popups;
-using Assets._Project.Develop.Runtime.UI.Core.Views;
+using Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups;
 using System;
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
 {
-    public class TowerAbilitiesPopupView : PopupViewBase, IWorldPositionView
+    public class TowerAbilitiesPopupView : TowerPopupViewBase
     {
-        public event Action FirstAbilityButtonClicked;
-        public event Action SecondAbilityButtonClicked;
-        public event Action SellButtonClicked;
+        public event Action<TowerAbilitiesPopupButtons> ButtonClicked;
 
-        [SerializeField] private Button _firstAbilityButton;
-        [SerializeField] private Button _secondAbilityButton;
-        [SerializeField] private Button _sellButton;
+        [SerializeField] private TowerMedallionView _firstAbilityButton;
+        [SerializeField] private TowerMedallionView _secondAbilityButton;
+        [SerializeField] private MedallionButtonView _sellButton;
 
-        [SerializeField] private TMP_Text _firstAbilityPrice;
-        [SerializeField] private TMP_Text _secondAbilityPrice;
-        [SerializeField] private GameObject _firstAbilityPriceParent;
-        [SerializeField] private GameObject _secondAbilityPriceParent;
-        [SerializeField] private Color _disabledPriceColor;
-        [SerializeField] private Color _enabledPriceColor;
+        // Запечённые состояния значков способностей (Р-39): набор ищется по значку из конфига.
+        [SerializeField] private List<MedallionIcons> _abilitiesIcons;
 
-        [SerializeField] private Image _firstAbilityImage;
-        [SerializeField] private Image _secondAbilityImage;
+        public void SetAbilityButton(TowerAbilitiesPopupButtons button, MedallionStates state, int cost)
+            => GetAbilityButton(button).Set(state, cost);
 
-        [SerializeField] private TitleWithTextView _leftInfoContainer;
-        [SerializeField] private TitleWithTextView _rightInfoContainer;
+        public void SetAbilityIcon(TowerAbilitiesPopupButtons button, Sprite icon)
+            => GetAbilityButton(button).SetIcons(GetIconsFor(icon));
 
-        private Camera _camera;
+        public void SetAbilityLevels(TowerAbilitiesPopupButtons button, int level, int maxLevel)
+            => GetAbilityButton(button).SetLevels(level, maxLevel);
 
-        public void UpdateWorldPosition(Vector3 worldPosition)
-        {
-            Vector3 position = _camera.WorldToScreenPoint(worldPosition);
-
-            transform.position = position;
-        }
-
-        public void SetupInfoContainer(string title, string desc)
-        {
-            _leftInfoContainer.SetTitle(title);
-            _rightInfoContainer.SetTitle(title);
-
-            _leftInfoContainer.SetText(desc);
-            _rightInfoContainer.SetText(desc);
-        }
-
-        public void ShowInfoContainer(RelativeUIPositions position)
-        {
-            GetContainerBy(position).gameObject.SetActive(true);
-        }
-
-        public void HideInfoContainer()
-        {
-            _leftInfoContainer.gameObject.SetActive(false);
-            _rightInfoContainer.gameObject.SetActive(false);
-        }
-
-        public void SetFirstAbilityPrice(string value) => _firstAbilityPrice.text = value;
-
-        public void SetSecondAbilityPrice(string value) => _secondAbilityPrice.text = value;
-
-        public void SetFirstAbilitySprite(Sprite sprite) => _firstAbilityImage.sprite = sprite;
-
-        public void SetSecondAbilitySprite(Sprite sprite) => _secondAbilityImage.sprite = sprite;
-
-        public void HideFirstAbilityPrice()
-        {
-            _firstAbilityPriceParent.SetActive(false);
-        }
-
-        public void HideSecondAbilityPrice()
-        {
-            _secondAbilityPriceParent.SetActive(false);
-        }
-
-        public void SwitchFirstAbilityInteractable(bool value)
-        {
-            _firstAbilityButton.interactable = value;
-            _firstAbilityPrice.color = value ? _enabledPriceColor : _disabledPriceColor;
-        }
-
-        public void SwitchSecondAbilityInteractable(bool value)
-        {
-            _secondAbilityButton.interactable = value;
-            _secondAbilityPrice.color = value ? _enabledPriceColor : _disabledPriceColor;
-        }
-
-        public void OnAbilityProvided()
-        {
-            Selectable firstButtonSelectable = _firstAbilityButton.GetComponent<Selectable>();
-            Selectable secondButtonSelectable = _secondAbilityButton.GetComponent<Selectable>();
-
-            if (EventSystem.current != null)
-            {
-                EventSystem.current.SetSelectedGameObject(null);
-            }
-
-            firstButtonSelectable.OnDeselect(null);
-            secondButtonSelectable.OnDeselect(null);
-        }
-
-        private void Awake()
-        {
-            _camera = Camera.main;
-        }
+        public void SetSellButton(MedallionStates state) => _sellButton.SetState(state);
 
         private void OnEnable()
         {
-            _firstAbilityButton.onClick.AddListener(OnFirstAbilityButtonClicked);
-            _secondAbilityButton.onClick.AddListener(OnSecondAbilityButtonClicked);
-            _sellButton.onClick.AddListener(OnSellButtonClicked);
+            _firstAbilityButton.Clicked += OnFirstAbilityButtonClicked;
+            _secondAbilityButton.Clicked += OnSecondAbilityButtonClicked;
+            _sellButton.Clicked += OnSellButtonClicked;
         }
 
         private void OnDisable()
         {
-            _firstAbilityButton.onClick.RemoveListener(OnFirstAbilityButtonClicked);
-            _secondAbilityButton.onClick.RemoveListener(OnSecondAbilityButtonClicked);
-            _sellButton.onClick.RemoveListener(OnSellButtonClicked);
+            _firstAbilityButton.Clicked -= OnFirstAbilityButtonClicked;
+            _secondAbilityButton.Clicked -= OnSecondAbilityButtonClicked;
+            _sellButton.Clicked -= OnSellButtonClicked;
         }
 
-        private TitleWithTextView GetContainerBy(RelativeUIPositions position)
+        private TowerMedallionView GetAbilityButton(TowerAbilitiesPopupButtons button)
         {
-            return position switch
+            return button switch
             {
-                RelativeUIPositions.Left => _leftInfoContainer,
-                RelativeUIPositions.Right => _rightInfoContainer,
-                _ => throw new NotImplementedException(),
+                TowerAbilitiesPopupButtons.FirstAbility => _firstAbilityButton,
+                TowerAbilitiesPopupButtons.SecondAbility => _secondAbilityButton,
+                _ => throw new ArgumentOutOfRangeException(nameof(button)),
             };
         }
 
-        private void OnSellButtonClicked() => SellButtonClicked?.Invoke();
+        private MedallionIcons GetIconsFor(Sprite icon)
+        {
+            foreach (MedallionIcons icons in _abilitiesIcons)
+            {
+                if (icons.Idle == icon)
+                    return icons;
+            }
 
-        private void OnFirstAbilityButtonClicked() => FirstAbilityButtonClicked?.Invoke();
-        private void OnSecondAbilityButtonClicked() => SecondAbilityButtonClicked?.Invoke();
+            return new MedallionIcons(icon, icon, icon);
+        }
+
+        private void OnFirstAbilityButtonClicked() => ButtonClicked?.Invoke(TowerAbilitiesPopupButtons.FirstAbility);
+
+        private void OnSecondAbilityButtonClicked() => ButtonClicked?.Invoke(TowerAbilitiesPopupButtons.SecondAbility);
+
+        private void OnSellButtonClicked() => ButtonClicked?.Invoke(TowerAbilitiesPopupButtons.Sell);
     }
 }
