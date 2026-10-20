@@ -3,6 +3,7 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities;
+using Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.PauseFeature;
@@ -68,7 +69,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<RayShooterService>(),
                 view,
                 _container.Resolve<StagesCycle>(),
-                _container.Resolve<StageProviderService>());
+                _container.Resolve<StageProviderService>(),
+                _container.Resolve<EarnGoldOnSkipStageService>());
         }
 
         public BuildTowerPopupPresenter CreateBuildTowerPopupPresenter(BuildTowerPopupView view, Entity towerPlaceholder)
@@ -139,6 +141,11 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
         public GoldWalletPresenter CreateGoldWalletPresenter(IconTextView view)
         {
             return new GoldWalletPresenter(view, _container.Resolve<WalletService>());
+        }
+
+        public GoldGainPresenter CreateGoldGainPresenter(GoldGainView view)
+        {
+            return new GoldGainPresenter(view, _container.Resolve<EarnGoldOnSkipStageService>());
         }
 
         public PlayerHealthPresenter CreatePlayerHealthPresenter(IconTextView view)

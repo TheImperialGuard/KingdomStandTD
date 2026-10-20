@@ -15,6 +15,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning
 {
     public class EarnGoldOnSkipStageService
     {
+        public event Action<int> Earned;
+
         private readonly ConfigsProviderService _configProviderService;
         private readonly WalletService _walletService;
 
@@ -39,6 +41,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning
 
             _walletService.Add(CurrencyTypes.Gold, earnedGold);
 
+            if (earnedGold > 0)
+                Earned?.Invoke(earnedGold);
+
             #if UNITY_EDITOR
                 PlaytestHooks.NotifySkipGoldEarned(earnedGold);
             #endif
@@ -46,7 +51,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning
             Debug.Log($"Золото за скип: {earnedGold}. Всего: {_walletService.GetCurrency(CurrencyTypes.Gold).Value}");
         }
 
-        private int CalculateEarnedGold(float remainingStageTime)
+        public int CalculateEarnedGold(float remainingStageTime)
         {
             float goldIndex = _gameConfig.GoldIndexForRemainingStageSeconds;
             int maxGold = _gameConfig.MaxGoldForSkipStage;

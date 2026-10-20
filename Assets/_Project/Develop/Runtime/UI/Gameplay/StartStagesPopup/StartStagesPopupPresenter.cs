@@ -1,16 +1,9 @@
-﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
-using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages;
-using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
+﻿using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup
 {
@@ -46,7 +39,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup
             base.Initialize();
 
             _view.StartButtonClicked += OnStartButtonClicked;
-            _view.SetWavesEnemiesText(GetWavesEnemiesText());
+            _view.SetWavesEnemiesText(StageEnemiesText.Build(_stageProviderService.NextStageConfig));
 
             _clicks = 0;
         }
@@ -78,55 +71,6 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup
             {
                 _view.ShowInfo();
             }
-        }
-
-        private string GetWavesEnemiesText()
-        {
-            StageConfig config = _stageProviderService.NextStageConfig;
-
-            if (config is EnemiesWavesStageConfig enemiesWavesStageConfig == false)
-                throw new ArgumentException($"{typeof(StageConfig)}");
-
-            IReadOnlyList<EnemiesWaveConfig> waves = enemiesWavesStageConfig.EnemiesWaveConfigs;
-
-            Dictionary<string, int> allEnemiesInWaves = new();
-
-            foreach (EnemiesWaveConfig wave in waves)
-            {
-                foreach (WaveEnemyGroup enemyGroup in wave.EnemyGroups)
-                {
-                    string characterName = enemyGroup.EnemyConfig.CharacterName;
-                    int count = enemyGroup.Count * wave.PatternRepeats;
-
-                    if (allEnemiesInWaves.ContainsKey(characterName))
-                    {
-                        allEnemiesInWaves[characterName] += count;
-                    }
-                    else
-                    {
-                        allEnemiesInWaves.Add(characterName, count);
-                    }
-                }
-            }
-
-            string text = "";
-
-            StringBuilder stringBuilder = new StringBuilder(text);
-
-            foreach (KeyValuePair<string, int> kvp in allEnemiesInWaves)
-            {
-                stringBuilder
-                    .Append(kvp.Key)
-                    .Append(" x")
-                    .Append(kvp.Value.ToString())
-                    .Append(", ");
-            }
-
-            stringBuilder.Remove(stringBuilder.Length - 2, 2);
-
-            text = stringBuilder.ToString();
-
-            return text;
         }
     }
 }
