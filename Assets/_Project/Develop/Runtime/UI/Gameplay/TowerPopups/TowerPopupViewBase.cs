@@ -22,7 +22,12 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups
 
         public void UpdateWorldPosition(Vector3 worldPosition)
         {
-            transform.position = _camera.WorldToScreenPoint(worldPosition);
+            Vector3 screenPosition = _camera.WorldToScreenPoint(worldPosition);
+
+            // В z — расстояние до камеры. Вне плоскости канваса uGUI не сортирует окно по глубине и рвёт батч на каждой
+            // смене материала.
+            screenPosition.z = 0f;
+            transform.position = screenPosition;
 
             if (_tip.IsShown)
                 PlaceTip();
