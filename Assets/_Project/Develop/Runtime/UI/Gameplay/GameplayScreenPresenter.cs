@@ -81,6 +81,10 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
             GoldWalletPresenter goldWalletPresenter = _gameplayPresentersFactory.CreateGoldWalletPresenter(_screenView.GoldWalletView);
 
             _childPresenters.Add(goldWalletPresenter);
+
+            GoldGainPresenter goldGainPresenter = _gameplayPresentersFactory.CreateGoldGainPresenter(_screenView.GoldGainView);
+
+            _childPresenters.Add(goldGainPresenter);
         }
 
         private void CreateStagesStatus()

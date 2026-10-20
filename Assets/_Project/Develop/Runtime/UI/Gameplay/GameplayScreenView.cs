@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Assets._Project.Develop.Runtime.UI.CommonViews;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
+using Assets._Project.Develop.Runtime.UI.Gameplay.GoldWallet;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
         public event Action AdvertRewardClicked;
 
         [field: SerializeField] public IconTextView GoldWalletView { get; private set; }
+        [field: SerializeField] public GoldGainView GoldGainView { get; private set; }
         [field: SerializeField] public IconTextView PlayerHealthView { get; private set; }
         [field: SerializeField] public IconTextView StagesStatusView { get; private set; }
         [field: SerializeField] public Button PauseButton { get; private set; }
