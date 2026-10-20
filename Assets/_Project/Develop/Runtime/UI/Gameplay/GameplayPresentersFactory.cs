@@ -29,7 +29,6 @@ using Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup;
 using Assets._Project.Develop.Runtime.UI.Settings;
 using Assets._Project.Develop.Runtime.Utilities.Adverts;
-using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
@@ -101,7 +100,6 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<RayShooterService>(),
                 view,
                 sourceTower,
-                _container.Resolve<ResourcesAssetsLoader>(),
                 _container.Resolve<TowersFactory>(),
                 config,
                 _container.Resolve<TowersPurchaseService>(),

@@ -41,6 +41,13 @@ namespace Assets._Project.Develop.Runtime.Utilities.Rendering
                 .OnComplete(Disable);
         }
 
+        public void Hide()
+        {
+            Kill();
+            SetOpacity(HiddenOpacity);
+            Disable();
+        }
+
         public void Kill()
         {
             if (_tween != null && _tween.IsActive())

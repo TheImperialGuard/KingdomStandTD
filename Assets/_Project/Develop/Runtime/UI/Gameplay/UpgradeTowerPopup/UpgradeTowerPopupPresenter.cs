@@ -2,38 +2,29 @@
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
-using Assets._Project.Develop.Runtime.Gameplay.Features.Shoot;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups;
-using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.Text;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using System;
-using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
 {
-    // Улучшение башни I–III уровня и продажа. Заряд улучшения показывает поверх текущего круга дальности круг следующего
-    // уровня (Р-19).
+    // Улучшение башни I–III уровня и продажа. Заряд улучшения показывает на круге дальности башни прирост до дальности
+    // следующего уровня (Р-19).
     public class UpgradeTowerPopupPresenter : TowerPopupPresenterBase<UpgradeTowerPopupButtons>
     {
-        private const string RangeZonePrefabPath = "Prefabs/Entities/Towers/ShootingRangeZone";
-
         private readonly UpgradeTowerPopupView _view;
 
-        private readonly ResourcesAssetsLoader _resourcesAssetsLoader;
         private readonly TowersFactory _towersFactory;
         private readonly TowersListConfig _towersListConfig;
-
-        private ShootingRangeZone _rangeDemo;
 
         public UpgradeTowerPopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
             RayShooterService rayShooterService,
             UpgradeTowerPopupView view,
             Entity sourceTower,
-            ResourcesAssetsLoader resourcesAssetsLoader,
             TowersFactory towersFactory,
             TowersListConfig towersListConfig,
             TowersPurchaseService towersPurchaseService,
@@ -49,7 +40,6 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
                 walletService)
         {
             _view = view;
-            _resourcesAssetsLoader = resourcesAssetsLoader;
             _towersFactory = towersFactory;
             _towersListConfig = towersListConfig;
         }
@@ -72,8 +62,6 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
             base.Dispose();
 
             _view.ButtonClicked -= OnButtonClicked;
-
-            ReleaseRangeDemo();
         }
 
         protected override void RefreshButtons()
@@ -119,10 +107,10 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
         protected override void OnArmed(UpgradeTowerPopupButtons button)
         {
             if (button == UpgradeTowerPopupButtons.Upgrade)
-                CreateRangeDemo(NextLevelConfig);
+                Source.ShootingRangeZone.ShowGrowth(NextLevelConfig.AttackRange);
         }
 
-        protected override void OnDisarmed(UpgradeTowerPopupButtons button) => ReleaseRangeDemo();
+        protected override void OnDisarmed(UpgradeTowerPopupButtons button) => Source.ShootingRangeZone.HideGrowth();
 
         protected override void Activate(UpgradeTowerPopupButtons button)
         {
@@ -146,30 +134,10 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
             if (TowersPurchaseService.TryBuyTower(TowerType, NextTowerLevel) == false)
                 return;
 
-            ReleaseRangeDemo();
-
             _towersFactory.Create(Source.Transform.position, NextLevelConfig, NextTowerLevel);
 
             Source.SelfReleaseRequested.Value = true;
             OnCloseRequest(false);
-        }
-
-        private void CreateRangeDemo(ShootingTowerConfig config)
-        {
-            ShootingRangeZone zonePrefab = _resourcesAssetsLoader.Load<ShootingRangeZone>(RangeZonePrefabPath);
-
-            _rangeDemo = GameObject.Instantiate(zonePrefab, Source.Transform.position, Quaternion.identity);
-
-            _rangeDemo.SetRange(config.AttackRange);
-            _rangeDemo.Show();
-        }
-
-        private void ReleaseRangeDemo()
-        {
-            if (_rangeDemo != null)
-                GameObject.Destroy(_rangeDemo.gameObject);
-
-            _rangeDemo = null;
         }
     }
 }
