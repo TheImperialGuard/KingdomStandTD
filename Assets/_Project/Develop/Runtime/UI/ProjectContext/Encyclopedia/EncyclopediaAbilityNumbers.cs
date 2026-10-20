@@ -5,43 +5,45 @@ using Assets._Project.Develop.Runtime.Utilities.Text;
 namespace Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia
 {
     // Строка цифр способности под её описанием (Р-19, Р-67): числа берутся из полей конфига, в описаниях их нет. У башен —
-    // значения первого уровня способности. Части строки разделены «·» и переносятся только по нему: «раз в 10 с» не
-    // разрывается.
+    // значения заданного уровня способности: в книге первого, в окне способностей боя — покупаемого (Р-20 боя). Части
+    // строки разделены «·» и переносятся только по нему: «раз в 10 с» не разрывается.
     public static class EncyclopediaAbilityNumbers
     {
         private const int FirstLevel = 1;
         private const char Space = ' ';
         private const string PartsSeparator = "·";
 
-        public static string Format(AbilityConfig ability) => KeepPartsTogether(FormatTowerAbility(ability));
+        public static string Format(AbilityConfig ability) => Format(ability, FirstLevel);
+
+        public static string Format(AbilityConfig ability, int level) => KeepPartsTogether(FormatTowerAbility(ability, level));
 
         public static string Format(EnemyAbilityConfig ability) => KeepPartsTogether(FormatEnemyAbility(ability));
 
-        private static string FormatTowerAbility(AbilityConfig ability)
+        private static string FormatTowerAbility(AbilityConfig ability, int level)
         {
             switch (ability)
             {
                 case AdditionalShootingTargetsAbilityConfig targets:
-                    return FormatAdditionalTargets(targets.GetAdditionsTargetsBy(FirstLevel));
+                    return FormatAdditionalTargets(targets.GetAdditionsTargetsBy(level));
 
                 case PoisonedAttackAbilityConfig poison:
                     return FormatPoison(
-                        DecimalText.Format(poison.GetDamageByLevel(FirstLevel)),
-                        DecimalText.Format(poison.GetEffectIntervalByLevel(FirstLevel)),
-                        DecimalText.Format(poison.GetEffectTimeByLevel(FirstLevel)));
+                        DecimalText.Format(poison.GetDamageByLevel(level)),
+                        DecimalText.Format(poison.GetEffectIntervalByLevel(level)),
+                        DecimalText.Format(poison.GetEffectTimeByLevel(level)));
 
                 case ProjectileFragmentsAbilityConfig fragments:
-                    return FormatFragments((int)fragments.FragmentsCount, fragments.GetFragmentsDamageBy(FirstLevel));
+                    return FormatFragments((int)fragments.FragmentsCount, fragments.GetFragmentsDamageBy(level));
 
                 case AttackStunAbilityConfig attackStun:
-                    return FormatStun(DecimalText.Format(attackStun.GetStunTimeBy(FirstLevel)));
+                    return FormatStun(DecimalText.Format(attackStun.GetStunTimeBy(level)));
 
                 case OneShotAttackAbilityConfig oneShot:
-                    return FormatCooldown(DecimalText.Format(oneShot.GetCooldownBy(FirstLevel)));
+                    return FormatCooldown(DecimalText.Format(oneShot.GetCooldownBy(level)));
 
                 case StunAbilityConfig stun:
                     return FormatFreeze(
-                        DecimalText.Format(stun.GetStunTimeBy(FirstLevel)),
+                        DecimalText.Format(stun.GetStunTimeBy(level)),
                         DecimalText.Format(stun.Cooldown));
 
                 default:
