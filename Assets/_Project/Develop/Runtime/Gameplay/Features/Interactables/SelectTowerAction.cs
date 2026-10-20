@@ -18,6 +18,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
 
         public void Do()
         {
+            if (_popupService.IsTowerPopupOpenFor(_source))
+                return;
+
             _source.ShootingRangeZone.Show();
 
             _popupService.OpenTowerInfoPopup(_source);

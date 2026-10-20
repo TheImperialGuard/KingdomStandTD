@@ -1,6 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.PauseFeature;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
+using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
@@ -23,6 +24,9 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
         private readonly GameplayPresentersFactory _gameplayPresentersFactory;
         private readonly TimeScalePauseService _timeScalePauseService;
 
+        private PopupPresenterBase _towerPopup;
+        private Entity _towerPopupSource;
+
         public GameplayPopupService(
             ViewsFactory viewsFactory,
             ProjectPresentersFactory projectPresentersFactory,
@@ -43,6 +47,10 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
         protected override void OnEncyclopediaOpened() => _timeScalePauseService.Pause();
 
         protected override void OnEncyclopediaClosed() => _timeScalePauseService.Unpause();
+
+        // Открыто ли окно башни (постройки, улучшения или способностей) этой башни или места: повторное нажатие на них
+        // ничего не делает (Р-38). Окно считается закрытым с момента запроса закрытия.
+        public bool IsTowerPopupOpenFor(Entity source) => _towerPopup != null && _towerPopupSource == source;
 
         public StartStagesPopupPresenter OpenStartStagesPopup(Action closedCallback = null)
         {
@@ -73,6 +81,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
             BuildTowerPopupPresenter popup = _gameplayPresentersFactory.CreateBuildTowerPopupPresenter(view, towerPlaceholder);
 
             OnPopupCreated(popup, view, closedCallback);
+            TrackTowerPopup(popup, towerPlaceholder);
 
             return popup;
         }
@@ -84,6 +93,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
             UpgradeTowerPopupPresenter popup = _gameplayPresentersFactory.CreateUpgradeTowerPopupPresenter(view, sourceTower);
 
             OnPopupCreated(popup, view, closedCallback);
+            TrackTowerPopup(popup, sourceTower);
 
             return popup;
         }
@@ -95,6 +105,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
             TowerAbilitiesPopupPresenter popup = _gameplayPresentersFactory.CreateTowerAbilitiesPopupPresenter(view, sourceTower);
 
             OnPopupCreated(popup, view, closedCallback);
+            TrackTowerPopup(popup, sourceTower);
 
             return popup;
         }
@@ -152,6 +163,25 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
             OnPopupCreated(presenter, view, closedCallback);
 
             return presenter;
+        }
+
+        private void TrackTowerPopup(PopupPresenterBase popup, Entity source)
+        {
+            _towerPopup = popup;
+            _towerPopupSource = source;
+
+            popup.CloseRequest += OnTowerPopupCloseRequest;
+        }
+
+        private void OnTowerPopupCloseRequest(PopupPresenterBase popup, bool withCallBack)
+        {
+            popup.CloseRequest -= OnTowerPopupCloseRequest;
+
+            if (popup != _towerPopup)
+                return;
+
+            _towerPopup = null;
+            _towerPopupSource = null;
         }
     }
 }

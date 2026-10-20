@@ -69,6 +69,10 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup
         {
             base.OnClickedOutside(oldHit, newHit);
 
+            // Щелчок по своей башне ничего не делает, как и в окне башни (Р-38).
+            if (newHit.IsOn(_sourceTower))
+                return;
+
             OnCloseRequest();
         }
 

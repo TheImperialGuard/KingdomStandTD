@@ -19,6 +19,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Interactables
 
         public void Do()
         {
+            if (_popupService.IsTowerPopupOpenFor(_source))
+                return;
+
             _popupService.OpenBuildTowerPopup(_source);
         }
     }
