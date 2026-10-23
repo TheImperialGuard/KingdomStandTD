@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e74d2de9df0ef40838a9586a393bc5, type: 3}
+  m_Name: SnowLighting
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.LevelLightingConfig
+  <SunColor>k__BackingField: {r: 0.8901961, g: 0.9254902, b: 1, a: 1}
+  <SunIntensity>k__BackingField: 0.85
+  <SunRotation>k__BackingField: {x: 60, y: 330, z: 0}
+  <SunShadowStrength>k__BackingField: 0.7
+  <AmbientSkyColor>k__BackingField: {r: 0.37254903, g: 0.48235294, b: 0.6784314, a: 1}
+  <AmbientEquatorColor>k__BackingField: {r: 0.41568628, g: 0.50980395, b: 0.65882355, a: 1}
+  <AmbientGroundColor>k__BackingField: {r: 0.30588236, g: 0.3529412, b: 0.4392157, a: 1}
