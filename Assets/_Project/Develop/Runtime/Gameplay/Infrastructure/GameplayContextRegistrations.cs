@@ -63,6 +63,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateLevelCameraBoundsService).NonLazy();
 
+            container.RegisterAsSingle(CreateLevelLightingService).NonLazy();
+
             container.RegisterAsSingle(CreateGameplayWalletService);
 
             container.RegisterAsSingle(CreateTowersPurchaseService);
@@ -314,6 +316,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             BoundedOrthoCamera boundedOrthoCamera = camera.GetComponent<BoundedOrthoCamera>();
 
             return new LevelCameraBoundsService(c.Resolve<Level>(), boundedOrthoCamera);
+        }
+
+        private static LevelLightingService CreateLevelLightingService(DIContainer c)
+        {
+            return new LevelLightingService(c.Resolve<Level>(), RenderSettings.sun);
         }
 
         private static CameraMover CreateCameraMover(DIContainer c)

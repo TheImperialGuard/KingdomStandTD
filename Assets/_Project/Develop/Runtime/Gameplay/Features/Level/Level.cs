@@ -1,3 +1,4 @@
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Level
         [SerializeField] private List<Transform> _towersPositions;
         [SerializeField] private GameObject _staticGroup;
 
+        [Tooltip("Свет уровня. Пусто — свет сцены остаётся как есть")]
+        [SerializeField] private LevelLightingConfig _lighting;
+
         [Header("Объекты вне игрового поля: тайл спавна врагов, концы дороги")]
         [SerializeField] private List<GameObject> _boundsExcludedObjects;
 
@@ -18,6 +22,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Level
 
         public IReadOnlyList<RoadPath> RoadPaths => _roadPaths;
         public IReadOnlyList<Transform> TowersPositions => _towersPositions;
+        public LevelLightingConfig Lighting => _lighting;
 
         public Bounds FieldBounds => _fieldBounds;
         public bool HasFieldBounds => _hasFieldBounds;
