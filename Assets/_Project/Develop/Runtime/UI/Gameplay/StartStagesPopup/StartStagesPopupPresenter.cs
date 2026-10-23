@@ -51,6 +51,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.StartStagesPopup
             _view.StartButtonClicked -= OnStartButtonClicked;
         }
 
+        protected override void OnPreHide()
+        {
+            base.OnPreHide();
+
+            _view.StartButtonClicked -= OnStartButtonClicked;
+        }
+
         protected override void OnClickedOutside(RaycastHit oldHit, RaycastHit newHit)
         {
             base.OnClickedOutside(oldHit, newHit);

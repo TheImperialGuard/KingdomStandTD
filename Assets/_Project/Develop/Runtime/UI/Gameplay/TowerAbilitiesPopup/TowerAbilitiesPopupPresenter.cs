@@ -79,6 +79,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
             _view.ButtonClicked -= OnButtonClicked;
         }
 
+        protected override void OnPreHide()
+        {
+            base.OnPreHide();
+
+            _view.ButtonClicked -= OnButtonClicked;
+        }
+
         protected override void RefreshButtons()
         {
             RefreshAbilityButton(TowerAbilitiesPopupButtons.FirstAbility);

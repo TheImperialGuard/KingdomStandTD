@@ -73,8 +73,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups
         {
             base.Dispose();
 
-            _goldDisposable.Dispose();
-            _cameraMovedDisposable.Dispose();
+            UnsubscribeFromWorld();
         }
 
         protected abstract void RefreshButtons();
@@ -90,6 +89,14 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups
         protected virtual void OnArmed(TButton button) { }
 
         protected virtual void OnDisarmed(TButton button) { }
+
+        // После постройки, улучшения или продажи источник окна уничтожается, пока окно ещё закрывается.
+        protected override void OnPreHide()
+        {
+            base.OnPreHide();
+
+            UnsubscribeFromWorld();
+        }
 
         protected override void OnClickedOutside(RaycastHit oldHit, RaycastHit newHit)
         {
@@ -184,5 +191,14 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups
         }
 
         private void OnCameraMoved() => _view.UpdateWorldPosition(Source.Transform.position);
+
+        private void UnsubscribeFromWorld()
+        {
+            _goldDisposable?.Dispose();
+            _goldDisposable = null;
+
+            _cameraMovedDisposable?.Dispose();
+            _cameraMovedDisposable = null;
+        }
     }
 }

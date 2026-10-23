@@ -67,6 +67,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup
             ReleaseTowerDemo();
         }
 
+        protected override void OnPreHide()
+        {
+            base.OnPreHide();
+
+            _view.ButtonClicked -= OnButtonClicked;
+        }
+
         protected override void RefreshButtons()
         {
             foreach (TowerTypes type in Enum.GetValues(typeof(TowerTypes)))

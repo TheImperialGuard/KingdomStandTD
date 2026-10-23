@@ -40,7 +40,7 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Popups
 
             PopupView.CloseRequest -= OnCloseRequest;
 
-            _rayShooterServiceDisposable.Dispose();
+            UnsubscribeFromClicks();
         }
 
         public void Show()
@@ -66,9 +66,12 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Popups
 
         protected virtual void OnPostShow() { }
 
+        // Закрывающееся окно на щелчки по миру уже не отвечает: его источник к этому времени может быть уничтожен.
         protected virtual void OnPreHide()
         {
             PopupView.CloseRequest -= OnCloseRequest;
+
+            UnsubscribeFromClicks();
         }
 
         protected virtual void OnPostHide() { }
@@ -99,6 +102,12 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Popups
         {
             if (_process != null)
                 _coroutinesPerformer.StopPerform(_process);
+        }
+
+        private void UnsubscribeFromClicks()
+        {
+            _rayShooterServiceDisposable?.Dispose();
+            _rayShooterServiceDisposable = null;
         }
     }
 }

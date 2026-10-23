@@ -64,6 +64,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
             _view.ButtonClicked -= OnButtonClicked;
         }
 
+        protected override void OnPreHide()
+        {
+            base.OnPreHide();
+
+            _view.ButtonClicked -= OnButtonClicked;
+        }
+
         protected override void RefreshButtons()
         {
             int upgradeCost = TowersPurchaseService.GetPriceFor(TowerType, NextTowerLevel);

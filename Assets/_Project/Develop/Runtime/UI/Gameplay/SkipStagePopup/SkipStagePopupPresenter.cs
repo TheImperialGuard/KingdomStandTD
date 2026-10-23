@@ -74,6 +74,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup
             _remainingTimeDisposable.Dispose();
         }
 
+        protected override void OnPreHide()
+        {
+            base.OnPreHide();
+
+            _view.StartButtonClicked -= OnStartButtonClicked;
+        }
+
         protected override void OnClickedOutside(RaycastHit oldHit, RaycastHit newHit)
         {
             base.OnClickedOutside(oldHit, newHit);
