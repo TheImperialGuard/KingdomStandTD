@@ -1,0 +1,979 @@
+{
+  "level": "Level_8",
+  "campaignNumber": 8,
+  "prefabPath": "Prefabs/Levels/Level_8",
+  "gameMode": "Basic",
+  "towerSlotsCount": 0,
+  "startGold": 850,
+  "startPlayerHealth": 20,
+  "roads": [
+    {
+      "pathNumber": "First",
+      "name": "Path_1",
+      "waypointsCount": 8,
+      "lengthCenter": 57.0,
+      "lengthLeft": 54.884,
+      "lengthRight": 59.129,
+      "timeToBase": {
+        "HumanRogue": 38.0,
+        "Skeleton": 57.0,
+        "SkeletonMage": 95.0
+      }
+    },
+    {
+      "pathNumber": "Second",
+      "name": "Path_2",
+      "waypointsCount": 5,
+      "lengthCenter": 27.0,
+      "lengthLeft": 27.005,
+      "lengthRight": 27.007,
+      "timeToBase": {
+        "Barbarian": 54.0,
+        "HumanRogue": 18.0,
+        "Skeleton": 27.0,
+        "SkeletonBoss": 54.0,
+        "SkeletonMage": 45.0,
+        "SkeletonRogue": 54.0
+      }
+    }
+  ],
+  "stages": [
+    {
+      "stageTime": 60.0,
+      "timeToSkipStage": 35.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "SkeletonMage",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 1000.0,
+            "killGold": 200,
+            "breakthroughDamage": 10,
+            "spawnEnd": 18.0,
+            "firstArrival": 95.0,
+            "lastArrival": 113.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "SkeletonRogue",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 1.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 800.0,
+            "killGold": 150,
+            "breakthroughDamage": 10,
+            "spawnEnd": 19.0,
+            "firstArrival": 55.0,
+            "lastArrival": 73.0
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 2,
+        "enemiesCount": 20,
+        "enemiesByType": {
+          "SkeletonMage": 10,
+          "SkeletonRogue": 10
+        },
+        "health": 1800.0,
+        "effectiveHealthPhysic": 2142.857,
+        "effectiveHealthMagic": 7466.667,
+        "healthPerSecond": 30.0,
+        "killGold": 350,
+        "maxSkipGold": 30,
+        "goldAtStartWithoutSkips": 850,
+        "goldAtStartWithMaxSkips": 850,
+        "breakthroughDamage": 20,
+        "breakthroughThreat": 1.0,
+        "spawnEnd": 19.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 113.0,
+        "peakEnemies": 20,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 1000.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 800.0
+          }
+        ]
+      }
+    },
+    {
+      "stageTime": 45.0,
+      "timeToSkipStage": 15.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "HumanRogue",
+              "count": 5
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 5,
+            "health": 175.0,
+            "killGold": 50,
+            "breakthroughDamage": 5,
+            "spawnEnd": 8.0,
+            "firstArrival": 38.0,
+            "lastArrival": 46.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "HumanRogue",
+              "count": 5
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 5,
+            "health": 175.0,
+            "killGold": 50,
+            "breakthroughDamage": 5,
+            "spawnEnd": 8.0,
+            "firstArrival": 18.0,
+            "lastArrival": 26.0
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 2,
+        "enemiesCount": 10,
+        "enemiesByType": {
+          "HumanRogue": 10
+        },
+        "health": 350.0,
+        "effectiveHealthPhysic": 350.0,
+        "effectiveHealthMagic": 350.0,
+        "healthPerSecond": 7.778,
+        "killGold": 100,
+        "maxSkipGold": 30,
+        "goldAtStartWithoutSkips": 1200,
+        "goldAtStartWithMaxSkips": 1230,
+        "breakthroughDamage": 10,
+        "breakthroughThreat": 0.5,
+        "spawnEnd": 8.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 46.0,
+        "peakEnemies": 23,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 5,
+            "health": 175.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 5,
+            "health": 175.0
+          }
+        ]
+      }
+    },
+    {
+      "stageTime": 60.0,
+      "timeToSkipStage": 35.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "SkeletonMage",
+              "count": 3
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 3,
+            "health": 300.0,
+            "killGold": 60,
+            "breakthroughDamage": 3,
+            "spawnEnd": 4.0,
+            "firstArrival": 95.0,
+            "lastArrival": 99.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "HumanRogue",
+              "count": 3
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 3,
+            "health": 105.0,
+            "killGold": 30,
+            "breakthroughDamage": 3,
+            "spawnEnd": 4.0,
+            "firstArrival": 18.0,
+            "lastArrival": 22.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Barbarian",
+              "count": 2
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 2.0,
+          "delayBetweenSpawns": 10.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 2,
+            "health": 1200.0,
+            "killGold": 100,
+            "breakthroughDamage": 6,
+            "spawnEnd": 12.0,
+            "firstArrival": 56.0,
+            "lastArrival": 66.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 8.0,
+          "delayBetweenSpawns": 3.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 200.0,
+            "killGold": 50,
+            "breakthroughDamage": 10,
+            "spawnEnd": 35.0,
+            "firstArrival": 65.0,
+            "lastArrival": 92.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Right",
+          "startDelay": 9.0,
+          "delayBetweenSpawns": 3.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 200.0,
+            "killGold": 50,
+            "breakthroughDamage": 10,
+            "spawnEnd": 36.0,
+            "firstArrival": 68.129,
+            "lastArrival": 95.129
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 5,
+        "enemiesCount": 28,
+        "enemiesByType": {
+          "Barbarian": 2,
+          "HumanRogue": 3,
+          "Skeleton": 20,
+          "SkeletonMage": 3
+        },
+        "health": 2005.0,
+        "effectiveHealthPhysic": 3205.0,
+        "effectiveHealthMagic": 3705.0,
+        "healthPerSecond": 33.417,
+        "killGold": 290,
+        "maxSkipGold": 30,
+        "goldAtStartWithoutSkips": 1300,
+        "goldAtStartWithMaxSkips": 1360,
+        "breakthroughDamage": 32,
+        "breakthroughThreat": 1.6,
+        "spawnEnd": 36.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 99.0,
+        "peakEnemies": 25,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 2,
+            "enemiesCount": 13,
+            "health": 500.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Right",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 200.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Center",
+            "wavesCount": 2,
+            "enemiesCount": 5,
+            "health": 1305.0
+          }
+        ]
+      }
+    },
+    {
+      "stageTime": 60.0,
+      "timeToSkipStage": 35.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "SkeletonMage",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 2.0,
+          "delayBetweenSpawns": 4.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 1000.0,
+            "killGold": 200,
+            "breakthroughDamage": 10,
+            "spawnEnd": 38.0,
+            "firstArrival": 97.0,
+            "lastArrival": 133.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "SkeletonMage",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 4.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 1000.0,
+            "killGold": 200,
+            "breakthroughDamage": 10,
+            "spawnEnd": 36.0,
+            "firstArrival": 45.0,
+            "lastArrival": 81.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "HumanRogue",
+              "count": 5
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Left",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 5.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 5,
+            "health": 175.0,
+            "killGold": 50,
+            "breakthroughDamage": 5,
+            "spawnEnd": 20.0,
+            "firstArrival": 36.589,
+            "lastArrival": 56.589
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "HumanRogue",
+              "count": 5
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Right",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 5.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 5,
+            "health": 175.0,
+            "killGold": 50,
+            "breakthroughDamage": 5,
+            "spawnEnd": 20.0,
+            "firstArrival": 18.005,
+            "lastArrival": 38.005
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Right",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 200.0,
+            "killGold": 50,
+            "breakthroughDamage": 10,
+            "spawnEnd": 9.0,
+            "firstArrival": 59.129,
+            "lastArrival": 68.129
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Left",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 200.0,
+            "killGold": 50,
+            "breakthroughDamage": 10,
+            "spawnEnd": 9.0,
+            "firstArrival": 27.005,
+            "lastArrival": 36.005
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 6,
+        "enemiesCount": 50,
+        "enemiesByType": {
+          "HumanRogue": 10,
+          "Skeleton": 20,
+          "SkeletonMage": 20
+        },
+        "health": 2750.0,
+        "effectiveHealthPhysic": 2750.0,
+        "effectiveHealthMagic": 14083.335,
+        "healthPerSecond": 45.833,
+        "killGold": 600,
+        "maxSkipGold": 30,
+        "goldAtStartWithoutSkips": 1590,
+        "goldAtStartWithMaxSkips": 1680,
+        "breakthroughDamage": 50,
+        "breakthroughThreat": 2.5,
+        "spawnEnd": 38.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 133.0,
+        "peakEnemies": 53,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 1000.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Left",
+            "wavesCount": 1,
+            "enemiesCount": 5,
+            "health": 175.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Right",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 200.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 1000.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Left",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 200.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Right",
+            "wavesCount": 1,
+            "enemiesCount": 5,
+            "health": 175.0
+          }
+        ]
+      }
+    },
+    {
+      "stageTime": 70.0,
+      "timeToSkipStage": 45.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "SkeletonRogue",
+              "count": 20
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 2.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 20,
+            "health": 1600.0,
+            "killGold": 300,
+            "breakthroughDamage": 20,
+            "spawnEnd": 38.0,
+            "firstArrival": 54.0,
+            "lastArrival": 92.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 30
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 30,
+            "health": 600.0,
+            "killGold": 150,
+            "breakthroughDamage": 30,
+            "spawnEnd": 29.0,
+            "firstArrival": 57.0,
+            "lastArrival": 86.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 30
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Left",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 30,
+            "health": 600.0,
+            "killGold": 150,
+            "breakthroughDamage": 30,
+            "spawnEnd": 29.0,
+            "firstArrival": 54.884,
+            "lastArrival": 83.884
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 30
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Right",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 30,
+            "health": 600.0,
+            "killGold": 150,
+            "breakthroughDamage": 30,
+            "spawnEnd": 29.0,
+            "firstArrival": 59.129,
+            "lastArrival": 88.129
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 4,
+        "enemiesCount": 110,
+        "enemiesByType": {
+          "Skeleton": 90,
+          "SkeletonRogue": 20
+        },
+        "health": 3400.0,
+        "effectiveHealthPhysic": 4085.714,
+        "effectiveHealthMagic": 3400.0,
+        "healthPerSecond": 48.571,
+        "killGold": 750,
+        "maxSkipGold": 30,
+        "goldAtStartWithoutSkips": 2190,
+        "goldAtStartWithMaxSkips": 2310,
+        "breakthroughDamage": 110,
+        "breakthroughThreat": 5.5,
+        "spawnEnd": 38.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 92.0,
+        "peakEnemies": 119,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 30,
+            "health": 600.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Left",
+            "wavesCount": 1,
+            "enemiesCount": 30,
+            "health": 600.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Right",
+            "wavesCount": 1,
+            "enemiesCount": 30,
+            "health": 600.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 20,
+            "health": 1600.0
+          }
+        ]
+      }
+    },
+    {
+      "stageTime": 110.0,
+      "timeToSkipStage": 60.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "Barbarian",
+              "count": 7
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 6.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 7,
+            "health": 4200.0,
+            "killGold": 350,
+            "breakthroughDamage": 21,
+            "spawnEnd": 36.0,
+            "firstArrival": 54.0,
+            "lastArrival": 90.0
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "HumanRogue",
+              "count": 15
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 5.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 15,
+            "health": 525.0,
+            "killGold": 150,
+            "breakthroughDamage": 15,
+            "spawnEnd": 70.0,
+            "firstArrival": 38.0,
+            "lastArrival": 108.0
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 2,
+        "enemiesCount": 22,
+        "enemiesByType": {
+          "Barbarian": 7,
+          "HumanRogue": 15
+        },
+        "health": 4725.0,
+        "effectiveHealthPhysic": 8925.0,
+        "effectiveHealthMagic": 4725.0,
+        "healthPerSecond": 42.955,
+        "killGold": 500,
+        "maxSkipGold": 30,
+        "goldAtStartWithoutSkips": 2940,
+        "goldAtStartWithMaxSkips": 3090,
+        "breakthroughDamage": 36,
+        "breakthroughThreat": 1.8,
+        "spawnEnd": 70.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 108.0,
+        "peakEnemies": 63,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 15,
+            "health": 525.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 7,
+            "health": 4200.0
+          }
+        ]
+      }
+    },
+    {
+      "stageTime": 100.0,
+      "timeToSkipStage": 60.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "SkeletonBoss",
+              "count": 1
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 1,
+            "health": 8000.0,
+            "killGold": 100,
+            "breakthroughDamage": 20,
+            "spawnEnd": 0.0,
+            "firstArrival": 54.0,
+            "lastArrival": 54.0
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 1,
+        "enemiesCount": 1,
+        "enemiesByType": {
+          "SkeletonBoss": 1
+        },
+        "health": 8000.0,
+        "effectiveHealthPhysic": 16000.0,
+        "effectiveHealthMagic": 8000.0,
+        "healthPerSecond": 80.0,
+        "killGold": 100,
+        "maxSkipGold": 0,
+        "goldAtStartWithoutSkips": 3440,
+        "goldAtStartWithMaxSkips": 3620,
+        "breakthroughDamage": 20,
+        "breakthroughThreat": 1.0,
+        "spawnEnd": 0.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 54.0,
+        "peakEnemies": 1,
+        "traffic": [
+          {
+            "pathNumber": "Second",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 1,
+            "health": 8000.0
+          }
+        ]
+      }
+    }
+  ],
+  "analysis": {
+    "stagesCount": 7,
+    "wavesCount": 22,
+    "enemiesCount": 241,
+    "enemiesByType": {
+      "Barbarian": 9,
+      "HumanRogue": 38,
+      "Skeleton": 130,
+      "SkeletonBoss": 1,
+      "SkeletonMage": 33,
+      "SkeletonRogue": 30
+    },
+    "health": 23030.0,
+    "effectiveHealthPhysic": 37458.57,
+    "effectiveHealthMagic": 41730.004,
+    "killGold": 2690,
+    "maxSkipGold": 180,
+    "totalGoldWithoutSkips": 3540,
+    "totalGoldWithMaxSkips": 3720,
+    "breakthroughDamage": 278,
+    "breakthroughThreat": 13.9,
+    "durationWithoutSkips": 406.0,
+    "durationWithMaxSkips": 240.0,
+    "peakEnemies": 119,
+    "traffic": [
+      {
+        "pathNumber": "First",
+        "lane": "Center",
+        "wavesCount": 7,
+        "enemiesCount": 83,
+        "health": 3800.0
+      },
+      {
+        "pathNumber": "First",
+        "lane": "Left",
+        "wavesCount": 2,
+        "enemiesCount": 35,
+        "health": 775.0
+      },
+      {
+        "pathNumber": "First",
+        "lane": "Right",
+        "wavesCount": 3,
+        "enemiesCount": 50,
+        "health": 1000.0
+      },
+      {
+        "pathNumber": "Second",
+        "lane": "Center",
+        "wavesCount": 8,
+        "enemiesCount": 58,
+        "health": 17080.0
+      },
+      {
+        "pathNumber": "Second",
+        "lane": "Left",
+        "wavesCount": 1,
+        "enemiesCount": 10,
+        "health": 200.0
+      },
+      {
+        "pathNumber": "Second",
+        "lane": "Right",
+        "wavesCount": 1,
+        "enemiesCount": 5,
+        "health": 175.0
+      }
+    ]
+  },
+  "errors": [],
+  "warnings": [
+    "На префабе нет ни одного места под башню"
+  ]
+}
