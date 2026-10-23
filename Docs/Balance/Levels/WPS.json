@@ -1,7 +1,7 @@
 {
   "level": "WPS",
   "campaignNumber": null,
-  "prefabPath": "Prefabs/Levels/RoadMaket_1",
+  "prefabPath": "Prefabs/Levels/RoadMaket_5",
   "gameMode": "Basic",
   "towerSlotsCount": 0,
   "startGold": 2000,
@@ -10,25 +10,25 @@
     {
       "pathNumber": "First",
       "name": "Path_1",
-      "waypointsCount": 8,
-      "lengthCenter": 57.0,
-      "lengthLeft": 54.884,
-      "lengthRight": 59.129,
+      "waypointsCount": 11,
+      "lengthCenter": 47.0,
+      "lengthLeft": 47.0,
+      "lengthRight": 47.0,
       "timeToBase": {
-        "Gargoyle": 57.0,
-        "Skeleton": 57.0
+        "Gargoyle": 47.0,
+        "Skeleton": 47.0
       }
     },
     {
       "pathNumber": "Second",
       "name": "Path_2",
-      "waypointsCount": 5,
-      "lengthCenter": 27.0,
-      "lengthLeft": 27.005,
-      "lengthRight": 27.007,
+      "waypointsCount": 11,
+      "lengthCenter": 47.0,
+      "lengthLeft": 47.0,
+      "lengthRight": 47.0,
       "timeToBase": {
-        "Gargoyle": 27.0,
-        "Orc": 27.0
+        "Gargoyle": 47.0,
+        "Orc": 47.0
       }
     }
   ],
@@ -57,8 +57,8 @@
             "killGold": 50,
             "breakthroughDamage": 5,
             "spawnEnd": 8.0,
-            "firstArrival": 57.0,
-            "lastArrival": 65.0
+            "firstArrival": 47.0,
+            "lastArrival": 55.0
           }
         },
         {
@@ -80,8 +80,8 @@
             "killGold": 100,
             "breakthroughDamage": 10,
             "spawnEnd": 18.0,
-            "firstArrival": 27.0,
-            "lastArrival": 45.0
+            "firstArrival": 47.0,
+            "lastArrival": 65.0
           }
         }
       ],
@@ -147,8 +147,8 @@
             "killGold": 50,
             "breakthroughDamage": 10,
             "spawnEnd": 18.0,
-            "firstArrival": 57.0,
-            "lastArrival": 75.0
+            "firstArrival": 47.0,
+            "lastArrival": 65.0
           }
         },
         {
@@ -170,8 +170,8 @@
             "killGold": 100,
             "breakthroughDamage": 10,
             "spawnEnd": 18.0,
-            "firstArrival": 27.0,
-            "lastArrival": 45.0
+            "firstArrival": 47.0,
+            "lastArrival": 65.0
           }
         }
       ],
@@ -194,8 +194,8 @@
         "breakthroughThreat": 1.0,
         "spawnEnd": 18.0,
         "spawnOverflow": 0.0,
-        "lastArrival": 75.0,
-        "peakEnemies": 29,
+        "lastArrival": 65.0,
+        "peakEnemies": 35,
         "traffic": [
           {
             "pathNumber": "First",
@@ -235,7 +235,7 @@
     "breakthroughThreat": 1.75,
     "durationWithoutSkips": 40.0,
     "durationWithMaxSkips": 35.0,
-    "peakEnemies": 29,
+    "peakEnemies": 35,
     "traffic": [
       {
         "pathNumber": "First",
