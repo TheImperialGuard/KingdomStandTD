@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6344026827213440097}
   - component: {fileID: 4484069676630610299}
   m_Layer: 0
-  m_Name: Level_wps1
+  m_Name: Level_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

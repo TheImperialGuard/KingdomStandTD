@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 5703507252820143025}
   - component: {fileID: 4755431590956081824}
   m_Layer: 0
-  m_Name: Level_wps_2
+  m_Name: Level_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,6 +396,7 @@ MonoBehaviour:
   - {fileID: 2288325752321214964}
   - {fileID: 2282302870674165620}
   _staticGroup: {fileID: 6176400234163683696}
+  _lighting: {fileID: 0}
   _boundsExcludedObjects:
   - {fileID: 4047093369561484229}
   - {fileID: 7059218826297909318}
