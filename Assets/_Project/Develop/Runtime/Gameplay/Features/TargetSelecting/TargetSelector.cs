@@ -17,6 +17,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
 
         private readonly Transform _sourceTransform;
 
+        private Vector3 _sourcePosition;
+        private float _shootRange;
+
         public TargetSelector(Entity entity, List<ReactiveVariable<Entity>> targetsForExclude = null)
         {
             TargetsForExclude = targetsForExclude;
@@ -27,6 +30,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
         public abstract Entity SelectTargetFrom(IReadOnlyList<Entity> targets);
 
         public abstract List<Entity> SelectMultipleTargetsFrom(IReadOnlyList<Entity> targets, int count);
+
+        // За один поиск позиция и дальность не меняются — читаем их один раз, а не на каждую сущность из списка.
+        protected void CacheSourceState()
+        {
+            _sourcePosition = _sourceTransform.position;
+            _shootRange = _source.InstantShootRange.Value;
+        }
 
         protected bool IsTargetExcluded(Entity target)
         {
@@ -46,7 +56,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
 
         protected bool IsEnemy(Entity target) => EntitiesHelper.IsSameTeam(_source, target) == false;
 
-        protected bool IsInShootRange(Entity target) => GetDistanceTo(target) <= _source.InstantShootRange.Value;
+        protected bool IsInShootRange(Entity target) => GetDistanceTo(target) <= _shootRange;
 
         protected bool IsFlying(Entity target) => target.HasComponent<IsFlying>();
 
@@ -101,6 +111,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
             return closestTargetToFinish;
         }
 
-        protected float GetDistanceTo(Entity target) => (_sourceTransform.position - target.Transform.position).magnitude;
+        protected float GetDistanceTo(Entity target) => (_sourcePosition - target.Transform.position).magnitude;
     }
 }

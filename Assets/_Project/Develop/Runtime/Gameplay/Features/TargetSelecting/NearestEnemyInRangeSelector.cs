@@ -20,6 +20,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
 
         public override Entity SelectTargetFrom(IReadOnlyList<Entity> targets)
         {
+            CacheSourceState();
+
             _candidates.Clear();
 
             for (int i = 0; i < targets.Count; i++)
@@ -32,10 +34,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting
                 if (IsTeamMember(target) == false)
                     continue;
 
-                if (IsEnemy(target) == false)
+                if (IsInShootRange(target) == false)
                     continue;
 
-                if (IsInShootRange(target) == false)
+                if (IsEnemy(target) == false)
                     continue;
 
                 if (IsDamagable(target) == false)
