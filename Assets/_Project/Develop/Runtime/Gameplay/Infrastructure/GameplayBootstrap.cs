@@ -2,6 +2,7 @@
 using System.Collections;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.RoutesPreview;
@@ -67,6 +68,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _routesPreviewService = _container.Resolve<RoutesPreviewService>();
             _hotkeysService = _container.Resolve<HotkeysService>();
             _particleEffectsPool = _container.Resolve<ParticleEffectsPool>();
+
+            // Пока виден экран загрузки: первые враги каждого вида возьмут объект из пула, а не создадут его посреди боя
+            _container.Resolve<EnemiesPrewarmer>().Prewarm();
 
             _gameplayCycle.Prepare();
 

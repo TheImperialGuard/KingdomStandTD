@@ -31,7 +31,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.WarCryFeature
             _abilityEndedDisposable?.Dispose();
             _isDeadChangedDisposable?.Dispose();
 
-            _fader?.Kill();
+            // Зона гаснет сразу, даже посреди крика: объект из пула достанется новой сущности до её первого крика
+            _fader?.Hide();
         }
 
         protected override void OnEntityStartedWork(Entity entity)

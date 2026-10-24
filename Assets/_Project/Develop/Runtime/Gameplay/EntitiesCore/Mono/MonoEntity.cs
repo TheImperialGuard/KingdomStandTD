@@ -17,6 +17,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
         private Collider[] _colliders;
         private bool[] _initialCollidersEnabled;
         private Rigidbody[] _rigidbodies;
+        private Animator[] _animators;
 
         public Entity LinkedEntity => _linkedEntity;
 
@@ -58,7 +59,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
         }
 
         // Возвращает то, что системы меняют в объекте за жизнь сущности, к виду свежего экземпляра.
-        // Вызывается до выключения объекта, пока его Rigidbody ещё в физической сцене
+        // Вызывается до выключения объекта, пока его Rigidbody ещё в физической сцене, а Animator — включён.
+        // Состояние и параметры Animator сбрасывает сам при выключении, а кости остаются в последней позе
+        // (у врага — в позе смерти): их возвращает WriteDefaultValues
         public void ResetForReuse()
         {
             for (int i = 0; i < _colliders.Length; i++)
@@ -72,6 +75,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
                 rigidbody.linearVelocity = Vector3.zero;
                 rigidbody.angularVelocity = Vector3.zero;
             }
+
+            foreach (Animator animator in _animators)
+                animator.WriteDefaultValues();
         }
 
         private void CacheParts()
@@ -80,6 +86,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
             _views = GetComponentsInChildren<EntityView>();
             _colliders = GetComponentsInChildren<Collider>();
             _rigidbodies = GetComponentsInChildren<Rigidbody>();
+            _animators = GetComponentsInChildren<Animator>();
 
             _initialCollidersEnabled = new bool[_colliders.Length];
 

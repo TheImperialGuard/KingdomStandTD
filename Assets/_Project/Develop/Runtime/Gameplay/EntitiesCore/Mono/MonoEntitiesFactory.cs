@@ -50,8 +50,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
         }
 
         // Объект берётся из пула, а при освобождении сущности возвращается туда вместо Destroy.
-        // Префаб должен быть готов к повторному Link: коллайдеры и скорость Rigidbody сбрасывает MonoEntity,
-        // остальное, что вью меняют в объекте, они отменяют в Cleanup или выставляют заново при старте сущности
+        // Префаб должен быть готов к повторному Link: коллайдеры, скорость Rigidbody и позу костей Animator сбрасывает
+        // MonoEntity, остальное, что вью меняют в объекте, они отменяют в Cleanup или выставляют заново при старте сущности.
+        // Пропажу цели из пула проверяют по сущности (Entity.IsInit), а не по уничтоженному объекту: объект не уничтожается
         public MonoEntity CreatePooled(Entity entity, Vector3 position, string path)
         {
             Stack<MonoEntity> freeInstances = GetFreeInstances(path);
@@ -69,6 +70,21 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
             Link(entity, viewInstance);
 
             return viewInstance;
+        }
+
+        // Заранее кладёт в пул свободные экземпляры префаба: первые CreatePooled по этому пути обойдутся без загрузки
+        // префаба и Instantiate
+        public void Prewarm(string path, int count)
+        {
+            Stack<MonoEntity> freeInstances = GetFreeInstances(path);
+
+            for (int i = 0; i < count; i++)
+            {
+                MonoEntity viewInstance = CreateInstance(path, Vector3.zero);
+                _instanceToFreeInstances.Add(viewInstance, freeInstances);
+
+                PutToPool(viewInstance, freeInstances);
+            }
         }
 
         public void Initialize()
@@ -168,6 +184,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
         {
             monoEntity.ResetForReuse();
 
+            PutToPool(monoEntity, freeInstances);
+        }
+
+        private void PutToPool(MonoEntity monoEntity, Stack<MonoEntity> freeInstances)
+        {
             monoEntity.gameObject.SetActive(false);
             monoEntity.transform.SetParent(_poolRoot, false);
 

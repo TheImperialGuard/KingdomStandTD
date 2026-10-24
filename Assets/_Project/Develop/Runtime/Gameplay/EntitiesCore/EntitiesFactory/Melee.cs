@@ -17,7 +17,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
         {
             Entity entity = CreateEmpty();
 
-            _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
+            _monoEntitiesFactory.CreatePooled(entity, position, config.PrefabPath);
 
             Dictionary<StatTypes, float> baseStats = new()
             {

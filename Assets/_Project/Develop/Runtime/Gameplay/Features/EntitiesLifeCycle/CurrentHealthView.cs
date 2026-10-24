@@ -41,6 +41,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle
             _maxHealthChangedDisposable = _maxHealth.Subscribe(OnHealthChanged);
             _isDeadChangedDisposable = _isDead.Subscribe(OnIsDeadChanged);
 
+            // Объект из пула приходит с полоской, спрятанной при смерти прошлой сущности
+            _healthBar.Show();
+
             OnHealthChanged(0, 0);
         }
 

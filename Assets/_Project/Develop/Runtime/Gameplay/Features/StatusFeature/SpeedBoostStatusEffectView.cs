@@ -36,7 +36,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature
             _statuses = null;
 
             _isDeadChangedDisposable.Dispose();
-            _fader.Kill();
+
+            // Кружок гаснет сразу: объект из пула достанется новой сущности без ускорения
+            _fader.Hide();
+            _isShown = false;
         }
 
         protected override void OnEntityStartedWork(Entity entity)

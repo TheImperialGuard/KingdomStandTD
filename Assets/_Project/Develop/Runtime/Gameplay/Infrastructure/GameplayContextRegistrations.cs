@@ -85,6 +85,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateEnemiesFactory);
 
+            container.RegisterAsSingle(CreateEnemiesPrewarmer);
+
             container.RegisterAsSingle(CreateTowerFactory);
 
             container.RegisterAsSingle(CreateWavesSpawner);
@@ -230,6 +232,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static EnemiesFactory CreateEnemiesFactory(DIContainer c)
             => new(c);
+
+        private static EnemiesPrewarmer CreateEnemiesPrewarmer(DIContainer c)
+            => new(_levelConfig, c.Resolve<MonoEntitiesFactory>());
 
         private static BrainsFactory CreateBrainsFactory(DIContainer c)
             => new(c);

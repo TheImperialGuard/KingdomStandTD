@@ -34,6 +34,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature
             base.Cleanup(entity);
 
             _moveSpeedChangedDisposable?.Dispose();
+
+#if UNITY_EDITOR
+            // Объект из пула проходит Link снова и подписался бы ещё раз
+            _config.Changed -= Apply;
+#endif
         }
 
         protected override void OnEntityStartedWork(Entity entity)
@@ -55,7 +60,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature
         }
 
 #if UNITY_EDITOR
-        // Ассет таблицы переживает выход из Play Mode, а Cleanup при выходе не вызывается, поэтому отписка здесь
+        // Ассет таблицы переживает выход из Play Mode, а Cleanup при выходе не вызывается, поэтому отписка и здесь
         private void OnDestroy() => _config.Changed -= Apply;
 #endif
 

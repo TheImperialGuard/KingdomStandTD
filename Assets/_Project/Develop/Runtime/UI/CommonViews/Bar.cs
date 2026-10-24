@@ -14,6 +14,11 @@ namespace Assets._Project.Develop.Runtime.UI.CommonViews
 
         public void SetFillerColor(Color color) => _filler.color = color;
 
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
+
         public void Hide()
         {
             gameObject.SetActive(false);
