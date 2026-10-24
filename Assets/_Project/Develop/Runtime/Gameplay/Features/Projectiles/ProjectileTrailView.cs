@@ -1,17 +1,12 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+﻿using System;
+using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
-using Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
 {
-    public class ProjectileTrailView : EntityView
+    public class ProjectileTrailView : ParticleEffectsEntityView
     {
         [SerializeField] private ParticleSystem _trailPrefab;
         [SerializeField] private Transform _projectile;
@@ -22,13 +17,27 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
 
         private ParticleSystem _trail;
 
+        public override void Cleanup(Entity entity)
+        {
+            base.Cleanup(entity);
+
+            _isDeadChangedDisposable?.Dispose();
+
+            // Снаряд освобождён без смерти — след гаснет так же, как при смерти
+            FinishTrail();
+        }
+
         protected override void OnEntityStartedWork(Entity entity)
         {
             _isDead = entity.IsDead;
 
             _isDeadChangedDisposable = _isDead.Subscribe(OnIsDeadChanged);
 
-            _trail = Instantiate(_trailPrefab, _projectile.position, Quaternion.identity, null);
+            _trail = EffectsPool.Spawn(_trailPrefab, _projectile.position);
+
+            // Экземпляр из пула приходит с выключенным повтором после прошлого снаряда
+            ParticleSystem.MainModule main = _trail.main;
+            main.loop = true;
         }
 
         private void Update()
@@ -39,11 +48,19 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
             }
         }
 
-        private void OnIsDeadChanged(bool arg1, bool isDead)
+        private void OnIsDeadChanged(bool arg1, bool isDead) => FinishTrail();
+
+        // След доигрывает текущий цикл на месте и возвращается в пул, когда погаснут частицы.
+        // Ссылка обнуляется, чтобы вью не двигала экземпляр, который пул уже отдал другому снаряду
+        private void FinishTrail()
         {
-            var main = _trail.main;
+            if (_trail == null)
+                return;
+
+            ParticleSystem.MainModule main = _trail.main;
             main.loop = false;
-            main.stopAction = ParticleSystemStopAction.Destroy;
+
+            _trail = null;
         }
     }
 }
