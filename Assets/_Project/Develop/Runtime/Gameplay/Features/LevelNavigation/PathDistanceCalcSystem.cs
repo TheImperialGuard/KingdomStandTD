@@ -13,11 +13,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
         private List<Waypoint> _path;
         private List<Waypoint> _reachedWaypoints;
 
+        // Длина маршрута от каждого вейпоинта до последнего. Вейпоинты неподвижны, поэтому хвосты считаются один раз.
+        private float[] _tailDistances;
+
         private ReactiveVariable<float> _currentPathDistance;
         private ReactiveVariable<float> _totalPathDistance;
         private ReactiveVariable<float> _traveledPathDistance;
-
-        private bool _isInit;
 
         public void OnInit(Entity entity)
         {
@@ -30,38 +31,42 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
             _totalPathDistance = entity.TotalPathDistance;
             _traveledPathDistance = entity.TraveledPathDistance;
 
-            _totalPathDistance.Value = CalculateTotalDistance(_path, _source);
+            _tailDistances = CalculateTailDistances(_path);
 
-            _isInit = true;
+            _totalPathDistance.Value = CalculateRemainingDistance();
         }
 
         public void OnUpdate(float deltaTime)
         {
-            if (_isInit == false)
-                return;
-
-            _currentPathDistance.Value = CalculateTotalDistance(_path, _source);
+            _currentPathDistance.Value = CalculateRemainingDistance();
             _traveledPathDistance.Value = _totalPathDistance.Value - _currentPathDistance.Value;
         }
 
-        private float CalculateTotalDistance(List<Waypoint> path, Transform startPoint)
+        private static float[] CalculateTailDistances(List<Waypoint> path)
         {
-            float totalDistance = 0f;
+            float[] tailDistances = new float[path.Count];
 
-            Vector3 startPos = startPoint.position;
-
-            foreach (Waypoint waypoint in path)
+            for (int i = path.Count - 2; i >= 0; i--)
             {
-                if (_reachedWaypoints.Contains(waypoint))
-                    continue;
+                Vector3 segment = path[i + 1].transform.position - path[i].transform.position;
 
-                Vector3 direction = waypoint.transform.position - startPos;
-
-                totalDistance += direction.magnitude;
-                startPos = waypoint.transform.position;
+                tailDistances[i] = tailDistances[i + 1] + segment.magnitude;
             }
 
-            return totalDistance;
+            return tailDistances;
+        }
+
+        // Пройденные вейпоинты — всегда начало маршрута: навигация засчитывает их по порядку.
+        private float CalculateRemainingDistance()
+        {
+            int nextWaypointIndex = _reachedWaypoints.Count;
+
+            if (nextWaypointIndex >= _path.Count)
+                return 0f;
+
+            Vector3 toNextWaypoint = _path[nextWaypointIndex].transform.position - _source.position;
+
+            return toNextWaypoint.magnitude + _tailDistances[nextWaypointIndex];
         }
     }
 }
