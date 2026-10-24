@@ -16,6 +16,9 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.Boot
 {
     public class GameEntryPoint : MonoBehaviour
     {
+        private const int TargetFrameRate = 60;
+        private const int WebVSyncCount = 1;
+
         private void Awake()
         {
             Debug.Log("Старт проекта, сетап настроек");
@@ -74,10 +77,21 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.Boot
 
         private void SetupAppSettings()
         {
-            QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = 60;
-
+            SetupFrameRate();
             SetupScreenOrientation();
+        }
+
+        // На вебе кадры задаёт цикл отрисовки браузера: с targetFrameRate они идут неровно
+        private void SetupFrameRate()
+        {
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+            {
+                QualitySettings.vSyncCount = WebVSyncCount;
+                return;
+            }
+
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = TargetFrameRate;
         }
 
         private void SetupScreenOrientation()
