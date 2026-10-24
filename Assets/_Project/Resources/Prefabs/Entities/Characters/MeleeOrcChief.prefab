@@ -270,7 +270,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: cfb6bcb6535887f4c93d9dd3f39459dd, type: 2}
     - target: {fileID: 5866666021909216657, guid: a1bd49b4921f41a4e9543326e51a6c64, type: 3}
       propertyPath: m_CullingMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6363870918119550207, guid: a1bd49b4921f41a4e9543326e51a6c64, type: 3}
       propertyPath: m_CastShadows
