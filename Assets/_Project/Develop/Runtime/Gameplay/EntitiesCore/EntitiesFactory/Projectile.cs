@@ -16,7 +16,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
         {
             Entity entity = CreateEmpty();
 
-            _monoEntitiesFactory.Create(entity, position, prefabPath);
+            _monoEntitiesFactory.CreatePooled(entity, position, prefabPath);
 
             entity
                 .AddOwner(new ReactiveVariable<Entity>(owner))
@@ -74,7 +74,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
         {
             Entity entity = CreateEmpty();
 
-            _monoEntitiesFactory.Create(entity, position, prefabPath);
+            _monoEntitiesFactory.CreatePooled(entity, position, prefabPath);
 
             entity
                 .AddOwner(new ReactiveVariable<Entity>(owner))
