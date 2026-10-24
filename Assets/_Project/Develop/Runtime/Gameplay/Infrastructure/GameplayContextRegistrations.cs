@@ -21,6 +21,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.RoutesPreview;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
@@ -54,6 +55,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateEntitiesFactory);
 
             container.RegisterAsSingle(CreateEntitiesLifeContext);
+
+            container.RegisterAsSingle(CreateTargetCandidatesService).NonLazy();
 
             container.RegisterAsSingle(CreateMonoEntitiesFactory).NonLazy();
 
@@ -136,6 +139,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c) => new();
 
         private static EntitiesLifeContext CreateEntitiesLifeContext(DIContainer c) => new();
+
+        private static TargetCandidatesService CreateTargetCandidatesService(DIContainer c)
+            => new(c.Resolve<EntitiesLifeContext>());
 
         private static AIBrainsContext CreateAIBrainsContext(DIContainer c) => new();
 

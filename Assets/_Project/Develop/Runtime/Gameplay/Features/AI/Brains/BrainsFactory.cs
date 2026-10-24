@@ -11,13 +11,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
     {
         private readonly DIContainer _container;
         private readonly AIBrainsContext _brainsContext;
-        private readonly EntitiesLifeContext _entitiesLifeContext;
+        private readonly TargetCandidatesService _targetCandidatesService;
 
         public BrainsFactory(DIContainer container)
         {
             _container = container;
             _brainsContext = _container.Resolve<AIBrainsContext>();
-            _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+            _targetCandidatesService = _container.Resolve<TargetCandidatesService>();
         }
 
         public StateMachineBrain CreateMeleeBrain(Entity entity)
@@ -33,7 +33,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
 
         public StateMachineBrain CreateTowerBrain(Entity entity, ITargetSelector targetSelector)
         {
-            FindTargetState findTargetState = new FindTargetState(targetSelector, _entitiesLifeContext, entity);
+            FindTargetState findTargetState = new FindTargetState(targetSelector, _targetCandidatesService, entity);
             AttackTriggerState attackTriggerState = new AttackTriggerState(entity);
 
             ICompositeCondition fromFindTargetToAttackTriggerStateCondition = new CompositeCondition()

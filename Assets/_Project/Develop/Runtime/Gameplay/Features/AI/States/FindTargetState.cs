@@ -9,23 +9,23 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.States
     {
         private ITargetSelector _targetSelector;
 
-        private EntitiesLifeContext _entitiesLifeContext;
+        private TargetCandidatesService _targetCandidatesService;
 
         private ReactiveVariable<Entity> _currentTarget;
 
         public FindTargetState(
             ITargetSelector targetSelector,
-            EntitiesLifeContext entitiesLifeContext,
+            TargetCandidatesService targetCandidatesService,
             Entity entity)
         {
             _targetSelector = targetSelector;
-            _entitiesLifeContext = entitiesLifeContext;
+            _targetCandidatesService = targetCandidatesService;
             _currentTarget = entity.CurrentTarget;
         }
 
         public void Update(float deltaTime)
         {
-            _currentTarget.Value = _targetSelector.SelectTargetFrom(_entitiesLifeContext.Entities);
+            _currentTarget.Value = _targetSelector.SelectTargetFrom(_targetCandidatesService.Candidates);
         }
     }
 }
