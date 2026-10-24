@@ -9,8 +9,9 @@ using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature
 {
-    // Поднимает строй призванных по событию Summon в клипе каста. Призыв держится на этом событии и на culling аниматора
-    // AlwaysAnimate: если переименовать или удалить событие в клипе или включить отсечение, призыва не будет.
+    // Поднимает строй призванных по событию Summon в клипе каста. Призыв держится на этом событии: если переименовать или
+    // удалить его в клипе или поставить аниматору отсечение Cull Completely, призыва не будет. При Cull Update Transforms
+    // событие приходит и тогда, когда некромант за кадром.
     // События анимации приходят вне прохода EntitiesLifeContext.Update, поэтому создавать сущности здесь безопасно.
     public class SummonOnAnimationEventSystem : IInitializableSystem, IDisposableSystem
     {
