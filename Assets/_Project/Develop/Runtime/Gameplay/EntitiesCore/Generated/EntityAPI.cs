@@ -1129,6 +1129,30 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.CurrentWaypoint() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.CurrentLanePoint CurrentLanePointC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.CurrentLanePoint>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> CurrentLanePoint => CurrentLanePointC.Value;
+
+		public bool TryGetCurrentLanePoint(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.CurrentLanePoint component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentLanePoint()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.CurrentLanePoint() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentLanePoint(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.CurrentLanePoint() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.Waypoints WaypointsC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.Waypoints>();
 
 		public System.Collections.Generic.List<Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation.Waypoint> Waypoints => WaypointsC.Value;

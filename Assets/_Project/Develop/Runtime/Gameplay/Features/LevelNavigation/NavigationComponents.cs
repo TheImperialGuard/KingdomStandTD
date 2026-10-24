@@ -10,6 +10,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
         public ReactiveVariable<Waypoint> Value;
     }
 
+    public class CurrentLanePoint : IEntityComponent
+    {
+        public ReactiveVariable<Vector3> Value;
+    }
+
     public class Waypoints : IEntityComponent
     {
         public List<Waypoint> Value;

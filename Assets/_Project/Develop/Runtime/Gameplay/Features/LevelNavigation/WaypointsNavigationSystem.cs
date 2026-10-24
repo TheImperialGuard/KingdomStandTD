@@ -10,6 +10,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
 {
     public class WaypointsNavigationSystem : IInitializableSystem, IUpdatableSystem
     {
+        private const float ReachDistance = 0.05f;
+
         private Transform _soure;
 
         private List<Waypoint> _waypoints;
@@ -17,6 +19,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
         private ReactiveVariable<Vector3> _waypointsOffset;
 
         private ReactiveVariable<Waypoint> _currentWaypoint;
+        private ReactiveVariable<Vector3> _currentLanePoint;
+        private Vector3 _previousLanePoint;
 
         private ReactiveVariable<bool> _isPathFinished;
 
@@ -29,7 +33,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
             _waypointsOffset = entity.WaypointsOffset;
 
             _currentWaypoint = entity.CurrentWaypoint;
-            _currentWaypoint.Value = _waypoints[0];
+            _currentLanePoint = entity.CurrentLanePoint;
+
+            // Первый отрезок полосы начинается там, где враг появился, — так же и у призванных скелетов.
+            _previousLanePoint = _soure.position;
+            SetCurrentWaypoint(_waypoints[0]);
 
             _isPathFinished = entity.IsPathFinished;
             _isPathFinished.Value = false;
@@ -45,16 +53,18 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
             SwitchWaypoint();
         }
 
+        // На долгом кадре шаг врага больше окна ReachDistance: он перескакивает точку, не попав в окно.
+        // Поэтому точка засчитана и тогда, когда враг уже прошёл плоскость через неё поперёк отрезка полосы.
         private bool IsCurrentWaypointReached()
         {
-            Transform waypoint = _currentWaypoint.Value.transform;
-            Vector3 waypointPos = _currentWaypoint.Value.transform.position;
+            Vector3 toLanePoint = _currentLanePoint.Value - _soure.position;
 
-            waypointPos += waypoint.TransformVector(_waypointsOffset.Value);
+            if (toLanePoint.sqrMagnitude <= ReachDistance * ReachDistance)
+                return true;
 
-            float distanceToWaypoint = (waypointPos - _soure.position).magnitude;
+            Vector3 segment = _currentLanePoint.Value - _previousLanePoint;
 
-            return distanceToWaypoint <= 0.05f;
+            return Vector3.Dot(toLanePoint, segment) < 0;
         }
 
         private void SwitchWaypoint()
@@ -65,7 +75,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
                 return;
             }
 
-            _currentWaypoint.Value = _waypoints[_reachedWaypoints.Count];
+            _previousLanePoint = _currentLanePoint.Value;
+            SetCurrentWaypoint(_waypoints[_reachedWaypoints.Count]);
+        }
+
+        private void SetCurrentWaypoint(Waypoint waypoint)
+        {
+            Transform waypointTransform = waypoint.transform;
+
+            _currentWaypoint.Value = waypoint;
+            _currentLanePoint.Value = waypointTransform.position + waypointTransform.TransformVector(_waypointsOffset.Value);
         }
     }
 }

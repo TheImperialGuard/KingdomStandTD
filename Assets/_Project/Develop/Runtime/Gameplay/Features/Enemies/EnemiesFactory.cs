@@ -133,6 +133,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
             entity
                 .AddWaypoints(new(path))
                 .AddCurrentWaypoint()
+                .AddCurrentLanePoint()
                 .AddReachedWaypoints(new())
                 .AddIsPathFinished()
                 .AddWaypointsOffset(new(waypointsOffset))
