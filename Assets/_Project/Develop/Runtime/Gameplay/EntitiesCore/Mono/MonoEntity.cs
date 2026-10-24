@@ -1,18 +1,21 @@
-﻿using UnityEngine;
+﻿using Assets._Project.Develop.Runtime.Utilities.ParticleEffects;
+using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
 {
     public class MonoEntity : MonoBehaviour
     {
         private CollidersRegistryService _colllidersRegistryService;
+        private ParticleEffectsPool _particleEffectsPool;
 
         private Entity _linkedEntity;
 
         public Entity LinkedEntity => _linkedEntity;
 
-        public void Initialize(CollidersRegistryService collidersRegistryService)
+        public void Initialize(CollidersRegistryService collidersRegistryService, ParticleEffectsPool particleEffectsPool)
         {
             _colllidersRegistryService = collidersRegistryService;
+            _particleEffectsPool = particleEffectsPool;
         }
 
         public void Link(Entity entity)
@@ -29,7 +32,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
 
             if (views != null )
                 foreach (EntityView view in views)
+                {
+                    if (view is ParticleEffectsEntityView effectsView)
+                        effectsView.SetEffectsPool(_particleEffectsPool);
+
                     view.Link(entity);
+                }
 
             foreach (Collider collider in GetComponentsInChildren<Collider>())
                 _colllidersRegistryService.Register(collider, entity);

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
 {
-    public class StunAbilityView : EntityView
+    public class StunAbilityView : ParticleEffectsEntityView
     {
         [SerializeField] private ParticleSystem _effectPrefab;
 
@@ -58,7 +58,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
 
         private void CreateEffect()
         {
-            ParticleSystem effect = Instantiate(_effectPrefab, _currentTarget.Value.Transform.position, Quaternion.identity);
+            ParticleSystem effect = EffectsPool.Spawn(_effectPrefab, _currentTarget.Value.Transform.position);
 
             ParticleEffectTimeScaler timeScaler = effect.GetComponent<ParticleEffectTimeScaler>();
 

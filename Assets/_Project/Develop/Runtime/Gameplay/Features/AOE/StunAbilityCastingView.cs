@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
 {
-    public class StunAbilityCastingView : EntityView
+    public class StunAbilityCastingView : ParticleEffectsEntityView
     {
         [SerializeField] private ParticleSystem _effectPrefab;
         [SerializeField] private Transform _effectSpawnPoint;
@@ -47,7 +47,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
 
         private void CreateEffect()
         {
-            Instantiate(_effectPrefab, _effectSpawnPoint.position, Quaternion.identity);
+            EffectsPool.Spawn(_effectPrefab, _effectSpawnPoint.position);
         }
     }
 }

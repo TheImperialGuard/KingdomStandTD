@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Attack
 {
-    public class AttackEffectView : EntityView
+    public class AttackEffectView : ParticleEffectsEntityView
     {
         [SerializeField] private ParticleSystem _effectPrefab;
         [SerializeField] private Transform _effectSpawnPoint;
@@ -38,7 +38,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Attack
 
         private void OnAttackDelayEnd()
         {
-            Instantiate(_effectPrefab, _effectSpawnPoint.position, Quaternion.identity, _effectSpawnPoint);
+            EffectsPool.Spawn(_effectPrefab, _effectSpawnPoint.position, _effectSpawnPoint);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
+using Assets._Project.Develop.Runtime.Utilities.ParticleEffects;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,16 +15,20 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
 
         private readonly CollidersRegistryService _collidersRegistryService;
 
+        private readonly ParticleEffectsPool _particleEffectsPool;
+
         private readonly Dictionary<Entity, MonoEntity> _entityToMono = new();
 
         public MonoEntitiesFactory(
-            ResourcesAssetsLoader resourcesAssetsLoader, 
-            EntitiesLifeContext entitiesLifeContext, 
-            CollidersRegistryService collidersRegistryService)
+            ResourcesAssetsLoader resourcesAssetsLoader,
+            EntitiesLifeContext entitiesLifeContext,
+            CollidersRegistryService collidersRegistryService,
+            ParticleEffectsPool particleEffectsPool)
         {
             _resourcesAssetsLoader = resourcesAssetsLoader;
             _entitiesLifeContext = entitiesLifeContext;
             _collidersRegistryService = collidersRegistryService;
+            _particleEffectsPool = particleEffectsPool;
         }
 
         public MonoEntity Create(Entity entity, Vector3 position, string path)
@@ -32,7 +37,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
 
             MonoEntity viewInstance = GameObject.Instantiate(prefab, position, Quaternion.identity, null);
 
-            viewInstance.Initialize(_collidersRegistryService);
+            viewInstance.Initialize(_collidersRegistryService, _particleEffectsPool);
 
             viewInstance.Link(entity);
 

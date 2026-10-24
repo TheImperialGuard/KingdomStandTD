@@ -9,6 +9,7 @@ using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
+using Assets._Project.Develop.Runtime.Utilities.ParticleEffects;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 using Unity.Profiling;
 using UnityEngine;
@@ -28,6 +29,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private CameraMover _cameraMover;
         private RoutesPreviewService _routesPreviewService;
         private HotkeysService _hotkeysService;
+        private ParticleEffectsPool _particleEffectsPool;
 
         private static readonly ProfilerMarker _markerHotkeysService = new("KS.HotkeysService");
         private static readonly ProfilerMarker _markerCameraMover = new("KS.CameraMover");
@@ -36,6 +38,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private static readonly ProfilerMarker _markerRayShooterService = new("KS.RayShooterService");
         private static readonly ProfilerMarker _markerBrainsContext = new("KS.BrainsContext");
         private static readonly ProfilerMarker _markerEntitiesLifeContext = new("KS.EntitiesLifeContext");
+        private static readonly ProfilerMarker _markerParticleEffectsPool = new("KS.ParticleEffectsPool");
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -63,6 +66,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _cameraMover = _container.Resolve<CameraMover>();
             _routesPreviewService = _container.Resolve<RoutesPreviewService>();
             _hotkeysService = _container.Resolve<HotkeysService>();
+            _particleEffectsPool = _container.Resolve<ParticleEffectsPool>();
 
             _gameplayCycle.Prepare();
 
@@ -100,6 +104,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             using (_markerBrainsContext.Auto())
                 _brainsContext?.Update(Time.deltaTime);
+
+            using (_markerParticleEffectsPool.Auto())
+                _particleEffectsPool?.Update();
 
             //if (Input.GetKeyDown(KeyCode.M))
             //{

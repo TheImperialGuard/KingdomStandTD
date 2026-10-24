@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle
 {
-    public class DeathEffectView : EntityView
+    public class DeathEffectView : ParticleEffectsEntityView
     {
         [SerializeField] private ParticleSystem _effectPrefab;
         [SerializeField] private Transform _effectSpawnPoint;
@@ -32,7 +32,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle
         private void OnIsDeadChanged(bool arg1, bool isDead)
         {
             if (isDead == true)
-                Instantiate(_effectPrefab, _effectSpawnPoint.position, Quaternion.identity);
+                EffectsPool.Spawn(_effectPrefab, _effectSpawnPoint.position);
         }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage
 {
-    public class ApplyDamageView : EntityView
+    public class ApplyDamageView : ParticleEffectsEntityView
     {
         [SerializeField] private ParticleSystem _applyDamageEffectPrefab;
         [SerializeField] private Transform _effectSpawnPoint;
@@ -30,7 +30,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.ApplyDamage
 
         private void OnDamaged(float obj)
         {
-            Instantiate(_applyDamageEffectPrefab, _effectSpawnPoint.position, Quaternion.identity);
+            EffectsPool.Spawn(_applyDamageEffectPrefab, _effectSpawnPoint.position);
         }
     }
 }

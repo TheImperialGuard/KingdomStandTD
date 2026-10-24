@@ -34,6 +34,7 @@ using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
+using Assets._Project.Develop.Runtime.Utilities.ParticleEffects;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using Assets._Project.Develop.Runtime.Utilities.Timer;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
@@ -61,6 +62,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateMonoEntitiesFactory).NonLazy();
 
             container.RegisterAsSingle(CreateCollidersRegistryService);
+
+            container.RegisterAsSingle(CreateParticleEffectsPool);
 
             container.RegisterAsSingle(CreateLevel).NonLazy();
 
@@ -138,6 +141,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c) => new();
 
+        private static ParticleEffectsPool CreateParticleEffectsPool(DIContainer c) => new();
+
         private static EntitiesLifeContext CreateEntitiesLifeContext(DIContainer c) => new();
 
         private static TargetCandidatesService CreateTargetCandidatesService(DIContainer c)
@@ -150,7 +155,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             return new MonoEntitiesFactory(
                 c.Resolve<ResourcesAssetsLoader>(),
                 c.Resolve<EntitiesLifeContext>(),
-                c.Resolve<CollidersRegistryService>());
+                c.Resolve<CollidersRegistryService>(),
+                c.Resolve<ParticleEffectsPool>());
         }
 
         private static WavesSpawner CreateWavesSpawner(DIContainer c)
