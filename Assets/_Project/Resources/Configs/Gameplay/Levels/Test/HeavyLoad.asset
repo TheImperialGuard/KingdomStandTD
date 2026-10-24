@@ -109,8 +109,56 @@ MonoBehaviour:
       <Lane>k__BackingField: 2
       <StartDelay>k__BackingField: 1
       <DelayBetweenSpawns>k__BackingField: 4
-    _note: "\u0422\u044F\u0436\u0451\u043B\u044B\u0439 \u0442\u0435\u0441\u0442:
-      \u0432\u043E\u043B\u043D\u0430 4 \u0443\u0440\u043E\u0432\u043D\u044F 2"
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 35814527bab6fa34d9b98a37d479cec2, type: 2}
+        <Count>k__BackingField: 10
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 1
+      <Lane>k__BackingField: 1
+      <StartDelay>k__BackingField: 5
+      <DelayBetweenSpawns>k__BackingField: 1
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 35814527bab6fa34d9b98a37d479cec2, type: 2}
+        <Count>k__BackingField: 10
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 1
+      <Lane>k__BackingField: 2
+      <StartDelay>k__BackingField: 5
+      <DelayBetweenSpawns>k__BackingField: 1
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 7b986777ae748f949a65c5063ce560f8, type: 2}
+        <Count>k__BackingField: 2
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 1
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 0
+      <DelayBetweenSpawns>k__BackingField: 30
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 3f7d6970be668914b8bd4799f9a0f282, type: 2}
+        <Count>k__BackingField: 30
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 1
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 1.5
+      <DelayBetweenSpawns>k__BackingField: 1.5
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: dbf8c312d815bdf42a56d598a7d92f57, type: 2}
+        <Count>k__BackingField: 2
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 0
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 10
+      <DelayBetweenSpawns>k__BackingField: 15
+    _note: "\u0422\u044F\u0436\u0451\u043B\u044B\u0439 \u0442\u0435\u0441\u0442 \u0441
+      \u0437\u0430\u043F\u0430\u0441\u043E\u043C: \u0432\u043E\u043B\u043D\u0430
+      4 \u0443\u0440\u043E\u0432\u043D\u044F 2 + \u0433\u0430\u0440\u0433\u0443\u043B\u044C\u0438,
+      \u0432\u043E\u0436\u0430\u043A\u0438 \u0441 \u043E\u0440\u043A\u0430\u043C\u0438,
+      \u043D\u0435\u043A\u0440\u043E\u043C\u0430\u043D\u0442\u044B"
     <StageTime>k__BackingField: 60
     <TimeToSkipStage>k__BackingField: 25
   <PrefabPath>k__BackingField: Prefabs/Levels/Level_2
