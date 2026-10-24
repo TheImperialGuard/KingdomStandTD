@@ -51,7 +51,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 
             Vector3 shootDirection = _directionArgs.Value.Direction;
 
-            if (_currentTarget.Value.Transform != null)
+            if (_currentTarget.Value != null && _currentTarget.Value.Transform != null)
                 shootDirection = (_currentTarget.Value.Transform.position - _shootPoint.position).normalized;
 
             Shoot(shootDirection, _directionArgs.Value.ProjectileCounts);

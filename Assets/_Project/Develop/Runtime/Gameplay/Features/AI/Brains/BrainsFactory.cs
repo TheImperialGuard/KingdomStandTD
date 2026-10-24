@@ -64,9 +64,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
 
             ReactiveVariable<Entity> currentTarget = entity.CurrentTarget;
 
-            ICompositeCondition fromMovementToSelfReleaseStateCondition = new CompositeCondition(LogicOperations.Or)
-                .Add(new FuncCondition(() => currentTarget.Value == null))
-                .Add(new FuncCondition(() => currentTarget.Value.IsDead.Value == true));
+            // Одним условием: CompositeCondition вычисляет все части, и при пустой цели упал бы на IsDead
+            ICondition fromMovementToSelfReleaseStateCondition = new FuncCondition(
+                () => currentTarget.Value == null || currentTarget.Value.IsDead.Value == true);
 
             AIStateMachine stateMachine = new AIStateMachine();
 

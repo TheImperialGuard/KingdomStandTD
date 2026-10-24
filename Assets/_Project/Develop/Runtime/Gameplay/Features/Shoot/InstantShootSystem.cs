@@ -44,6 +44,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 
         private void OnAttackDelayEnd()
         {
+            if (_directionArgs.Value == null)
+                return;
+
             Shoot(_directionArgs.Value.Direction, _directionArgs.Value.ProjectileCounts);
         }
 
