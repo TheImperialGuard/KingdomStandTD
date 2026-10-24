@@ -49,8 +49,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
 
         private void OnAbilityDelayEnd()
         {
+            Entity target = _currentTarget.Value;
+
+            // За время задержки цель могла пропасть: атака кончилась, и башня не нашла новую, или враг уничтожен
+            if (target == null || target.Transform == null)
+                return;
+
             List<Entity> entities = _areaEntitiesDetectorService.GetEntitiesInArea(
-                _currentTarget.Value.Transform.position,
+                target.Transform.position,
                 _areaRadius.Value);
 
             foreach (Entity entity in entities)

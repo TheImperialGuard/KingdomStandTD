@@ -58,7 +58,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
 
         private void CreateEffect()
         {
-            ParticleSystem effect = EffectsPool.Spawn(_effectPrefab, _currentTarget.Value.Transform.position);
+            Entity target = _currentTarget.Value;
+
+            // Цель пропала за время задержки — оглушения нет, эффекта тоже (StunEntitiesInAreaSecondAbilitySystem)
+            if (target == null || target.Transform == null)
+                return;
+
+            ParticleSystem effect = EffectsPool.Spawn(_effectPrefab, target.Transform.position);
 
             ParticleEffectTimeScaler timeScaler = effect.GetComponent<ParticleEffectTimeScaler>();
 
