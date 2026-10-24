@@ -30,7 +30,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI
             if (_isInit == false)
                 return;
 
-            if (_currentTarget.Value != null && _currentTarget.Value.Transform != null)
+            // У освобождённой цели объект из пула уже может принадлежать другой сущности
+            if (_currentTarget.Value != null && _currentTarget.Value.IsInit)
             {
                 Vector3 directionToTarget = _currentTarget.Value.Transform.position - _rotatable.position;
                 directionToTarget.y = 0;

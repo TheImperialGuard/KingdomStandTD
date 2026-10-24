@@ -51,8 +51,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
         {
             Entity target = _currentTarget.Value;
 
-            // За время задержки цель могла пропасть: атака кончилась, и башня не нашла новую, или враг уничтожен
-            if (target == null || target.Transform == null)
+            // За время задержки цель могла пропасть: атака кончилась, и башня не нашла новую, или враг освобождён
+            // (его объект из пула уже может принадлежать другой сущности)
+            if (target == null || target.IsInit == false)
                 return;
 
             List<Entity> entities = _areaEntitiesDetectorService.GetEntitiesInArea(

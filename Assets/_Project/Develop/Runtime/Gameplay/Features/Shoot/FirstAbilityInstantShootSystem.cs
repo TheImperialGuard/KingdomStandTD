@@ -51,7 +51,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
 
             Vector3 shootDirection = _directionArgs.Value.Direction;
 
-            if (_currentTarget.Value != null && _currentTarget.Value.Transform != null)
+            // У освобождённой цели объект из пула уже может принадлежать другой сущности
+            if (_currentTarget.Value != null && _currentTarget.Value.IsInit)
                 shootDirection = (_currentTarget.Value.Transform.position - _shootPoint.position).normalized;
 
             Shoot(shootDirection, _directionArgs.Value.ProjectileCounts);

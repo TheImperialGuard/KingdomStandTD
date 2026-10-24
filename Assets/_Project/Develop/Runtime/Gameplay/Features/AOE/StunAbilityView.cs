@@ -61,7 +61,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
             Entity target = _currentTarget.Value;
 
             // Цель пропала за время задержки — оглушения нет, эффекта тоже (StunEntitiesInAreaSecondAbilitySystem)
-            if (target == null || target.Transform == null)
+            if (target == null || target.IsInit == false)
                 return;
 
             ParticleSystem effect = EffectsPool.Spawn(_effectPrefab, target.Transform.position);

@@ -36,7 +36,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.States
 
             Entity target = _currentTarget.Value;
 
-            if (target == null)
+            // Освобождённая цель: её объект из пула уже может принадлежать другой сущности
+            if (target == null || target.IsInit == false)
                 return false;
 
             Transform aimingPoint;
@@ -46,9 +47,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.States
                 position = aimingPoint.position;
                 return true;
             }
-
-            if (target.Transform == null)
-                return false;
 
             position = target.Transform.position;
             return true;

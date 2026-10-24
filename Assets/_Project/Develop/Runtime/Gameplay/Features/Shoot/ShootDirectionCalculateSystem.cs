@@ -48,7 +48,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Shoot
             if (_currentTarget.Value.TryGetAimingPoint(out Transform aimingPoint) == false)
                 throw new Exception($"Not found aiming point for target: {_currentTarget.Value.Transform.gameObject.name}");
 
-            if (aimingPoint == null)
+            // Освобождённая цель: её объект из пула уже может принадлежать другой сущности
+            if (_currentTarget.Value.IsInit == false || aimingPoint == null)
                 return _previousTargetPos;
 
             Vector3 currentTargetPosition = aimingPoint.position;
