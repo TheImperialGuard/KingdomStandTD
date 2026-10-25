@@ -14,6 +14,9 @@ using Assets._Project.Develop.Runtime.Utilities.ParticleEffects;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 using Unity.Profiling;
 using UnityEngine;
+#if KS_PERF_PROBE
+using Assets._Project.Develop.Runtime.Gameplay.Features.PerformanceProbe;
+#endif
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 {
@@ -31,6 +34,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private RoutesPreviewService _routesPreviewService;
         private HotkeysService _hotkeysService;
         private ParticleEffectsPool _particleEffectsPool;
+
+#if KS_PERF_PROBE
+        private PerformanceProbeService _performanceProbeService;
+#endif
 
         private static readonly ProfilerMarker _markerHotkeysService = new("KS.HotkeysService");
         private static readonly ProfilerMarker _markerCameraMover = new("KS.CameraMover");
@@ -68,6 +75,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _routesPreviewService = _container.Resolve<RoutesPreviewService>();
             _hotkeysService = _container.Resolve<HotkeysService>();
             _particleEffectsPool = _container.Resolve<ParticleEffectsPool>();
+
+            #if KS_PERF_PROBE
+                _performanceProbeService = _container.Resolve<PerformanceProbeService>();
+            #endif
 
             // Пока виден экран загрузки: первые враги каждого вида возьмут объект из пула, а не создадут его посреди боя
             _container.Resolve<EnemiesPrewarmer>().Prewarm();
@@ -111,6 +122,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             using (_markerParticleEffectsPool.Auto())
                 _particleEffectsPool?.Update();
+
+            #if KS_PERF_PROBE
+                // Время кадра без масштаба: замер идёт и на паузе, и на ускорении
+                _performanceProbeService?.Update(Time.unscaledDeltaTime);
+            #endif
 
             //if (Input.GetKeyDown(KeyCode.M))
             //{

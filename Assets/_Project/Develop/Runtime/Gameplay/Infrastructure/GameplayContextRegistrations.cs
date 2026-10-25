@@ -40,6 +40,9 @@ using Assets._Project.Develop.Runtime.Utilities.Timer;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using System.Collections.Generic;
 using UnityEngine;
+#if KS_PERF_PROBE
+using Assets._Project.Develop.Runtime.Gameplay.Features.PerformanceProbe;
+#endif
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 {
@@ -139,7 +142,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 // Плейтест из редактора уровней регистрирует здесь лог прогона
                 PlaytestHooks.ProcessRegistrations(container);
             #endif
+
+            #if KS_PERF_PROBE
+                // Замер на телефоне в тестовой сборке: счётчик кадра и прогон с выключением частей врагов
+                container.RegisterAsSingle(CreatePerformanceProbeService).NonLazy();
+            #endif
         }
+
+#if KS_PERF_PROBE
+        private static PerformanceProbeService CreatePerformanceProbeService(DIContainer c)
+            => new(c.Resolve<EntitiesLifeContext>());
+#endif
 
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c) => new();
 
