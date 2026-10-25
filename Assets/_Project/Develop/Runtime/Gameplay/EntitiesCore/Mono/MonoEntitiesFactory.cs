@@ -1,6 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.ParticleEffects;
+using Assets._Project.Develop.Runtime.Utilities.Rendering;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
     public class MonoEntitiesFactory : IInitializable, IDisposable
     {
         private const string PoolRootName = "MonoEntitiesPool";
+        private const string CombinedTemplatesRootName = "CombinedTemplates";
 
         private readonly ResourcesAssetsLoader _resourcesAssetsLoader;
 
@@ -26,7 +28,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
         private readonly Dictionary<string, Stack<MonoEntity>> _freeInstances = new();
         private readonly Dictionary<MonoEntity, Stack<MonoEntity>> _instanceToFreeInstances = new();
 
+        private readonly List<Mesh> _combinedMeshes = new();
+
         private Transform _poolRoot;
+        private Transform _combinedTemplatesRoot;
 
         public MonoEntitiesFactory(
             ResourcesAssetsLoader resourcesAssetsLoader,
@@ -87,9 +92,33 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
             }
         }
 
+        // Склеивает части модели префаба в один SkinnedMeshRenderer (SkinnedMeshCombiner): дальше экземпляры по этому пути
+        // клонируются не из префаба, а из его копии со склеенной моделью, и в бою склейка ничего не стоит. Копия лежит под
+        // выключенным корнем и сама не просыпается; префаб не меняется. Вызывать до первого экземпляра по пути — созданные
+        // раньше останутся несклеенными
+        public void CombineSkinnedParts(string path)
+        {
+            MonoEntity prefab = GetPrefab(path);
+            MonoEntity template = GameObject.Instantiate(prefab, _combinedTemplatesRoot, false);
+            template.name = prefab.name;
+
+            if (SkinnedMeshCombiner.TryCombine(template.gameObject, out Mesh combinedMesh) == false)
+            {
+                GameObject.Destroy(template.gameObject);
+                return;
+            }
+
+            _combinedMeshes.Add(combinedMesh);
+            _prefabs[path] = template;
+        }
+
         public void Initialize()
         {
             _poolRoot = new GameObject(PoolRootName).transform;
+
+            _combinedTemplatesRoot = new GameObject(CombinedTemplatesRootName).transform;
+            _combinedTemplatesRoot.SetParent(_poolRoot, false);
+            _combinedTemplatesRoot.gameObject.SetActive(false);
 
             _entitiesLifeContext.Released += OnEntityReleased;
         }
@@ -106,6 +135,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono
             if (_poolRoot != null)
                 GameObject.Destroy(_poolRoot.gameObject);
 
+            // Меши, созданные кодом, не уничтожаются вместе с объектами, которые на них ссылаются
+            foreach (Mesh combinedMesh in _combinedMeshes)
+                GameObject.Destroy(combinedMesh);
+
+            _combinedMeshes.Clear();
             _freeInstances.Clear();
             _instanceToFreeInstances.Clear();
         }

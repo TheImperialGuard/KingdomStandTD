@@ -8,7 +8,8 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
 {
     // Кладёт в пул объекты врагов уровня до начала боя: по одному на вид, а призываемым — весь строй, который призыв
-    // создаёт за один кадр. Обычные враги выходят по одному, поэтому дальше пул дорастёт в бою сам
+    // создаёт за один кадр. Обычные враги выходят по одному, поэтому дальше пул дорастёт в бою сам.
+    // Перед этим склеивает части модели каждого вида в один меш: один вызов отрисовки на врага вместо вызова на часть
     public class EnemiesPrewarmer
     {
         private const int InstancesPerKind = 1;
@@ -36,7 +37,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Enemies
             }
 
             foreach (KeyValuePair<string, int> prefabCount in pathToCount)
+            {
+                _monoEntitiesFactory.CombineSkinnedParts(prefabCount.Key);
                 _monoEntitiesFactory.Prewarm(prefabCount.Key, prefabCount.Value);
+            }
         }
 
         // Вид может прийти и в волне, и призывом — берётся наибольшее число
