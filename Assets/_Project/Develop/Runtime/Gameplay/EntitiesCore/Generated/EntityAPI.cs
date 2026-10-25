@@ -1800,6 +1800,25 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.DisableCollidersOnDeath() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.HealthBarPoint HealthBarPointC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.HealthBarPoint>();
+
+		public UnityEngine.Transform HealthBarPoint => HealthBarPointC.Value;
+
+		public bool TryGetHealthBarPoint(out UnityEngine.Transform value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.HealthBarPoint component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(UnityEngine.Transform);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddHealthBarPoint(UnityEngine.Transform value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle.HealthBarPoint() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.EnemyName EnemyNameC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Enemies.EnemyName>();
 
 		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> EnemyName => EnemyNameC.Value;

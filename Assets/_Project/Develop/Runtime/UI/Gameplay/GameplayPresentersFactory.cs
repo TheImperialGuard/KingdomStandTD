@@ -16,8 +16,10 @@ using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.Meta.Features.Settings;
 using Assets._Project.Develop.Runtime.UI.CommonViews;
 using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
+using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
+using Assets._Project.Develop.Runtime.UI.Gameplay.EnemyHealthBars;
 using Assets._Project.Develop.Runtime.UI.Gameplay.GoldWallet;
 using Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.PlayerHealthDisplay;
@@ -174,6 +176,20 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 view,
                 sourceEnemy,
                 _container.Resolve<EntitiesLifeContext>());
+        }
+
+        public EnemiesHealthBarsPresenter CreateEnemiesHealthBarsPresenter()
+        {
+            return new EnemiesHealthBarsPresenter(
+                _container.Resolve<EntitiesLifeContext>(),
+                _container.Resolve<ViewsFactory>(),
+                this,
+                _container.Resolve<GameplayUIRoot>().HealthBarsLayer);
+        }
+
+        public EnemyHealthBarPresenter CreateEnemyHealthBarPresenter(EnemyHealthBarView view, Entity enemy)
+        {
+            return new EnemyHealthBarPresenter(view, enemy);
         }
 
         public WinPopupPresenter CreateWinPopupPresenter(WinPopupView view, LevelResults results)

@@ -9,6 +9,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.RoutesPreview;
 using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
+using Assets._Project.Develop.Runtime.UI.Gameplay.EnemyHealthBars;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ParticleEffects;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
@@ -34,6 +35,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private RoutesPreviewService _routesPreviewService;
         private HotkeysService _hotkeysService;
         private ParticleEffectsPool _particleEffectsPool;
+        private EnemiesHealthBarsPresenter _enemiesHealthBarsPresenter;
 
 #if KS_PERF_PROBE
         private PerformanceProbeService _performanceProbeService;
@@ -47,6 +49,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private static readonly ProfilerMarker _markerBrainsContext = new("KS.BrainsContext");
         private static readonly ProfilerMarker _markerEntitiesLifeContext = new("KS.EntitiesLifeContext");
         private static readonly ProfilerMarker _markerParticleEffectsPool = new("KS.ParticleEffectsPool");
+        private static readonly ProfilerMarker _markerEnemiesHealthBars = new("KS.EnemiesHealthBars");
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -75,6 +78,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _routesPreviewService = _container.Resolve<RoutesPreviewService>();
             _hotkeysService = _container.Resolve<HotkeysService>();
             _particleEffectsPool = _container.Resolve<ParticleEffectsPool>();
+            _enemiesHealthBarsPresenter = _container.Resolve<EnemiesHealthBarsPresenter>();
 
             #if KS_PERF_PROBE
                 _performanceProbeService = _container.Resolve<PerformanceProbeService>();
@@ -122,6 +126,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             using (_markerParticleEffectsPool.Auto())
                 _particleEffectsPool?.Update();
+
+            // Последним: полоски встают над врагами после того, как в этом кадре сдвинулись камера и враги
+            using (_markerEnemiesHealthBars.Auto())
+                _enemiesHealthBarsPresenter?.Update();
 
             #if KS_PERF_PROBE
                 // Время кадра без масштаба: замер идёт и на паузе, и на ускорении

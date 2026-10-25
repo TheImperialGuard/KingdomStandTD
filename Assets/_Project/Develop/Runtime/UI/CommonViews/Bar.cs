@@ -4,13 +4,13 @@ using UnityEngine.UI;
 
 namespace Assets._Project.Develop.Runtime.UI.CommonViews
 {
+    // Заливка — Image с типом Filled, без маски: маска рвёт батч Canvas, а части полоски с одной текстурой атласа
+    // идут одним вызовом отрисовки
     public class Bar : MonoBehaviour, IView
     {
-        [SerializeField] private Slider _slider;
-
         [SerializeField] private Image _filler;
 
-        public void UpdateSliderValue(float value) => _slider.value = value;
+        public void UpdateValue(float value) => _filler.fillAmount = value;
 
         public void SetFillerColor(Color color) => _filler.color = color;
 

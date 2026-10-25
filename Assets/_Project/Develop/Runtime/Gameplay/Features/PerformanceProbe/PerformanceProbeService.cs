@@ -35,6 +35,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.PerformanceProbe
 
         private readonly EntitiesLifeContext _entitiesLifeContext;
 
+        // Полоски здоровья всех врагов — один слой интерфейса, поэтому выключаются целиком, а не у каждого врага
+        private readonly Canvas _healthBarsCanvas;
+
         private readonly Dictionary<Entity, EnemyObject> _liveEnemies = new();
         private readonly Dictionary<Transform, EnemyObject> _enemyObjects = new();
 
@@ -50,9 +53,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.PerformanceProbe
         private int _phaseIndex = NoPhase;
         private float _phaseTime;
 
-        public PerformanceProbeService(EntitiesLifeContext entitiesLifeContext)
+        public PerformanceProbeService(EntitiesLifeContext entitiesLifeContext, Canvas healthBarsCanvas)
         {
             _entitiesLifeContext = entitiesLifeContext;
+            _healthBarsCanvas = healthBarsCanvas;
         }
 
         public void Initialize()
@@ -158,6 +162,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.PerformanceProbe
 
             foreach (EnemyObject enemyObject in _liveEnemies.Values)
                 enemyObject.Apply(disabledParts);
+
+            _healthBarsCanvas.enabled = (disabledParts & EnemyParts.HealthBars) == 0;
         }
 
         // Враг, появившийся посреди прогона, получает выключатели текущей фазы
@@ -245,27 +251,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.PerformanceProbe
         {
             private readonly SkinnedMeshRenderer[] _models;
             private readonly Animator[] _animators;
-            private readonly Behaviour[] _healthBars;
 
             public EnemyObject(Transform root)
             {
                 _models = Array.FindAll(root.GetComponentsInChildren<SkinnedMeshRenderer>(true), model => model.enabled);
                 _animators = Array.FindAll(root.GetComponentsInChildren<Animator>(true), animator => animator.enabled);
-
-                // Полоска — объект Canvas целиком: сам Canvas, CanvasScaler и поворот к камере
-                List<Behaviour> healthBars = new();
-
-                foreach (Canvas canvas in root.GetComponentsInChildren<Canvas>(true))
-                    healthBars.AddRange(Array.FindAll(canvas.GetComponents<Behaviour>(), part => part.enabled));
-
-                _healthBars = healthBars.ToArray();
             }
 
             public void Apply(EnemyParts disabledParts)
             {
                 SetEnabled(_models, (disabledParts & EnemyParts.Models) == 0);
                 SetEnabled(_animators, (disabledParts & EnemyParts.Animators) == 0);
-                SetEnabled(_healthBars, (disabledParts & EnemyParts.HealthBars) == 0);
             }
 
             private void SetEnabled(SkinnedMeshRenderer[] models, bool isEnabled)

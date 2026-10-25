@@ -29,6 +29,7 @@ namespace Assets._Project.Develop.Runtime.UI.Core.Views
             {ViewIDs.EncyclopediaTrait, "UI/ProjectContext/Encyclopedia/EncyclopediaTraitView" },
             {ViewIDs.EncyclopediaStatTile, "UI/ProjectContext/Encyclopedia/EncyclopediaStatTileView" },
             {ViewIDs.EncyclopediaAbility, "UI/ProjectContext/Encyclopedia/EncyclopediaAbilityView" },
+            {ViewIDs.EnemyHealthBar, "UI/Gameplay/HealthBar/HealthBar" },
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)

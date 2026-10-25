@@ -64,14 +64,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4689774200801249157, guid: 66be6471186b2e74daa6a446f7a1b236, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4689774200801249157, guid: 66be6471186b2e74daa6a446f7a1b236, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7269835122164473616, guid: 66be6471186b2e74daa6a446f7a1b236, type: 3}
       propertyPath: m_Name
       value: MeleeSkeletonBoss
@@ -83,10 +75,6 @@ PrefabInstance:
     - target: {fileID: 8092288130613716529, guid: 66be6471186b2e74daa6a446f7a1b236, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 1.105
-      objectReference: {fileID: 0}
-    - target: {fileID: 8658597811236057527, guid: 66be6471186b2e74daa6a446f7a1b236, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 280
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3841488659158377499, guid: 66be6471186b2e74daa6a446f7a1b236, type: 3}

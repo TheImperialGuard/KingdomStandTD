@@ -28,6 +28,7 @@ using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Gameplay;
+using Assets._Project.Develop.Runtime.UI.Gameplay.EnemyHealthBars;
 using Assets._Project.Develop.Runtime.UI.ProjectContext;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
@@ -132,6 +133,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateGameplayScreenPresenter).NonLazy();
 
+            container.RegisterAsSingle(CreateEnemiesHealthBarsPresenter).NonLazy();
+
             container.RegisterAsSingle(CreateStartBossMusicService).NonLazy();
 
             container.RegisterAsSingle(CreateCameraMover);
@@ -151,7 +154,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
 #if KS_PERF_PROBE
         private static PerformanceProbeService CreatePerformanceProbeService(DIContainer c)
-            => new(c.Resolve<EntitiesLifeContext>());
+        {
+            Canvas healthBarsCanvas = c.Resolve<GameplayUIRoot>().HealthBarsLayer.GetComponent<Canvas>();
+
+            return new PerformanceProbeService(c.Resolve<EntitiesLifeContext>(), healthBarsCanvas);
+        }
 #endif
 
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c) => new();
@@ -421,5 +428,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             return presenter;
         }
+
+        private static EnemiesHealthBarsPresenter CreateEnemiesHealthBarsPresenter(DIContainer c)
+            => c.Resolve<GameplayPresentersFactory>().CreateEnemiesHealthBarsPresenter();
     }
 }

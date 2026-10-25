@@ -66,4 +66,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.EntitiesLifeCycle
     {
         public List<Collider> Value;
     }
+
+    public class HealthBarPoint : IEntityComponent
+    {
+        public Transform Value;
+    }
 }
