@@ -186,6 +186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Warrior
       objectReference: {fileID: 0}
+    - target: {fileID: 6694911617018394084, guid: 4fa501508ba1fd14db956ace7c7bed39, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7656125411362483174, guid: 4fa501508ba1fd14db956ace7c7bed39, type: 3}
       propertyPath: m_CastShadows
       value: 0
