@@ -1,0 +1,598 @@
+{
+  "level": "HeavyLoad",
+  "campaignNumber": null,
+  "prefabPath": "Prefabs/Levels/Level_2",
+  "gameMode": "Basic",
+  "towerSlotsCount": 16,
+  "startGold": 5000,
+  "startPlayerHealth": 1000,
+  "roads": [
+    {
+      "pathNumber": "First",
+      "name": "Path_1",
+      "waypointsCount": 8,
+      "lengthCenter": 43.013,
+      "lengthLeft": 42.309,
+      "lengthRight": 43.723,
+      "timeToBase": {
+        "Necromancer": 43.013,
+        "Skeleton": 43.013
+      }
+    },
+    {
+      "pathNumber": "Second",
+      "name": "Path_2",
+      "waypointsCount": 8,
+      "lengthCenter": 35.013,
+      "lengthLeft": 35.725,
+      "lengthRight": 34.311,
+      "timeToBase": {
+        "Gargoyle": 35.013,
+        "Orc": 35.013,
+        "OrcChief": 70.025,
+        "SkeletonMage": 58.354
+      }
+    }
+  ],
+  "stages": [
+    {
+      "stageTime": 60.0,
+      "timeToSkipStage": 25.0,
+      "note": "Тяжёлый тест: волна 4 уровня 2",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 30
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Left",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 0.5,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 30,
+            "health": 600.0,
+            "killGold": 150,
+            "breakthroughDamage": 30,
+            "spawnEnd": 14.5,
+            "firstArrival": 42.309,
+            "lastArrival": 56.809
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 30
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Right",
+          "startDelay": 1.0,
+          "delayBetweenSpawns": 0.5,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 30,
+            "health": 600.0,
+            "killGold": 150,
+            "breakthroughDamage": 30,
+            "spawnEnd": 15.5,
+            "firstArrival": 44.723,
+            "lastArrival": 59.223
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 30
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 2.0,
+          "delayBetweenSpawns": 0.5,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 30,
+            "health": 600.0,
+            "killGold": 150,
+            "breakthroughDamage": 30,
+            "spawnEnd": 16.5,
+            "firstArrival": 45.013,
+            "lastArrival": 59.513
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "SkeletonMage",
+              "count": 8
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 4.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 8,
+            "health": 800.0,
+            "killGold": 160,
+            "breakthroughDamage": 8,
+            "spawnEnd": 28.0,
+            "firstArrival": 58.354,
+            "lastArrival": 86.354
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "SkeletonMage",
+              "count": 8
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Right",
+          "startDelay": 1.0,
+          "delayBetweenSpawns": 4.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 8,
+            "health": 800.0,
+            "killGold": 160,
+            "breakthroughDamage": 8,
+            "spawnEnd": 29.0,
+            "firstArrival": 58.185,
+            "lastArrival": 86.185
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 5,
+        "enemiesCount": 106,
+        "enemiesByType": {
+          "Skeleton": 90,
+          "SkeletonMage": 16
+        },
+        "health": 3400.0,
+        "effectiveHealthPhysic": 3400.0,
+        "effectiveHealthMagic": 12466.668,
+        "healthPerSecond": 56.667,
+        "killGold": 770,
+        "maxSkipGold": 30,
+        "goldAtStartWithoutSkips": 5000,
+        "goldAtStartWithMaxSkips": 5000,
+        "breakthroughDamage": 106,
+        "breakthroughThreat": 0.106,
+        "spawnEnd": 29.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 86.354,
+        "peakEnemies": 106,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 30,
+            "health": 600.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Left",
+            "wavesCount": 1,
+            "enemiesCount": 30,
+            "health": 600.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Right",
+            "wavesCount": 1,
+            "enemiesCount": 30,
+            "health": 600.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 8,
+            "health": 800.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Right",
+            "wavesCount": 1,
+            "enemiesCount": 8,
+            "health": 800.0
+          }
+        ]
+      }
+    },
+    {
+      "stageTime": 60.0,
+      "timeToSkipStage": 25.0,
+      "note": "Тяжёлый тест с запасом: волна 4 уровня 2 + гаргульи, вожаки с орками, некроманты",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 30
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Left",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 0.5,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 30,
+            "health": 600.0,
+            "killGold": 150,
+            "breakthroughDamage": 30,
+            "spawnEnd": 14.5,
+            "firstArrival": 42.309,
+            "lastArrival": 56.809
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 30
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Right",
+          "startDelay": 1.0,
+          "delayBetweenSpawns": 0.5,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 30,
+            "health": 600.0,
+            "killGold": 150,
+            "breakthroughDamage": 30,
+            "spawnEnd": 15.5,
+            "firstArrival": 44.723,
+            "lastArrival": 59.223
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Skeleton",
+              "count": 30
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 2.0,
+          "delayBetweenSpawns": 0.5,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 30,
+            "health": 600.0,
+            "killGold": 150,
+            "breakthroughDamage": 30,
+            "spawnEnd": 16.5,
+            "firstArrival": 45.013,
+            "lastArrival": 59.513
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "SkeletonMage",
+              "count": 8
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 4.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 8,
+            "health": 800.0,
+            "killGold": 160,
+            "breakthroughDamage": 8,
+            "spawnEnd": 28.0,
+            "firstArrival": 58.354,
+            "lastArrival": 86.354
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "SkeletonMage",
+              "count": 8
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Right",
+          "startDelay": 1.0,
+          "delayBetweenSpawns": 4.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 8,
+            "health": 800.0,
+            "killGold": 160,
+            "breakthroughDamage": 8,
+            "spawnEnd": 29.0,
+            "firstArrival": 58.185,
+            "lastArrival": 86.185
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Gargoyle",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Left",
+          "startDelay": 5.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 100.0,
+            "killGold": 100,
+            "breakthroughDamage": 10,
+            "spawnEnd": 14.0,
+            "firstArrival": 40.725,
+            "lastArrival": 49.725
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Gargoyle",
+              "count": 10
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Right",
+          "startDelay": 5.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 10,
+            "health": 100.0,
+            "killGold": 100,
+            "breakthroughDamage": 10,
+            "spawnEnd": 14.0,
+            "firstArrival": 39.311,
+            "lastArrival": 48.311
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "OrcChief",
+              "count": 2
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 30.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 2,
+            "health": 200.0,
+            "killGold": 20,
+            "breakthroughDamage": 2,
+            "spawnEnd": 30.0,
+            "firstArrival": 70.025,
+            "lastArrival": 100.025
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Orc",
+              "count": 30
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 1.5,
+          "delayBetweenSpawns": 1.5,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 30,
+            "health": 3000.0,
+            "killGold": 300,
+            "breakthroughDamage": 30,
+            "spawnEnd": 45.0,
+            "firstArrival": 36.513,
+            "lastArrival": 80.012
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "Necromancer",
+              "count": 2
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 10.0,
+          "delayBetweenSpawns": 15.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 2,
+            "health": 200.0,
+            "killGold": 20,
+            "breakthroughDamage": 2,
+            "spawnEnd": 25.0,
+            "firstArrival": 53.013,
+            "lastArrival": 68.012
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 10,
+        "enemiesCount": 160,
+        "enemiesByType": {
+          "Gargoyle": 20,
+          "Necromancer": 2,
+          "Orc": 30,
+          "OrcChief": 2,
+          "Skeleton": 90,
+          "SkeletonMage": 16
+        },
+        "health": 7000.0,
+        "effectiveHealthPhysic": 7260.869,
+        "effectiveHealthMagic": 16066.668,
+        "healthPerSecond": 116.667,
+        "killGold": 1310,
+        "maxSkipGold": 0,
+        "goldAtStartWithoutSkips": 5770,
+        "goldAtStartWithMaxSkips": 5800,
+        "breakthroughDamage": 160,
+        "breakthroughThreat": 0.16,
+        "spawnEnd": 45.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 100.025,
+        "peakEnemies": 154,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 2,
+            "enemiesCount": 32,
+            "health": 800.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Left",
+            "wavesCount": 1,
+            "enemiesCount": 30,
+            "health": 600.0
+          },
+          {
+            "pathNumber": "First",
+            "lane": "Right",
+            "wavesCount": 1,
+            "enemiesCount": 30,
+            "health": 600.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Center",
+            "wavesCount": 3,
+            "enemiesCount": 40,
+            "health": 4000.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Left",
+            "wavesCount": 1,
+            "enemiesCount": 10,
+            "health": 100.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Right",
+            "wavesCount": 2,
+            "enemiesCount": 18,
+            "health": 900.0
+          }
+        ]
+      }
+    }
+  ],
+  "analysis": {
+    "stagesCount": 2,
+    "wavesCount": 15,
+    "enemiesCount": 266,
+    "enemiesByType": {
+      "Gargoyle": 20,
+      "Necromancer": 2,
+      "Orc": 30,
+      "OrcChief": 2,
+      "Skeleton": 180,
+      "SkeletonMage": 32
+    },
+    "health": 10400.0,
+    "effectiveHealthPhysic": 10660.869,
+    "effectiveHealthMagic": 28533.336,
+    "killGold": 2080,
+    "maxSkipGold": 30,
+    "totalGoldWithoutSkips": 7080,
+    "totalGoldWithMaxSkips": 7110,
+    "breakthroughDamage": 266,
+    "breakthroughThreat": 0.266,
+    "durationWithoutSkips": 120.0,
+    "durationWithMaxSkips": 85.0,
+    "peakEnemies": 154,
+    "traffic": [
+      {
+        "pathNumber": "First",
+        "lane": "Center",
+        "wavesCount": 3,
+        "enemiesCount": 62,
+        "health": 1400.0
+      },
+      {
+        "pathNumber": "First",
+        "lane": "Left",
+        "wavesCount": 2,
+        "enemiesCount": 60,
+        "health": 1200.0
+      },
+      {
+        "pathNumber": "First",
+        "lane": "Right",
+        "wavesCount": 2,
+        "enemiesCount": 60,
+        "health": 1200.0
+      },
+      {
+        "pathNumber": "Second",
+        "lane": "Center",
+        "wavesCount": 4,
+        "enemiesCount": 48,
+        "health": 4800.0
+      },
+      {
+        "pathNumber": "Second",
+        "lane": "Left",
+        "wavesCount": 1,
+        "enemiesCount": 10,
+        "health": 100.0
+      },
+      {
+        "pathNumber": "Second",
+        "lane": "Right",
+        "wavesCount": 3,
+        "enemiesCount": 26,
+        "health": 1700.0
+      }
+    ]
+  },
+  "errors": [],
+  "warnings": []
+}
