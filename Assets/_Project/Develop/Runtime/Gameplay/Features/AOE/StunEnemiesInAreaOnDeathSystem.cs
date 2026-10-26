@@ -1,5 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
@@ -63,6 +64,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
 
             foreach (Entity entityInArea in entities)
             {
+                // Снаряд пушки взрывается на земле: летающих не оглушает, как и не берёт в цель
+                if (entityInArea.HasComponent<IsFlying>())
+                    continue;
+
                 if (entityInArea.TryGetIsStunned(out ReactiveVariable<bool> isStunned) == false)
                     continue;
 
