@@ -17,6 +17,7 @@ using Assets._Project.Develop.Runtime.Meta.Features.Settings;
 using Assets._Project.Develop.Runtime.UI.CommonViews;
 using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
+using Assets._Project.Develop.Runtime.UI.Gameplay.BossHealthBar;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.EnemyHealthBars;
@@ -155,6 +156,11 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
         public PlayerHealthPresenter CreatePlayerHealthPresenter(IconTextView view)
         {
             return new PlayerHealthPresenter(view, _container.Resolve<PlayerHealth>());
+        }
+
+        public BossHealthBarPresenter CreateBossHealthBarPresenter(BossHealthBarView view)
+        {
+            return new BossHealthBarPresenter(view, _container.Resolve<EntitiesLifeContext>());
         }
 
         public StagesStatusPresenter CreateStagesStatusPresenter(IconTextView view)
