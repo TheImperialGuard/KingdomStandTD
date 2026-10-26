@@ -1,3 +1,4 @@
+﻿using Assets._Project.Develop.Runtime.Utilities.CameraManagment;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
@@ -15,10 +16,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
 
         public void Update()
         {
+            _boundedCamera.RefitOnAspectChange();
+
             Vector3 delta = _inputService.CameraDelta;
 
             if (delta != Vector3.zero)
-                _boundedCamera.MoveCamera(delta);
+                _boundedCamera.Move(delta);
         }
     }
 }

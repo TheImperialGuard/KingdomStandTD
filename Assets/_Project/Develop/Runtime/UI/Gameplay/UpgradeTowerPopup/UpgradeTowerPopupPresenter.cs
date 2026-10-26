@@ -4,6 +4,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups;
+using Assets._Project.Develop.Runtime.Utilities.CameraManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.Text;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
@@ -29,7 +30,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
             TowersListConfig towersListConfig,
             TowersPurchaseService towersPurchaseService,
             WalletService walletService,
-            TowersPlaceholdersService towersPlaceholdersService)
+            TowersPlaceholdersService towersPlaceholdersService,
+            BoundedOrthoCamera camera)
             : base(
                 coroutinesPerformer,
                 rayShooterService,
@@ -37,7 +39,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup
                 sourceTower,
                 towersPurchaseService,
                 towersPlaceholdersService,
-                walletService)
+                walletService,
+                camera)
         {
             _view = view;
             _towersFactory = towersFactory;

@@ -8,6 +8,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups;
 using Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia;
+using Assets._Project.Develop.Runtime.Utilities.CameraManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using System;
@@ -45,7 +46,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
             TowersPurchaseService towersPurchaseService,
             WalletService walletService,
             TowersPlaceholdersService towersPlaceholdersService,
-            AbilitiesFactory abilitiesFactory)
+            AbilitiesFactory abilitiesFactory,
+            BoundedOrthoCamera camera)
             : base(
                 coroutinesPerformer,
                 rayShooterService,
@@ -53,7 +55,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerAbilitiesPopup
                 sourceTower,
                 towersPurchaseService,
                 towersPlaceholdersService,
-                walletService)
+                walletService,
+                camera)
         {
             _view = view;
             _towersAbilitiesListConfig = towersAbilitiesListConfig;

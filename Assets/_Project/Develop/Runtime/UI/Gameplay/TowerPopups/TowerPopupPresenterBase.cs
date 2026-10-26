@@ -4,6 +4,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.UI.CommonViews;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
+using Assets._Project.Develop.Runtime.Utilities.CameraManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using System;
@@ -23,6 +24,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups
 
         private readonly TowerPopupViewBase _view;
         private readonly WalletService _walletService;
+        private readonly BoundedOrthoCamera _camera;
 
         private TButton? _armedButton;
 
@@ -36,7 +38,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups
             Entity source,
             TowersPurchaseService towersPurchaseService,
             TowersPlaceholdersService towersPlaceholdersService,
-            WalletService walletService)
+            WalletService walletService,
+            BoundedOrthoCamera camera)
             : base(coroutinesPerformer, rayShooterService)
         {
             _view = view;
@@ -44,6 +47,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups
             TowersPurchaseService = towersPurchaseService;
             TowersPlaceholdersService = towersPlaceholdersService;
             _walletService = walletService;
+            _camera = camera;
         }
 
         protected override PopupViewBase PopupView => _view;
@@ -62,9 +66,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups
             _view.HideTip();
 
             _goldDisposable = _walletService.GetCurrency(CurrencyTypes.Gold).Subscribe(OnGoldChanged);
-
-            BoundedOrthoCamera camera = Camera.main.GetComponent<BoundedOrthoCamera>();
-            _cameraMovedDisposable = camera.CameraMoved.Subscribe(OnCameraMoved);
+            _cameraMovedDisposable = _camera.Moved.Subscribe(OnCameraMoved);
 
             RefreshButtons();
         }

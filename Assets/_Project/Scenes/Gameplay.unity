@@ -507,13 +507,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e9d5afd0f1ab11408aa67340ce902dc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BoundedOrthoCamera
-  worldMin: {x: -11, y: -11}
-  worldMax: {x: 11, y: 11.15}
-  groundY: 0
-  minResolutionWidth: 1920
-  minResolutionHeight: 1080
-  drawGizmos: 1
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Utilities.CameraManagment.BoundedOrthoCamera
+  _groundY: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -32,6 +32,7 @@ using Assets._Project.Develop.Runtime.UI.Gameplay.EnemyHealthBars;
 using Assets._Project.Develop.Runtime.UI.ProjectContext;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
+using Assets._Project.Develop.Runtime.Utilities.CameraManagment;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
@@ -70,6 +71,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateParticleEffectsPool);
 
             container.RegisterAsSingle(CreateLevel).NonLazy();
+
+            container.RegisterAsSingle(CreateBoundedOrthoCamera);
 
             container.RegisterAsSingle(CreateLevelCameraBoundsService).NonLazy();
 
@@ -347,12 +350,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             return new PlayerHealth(maxValue, maxValue);
         }
 
+        private static BoundedOrthoCamera CreateBoundedOrthoCamera(DIContainer c)
+        {
+            return Camera.main.GetComponent<BoundedOrthoCamera>();
+        }
+
         private static LevelCameraBoundsService CreateLevelCameraBoundsService(DIContainer c)
         {
-            Camera camera = Camera.main;
-            BoundedOrthoCamera boundedOrthoCamera = camera.GetComponent<BoundedOrthoCamera>();
-
-            return new LevelCameraBoundsService(c.Resolve<Level>(), boundedOrthoCamera);
+            return new LevelCameraBoundsService(c.Resolve<Level>(), c.Resolve<BoundedOrthoCamera>());
         }
 
         private static LevelLightingService CreateLevelLightingService(DIContainer c)
@@ -362,10 +367,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static CameraMover CreateCameraMover(DIContainer c)
         {
-            Camera camera = Camera.main;
-            BoundedOrthoCamera boundedOrthoCamera = camera.GetComponent<BoundedOrthoCamera>();
-
-            return new CameraMover(boundedOrthoCamera, c.Resolve<IInputService>());
+            return new CameraMover(c.Resolve<BoundedOrthoCamera>(), c.Resolve<IInputService>());
         }
 
         private static Level CreateLevel(DIContainer c)

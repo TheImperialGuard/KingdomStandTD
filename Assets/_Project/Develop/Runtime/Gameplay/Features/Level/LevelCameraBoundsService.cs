@@ -1,4 +1,5 @@
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.Utilities.CameraManagment;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Level

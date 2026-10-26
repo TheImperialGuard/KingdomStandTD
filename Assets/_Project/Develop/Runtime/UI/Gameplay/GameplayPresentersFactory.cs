@@ -32,6 +32,7 @@ using Assets._Project.Develop.Runtime.UI.Gameplay.UpgradeTowerPopup;
 using Assets._Project.Develop.Runtime.UI.Settings;
 using Assets._Project.Develop.Runtime.Utilities.Adverts;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
+using Assets._Project.Develop.Runtime.Utilities.CameraManagment;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
@@ -89,7 +90,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<TowersFactory>(),
                 _container.Resolve<TowersPurchaseService>(),
                 _container.Resolve<WalletService>(),
-                _container.Resolve<TowersPlaceholdersService>());
+                _container.Resolve<TowersPlaceholdersService>(),
+                _container.Resolve<BoundedOrthoCamera>());
         }
 
         public UpgradeTowerPopupPresenter CreateUpgradeTowerPopupPresenter(UpgradeTowerPopupView view, Entity sourceTower)
@@ -106,7 +108,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 config,
                 _container.Resolve<TowersPurchaseService>(),
                 _container.Resolve<WalletService>(),
-                _container.Resolve<TowersPlaceholdersService>());
+                _container.Resolve<TowersPlaceholdersService>(),
+                _container.Resolve<BoundedOrthoCamera>());
         }
 
         public TowerAbilitiesPopupPresenter CreateTowerAbilitiesPopupPresenter(TowerAbilitiesPopupView view, Entity sourceTower)
@@ -123,7 +126,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<TowersPurchaseService>(),
                 _container.Resolve<WalletService>(),
                 _container.Resolve<TowersPlaceholdersService>(),
-                _container.Resolve<AbilitiesFactory>());
+                _container.Resolve<AbilitiesFactory>(),
+                _container.Resolve<BoundedOrthoCamera>());
         }
 
         public GameplayScreenPresenter CreateGameplayScreenPresenter(GameplayScreenView view)

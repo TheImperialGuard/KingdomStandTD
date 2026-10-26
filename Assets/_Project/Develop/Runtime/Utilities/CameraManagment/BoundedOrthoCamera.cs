@@ -1,492 +1,196 @@
 ﻿using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
-public sealed class BoundedOrthoCamera : MonoBehaviour
+namespace Assets._Project.Develop.Runtime.Utilities.CameraManagment
 {
-    // Вписываем видимую область чуть теснее границ, чтобы не балансировать
-    // на точном равенстве и всегда попадать в обычную ветку ограничения.
-    private const float FIT_SAFETY_FACTOR = 0.999f;
-    private const float ASPECT_CHANGE_TOLERANCE = 0.0001f;
-
-    public ReactiveEvent CameraMoved = new();
-
-    [Header("Границы игровой области на плоскости XZ")]
-    [SerializeField] private Vector2 worldMin = new(-10f, -10f);
-    [SerializeField] private Vector2 worldMax = new(10f, 10f);
-
-    [Header("Плоскость игровой поверхности")]
-    [SerializeField] private float groundY = 0f;
-
-    [Header("Пределы масштаба камеры")]
-    [SerializeField] private float _minOrthographicSize = 1f;
-    [SerializeField] private float _maxOrthographicSize = 30f;
-
-    [Header("Отладка")]
-    [SerializeField] private bool drawGizmos = true;
-
-    private Camera _camera;
-    private float _fixedCameraY;
-    private float _fixedCameraRotationX;
-    private float _fixedCameraRotationZ;
-    private float _lastAspect;
-
-    private readonly Vector3[] _visibleCorners = new Vector3[4];
-
-    private enum Corner
+    // Наклонная ортографическая камера над прямоугольным полем: двигается, не показывая ничего за его границами,
+    // а масштаб подбирает так, чтобы вид вписывался в границы.
+    [RequireComponent(typeof(Camera))]
+    public sealed class BoundedOrthoCamera : MonoBehaviour
     {
-        BottomLeft,
-        TopLeft,
-        TopRight,
-        BottomRight
-    }
+        // Вписываем видимую область чуть теснее границ, чтобы не балансировать
+        // на точном равенстве и всегда попадать в обычную ветку ограничения.
+        private const float FitSafetyFactor = 0.999f;
+        private const float AspectChangeTolerance = 0.0001f;
 
-    private void Awake()
-    {
-        _camera = GetComponent<Camera>();
-
-        if (!_camera.orthographic)
+        private static readonly Vector2[] _viewportCorners =
         {
-            Debug.LogError(
-                $"{nameof(BoundedOrthoCamera)} requires an orthographic camera.",
-                this);
-        }
-
-        SaveFixedCameraSettings();
-
-        _lastAspect = _camera.aspect;
-    }
-
-    private void Start()
-    {
-        CenterCamera();
-    }
-
-    private void LateUpdate()
-    {
-        // Смена ориентации или разрешения меняет ширину видимой области,
-        // поэтому масштаб пересчитывается, а положение перепроверяется.
-        if (IsAspectChanged())
-        {
-            _lastAspect = _camera.aspect;
-            FitSizeToBounds();
-        }
-
-        ClampCurrentPosition();
-    }
-
-    private void SaveFixedCameraSettings()
-    {
-        _fixedCameraY = transform.position.y;
-        _fixedCameraRotationX = transform.eulerAngles.x;
-        _fixedCameraRotationZ = transform.eulerAngles.z;
-    }
-
-    /// <summary>
-    /// Перемещает камеру на delta в мировых координатах.
-    /// Обычно delta следует умножать на скорость и Time.deltaTime
-    /// во внешнем контроллере управления.
-    /// </summary>
-    public void MoveCamera(Vector3 delta)
-    {
-        Vector3 targetPosition = transform.position + delta;
-        targetPosition.y = _fixedCameraY;
-
-        transform.position = ClampPosition(targetPosition);
-        CameraMoved?.Invoke();
-    }
-
-    /// <summary>
-    /// Устанавливает позицию камеры, сохраняя допустимую высоту.
-    /// </summary>
-    public void SetCameraPosition(Vector3 position)
-    {
-        position.y = _fixedCameraY;
-        transform.position = ClampPosition(position);
-    }
-
-    /// <summary>
-    /// Центрирует фактическую видимую область камеры относительно центра границ.
-    /// </summary>
-    [ContextMenu("CenterCamera")]
-    public void CenterCamera()
-    {
-        Vector2 boundsCenter = GetBoundsCenter();
-
-        Vector3 currentPosition = transform.position;
-        currentPosition.y = _fixedCameraY;
-
-        // Сначала вычисляем положение центра видимой области
-        // при текущей позиции камеры.
-        Vector3 currentVisibleCenter = GetVisibleAreaCenter(currentPosition);
-
-        // Перемещаем камеру на разницу между желаемым
-        // и текущим центром видимой области.
-        Vector3 delta = new Vector3(
-            boundsCenter.x - currentVisibleCenter.x,
-            0f,
-            boundsCenter.y - currentVisibleCenter.z
-        );
-
-        Vector3 targetPosition = currentPosition + delta;
-        targetPosition.y = _fixedCameraY;
-
-        transform.position = ClampPosition(targetPosition);
-    }
-
-    /// <summary>
-    /// Устанавливает новые границы и центрирует камеру.
-    /// </summary>
-    public void SetBounds(Vector2 newMin, Vector2 newMax)
-    {
-        worldMin = newMin;
-        worldMax = newMax;
-
-        NormalizeBounds();
-        FitSizeToBounds();
-        CenterCamera();
-    }
-
-    /// <summary>
-    /// Подбирает размер камеры так, чтобы видимая область целиком помещалась в границы.
-    /// </summary>
-    [ContextMenu("FitSizeToBounds")]
-    public void FitSizeToBounds()
-    {
-        if (TryCalculateFitSize(out float size) == false)
-            return;
-
-        if (Mathf.Approximately(_camera.orthographicSize, size))
-            return;
-
-        _camera.orthographicSize = size;
-
-        CameraMoved?.Invoke();
-    }
-
-    /// <summary>
-    /// Возвращает фактические четыре угла изображения,
-    /// спроецированные на горизонтальную плоскость XZ.
-    /// </summary>
-    public bool TryGetVisibleCorners(
-        Vector3 cameraPosition,
-        Vector3[] corners)
-    {
-        if (corners == null || corners.Length < 4)
-        {
-            Debug.LogError("The corners array must contain at least four elements.");
-            return false;
-        }
-
-        Vector3 savedPosition = transform.position;
-        Quaternion savedRotation = transform.rotation;
-
-        transform.position = cameraPosition;
-        transform.rotation = Quaternion.Euler(
-            _fixedCameraRotationX,
-            transform.eulerAngles.y,
-            _fixedCameraRotationZ
-        );
-
-        Plane groundPlane = new Plane(Vector3.up, new Vector3(0f, groundY, 0f));
-
-        Vector2[] viewportPoints =
-        {
-            new Vector2(0f, 0f), // BottomLeft
-            new Vector2(0f, 1f), // TopLeft
-            new Vector2(1f, 1f), // TopRight
-            new Vector2(1f, 0f)  // BottomRight
+            new(0f, 0f),
+            new(0f, 1f),
+            new(1f, 1f),
+            new(1f, 0f)
         };
 
-        bool success = true;
+        [Tooltip("Высота верхней грани тайлов поля: по ней край кадра держится на краю поля")]
+        [SerializeField] private float _groundY;
 
-        for (int i = 0; i < viewportPoints.Length; i++)
+        private readonly ReactiveEvent _moved = new();
+
+        private Camera _camera;
+        private Vector2 _worldMin;
+        private Vector2 _worldMax;
+        private float _lastAspect;
+        private bool _isFitted;
+
+        /// <summary>
+        /// Камера сдвинулась или изменила масштаб: всё, что привязано на экране к точкам мира, пора переставить.
+        /// </summary>
+        public IReadOnlyEvent Moved => _moved;
+
+        /// <summary>
+        /// Задаёт границы поля на плоскости XZ, вписывает в них вид и ставит камеру по центру.
+        /// </summary>
+        public void SetBounds(Vector2 min, Vector2 max)
         {
-            Ray ray = _camera.ViewportPointToRay(viewportPoints[i]);
+            _worldMin = Vector2.Min(min, max);
+            _worldMax = Vector2.Max(min, max);
+            _lastAspect = _camera.aspect;
+            _isFitted = TryFitSize();
 
-            if (groundPlane.Raycast(ray, out float distance))
-            {
-                corners[i] = ray.GetPoint(distance);
-            }
-            else
-            {
-                success = false;
-            }
+            CenterCamera();
         }
 
-        transform.position = savedPosition;
-        transform.rotation = savedRotation;
-
-        return success;
-    }
-
-    private Vector3 ClampPosition(Vector3 targetPosition)
-    {
-        targetPosition.y = _fixedCameraY;
-
-        // Для ограничения используем фактические четыре угла
-        // будущей видимой области.
-        if (TryGetVisibleRect(targetPosition, out Vector2 visibleMin, out Vector2 visibleMax) == false)
+        /// <summary>
+        /// Смена ориентации или разрешения меняет ширину видимой области: вид вписывается заново,
+        /// а положение перепроверяется. Вызывать каждый кадр.
+        /// </summary>
+        public void RefitOnAspectChange()
         {
-            return transform.position;
+            if (IsAspectChanged() == false)
+                return;
+
+            _lastAspect = _camera.aspect;
+
+            if (_isFitted == false)
+                return;
+
+            TryFitSize();
+            SetClampedPosition(transform.position);
         }
 
-        float boundsWidth = worldMax.x - worldMin.x;
-        float boundsDepth = worldMax.y - worldMin.y;
-
-        float visibleWidth = visibleMax.x - visibleMin.x;
-
-        // Если камера видит больше области, чем существует,
-        // центрируем её по соответствующей оси.
-        if (visibleWidth >= boundsWidth)
+        /// <summary>
+        /// Сдвигает камеру на delta в мировых координатах, не меняя её высоту.
+        /// </summary>
+        public void Move(Vector3 delta)
         {
-            targetPosition.x +=
-                GetBoundsCenter().x - (visibleMin.x + visibleMax.x) * 0.5f;
-        }
-        else
-        {
-            if (visibleMin.x < worldMin.x)
-            {
-                targetPosition.x += worldMin.x - visibleMin.x;
-            }
+            delta.y = 0f;
 
-            if (visibleMax.x > worldMax.x)
-            {
-                targetPosition.x -= visibleMax.x - worldMax.x;
-            }
+            SetClampedPosition(transform.position + delta);
         }
 
-        // После изменения X нужно снова вычислить видимую область,
-        // потому что при общем наклоне камеры границы могут быть связаны.
-        if (TryGetVisibleRect(targetPosition, out visibleMin, out visibleMax) == false)
+        private void Awake()
         {
-            return transform.position;
+            _camera = GetComponent<Camera>();
+
+            if (_camera.orthographic == false)
+                Debug.LogError($"{nameof(BoundedOrthoCamera)} requires an orthographic camera.", this);
         }
 
-        float visibleDepth = visibleMax.y - visibleMin.y;
-
-        if (visibleDepth >= boundsDepth)
+        private void CenterCamera()
         {
-            targetPosition.z +=
-                GetBoundsCenter().y - (visibleMin.y + visibleMax.y) * 0.5f;
-        }
-        else
-        {
-            if (visibleMin.y < worldMin.y)
-            {
-                targetPosition.z += worldMin.y - visibleMin.y;
-            }
+            if (TryGetVisibleRect(out Rect visible) == false)
+                return;
 
-            if (visibleMax.y > worldMax.y)
-            {
-                targetPosition.z -= visibleMax.y - worldMax.y;
-            }
+            Vector2 offset = (_worldMin + _worldMax) / 2f - visible.center;
+
+            SetClampedPosition(transform.position + new Vector3(offset.x, 0f, offset.y));
         }
 
-        targetPosition.y = _fixedCameraY;
-        return targetPosition;
-    }
-
-    /// <summary>
-    /// Возвращает прямоугольник видимой области на плоскости XZ,
-    /// где x соответствует мировой оси X, а y — мировой оси Z.
-    /// </summary>
-    private bool TryGetVisibleRect(Vector3 cameraPosition, out Vector2 min, out Vector2 max)
-    {
-        min = Vector2.zero;
-        max = Vector2.zero;
-
-        if (TryGetVisibleCorners(cameraPosition, _visibleCorners) == false)
+        private void SetClampedPosition(Vector3 position)
         {
-            return false;
+            transform.position = ClampPosition(position);
+            _moved.Invoke();
         }
 
-        min = new Vector2(_visibleCorners[0].x, _visibleCorners[0].z);
-        max = min;
-
-        for (int i = 1; i < _visibleCorners.Length; i++)
+        // Сдвиг ортографической камеры по горизонтали сдвигает видимую область ровно на столько же,
+        // поэтому область считается в текущем положении и переносится в целевое.
+        private Vector3 ClampPosition(Vector3 targetPosition)
         {
-            Vector3 corner = _visibleCorners[i];
+            Vector3 currentPosition = transform.position;
 
-            min = new Vector2(Mathf.Min(min.x, corner.x), Mathf.Min(min.y, corner.z));
-            max = new Vector2(Mathf.Max(max.x, corner.x), Mathf.Max(max.y, corner.z));
+            targetPosition.y = currentPosition.y;
+
+            if (TryGetVisibleRect(out Rect visible) == false)
+                return currentPosition;
+
+            Vector3 offset = targetPosition - currentPosition;
+            visible.position += new Vector2(offset.x, offset.z);
+
+            targetPosition.x += GetClampOffset(visible.xMin, visible.xMax, _worldMin.x, _worldMax.x);
+            targetPosition.z += GetClampOffset(visible.yMin, visible.yMax, _worldMin.y, _worldMax.y);
+
+            return targetPosition;
         }
-
-        return true;
-    }
-
-    private bool TryCalculateFitSize(out float size)
-    {
-        size = _camera.orthographicSize;
-
-        if (TryGetVisibleRect(transform.position, out Vector2 visibleMin, out Vector2 visibleMax) == false)
-        {
-            return false;
-        }
-
-        float visibleWidth = visibleMax.x - visibleMin.x;
-        float visibleDepth = visibleMax.y - visibleMin.y;
-
-        if (visibleWidth <= 0f || visibleDepth <= 0f)
-        {
-            return false;
-        }
-
-        float boundsWidth = worldMax.x - worldMin.x;
-        float boundsDepth = worldMax.y - worldMin.y;
 
         // Видимые размеры линейны по orthographicSize при любом наклоне камеры,
-        // поэтому достаточно отмасштабировать текущий размер.
-        float scale = Mathf.Min(boundsWidth / visibleWidth, boundsDepth / visibleDepth);
-
-        float fitSize = _camera.orthographicSize * scale * FIT_SAFETY_FACTOR;
-
-        size = Mathf.Clamp(fitSize, _minOrthographicSize, _maxOrthographicSize);
-
-        if (Mathf.Approximately(fitSize, size) == false)
+        // поэтому вписанный размер получается масштабированием текущего.
+        private bool TryFitSize()
         {
-            Debug.LogWarning(
-                $"Размер камеры упёрся в предел. Желаемый: {fitSize}, применённый: {size}.",
-                this);
+            if (TryGetVisibleRect(out Rect visible) == false || visible.width <= 0f || visible.height <= 0f)
+                return false;
+
+            float boundsWidth = _worldMax.x - _worldMin.x;
+            float boundsDepth = _worldMax.y - _worldMin.y;
+            float scale = Mathf.Min(boundsWidth / visible.width, boundsDepth / visible.height);
+
+            _camera.orthographicSize *= scale * FitSafetyFactor;
+
+            return true;
         }
 
-        return true;
-    }
-
-    private bool IsAspectChanged()
-    {
-        return Mathf.Abs(_camera.aspect - _lastAspect) > ASPECT_CHANGE_TOLERANCE;
-    }
-
-    private void ClampCurrentPosition()
-    {
-        Vector3 currentPosition = transform.position;
-        currentPosition.y = _fixedCameraY;
-
-        Vector3 clampedPosition = ClampPosition(currentPosition);
-
-        if (clampedPosition == transform.position)
+        // Прямоугольник, который камера видит на плоскости поля: x — мировая ось X, y — мировая ось Z.
+        private bool TryGetVisibleRect(out Rect rect)
         {
-            return;
+            rect = default;
+
+            Vector2 min = Vector2.positiveInfinity;
+            Vector2 max = Vector2.negativeInfinity;
+
+            foreach (Vector2 viewportCorner in _viewportCorners)
+            {
+                if (TryGetGroundPoint(_camera.ViewportPointToRay(viewportCorner), out Vector3 point) == false)
+                    return false;
+
+                Vector2 groundPoint = new(point.x, point.z);
+
+                min = Vector2.Min(min, groundPoint);
+                max = Vector2.Max(max, groundPoint);
+            }
+
+            rect = Rect.MinMaxRect(min.x, min.y, max.x, max.y);
+            return true;
         }
 
-        transform.position = clampedPosition;
-
-        CameraMoved?.Invoke();
-    }
-
-    private Vector3 GetVisibleAreaCenter(Vector3 cameraPosition)
-    {
-        if (!TryGetVisibleCorners(cameraPosition, _visibleCorners))
+        private bool TryGetGroundPoint(Ray ray, out Vector3 point)
         {
-            return new Vector3(cameraPosition.x, groundY, cameraPosition.z);
+            Plane ground = new(Vector3.up, new Vector3(0f, _groundY, 0f));
+
+            if (ground.Raycast(ray, out float distance))
+            {
+                point = ray.GetPoint(distance);
+                return true;
+            }
+
+            point = Vector3.zero;
+            return false;
         }
 
-        Vector3 center = Vector3.zero;
+        private bool IsAspectChanged() => Mathf.Abs(_camera.aspect - _lastAspect) > AspectChangeTolerance;
 
-        for (int i = 0; i < _visibleCorners.Length; i++)
+        // Если камера видит больше, чем есть поля, она встаёт по центру этой оси,
+        // иначе край видимой области подтягивается к границе.
+        private static float GetClampOffset(float visibleMin, float visibleMax, float boundsMin, float boundsMax)
         {
-            center += _visibleCorners[i];
-        }
+            if (visibleMax - visibleMin >= boundsMax - boundsMin)
+                return (boundsMin + boundsMax) / 2f - (visibleMin + visibleMax) / 2f;
 
-        return center / _visibleCorners.Length;
-    }
+            if (visibleMin < boundsMin)
+                return boundsMin - visibleMin;
 
-    private Vector2 GetBoundsCenter()
-    {
-        return (worldMin + worldMax) * 0.5f;
-    }
+            if (visibleMax > boundsMax)
+                return boundsMax - visibleMax;
 
-    private void NormalizeBounds()
-    {
-        Vector2 min = new Vector2(
-            Mathf.Min(worldMin.x, worldMax.x),
-            Mathf.Min(worldMin.y, worldMax.y)
-        );
-
-        Vector2 max = new Vector2(
-            Mathf.Max(worldMin.x, worldMax.x),
-            Mathf.Max(worldMin.y, worldMax.y)
-        );
-
-        worldMin = min;
-        worldMax = max;
-    }
-
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        NormalizeBounds();
-
-        if (_camera == null)
-        {
-            _camera = GetComponent<Camera>();
-        }
-
-        if (_camera != null && _camera.orthographic)
-        {
-            _fixedCameraY = transform.position.y;
-            _fixedCameraRotationX = transform.eulerAngles.x;
-            _fixedCameraRotationZ = transform.eulerAngles.z;
+            return 0f;
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        if (!drawGizmos)
-        {
-            return;
-        }
-
-        if (_camera == null)
-        {
-            _camera = GetComponent<Camera>();
-        }
-
-        if (_camera == null || !_camera.orthographic)
-        {
-            return;
-        }
-
-        DrawWorldBounds();
-
-        Vector3 position = transform.position;
-
-        if (!TryGetVisibleCorners(position, _visibleCorners))
-        {
-            return;
-        }
-
-        Gizmos.color = Color.cyan;
-
-        for (int i = 0; i < _visibleCorners.Length; i++)
-        {
-            Vector3 current = _visibleCorners[i];
-            Vector3 next = _visibleCorners[(i + 1) % _visibleCorners.Length];
-
-            Gizmos.DrawLine(current, next);
-        }
-
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawLine(
-            GetVisibleAreaCenter(position),
-            GetVisibleAreaCenter(position) + Vector3.up
-        );
-    }
-
-    private void DrawWorldBounds()
-    {
-        Vector3 bottomLeft = new Vector3(worldMin.x, groundY, worldMin.y);
-        Vector3 topLeft = new Vector3(worldMin.x, groundY, worldMax.y);
-        Vector3 topRight = new Vector3(worldMax.x, groundY, worldMax.y);
-        Vector3 bottomRight = new Vector3(worldMax.x, groundY, worldMin.y);
-
-        Gizmos.color = Color.yellow;
-
-        Gizmos.DrawLine(bottomLeft, topLeft);
-        Gizmos.DrawLine(topLeft, topRight);
-        Gizmos.DrawLine(topRight, bottomRight);
-        Gizmos.DrawLine(bottomRight, bottomLeft);
-    }
-#endif
 }
