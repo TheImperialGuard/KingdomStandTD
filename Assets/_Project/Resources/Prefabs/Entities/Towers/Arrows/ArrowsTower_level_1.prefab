@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &427349394236143416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4703091211240310411}
+  m_Layer: 0
+  m_Name: EffectTopPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4703091211240310411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427349394236143416}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.4819999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5499663694539420368}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &495301554854222813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -269,6 +300,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7594907031105049859, guid: 25a63a86cf4591b42a9e6e90ee21551b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4703091211240310411}
     - targetCorrespondingSourceObject: {fileID: 6581817337344777674, guid: 25a63a86cf4591b42a9e6e90ee21551b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2169550558425453575}
@@ -281,8 +315,36 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6581817337344777674, guid: 25a63a86cf4591b42a9e6e90ee21551b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 96004264449915958}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3891846149284200393, guid: 25a63a86cf4591b42a9e6e90ee21551b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 633306364441721424}
   m_SourcePrefab: {fileID: 100100000, guid: 25a63a86cf4591b42a9e6e90ee21551b, type: 3}
+--- !u!1 &1384470109024557082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3891846149284200393, guid: 25a63a86cf4591b42a9e6e90ee21551b, type: 3}
+  m_PrefabInstance: {fileID: 2680835063712606163}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &633306364441721424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384470109024557082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa0b0cf63e9db20459fdf9fe83ab3713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Towers.TowerAppearanceView
+  _config: {fileID: 11400000, guid: ccae2251f083ccc44bc7863ca9e07a6d, type: 2}
+  _model: {fileID: 9107248999545518617}
+  _topPoint: {fileID: 4703091211240310411}
+--- !u!4 &5499663694539420368 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7594907031105049859, guid: 25a63a86cf4591b42a9e6e90ee21551b, type: 3}
+  m_PrefabInstance: {fileID: 2680835063712606163}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9107248999545518617 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6581817337344777674, guid: 25a63a86cf4591b42a9e6e90ee21551b, type: 3}

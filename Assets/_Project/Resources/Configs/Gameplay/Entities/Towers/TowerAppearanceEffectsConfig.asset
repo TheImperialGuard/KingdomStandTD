@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696bf016fd6cb6d49823a79678ed73e2, type: 3}
+  m_Name: TowerAppearanceEffectsConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers.TowerAppearanceEffectsConfig
+  <BuildEffect>k__BackingField: {fileID: 136373947461891708, guid: 486a5f49d1c895c49bda3b4fbf38ff83, type: 3}
+  <UpgradeEffect>k__BackingField: {fileID: 3170721983562660893, guid: c55cb5f0f27065c42911ef474c297acd, type: 3}
+  <UpgradeTopEffect>k__BackingField: {fileID: 532926107292611243, guid: 2dc5b948424a63d46bae7607b6c8dae3, type: 3}
+  <IsPopEnabled>k__BackingField: 1
+  <PopDuration>k__BackingField: 0.35
+  <PopStartScale>k__BackingField: {x: 1.15, y: 0.6, z: 1.15}
