@@ -34,10 +34,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
             _isDeadChangedDisposable = _isDead.Subscribe(OnIsDeadChanged);
 
             _trail = EffectsPool.Spawn(_trailPrefab, _projectile.position);
-
-            // Экземпляр из пула приходит с выключенным повтором после прошлого снаряда
-            ParticleSystem.MainModule main = _trail.main;
-            main.loop = true;
         }
 
         private void Update()
@@ -50,15 +46,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
 
         private void OnIsDeadChanged(bool arg1, bool isDead) => FinishTrail();
 
-        // След доигрывает текущий цикл на месте и возвращается в пул, когда погаснут частицы.
+        // След перестаёт выпускать частицы во всех слоях и возвращается в пул, когда погаснут уже выпущенные.
         // Ссылка обнуляется, чтобы вью не двигала экземпляр, который пул уже отдал другому снаряду
         private void FinishTrail()
         {
             if (_trail == null)
                 return;
 
-            ParticleSystem.MainModule main = _trail.main;
-            main.loop = false;
+            _trail.Stop(true, ParticleSystemStopBehavior.StopEmitting);
 
             _trail = null;
         }

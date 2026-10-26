@@ -394,10 +394,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2093499151868481992, guid: 503c0531fe43b8b49a52ff0e06b56ff8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 509420307566014790}
+    - targetCorrespondingSourceObject: {fileID: 2093499151868481992, guid: 503c0531fe43b8b49a52ff0e06b56ff8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6833290920290846916}
   m_SourcePrefab: {fileID: 100100000, guid: 503c0531fe43b8b49a52ff0e06b56ff8, type: 3}
 --- !u!4 &3486579403700989012 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6581817337344777674, guid: 503c0531fe43b8b49a52ff0e06b56ff8, type: 3}
+  m_PrefabInstance: {fileID: 7725255015500820894}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7017487375714917796 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 744924724756065338, guid: 503c0531fe43b8b49a52ff0e06b56ff8, type: 3}
   m_PrefabInstance: {fileID: 7725255015500820894}
   m_PrefabAsset: {fileID: 0}
 --- !u!82 &7203834816377758388 stripped
@@ -453,6 +461,20 @@ MonoBehaviour:
   _audioClip: {fileID: 8300000, guid: 0f6ab549b6ddffc4cbaba17795b6974a, type: 3}
   _pitchUpperLimit: 1.05
   _pitchLowerLimit: 0.95
+--- !u!114 &6833290920290846916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8518564066607292502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af07cee2eefb71e43a6758585d86d322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.OneShotAbilityCastingView
+  _effectPrefab: {fileID: 6331508678598841361, guid: 6ef62170852ed8c4b873b8e7a148ccd0, type: 3}
+  _effectSpawnPoint: {fileID: 7017487375714917796}
 --- !u!1001 &8697379390278311033
 PrefabInstance:
   m_ObjectHideFlags: 0
