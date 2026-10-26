@@ -443,8 +443,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04f45a49cb885f0429bb4bc757d6dbdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.AOE.StunAbilityCastingView
-  _effectPrefab: {fileID: 7159884806192553960, guid: 3de47c9328e4a06498ba45788555d7b4, type: 3}
-  _effectSpawnPoint: {fileID: 5452625987737461176}
+  _crystalChargeEffectPrefab: {fileID: 7922226465374543992, guid: b2adb9971e3daaf4faa696761e5410ce, type: 3}
+  _beamEffectPrefab: {fileID: 5713138393953052789, guid: 842b8febd3f2d364a93741217aa22aed, type: 3}
+  _beamsImpactEffectPrefab: {fileID: 7757882072107394804, guid: 746f8e0451544d74289f27cc4a8ff67d, type: 3}
+  _crystals:
+  - {fileID: 7371299361476710848}
+  - {fileID: 8931882348337781400}
+  - {fileID: 9167627918127070098}
+  - {fileID: 7078564109811222162}
+  _crystalsRotator: {fileID: 8539826073507522317}
+  _chargedSpinMultiplier: 10
+  _spinDownDuration: 1
+  _beamFlightDuration: 0.07
 --- !u!114 &509420307566014790
 MonoBehaviour:
   m_ObjectHideFlags: 0

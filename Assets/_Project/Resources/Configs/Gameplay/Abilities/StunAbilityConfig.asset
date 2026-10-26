@@ -28,6 +28,6 @@ MonoBehaviour:
   - 3
   - 4
   Radius: 0.8
-  InitialTime: 1
-  Delay: 0.1
+  InitialTime: 1.5
+  Delay: 1
   Cooldown: 12

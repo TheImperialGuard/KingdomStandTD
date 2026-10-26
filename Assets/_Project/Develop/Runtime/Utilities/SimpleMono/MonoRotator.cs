@@ -15,6 +15,9 @@ namespace Assets._Project.Develop.Runtime.Utilities.SimpleMono
         [SerializeField] private float _speed = 90f;
         [SerializeField] private bool _clockwise = true;
 
+        // Временное ускорение или замедление поверх скорости из инспектора
+        public float SpeedMultiplier { get; set; } = 1f;
+
         private void Update()
         {
             float direction = _clockwise ? 1f : -1f;
@@ -27,7 +30,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.SimpleMono
                 _ => Vector3.up
             };
 
-            transform.Rotate(delta * (_speed * direction * Time.deltaTime), Space.Self);
+            transform.Rotate(delta * (_speed * SpeedMultiplier * direction * Time.deltaTime), Space.Self);
         }
     }
 }
