@@ -12,6 +12,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
         public const float UpwardFragmentForce = 3f;
         public const float HorizontalFragmentForce = 1f;
 
+        // Угловая скорость кувыркания осколка в полёте, рад/с. Коллайдер осколка — сфера, на попадание вращение не влияет
+        public const float FragmentSpinSpeed = 12f;
+
         private readonly ProjectilesFactory _projectilesFactory;
 
         private ReactiveVariable<float> _fragmentsDamage;
@@ -75,7 +78,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
                 ).normalized;
 
                 Entity fragment = _projectilesFactory.Create(
-                ProjectilesTypes.Cannonball,
+                ProjectilesTypes.CannonballFragment,
                 spawnPoint,
                 FragmentsSpawnDirection,
                 _source.Owner.Value);
@@ -98,6 +101,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AOE
             Vector3 launchVelocity = Vector3.up * UpwardFragmentForce + horizontalDirection * HorizontalFragmentForce;
 
             fragment.Rigidbody.AddForce(launchVelocity, ForceMode.VelocityChange);
+            fragment.Rigidbody.angularVelocity = UnityEngine.Random.onUnitSphere * FragmentSpinSpeed;
         }
     }
 }

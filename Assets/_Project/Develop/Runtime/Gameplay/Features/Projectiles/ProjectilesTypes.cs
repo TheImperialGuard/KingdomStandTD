@@ -6,6 +6,7 @@
         PoisonedArrow,
         Magic,
         MagicTrail,
-        Cannonball
+        Cannonball,
+        CannonballFragment
     }
 }

@@ -97,9 +97,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
 
                     break;
 
+                // Осколок логически то же ядро, отличается только префабом
                 case ProjectilesTypes.Cannonball:
+                case ProjectilesTypes.CannonballFragment:
                     if (config is CannonballProjectileConfig cannonProjectileConfig == false)
-                        throw new ArgumentException($"Config with projectile type {ProjectilesTypes.Cannonball} is not {nameof(CannonballProjectileConfig)}");
+                        throw new ArgumentException($"Config with projectile type {type} is not {nameof(CannonballProjectileConfig)}");
 
                     entity = _entitiesFactory.CreateBallisticProjectile(position, direction, owner, config.PrefabPath);
 
