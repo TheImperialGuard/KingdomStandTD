@@ -97,9 +97,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
 
                     break;
 
-                // Осколок логически то же ядро, отличается только префабом
+                // Осколок и раскалённое ядро Царь-пушки логически то же ядро, отличаются только префабом
                 case ProjectilesTypes.Cannonball:
                 case ProjectilesTypes.CannonballFragment:
+                case ProjectilesTypes.HotCannonball:
                     if (config is CannonballProjectileConfig cannonProjectileConfig == false)
                         throw new ArgumentException($"Config with projectile type {type} is not {nameof(CannonballProjectileConfig)}");
 

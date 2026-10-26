@@ -7,6 +7,7 @@
         Magic,
         MagicTrail,
         Cannonball,
-        CannonballFragment
+        CannonballFragment,
+        HotCannonball
     }
 }
