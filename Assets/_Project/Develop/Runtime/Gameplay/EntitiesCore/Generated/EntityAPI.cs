@@ -2964,6 +2964,54 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityDelayEndEvent() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityCanceledEvent FirstAbilityCanceledEventC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityCanceledEvent>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent FirstAbilityCanceledEvent => FirstAbilityCanceledEventC.Value;
+
+		public bool TryGetFirstAbilityCanceledEvent(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityCanceledEvent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFirstAbilityCanceledEvent()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityCanceledEvent() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFirstAbilityCanceledEvent(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityCanceledEvent() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityCanceledEvent SecondAbilityCanceledEventC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityCanceledEvent>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent SecondAbilityCanceledEvent => SecondAbilityCanceledEventC.Value;
+
+		public bool TryGetSecondAbilityCanceledEvent(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityCanceledEvent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSecondAbilityCanceledEvent()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityCanceledEvent() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSecondAbilityCanceledEvent(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.SecondAbilityCanceledEvent() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityProjectileType FirstAbilityProjectileTypeC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.FirstAbilityProjectileType>();
 
 		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles.ProjectilesTypes> FirstAbilityProjectileType => FirstAbilityProjectileTypeC.Value;
@@ -3154,6 +3202,25 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentTarget(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
 		{
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AI.CurrentTarget() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.AI.TargetSelectorComponent TargetSelectorC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AI.TargetSelectorComponent>();
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting.ITargetSelector TargetSelector => TargetSelectorC.Value;
+
+		public bool TryGetTargetSelector(out Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting.ITargetSelector value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.AI.TargetSelectorComponent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting.ITargetSelector);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTargetSelector(Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting.ITargetSelector value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.AI.TargetSelectorComponent() {Value = value}); 
 		}
 
 		public Assets._Project.Develop.Runtime.Gameplay.Features.AI.MaxTargets MaxTargetsC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.AI.MaxTargets>();

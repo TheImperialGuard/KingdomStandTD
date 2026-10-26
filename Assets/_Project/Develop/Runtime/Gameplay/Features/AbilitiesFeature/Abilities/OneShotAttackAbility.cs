@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Shoot;
+using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using System;
 
@@ -12,6 +13,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
         private readonly Entity _entity;
         private readonly OneShotAttackAbilityConfig _config;
         private readonly ProjectilesFactory _projectilesFactory;
+        private readonly TargetCandidatesService _targetCandidatesService;
 
         private IDisposable _currentLevelChangedDisposable;
 
@@ -19,11 +21,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
             Entity entity,
             OneShotAttackAbilityConfig config,
             int currentLevel,
-            ProjectilesFactory projectilesFactory) : base(config.ID, currentLevel, config.MaxLevel)
+            ProjectilesFactory projectilesFactory,
+            TargetCandidatesService targetCandidatesService) : base(config.ID, currentLevel, config.MaxLevel)
         {
             _entity = entity;
             _config = config;
             _projectilesFactory = projectilesFactory;
+            _targetCandidatesService = targetCandidatesService;
         }
 
         public override void Activate()
@@ -51,6 +55,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
                 .AddFirstAbilityProjectileType(new(_config.ProjectileType))
                 .AddFirstAbilityCooldownTimer(new(_config.GetCooldownBy(CurrentLevel.Value)), new(_config.GetCooldownBy(CurrentLevel.Value)), new())
                 .AddFirstAbilityDelayEndEvent()
+                .AddFirstAbilityCanceledEvent()
                 .AddFirstAbilityDelayModifiedTime(new(_config.Delay))
                 .AddFirstAbilityDelayTime(new(_config.Delay))
                 .AddFirstAbilityProcessTimer(new(_config.InitialTime), new(_config.InitialTime), new())
@@ -72,6 +77,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
                 .AddSystem(new FirstAbilityCooldownTimerSystem())
                 .AddSystem(new RequestFirstAbilityOnAttackRequestSystem())
                 .AddSystem(new StartFirstAbilitySystem())
+                .AddSystem(new FirstAbilityRetargetSystem(_targetCandidatesService))
                 .AddSystem(new FirstAbilityProcessTimerSystem())
                 .AddSystem(new FirstAbilityDelayEndTriggerSystem())
                 .AddSystem(new FirstAbilityInstantShootSystem(_projectilesFactory))

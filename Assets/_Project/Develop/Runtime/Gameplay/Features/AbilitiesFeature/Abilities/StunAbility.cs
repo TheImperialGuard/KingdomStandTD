@@ -2,6 +2,7 @@
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AOE;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
@@ -15,6 +16,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
 
         private readonly AreaEntitiesDetectorService _areaEntitiesDetectorService;
         private readonly StatusesFactory _statusesFactory;
+        private readonly TargetCandidatesService _targetCandidatesService;
 
         private IDisposable _currentLevelChangedDisposable;
 
@@ -23,12 +25,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
             StunAbilityConfig config,
             int currentLevel,
             AreaEntitiesDetectorService areaEntitiesDetectorService,
-            StatusesFactory statusesFactory) : base(config.ID, currentLevel, config.MaxLevel)
+            StatusesFactory statusesFactory,
+            TargetCandidatesService targetCandidatesService) : base(config.ID, currentLevel, config.MaxLevel)
         {
             _entity = entity;
             _config = config;
             _areaEntitiesDetectorService = areaEntitiesDetectorService;
             _statusesFactory = statusesFactory;
+            _targetCandidatesService = targetCandidatesService;
         }
 
         public override void Activate()
@@ -55,6 +59,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
             _entity
                 .AddSecondAbilityCooldownTimer(new(_config.Cooldown), new(_config.Cooldown), new())
                 .AddSecondAbilityDelayEndEvent()
+                .AddSecondAbilityCanceledEvent()
                 .AddSecondAbilityDelayModifiedTime(new(_config.Delay))
                 .AddSecondAbilityDelayTime(new(_config.Delay))
                 .AddSecondAbilityProcessTimer(new(_config.InitialTime), new(_config.InitialTime), new())
@@ -86,6 +91,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
                 .AddSystem(new SecondAbilityCooldownTimerSystem())
                 .AddSystem(new RequestSecondAbilityOnAttackRequestSystem())
                 .AddSystem(new StartSecondAbilitySystem())
+                .AddSystem(new SecondAbilityRetargetSystem(_targetCandidatesService))
                 .AddSystem(new SecondAbilityProcessTimerSystem())
                 .AddSystem(new SecondAbilityDelayEndTriggerSystem())
                 .AddSystem(new StunEntitiesInAreaSecondAbilitySystem(_areaEntitiesDetectorService, _statusesFactory))

@@ -128,6 +128,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature
         public ReactiveEvent Value;
     }
 
+    public class FirstAbilityCanceledEvent : IEntityComponent
+    {
+        public ReactiveEvent Value;
+    }
+
+    public class SecondAbilityCanceledEvent : IEntityComponent
+    {
+        public ReactiveEvent Value;
+    }
+
     public class FirstAbilityProjectileType : IEntityComponent
     {
         public ReactiveVariable<ProjectilesTypes> Value;

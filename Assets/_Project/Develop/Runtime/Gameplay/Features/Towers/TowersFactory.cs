@@ -66,6 +66,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
                 AddBaseShooter(entity);
             }
 
+            entity.AddTargetSelector(targetSelector);
+
             if (level >= 4)
             {
                 AddAbilitiesFor(entity, config);

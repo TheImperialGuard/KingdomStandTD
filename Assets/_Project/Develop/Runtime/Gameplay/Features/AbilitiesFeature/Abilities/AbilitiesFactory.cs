@@ -3,6 +3,7 @@ using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AOE;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using System;
 
@@ -28,10 +29,21 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abi
                     return new PoisonedAttackAbility(entity, poisonedAttackAbilityConfig, currentLevel);
 
                 case OneShotAttackAbilityConfig oneShotAttackAbilityConfig:
-                    return new OneShotAttackAbility(entity, oneShotAttackAbilityConfig, currentLevel, _container.Resolve<ProjectilesFactory>());
+                    return new OneShotAttackAbility(
+                        entity,
+                        oneShotAttackAbilityConfig,
+                        currentLevel,
+                        _container.Resolve<ProjectilesFactory>(),
+                        _container.Resolve<TargetCandidatesService>());
 
                 case StunAbilityConfig stunAbilityConfig:
-                    return new StunAbility(entity, stunAbilityConfig, currentLevel, _container.Resolve<AreaEntitiesDetectorService>(), _container.Resolve<StatusesFactory>());
+                    return new StunAbility(
+                        entity,
+                        stunAbilityConfig,
+                        currentLevel,
+                        _container.Resolve<AreaEntitiesDetectorService>(),
+                        _container.Resolve<StatusesFactory>(),
+                        _container.Resolve<TargetCandidatesService>());
 
                 case AttackStunAbilityConfig attackStunAbilityConfig:
                     return new  AttackStunAbility(entity, attackStunAbilityConfig, currentLevel);
