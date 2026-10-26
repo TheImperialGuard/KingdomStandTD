@@ -367,7 +367,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static CameraMover CreateCameraMover(DIContainer c)
         {
-            return new CameraMover(c.Resolve<BoundedOrthoCamera>(), c.Resolve<IInputService>());
+            CameraConfig config = c.Resolve<ConfigsProviderService>().GetConfig<CameraConfig>();
+
+            return new CameraMover(c.Resolve<BoundedOrthoCamera>(), c.Resolve<IInputService>(), config);
         }
 
         private static Level CreateLevel(DIContainer c)

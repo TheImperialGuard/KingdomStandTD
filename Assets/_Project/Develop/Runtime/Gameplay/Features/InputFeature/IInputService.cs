@@ -17,6 +17,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
         Vector3 CameraDelta { get; }
 
         /// <summary>
+        /// Во сколько раз изменить масштаб камеры за текущий кадр: меньше 1 — приблизить, больше 1 — отдалить, 1 — не менять.
+        /// </summary>
+        float CameraZoomFactor { get; }
+
+        /// <summary>
+        /// Точка экрана, вокруг которой меняется масштаб: точка поля под ней остаётся на месте.
+        /// </summary>
+        Vector2 CameraZoomPivot { get; }
+
+        /// <summary>
         /// Просьба закрыть открытую панель интерфейса. Не зависит от IsEnabled: тот выключает игровой ввод,
         /// а панель должна закрываться и тогда.
         /// </summary>

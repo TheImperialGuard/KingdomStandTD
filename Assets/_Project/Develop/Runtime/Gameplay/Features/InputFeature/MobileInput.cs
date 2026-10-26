@@ -11,6 +11,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
         private const float MIN_DRAG_THRESHOLD_PIXELS = 8f;
         private const float MIN_PITCH_SIN = 0.05f;
         private const int NO_FINGER_ID = -1;
+        private const float NoZoom = 1f;
 
         private readonly List<RaycastResult> _uiRaycastResults = new();
         private readonly float _dragThresholdPixels;
@@ -18,12 +19,15 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
         private PointerEventData _uiPointerEventData;
         private Vector2 _touchStartPosition;
         private Vector2 _tapPosition;
+        private Vector2 _cameraZoomPivot;
         private Vector3 _cameraDelta;
+        private float _cameraZoomFactor = NoZoom;
         private int _processedFrame = -1;
         private int _trackedFingerId = NO_FINGER_ID;
         private bool _isDragging;
         private bool _isStartedOverUI;
         private bool _isTapPerformed;
+        private bool _isPinchBlocked;
 
         public MobileInput()
         {
@@ -78,6 +82,29 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
             }
         }
 
+        public float CameraZoomFactor
+        {
+            get
+            {
+                UpdateState();
+
+                if (IsEnabled == false)
+                    return NoZoom;
+
+                return _cameraZoomFactor;
+            }
+        }
+
+        public Vector2 CameraZoomPivot
+        {
+            get
+            {
+                UpdateState();
+
+                return _cameraZoomPivot;
+            }
+        }
+
         // Состояние пересчитывается один раз за кадр: потребители опрашивают
         // свойства по нескольку раз, а разбор касаний не идемпотентен.
         private void UpdateState()
@@ -88,10 +115,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
             _processedFrame = Time.frameCount;
             _isTapPerformed = false;
             _cameraDelta = Vector3.zero;
+            _cameraZoomFactor = NoZoom;
 
             if (Input.touchCount == 0)
             {
                 ResetTracking();
+                _isPinchBlocked = false;
                 return;
             }
 
@@ -101,6 +130,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
 
             for (int i = 0; i < Input.touchCount; i++)
                 ProcessTouch(Input.GetTouch(i));
+
+            if (Input.touchCount > 1)
+                UpdatePinch(Input.GetTouch(0), Input.GetTouch(1));
         }
 
         private void ProcessTouch(Touch touch)
@@ -112,7 +144,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
             }
 
             if (touch.fingerId != _trackedFingerId)
+            {
+                // Второй палец на интерфейсе — например, нажатие кнопки, пока первый двигает карту, — щипком не считается.
+                if (touch.phase == TouchPhase.Began && IsPointerOverUI(touch.position))
+                    _isPinchBlocked = true;
+
                 return;
+            }
 
             switch (touch.phase)
             {
@@ -162,6 +200,33 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
 
             ResetTracking();
         }
+
+        // Два пальца двигают карту за серединой между ними и меняют масштаб вокруг неё. Палец, который только лёг
+        // или уже отрывается, в кадре не учитывается: так карта не прыгает в начале и в конце жеста.
+        private void UpdatePinch(Touch first, Touch second)
+        {
+            _cameraDelta = Vector3.zero;
+
+            if (_isStartedOverUI || _isPinchBlocked || IsMoving(first) == false || IsMoving(second) == false)
+                return;
+
+            Vector2 previousFirst = first.position - first.deltaPosition;
+            Vector2 previousSecond = second.position - second.deltaPosition;
+
+            Vector2 middle = (first.position + second.position) / 2f;
+            Vector2 previousMiddle = (previousFirst + previousSecond) / 2f;
+
+            float distance = Vector2.Distance(first.position, second.position);
+            float previousDistance = Vector2.Distance(previousFirst, previousSecond);
+
+            _cameraDelta = ToWorldDelta(middle - previousMiddle);
+            _cameraZoomPivot = middle;
+
+            if (distance > 0f && previousDistance > 0f)
+                _cameraZoomFactor = previousDistance / distance;
+        }
+
+        private bool IsMoving(Touch touch) => touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary;
 
         private void ResetTracking()
         {

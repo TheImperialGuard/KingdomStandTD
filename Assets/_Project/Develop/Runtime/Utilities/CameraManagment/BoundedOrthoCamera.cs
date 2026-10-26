@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Utilities.CameraManagment
 {
-    // Наклонная ортографическая камера над прямоугольным полем: двигается, не показывая ничего за его границами,
-    // а масштаб подбирает так, чтобы вид вписывался в границы.
+    // Наклонная ортографическая камера над прямоугольным полем: двигается и меняет масштаб, не показывая ничего за его
+    // границами. Дальний масштаб — вид, вписанный в границы, ближний — приближение к нему в заданное число раз.
     [RequireComponent(typeof(Camera))]
     public sealed class BoundedOrthoCamera : MonoBehaviour
     {
@@ -12,6 +12,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.CameraManagment
         // на точном равенстве и всегда попадать в обычную ветку ограничения.
         private const float FitSafetyFactor = 0.999f;
         private const float AspectChangeTolerance = 0.0001f;
+        private const float NoZoom = 1f;
 
         private static readonly Vector2[] _viewportCorners =
         {
@@ -29,6 +30,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.CameraManagment
         private Camera _camera;
         private Vector2 _worldMin;
         private Vector2 _worldMax;
+        private float _fitSize;
         private float _lastAspect;
         private bool _isFitted;
 
@@ -38,20 +40,20 @@ namespace Assets._Project.Develop.Runtime.Utilities.CameraManagment
         public IReadOnlyEvent Moved => _moved;
 
         /// <summary>
-        /// Задаёт границы поля на плоскости XZ, вписывает в них вид и ставит камеру по центру.
+        /// Задаёт границы поля на плоскости XZ, вписывает в них вид и ставит камеру по центру. Приближение сбрасывается.
         /// </summary>
         public void SetBounds(Vector2 min, Vector2 max)
         {
             _worldMin = Vector2.Min(min, max);
             _worldMax = Vector2.Max(min, max);
             _lastAspect = _camera.aspect;
-            _isFitted = TryFitSize();
+            _isFitted = TryFitSize(NoZoom);
 
             CenterCamera();
         }
 
         /// <summary>
-        /// Смена ориентации или разрешения меняет ширину видимой области: вид вписывается заново,
+        /// Смена ориентации или разрешения меняет ширину видимой области: вид вписывается заново с тем же приближением,
         /// а положение перепроверяется. Вызывать каждый кадр.
         /// </summary>
         public void RefitOnAspectChange()
@@ -64,7 +66,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.CameraManagment
             if (_isFitted == false)
                 return;
 
-            TryFitSize();
+            TryFitSize(GetZoom());
             SetClampedPosition(transform.position);
         }
 
@@ -76,6 +78,32 @@ namespace Assets._Project.Develop.Runtime.Utilities.CameraManagment
             delta.y = 0f;
 
             SetClampedPosition(transform.position + delta);
+        }
+
+        /// <summary>
+        /// Меняет масштаб в factor раз (меньше 1 — приближение), оставляя на месте точку поля под screenPoint.
+        /// Масштаб не выходит за пределы: от вида, вписанного в границы, до приближения к нему в maxZoom раз.
+        /// </summary>
+        public void Zoom(float factor, Vector2 screenPoint, float maxZoom)
+        {
+            if (_isFitted == false)
+                return;
+
+            float minSize = _fitSize / Mathf.Max(maxZoom, NoZoom);
+            float size = Mathf.Clamp(_camera.orthographicSize * factor, minSize, _fitSize);
+
+            if (Mathf.Approximately(size, _camera.orthographicSize))
+                return;
+
+            Vector3 position = transform.position;
+            bool hasPivot = TryGetGroundPoint(_camera.ScreenPointToRay(screenPoint), out Vector3 pivotBefore);
+
+            _camera.orthographicSize = size;
+
+            if (hasPivot && TryGetGroundPoint(_camera.ScreenPointToRay(screenPoint), out Vector3 pivotAfter))
+                position += pivotBefore - pivotAfter;
+
+            SetClampedPosition(position);
         }
 
         private void Awake()
@@ -124,7 +152,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.CameraManagment
 
         // Видимые размеры линейны по orthographicSize при любом наклоне камеры,
         // поэтому вписанный размер получается масштабированием текущего.
-        private bool TryFitSize()
+        private bool TryFitSize(float zoom)
         {
             if (TryGetVisibleRect(out Rect visible) == false || visible.width <= 0f || visible.height <= 0f)
                 return false;
@@ -133,7 +161,8 @@ namespace Assets._Project.Develop.Runtime.Utilities.CameraManagment
             float boundsDepth = _worldMax.y - _worldMin.y;
             float scale = Mathf.Min(boundsWidth / visible.width, boundsDepth / visible.height);
 
-            _camera.orthographicSize *= scale * FitSafetyFactor;
+            _fitSize = _camera.orthographicSize * scale * FitSafetyFactor;
+            _camera.orthographicSize = _fitSize / zoom;
 
             return true;
         }
@@ -174,6 +203,8 @@ namespace Assets._Project.Develop.Runtime.Utilities.CameraManagment
             point = Vector3.zero;
             return false;
         }
+
+        private float GetZoom() => _fitSize / _camera.orthographicSize;
 
         private bool IsAspectChanged() => Mathf.Abs(_camera.aspect - _lastAspect) > AspectChangeTolerance;
 

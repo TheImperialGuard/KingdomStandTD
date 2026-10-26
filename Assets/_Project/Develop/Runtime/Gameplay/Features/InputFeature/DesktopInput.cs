@@ -10,6 +10,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
         private const KeyCode CloseKeyCode = KeyCode.Escape;
         private const KeyCode PreviousKeyCode = KeyCode.LeftArrow;
         private const KeyCode NextKeyCode = KeyCode.RightArrow;
+        private const float NoZoom = 1f;
+
+        // Браузеры отдают прокрутку по-разному, и быстрый прокрут может прийти одним большим значением:
+        // больше одного щелчка за кадр не засчитываем.
+        private const float MaxWheelStepsPerFrame = 1f;
 
         private readonly CameraConfig _cameraConfig;
 
@@ -52,9 +57,31 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature
                 if (Input.GetKey(KeyCode.D))
                     direction += Vector3.right;
 
-                return direction * _cameraConfig.MoveSpeed * Time.deltaTime;
+                // Скорость задана в высотах экрана: при любом масштабе карта бежит по экрану одинаково.
+                float screenHeight = Camera.main.orthographicSize * 2f;
+
+                return direction * _cameraConfig.MoveSpeed * screenHeight * Time.deltaTime;
             }
         }
+
+        public float CameraZoomFactor
+        {
+            get
+            {
+                if (IsEnabled == false)
+                    return NoZoom;
+
+                float wheelSteps = Mathf.Clamp(Input.mouseScrollDelta.y, -MaxWheelStepsPerFrame, MaxWheelStepsPerFrame);
+
+                if (wheelSteps == 0f || IsPointerOverUI())
+                    return NoZoom;
+
+                // Колёсико от себя приближает: масштаб камеры уменьшается.
+                return Mathf.Pow(_cameraConfig.WheelZoomStep, -wheelSteps);
+            }
+        }
+
+        public Vector2 CameraZoomPivot => Input.mousePosition;
 
         private bool IsPointerOverUI()
         {

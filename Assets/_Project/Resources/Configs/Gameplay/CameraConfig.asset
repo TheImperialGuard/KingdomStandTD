@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2caf226fd2ab56140b90830c74a980c1, type: 3}
   m_Name: CameraConfig
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.CameraConfig
-  MoveSpeed: 10
+  <MoveSpeed>k__BackingField: 0.8
+  <MaxZoom>k__BackingField: 2
+  <WheelZoomStep>k__BackingField: 1.15
