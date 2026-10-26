@@ -11,6 +11,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Attack
     {
         [SerializeField] private ParticleSystem _effectPrefab;
         [SerializeField] private Transform _effectSpawnPoint;
+        [SerializeField] private bool _alignWithSpawnPoint;
 
         private IReadOnlyEvent _attackDelayEndEvent;
 
@@ -38,7 +39,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Attack
 
         private void OnAttackDelayEnd()
         {
-            EffectsPool.Spawn(_effectPrefab, _effectSpawnPoint.position, _effectSpawnPoint);
+            ParticleSystem effect = EffectsPool.Spawn(_effectPrefab, _effectSpawnPoint.position, _effectSpawnPoint);
+
+            // Пул ставит эффект без поворота; направленный эффект, например язык огня из ствола, разворачиваем по точке
+            if (_alignWithSpawnPoint)
+                effect.transform.rotation = _effectSpawnPoint.rotation;
         }
     }
 }

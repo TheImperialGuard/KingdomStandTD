@@ -79,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Attack.AttackEffectView
   _effectPrefab: {fileID: 1964314624386401011, guid: 7a1fcc8c4971cbd4e915fbed152588a5, type: 3}
   _effectSpawnPoint: {fileID: 0}
+  _alignWithSpawnPoint: 0
 --- !u!114 &5207520992287583593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Attack.AttackEffectView
   _effectPrefab: {fileID: 3818302674703711868, guid: 1ed2ffa816f46d04da7d63ed41be6aca, type: 3}
   _effectSpawnPoint: {fileID: 0}
+  _alignWithSpawnPoint: 1
 --- !u!114 &2325040110077066483
 MonoBehaviour:
   m_ObjectHideFlags: 0
