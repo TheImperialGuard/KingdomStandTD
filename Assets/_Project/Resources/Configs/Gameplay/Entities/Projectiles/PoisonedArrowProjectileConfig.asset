@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PoisonedArrowProjectileConfig
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Projectiles.ArrowProjectileConfig
   <Type>k__BackingField: 1
-  <PrefabPath>k__BackingField: Prefabs/Entities/Projectiles/Arrow
+  <PrefabPath>k__BackingField: Prefabs/Entities/Projectiles/PoisonedArrow
