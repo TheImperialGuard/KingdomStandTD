@@ -3,7 +3,7 @@
   "campaignNumber": 7,
   "prefabPath": "Prefabs/Levels/Level_7",
   "gameMode": "Basic",
-  "towerSlotsCount": 5,
+  "towerSlotsCount": 9,
   "startGold": 850,
   "startPlayerHealth": 20,
   "roads": [

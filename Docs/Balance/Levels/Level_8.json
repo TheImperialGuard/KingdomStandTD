@@ -3,7 +3,7 @@
   "campaignNumber": 8,
   "prefabPath": "Prefabs/Levels/Level_8",
   "gameMode": "Basic",
-  "towerSlotsCount": 0,
+  "towerSlotsCount": 11,
   "startGold": 850,
   "startPlayerHealth": 20,
   "roads": [
@@ -973,7 +973,5 @@
     ]
   },
   "errors": [],
-  "warnings": [
-    "На префабе нет ни одного места под башню"
-  ]
+  "warnings": []
 }
