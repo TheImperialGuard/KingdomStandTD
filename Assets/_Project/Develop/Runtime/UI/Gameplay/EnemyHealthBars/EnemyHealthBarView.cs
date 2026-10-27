@@ -21,6 +21,11 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.EnemyHealthBars
         {
             Vector3 screenPosition = _camera.WorldToScreenPoint(worldPosition);
 
+            // Линии рамки тоньше пикселя экрана: при дробном положении они то попадают в пиксели, то нет, и рамка мерцает.
+            // На целых пикселях все полоски рисуются одинаково
+            screenPosition.x = Mathf.Round(screenPosition.x);
+            screenPosition.y = Mathf.Round(screenPosition.y);
+
             // В z — расстояние до камеры. Вне плоскости канваса uGUI не сортирует полоски по глубине и рвёт батч
             screenPosition.z = 0f;
             transform.position = screenPosition;
