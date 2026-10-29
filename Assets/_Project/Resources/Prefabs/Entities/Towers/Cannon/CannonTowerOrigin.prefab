@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aae2f6a2b52f494996c4a7475c2ea98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Sensors.BoxColliderRegistrator
-  _boxCollider: {fileID: 0}
+  _boxCollider: {fileID: 6903862146585615583}
 --- !u!65 &6903862146585615583
 BoxCollider:
   m_ObjectHideFlags: 0
