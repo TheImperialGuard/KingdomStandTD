@@ -27,3 +27,5 @@ MonoBehaviour:
     _baseSpeed: 1
   - _clip: {fileID: 2667949614841947897, guid: cfa2e7d4868407a42a49c747a8bf089a, type: 3}
     _baseSpeed: 0.4
+  - _clip: {fileID: 5522812681064789136, guid: fc4001822b8eeda4ea806d3bef51f249, type: 3}
+    _baseSpeed: 0.9

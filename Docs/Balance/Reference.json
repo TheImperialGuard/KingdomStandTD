@@ -33,6 +33,19 @@
       "isBoss": false
     },
     {
+      "asset": "GreyWolf",
+      "name": "",
+      "maxHealth": 100.0,
+      "moveSpeed": 1.6,
+      "damageResistanceType": "None",
+      "damageResistanceIndex": 0.0,
+      "effectiveHealthPhysic": 100.0,
+      "effectiveHealthMagic": 100.0,
+      "goldOnDeath": 10,
+      "damageOnFinishPath": 1,
+      "isBoss": false
+    },
+    {
       "asset": "HumanRogue",
       "name": "Разбойник",
       "maxHealth": 35.0,
@@ -159,6 +172,19 @@
       "effectiveHealthPhysic": 114.286,
       "effectiveHealthMagic": 80.0,
       "goldOnDeath": 15,
+      "damageOnFinishPath": 1,
+      "isBoss": false
+    },
+    {
+      "asset": "SnowWolf",
+      "name": "",
+      "maxHealth": 100.0,
+      "moveSpeed": 1.6,
+      "damageResistanceType": "None",
+      "damageResistanceIndex": 0.0,
+      "effectiveHealthPhysic": 100.0,
+      "effectiveHealthMagic": 100.0,
+      "goldOnDeath": 10,
       "damageOnFinishPath": 1,
       "isBoss": false
     },
