@@ -12,6 +12,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI
         [SerializeField, Min(0.01f)] private float _speed = 900;
 
         private ReactiveVariable<Entity> _currentTarget;
+        private ReactiveVariable<bool> _isFrozen;
 
         private bool _isInit;
 
@@ -21,6 +22,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI
                 return;
 
             _currentTarget = entity.CurrentTarget;
+            entity.TryGetIsFrozen(out _isFrozen);
 
             _isInit = true;
         }
@@ -28,6 +30,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI
         private void Update()
         {
             if (_isInit == false)
+                return;
+
+            // Замороженная башня не стреляет и за целью не поворачивается
+            if (_isFrozen != null && _isFrozen.Value)
                 return;
 
             // У освобождённой цели объект из пула уже может принадлежать другой сущности
