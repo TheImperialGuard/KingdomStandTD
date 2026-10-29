@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 986512327933822999, guid: 66be6471186b2e74daa6a446f7a1b236, type: 3}
       propertyPath: m_Radius
-      value: 0.1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 986512327933822999, guid: 66be6471186b2e74daa6a446f7a1b236, type: 3}
       propertyPath: m_Center.y
@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8092288130613716529, guid: 66be6471186b2e74daa6a446f7a1b236, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.105
+      value: 1.364
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3841488659158377499, guid: 66be6471186b2e74daa6a446f7a1b236, type: 3}
