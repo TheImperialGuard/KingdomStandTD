@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6581817337344777674}
   - component: {fileID: 5521851604989114287}
   - component: {fileID: 4316319203792528476}
+  - component: {fileID: 6828804218469894857}
   m_Layer: 0
   m_Name: ViewContainer
   m_TagString: Untagged
@@ -146,6 +147,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6828804218469894857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093499151868481992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dfc46613e7ddb141b60adc03f88e2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Gameplay.Features.Towers.FrozenTowerView
+  _frostMaterial: {fileID: 2100000, guid: bfec0ead99343224aaeb4c51fe9929f1, type: 2}
+  _freezeDuration: 0.3
+  _thawDuration: 0.8
 --- !u!1 &3891846149284200393
 GameObject:
   m_ObjectHideFlags: 0
