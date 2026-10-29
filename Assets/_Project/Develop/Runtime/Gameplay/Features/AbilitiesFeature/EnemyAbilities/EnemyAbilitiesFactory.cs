@@ -3,8 +3,11 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AOE;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
+using Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SummonFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.Features.WarCryFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
@@ -33,6 +36,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Ene
 
                 case SummonAbilityConfig summonConfig:
                     AddSummonTo(entity, summonConfig);
+                    break;
+
+                case SnowballThrowAbilityConfig snowballThrowConfig:
+                    AddSnowballThrowTo(entity, snowballThrowConfig);
                     break;
 
                 default:
@@ -95,6 +102,26 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Ene
 
             entity
                 .AddSystem(new SummonOnAnimationEventSystem(_container.Resolve<EnemiesFactory>()));
+        }
+
+        // Без башен в радиусе каст не начинается: бросающий идёт дальше не останавливаясь.
+        private void AddSnowballThrowTo(Entity entity, SnowballThrowAbilityConfig config)
+        {
+            BuiltTowersService builtTowersService = _container.Resolve<BuiltTowersService>();
+
+            entity
+                .AddSnowballThrowTarget()
+                .AddSnowballThrowRange(new(config.ThrowRange))
+                .AddSnowballSpeed(new(config.SnowballSpeed))
+                .AddSnowballArcHeight(new(config.SnowballArcHeight))
+                .AddFreezeDuration(new(config.FreezeDuration))
+                .AddSnowballPrefabPath(new(config.SnowballPrefabPath));
+
+            entity.CanStartFirstAbility.Add(new FuncCondition(
+                () => builtTowersService.HasTowerInRange(entity.Transform.position, entity.SnowballThrowRange.Value)));
+
+            entity
+                .AddSystem(new SnowballThrowSystem(builtTowersService, _container.Resolve<ProjectilesFactory>()));
         }
     }
 }

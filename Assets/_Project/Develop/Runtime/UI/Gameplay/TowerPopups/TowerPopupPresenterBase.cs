@@ -6,6 +6,7 @@ using Assets._Project.Develop.Runtime.UI.CommonViews;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.Utilities.CameraManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups
 
         private IDisposable _goldDisposable;
         private IDisposable _cameraMovedDisposable;
+        private IDisposable _frozenDisposable;
 
         protected TowerPopupPresenterBase(
             ICoroutinesPerformer coroutinesPerformer,
@@ -67,6 +69,10 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups
 
             _goldDisposable = _walletService.GetCurrency(CurrencyTypes.Gold).Subscribe(OnGoldChanged);
             _cameraMovedDisposable = _camera.Moved.Subscribe(OnCameraMoved);
+
+            // У места под башню заморозки нет
+            if (Source.TryGetIsFrozen(out ReactiveVariable<bool> isFrozen))
+                _frozenDisposable = isFrozen.Subscribe(OnFrozenChanged);
 
             RefreshButtons();
         }
@@ -194,6 +200,16 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups
 
         private void OnCameraMoved() => _view.UpdateWorldPosition(Source.Transform.position);
 
+        // Замороженную башню нельзя улучшить или продать — открытое окно закрывается, иначе это сделали бы его кнопки.
+        private void OnFrozenChanged(bool oldValue, bool newValue)
+        {
+            if (newValue == false)
+                return;
+
+            Disarm();
+            OnCloseRequest();
+        }
+
         private void UnsubscribeFromWorld()
         {
             _goldDisposable?.Dispose();
@@ -201,6 +217,9 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.TowerPopups
 
             _cameraMovedDisposable?.Dispose();
             _cameraMovedDisposable = null;
+
+            _frozenDisposable?.Dispose();
+            _frozenDisposable = null;
         }
     }
 }

@@ -3,8 +3,10 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Attack;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Shoot;
 using Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
+using Assets._Project.Develop.Runtime.Utilities.Timer;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,7 +45,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddInAttackCooldown()
                 .AddProjectileType(new(config.Projectile))
                 .AddProjectileSpeed(new(config.ProjectileSpeed))
-                .AddAttacksPerSecond(new ReactiveVariable<float>(modifiedStats[StatTypes.AttacksPerSecond]));
+                .AddAttacksPerSecond(new ReactiveVariable<float>(modifiedStats[StatTypes.AttacksPerSecond]))
+                .AddIsFrozen()
+                .AddStatuses();
 
             entity
                 .AddSystem(new RangeZoneRadiusSyncSystem())
@@ -52,7 +56,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddSystem(new AttackProcessTimerSystem())
                 .AddSystem(new AttackDelayEndTriggerSystem())
                 .AddSystem(new EndAttackSystem())
-                .AddSystem(new AttackCooldownTimerSystem());
+                .AddSystem(new AttackCooldownTimerSystem())
+                .AddSystem(new StatusesLifeCycleSystem(_container.Resolve<TimerServiceFactory>()))
+                .AddSystem(new StatusesApplierSystem(_container.Resolve<TimerServiceFactory>()));
 
             return entity;
         }

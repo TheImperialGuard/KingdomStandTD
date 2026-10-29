@@ -121,5 +121,30 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles
 
             return entity;
         }
+
+        public Entity CreateSnowball(
+            Vector3 position,
+            Vector3 targetPoint,
+            Entity target,
+            float speed,
+            float arcHeight,
+            float freezeDuration,
+            string prefabPath)
+        {
+            Entity entity = _entitiesFactory.CreateSnowball(
+                position,
+                targetPoint,
+                target,
+                speed,
+                arcHeight,
+                freezeDuration,
+                prefabPath);
+
+            entity.AddIsProjectile();
+
+            _entitiesLifeContext.Add(entity);
+
+            return entity;
+        }
     }
 }

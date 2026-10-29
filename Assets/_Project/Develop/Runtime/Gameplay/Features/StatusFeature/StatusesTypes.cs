@@ -5,5 +5,6 @@
         LastingDamage,
         Stun,
         SpeedBoost,
+        Freeze,
     }
 }

@@ -64,6 +64,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateTargetCandidatesService).NonLazy();
 
+            container.RegisterAsSingle(CreateBuiltTowersService).NonLazy();
+
             container.RegisterAsSingle(CreateMonoEntitiesFactory).NonLazy();
 
             container.RegisterAsSingle(CreateCollidersRegistryService);
@@ -171,6 +173,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private static EntitiesLifeContext CreateEntitiesLifeContext(DIContainer c) => new();
 
         private static TargetCandidatesService CreateTargetCandidatesService(DIContainer c)
+            => new(c.Resolve<EntitiesLifeContext>());
+
+        private static BuiltTowersService CreateBuiltTowersService(DIContainer c)
             => new(c.Resolve<EntitiesLifeContext>());
 
         private static AIBrainsContext CreateAIBrainsContext(DIContainer c) => new();

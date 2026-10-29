@@ -16,6 +16,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup
         private readonly EntitiesLifeContext _entitiesLifeContext;
 
         private IDisposable _damageChangedDisposable;
+        private IDisposable _frozenDisposable;
 
         public TowerInfoPopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
@@ -37,6 +38,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup
             base.Initialize();
 
             _damageChangedDisposable = _sourceTower.InstantAttackDamage.Subscribe(OnDamageChanged);
+            _frozenDisposable = _sourceTower.IsFrozen.Subscribe(OnFrozenChanged);
             _entitiesLifeContext.Released += OnSomeEntityReleased;
 
             SetupInfo();
@@ -62,6 +64,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup
             base.Dispose();
 
             _damageChangedDisposable?.Dispose();
+            _frozenDisposable?.Dispose();
             _entitiesLifeContext.Released -= OnSomeEntityReleased;
         }
 
@@ -79,6 +82,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup
         private void OnSomeEntityReleased(Entity entity)
         {
             if (_sourceTower == entity)
+                OnCloseRequest();
+        }
+
+        // Закрывается вместе с окном замороженной башни.
+        private void OnFrozenChanged(bool oldValue, bool isFrozen)
+        {
+            if (isFrozen)
                 OnCloseRequest();
         }
     }

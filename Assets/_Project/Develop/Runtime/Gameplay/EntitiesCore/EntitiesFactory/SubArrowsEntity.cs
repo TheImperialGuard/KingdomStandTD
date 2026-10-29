@@ -47,7 +47,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory
                 .AddAttacksPerSecond(parent.AttacksPerSecond)
                 .AddLastingDamage(parent.LastingDamage)
                 .AddLastingDamageInitialTime(parent.LastingDamageInitialTime)
-                .AddLastingDamageInterval(parent.LastingDamageInterval);
+                .AddLastingDamageInterval(parent.LastingDamageInterval)
+                .AddIsFrozen(parent.IsFrozen);
 
             ICompositeCondition canStartAttack = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.InAttackCooldown.Value == false))

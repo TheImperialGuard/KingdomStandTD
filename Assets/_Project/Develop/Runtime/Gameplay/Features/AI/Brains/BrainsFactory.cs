@@ -1,5 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.States;
+using Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.TargetSelecting;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
@@ -22,7 +23,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
 
         public StateMachineBrain CreateMeleeBrain(Entity entity)
         {
-            AIStateMachine stateMachine = CreateWaypointMovementStateMachine(entity);
+            AIStateMachine stateMachine = entity.HasComponent<SnowballThrowTarget>()
+                ? CreateSnowballThrowerStateMachine(entity)
+                : CreateWaypointMovementStateMachine(entity);
 
             StateMachineBrain brain = new(stateMachine);
 
@@ -36,8 +39,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
             FindTargetState findTargetState = new FindTargetState(targetSelector, _targetCandidatesService, entity);
             AttackTriggerState attackTriggerState = new AttackTriggerState(entity);
 
+            // Замороженная башня не стреляет: это единственный вход и атак, и способностей башни
+            // (AttackTriggerState → StartAttackRequest). Выстрел, начатый до заморозки, долетает.
             ICompositeCondition fromFindTargetToAttackTriggerStateCondition = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.CurrentTarget.Value != null));
+                .Add(new FuncCondition(() => entity.CurrentTarget.Value != null))
+                .Add(new FuncCondition(() => entity.IsFrozen.Value == false));
 
             ICondition fromAttackTriggerToFindTargetStateCondition = new FuncCondition(() => entity.InAttackProcess.Value == false);
 
@@ -89,6 +95,27 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains
             AIStateMachine stateMachine = new AIStateMachine();
 
             stateMachine.AddState(waypointsMovementState);
+
+            return stateMachine;
+        }
+
+        // Мозг пишет направление поворота каждый кадр и тикает после сущностей, поэтому развернуть бросающего к башне на
+        // время каста может только он сам — вторым состоянием. Первое добавленное состояние — начальное.
+        private AIStateMachine CreateSnowballThrowerStateMachine(Entity entity)
+        {
+            WaypointsMovementState waypointsMovementState = new(entity);
+            RotateToTargetOnGroundState rotateToThrowTargetState = new(entity, entity.SnowballThrowTarget);
+
+            ICondition fromMovementToRotateStateCondition = new FuncCondition(() => entity.InFirstAbilityProcess.Value);
+            ICondition fromRotateToMovementStateCondition = new FuncCondition(() => entity.InFirstAbilityProcess.Value == false);
+
+            AIStateMachine stateMachine = new AIStateMachine();
+
+            stateMachine.AddState(waypointsMovementState);
+            stateMachine.AddState(rotateToThrowTargetState);
+
+            stateMachine.AddTransition(waypointsMovementState, rotateToThrowTargetState, fromMovementToRotateStateCondition);
+            stateMachine.AddTransition(rotateToThrowTargetState, waypointsMovementState, fromRotateToMovementStateCondition);
 
             return stateMachine;
         }

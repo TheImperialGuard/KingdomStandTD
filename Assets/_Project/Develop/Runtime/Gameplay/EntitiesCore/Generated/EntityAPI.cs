@@ -361,6 +361,54 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.StunDuration() {Value = value}); 
 		}
 
+		public Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.IsFrozen IsFrozenC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.IsFrozen>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> IsFrozen => IsFrozenC.Value;
+
+		public bool TryGetIsFrozen(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.IsFrozen component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsFrozen()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.IsFrozen() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsFrozen(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.IsFrozen() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.FreezeDuration FreezeDurationC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.FreezeDuration>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> FreezeDuration => FreezeDurationC.Value;
+
+		public bool TryGetFreezeDuration(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.FreezeDuration component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFreezeDuration()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.FreezeDuration() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFreezeDuration(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.FreezeDuration() {Value = value}); 
+		}
+
 		public Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.SpeedBoostIndex SpeedBoostIndexC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.StatusFeature.SpeedBoostIndex>();
 
 		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> SpeedBoostIndex => SpeedBoostIndexC.Value;
@@ -503,6 +551,169 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddStatsEffects(Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatsEffectsList value)
 		{
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.StatsFeature.StatsEffects() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowAnimationEventReceiverComponent SnowballThrowAnimationEventReceiverC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowAnimationEventReceiverComponent>();
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowAnimationEventReceiver SnowballThrowAnimationEventReceiver => SnowballThrowAnimationEventReceiverC.Value;
+
+		public bool TryGetSnowballThrowAnimationEventReceiver(out Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowAnimationEventReceiver value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowAnimationEventReceiverComponent component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowAnimationEventReceiver);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSnowballThrowAnimationEventReceiver(Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowAnimationEventReceiver value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowAnimationEventReceiverComponent() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowTarget SnowballThrowTargetC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowTarget>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> SnowballThrowTarget => SnowballThrowTargetC.Value;
+
+		public bool TryGetSnowballThrowTarget(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowTarget component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSnowballThrowTarget()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowTarget() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSnowballThrowTarget(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowTarget() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowRange SnowballThrowRangeC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowRange>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> SnowballThrowRange => SnowballThrowRangeC.Value;
+
+		public bool TryGetSnowballThrowRange(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowRange component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSnowballThrowRange()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowRange() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSnowballThrowRange(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballThrowRange() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballSpeed SnowballSpeedC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballSpeed>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> SnowballSpeed => SnowballSpeedC.Value;
+
+		public bool TryGetSnowballSpeed(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballSpeed component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSnowballSpeed()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballSpeed() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSnowballSpeed(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballSpeed() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballArcHeight SnowballArcHeightC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballArcHeight>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> SnowballArcHeight => SnowballArcHeightC.Value;
+
+		public bool TryGetSnowballArcHeight(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballArcHeight component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSnowballArcHeight()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballArcHeight() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSnowballArcHeight(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballArcHeight() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballPrefabPath SnowballPrefabPathC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballPrefabPath>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> SnowballPrefabPath => SnowballPrefabPathC.Value;
+
+		public bool TryGetSnowballPrefabPath(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballPrefabPath component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSnowballPrefabPath()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballPrefabPath() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddSnowballPrefabPath(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.String> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.SnowballPrefabPath() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.FreezeTarget FreezeTargetC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.FreezeTarget>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> FreezeTarget => FreezeTargetC.Value;
+
+		public bool TryGetFreezeTarget(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.FreezeTarget component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFreezeTarget()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.FreezeTarget() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddFreezeTarget(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.SnowballThrowFeature.FreezeTarget() {Value = value}); 
 		}
 
 		public Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootPoint ShootPointC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.Shoot.ShootPoint>();
@@ -897,6 +1108,150 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
 		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddProjectileType(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles.ProjectilesTypes> value)
 		{
 			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.Projectiles.ProjectileType() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightStartPoint ArcFlightStartPointC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightStartPoint>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> ArcFlightStartPoint => ArcFlightStartPointC.Value;
+
+		public bool TryGetArcFlightStartPoint(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightStartPoint component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddArcFlightStartPoint()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightStartPoint() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddArcFlightStartPoint(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightStartPoint() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightEndPoint ArcFlightEndPointC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightEndPoint>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> ArcFlightEndPoint => ArcFlightEndPointC.Value;
+
+		public bool TryGetArcFlightEndPoint(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightEndPoint component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddArcFlightEndPoint()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightEndPoint() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddArcFlightEndPoint(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightEndPoint() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightHeight ArcFlightHeightC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightHeight>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> ArcFlightHeight => ArcFlightHeightC.Value;
+
+		public bool TryGetArcFlightHeight(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightHeight component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddArcFlightHeight()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightHeight() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddArcFlightHeight(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightHeight() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightDuration ArcFlightDurationC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightDuration>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> ArcFlightDuration => ArcFlightDurationC.Value;
+
+		public bool TryGetArcFlightDuration(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightDuration component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddArcFlightDuration()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightDuration() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddArcFlightDuration(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightDuration() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightCurrentTime ArcFlightCurrentTimeC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightCurrentTime>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> ArcFlightCurrentTime => ArcFlightCurrentTimeC.Value;
+
+		public bool TryGetArcFlightCurrentTime(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightCurrentTime component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddArcFlightCurrentTime()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightCurrentTime() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddArcFlightCurrentTime(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.ArcFlightCurrentTime() {Value = value}); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.IsArcFlightFinished IsArcFlightFinishedC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.IsArcFlightFinished>();
+
+		public Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> IsArcFlightFinished => IsArcFlightFinishedC.Value;
+
+		public bool TryGetIsArcFlightFinished(out Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			bool result = TryGetComponent(out Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.IsArcFlightFinished component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>);
+			return result;
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsArcFlightFinished()
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.IsArcFlightFinished() { Value = new Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean>() }); 
+		}
+
+		public Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddIsArcFlightFinished(Assets._Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
+		{
+			return AddComponent(new Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.IsArcFlightFinished() {Value = value}); 
 		}
 
 		public Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.MoveDirection MoveDirectionC => GetComponent<Assets._Project.Develop.Runtime.Gameplay.Features.MovementFeature.MoveDirection>();

@@ -88,8 +88,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Towers
                 .AddInteractiveAction(new(selectAction))
                 .AddSelfReleaseRequested(new(false));
 
+            // Замороженную башню нельзя нажать: ни улучшить, ни продать, ни купить способность
             ICompositeCondition canInteract = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.SelfReleaseRequested.Value == false));
+                .Add(new FuncCondition(() => entity.SelfReleaseRequested.Value == false))
+                .Add(new FuncCondition(() => entity.IsFrozen.Value == false));
 
             ICompositeCondition mustSelfRelease = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.SelfReleaseRequested.Value == true));
