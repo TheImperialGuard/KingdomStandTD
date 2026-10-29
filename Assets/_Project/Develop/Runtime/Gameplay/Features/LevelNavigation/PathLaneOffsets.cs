@@ -6,7 +6,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation
     // Смещение задаётся в локальных осях вейпоинта: ось X направлена поперёк дороги.
     public static class PathLaneOffsets
     {
-        public const float LANE_OFFSET = 0.5f;
+        public const float LANE_OFFSET = 0.625f;
 
         public static Vector3 ToLocalOffset(PathLane lane)
         {
