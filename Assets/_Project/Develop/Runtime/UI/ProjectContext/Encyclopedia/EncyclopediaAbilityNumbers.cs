@@ -67,6 +67,12 @@ namespace Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia
                         DecimalText.Format(warCry.SpeedBoostDuration),
                         cooldown);
 
+                case SnowballThrowAbilityConfig snowballThrow:
+                    return FormatSnowballThrow(
+                        DecimalText.Format(snowballThrow.ThrowRange),
+                        DecimalText.Format(snowballThrow.FreezeDuration),
+                        cooldown);
+
                 default:
                     return FormatCooldown(cooldown);
             }
@@ -108,5 +114,8 @@ namespace Assets._Project.Develop.Runtime.UI.ProjectContext.Encyclopedia
 
         private static string FormatWarCry(string radius, string speedBoost, string boostDuration, string cooldown)
             => $"Радиус {radius} · скорость ×{speedBoost} на {boostDuration} с · раз в {cooldown} с";
+
+        private static string FormatSnowballThrow(string range, string freezeDuration, string cooldown)
+            => $"Дальность {range} · заморозка {freezeDuration} с · раз в {cooldown} с";
     }
 }

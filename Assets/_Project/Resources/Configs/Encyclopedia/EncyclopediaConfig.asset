@@ -33,6 +33,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7b986777ae748f949a65c5063ce560f8, type: 2}
   - {fileID: 11400000, guid: ff63194087fd89e429af04e8d66cd63f, type: 2}
   - {fileID: 11400000, guid: 17626c9dc0622e249b983315d20a89de, type: 2}
+  - {fileID: 11400000, guid: b54ea7a5567773d4fae8ed2eabc5ca3a, type: 2}
   - {fileID: 11400000, guid: 35814527bab6fa34d9b98a37d479cec2, type: 2}
   _stats:
   - <Stat>k__BackingField: 0
