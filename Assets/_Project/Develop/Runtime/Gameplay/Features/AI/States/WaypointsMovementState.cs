@@ -28,7 +28,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.AI.States
 
         public void Update(float deltaTime)
         {
-            _currentDirection = (_currentLanePoint.Value - _transform.position).normalized;
+            // Только по горизонтали: Rigidbody поворачивается вокруг центра масс, и у модели с капсулой, смещённой вперёд,
+            // наклон к точке ниже себя приподнимает корень — наклон растёт, пока враг не ляжет и не застрянет.
+            _currentDirection = Vector3.ProjectOnPlane(_currentLanePoint.Value - _transform.position, Vector3.up).normalized;
 
             _movementDirection.Value = _currentDirection;
             _rotationDirection.Value = _currentDirection;
