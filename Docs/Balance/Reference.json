@@ -187,6 +187,19 @@
       "goldOnDeath": 3,
       "damageOnFinishPath": 1,
       "isBoss": false
+    },
+    {
+      "asset": "Yeti",
+      "name": "Йети",
+      "maxHealth": 1000.0,
+      "moveSpeed": 0.4,
+      "damageResistanceType": "None",
+      "damageResistanceIndex": 0.0,
+      "effectiveHealthPhysic": 1000.0,
+      "effectiveHealthMagic": 1000.0,
+      "goldOnDeath": 10,
+      "damageOnFinishPath": 20,
+      "isBoss": true
     }
   ],
   "towers": [

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee34f11ed8ec2945840d8cde2351b2d, type: 3}
+  m_Name: SnowballThrowAbilityConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities.Enemies.SnowballThrowAbilityConfig
+  <Name>k__BackingField: 
+  <Description>k__BackingField: 
+  <Icon>k__BackingField: {fileID: 0}
+  <Duration>k__BackingField: 3.2
+  <Cooldown>k__BackingField: 10
+  <ThrowRange>k__BackingField: 8
+  <FreezeDuration>k__BackingField: 4
+  <SnowballPrefabPath>k__BackingField: Prefabs/Entities/Projectiles/Snowball
+  <SnowballSpeed>k__BackingField: 6
+  <SnowballArcHeight>k__BackingField: 1.5
