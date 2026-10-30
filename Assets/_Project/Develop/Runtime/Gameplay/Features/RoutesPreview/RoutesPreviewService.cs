@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Assets._Project.Develop.Runtime.Configs.Gameplay;
-using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
@@ -11,7 +10,8 @@ using UnityEngine.Pool;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.RoutesPreview
 {
-    // Пока игрок готовится к старту стейджей, пускает цепочки стрелок по всем путям, которые используют волны уровня.
+    // Пока игрок готовится к старту стейджей, пускает цепочки стрелок по всем путям, которые используют волны уровня
+    // (список путей даёт регистрация уровня).
     // Цепочка идёт шагами: стрелка разгорается и гаснет, а на заданной доле её затухания впереди появляется следующая.
     // После старта стейджей стрелки убираются и больше не появляются.
     public class RoutesPreviewService : IInitializable, IDisposable
@@ -22,7 +22,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.RoutesPreview
 
         private readonly StagesCycle _stagesCycle;
         private readonly IReadOnlyList<RoadPath> _roadPaths;
-        private readonly IReadOnlyList<EnemiesWavesStageConfig> _stagesConfigs;
+        private readonly IReadOnlyList<PathNumber> _pathNumbers;
         private readonly RoutesPreviewConfig _config;
         private readonly ResourcesAssetsLoader _resourcesAssetsLoader;
 
@@ -39,13 +39,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.RoutesPreview
         public RoutesPreviewService(
             StagesCycle stagesCycle,
             IReadOnlyList<RoadPath> roadPaths,
-            IReadOnlyList<EnemiesWavesStageConfig> stagesConfigs,
+            IReadOnlyList<PathNumber> pathNumbers,
             RoutesPreviewConfig config,
             ResourcesAssetsLoader resourcesAssetsLoader)
         {
             _stagesCycle = stagesCycle;
             _roadPaths = roadPaths;
-            _stagesConfigs = stagesConfigs;
+            _pathNumbers = pathNumbers;
             _config = config;
             _resourcesAssetsLoader = resourcesAssetsLoader;
         }
@@ -88,7 +88,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.RoutesPreview
 
         private void CreateRoutes()
         {
-            foreach (PathNumber pathNumber in GetUsedPathNumbers())
+            foreach (PathNumber pathNumber in _pathNumbers)
             {
                 if (TryGetRoadPath(pathNumber, out RoadPath roadPath) == false)
                 {
@@ -109,19 +109,6 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.RoutesPreview
 
                 _routes.Add(new Route(line, color, stepsCount));
             }
-        }
-
-        private HashSet<PathNumber> GetUsedPathNumbers()
-        {
-            HashSet<PathNumber> pathNumbers = new();
-
-            foreach (EnemiesWavesStageConfig stageConfig in _stagesConfigs)
-            {
-                foreach (EnemiesWaveConfig waveConfig in stageConfig.EnemiesWaveConfigs)
-                    pathNumbers.Add(waveConfig.PathNumber);
-            }
-
-            return pathNumbers;
         }
 
         private bool TryGetRoadPath(PathNumber pathNumber, out RoadPath result)

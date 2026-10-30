@@ -104,6 +104,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateCampaignStagesSource);
 
+            container.RegisterAsSingle(CreateCampaignStagesContent);
+
             container.RegisterAsSingle(CreateStageProviderService);
 
             container.RegisterAsSingle(CreateGameModesFactory);
@@ -211,6 +213,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private static IStagesSource CreateCampaignStagesSource(DIContainer c)
             => new FixedStagesSource(_levelConfig.Stages);
 
+        private static LevelStagesContent CreateCampaignStagesContent(DIContainer c)
+            => LevelStagesContent.CollectFrom(_levelConfig.Stages);
+
         private static DealDamageToPlayerService CreateDealDamageToPlayerService(DIContainer c)
         {
             return new DealDamageToPlayerService(
@@ -267,7 +272,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             => new(c);
 
         private static EnemiesPrewarmer CreateEnemiesPrewarmer(DIContainer c)
-            => new(_levelConfig, c.Resolve<MonoEntitiesFactory>());
+            => new(c.Resolve<LevelStagesContent>().Enemies, c.Resolve<MonoEntitiesFactory>());
 
         private static BrainsFactory CreateBrainsFactory(DIContainer c)
             => new(c);
@@ -338,7 +343,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             return new RoutesPreviewService(
                 c.Resolve<StagesCycle>(),
                 c.Resolve<Level>().RoadPaths,
-                _levelConfig.Stages,
+                c.Resolve<LevelStagesContent>().PathNumbers,
                 config,
                 c.Resolve<ResourcesAssetsLoader>());
         }
