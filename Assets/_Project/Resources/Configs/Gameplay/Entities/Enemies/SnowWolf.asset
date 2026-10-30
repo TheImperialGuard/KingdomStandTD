@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SnowWolf
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters.MeleeConfig
   <PrefabPath>k__BackingField: Prefabs/Entities/Characters/MeleeSnowWolf
-  <CharacterName>k__BackingField: 
+  <CharacterName>k__BackingField: "\u0411\u0435\u043B\u044B\u0439 \u0432\u043E\u043B\u043A"
   <Picture>k__BackingField: {fileID: 0}
   <MoveSpeed>k__BackingField: 1.6
   <RotateSpeed>k__BackingField: 900
