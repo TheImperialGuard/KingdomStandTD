@@ -1,0 +1,51 @@
+{
+  "level": "EndlessLevel",
+  "campaignNumber": null,
+  "prefabPath": "Prefabs/Levels/EndlessLevel",
+  "gameMode": "Infinity",
+  "towerSlotsCount": 13,
+  "startGold": 800,
+  "startPlayerHealth": 20,
+  "roads": [
+    {
+      "pathNumber": "First",
+      "name": "Path_1",
+      "waypointsCount": 11,
+      "lengthCenter": 47.0,
+      "lengthLeft": 47.01,
+      "lengthRight": 47.013,
+      "timeToBase": {}
+    },
+    {
+      "pathNumber": "Second",
+      "name": "Path_2",
+      "waypointsCount": 11,
+      "lengthCenter": 47.0,
+      "lengthLeft": 47.013,
+      "lengthRight": 47.01,
+      "timeToBase": {}
+    }
+  ],
+  "stages": [],
+  "analysis": {
+    "stagesCount": 0,
+    "wavesCount": 0,
+    "enemiesCount": 0,
+    "enemiesByType": {},
+    "health": 0.0,
+    "effectiveHealthPhysic": 0.0,
+    "effectiveHealthMagic": 0.0,
+    "killGold": 0,
+    "maxSkipGold": 0,
+    "totalGoldWithoutSkips": 800,
+    "totalGoldWithMaxSkips": 800,
+    "breakthroughDamage": 0,
+    "breakthroughThreat": 0.0,
+    "durationWithoutSkips": 0.0,
+    "durationWithMaxSkips": 0.0,
+    "peakEnemies": null,
+    "traffic": []
+  },
+  "errors": [],
+  "warnings": []
+}

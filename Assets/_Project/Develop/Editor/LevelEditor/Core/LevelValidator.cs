@@ -4,6 +4,7 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Stages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelNavigation;
+using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 
 namespace Assets._Project.Develop.Editor.LevelEditor
 {
@@ -16,7 +17,10 @@ namespace Assets._Project.Develop.Editor.LevelEditor
 
             ValidateEconomy(config, issues);
             ValidatePrefab(config, prefab, issues);
-            ValidateStages(config, prefab, issues);
+
+            // Волны бесконечного уровня собирает генератор режима, своих стейджей у такого уровня нет
+            if (config.GameMode != GameModes.Infinity)
+                ValidateStages(config, prefab, issues);
 
             return issues;
         }
