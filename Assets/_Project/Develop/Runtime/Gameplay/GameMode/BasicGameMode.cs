@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
@@ -9,26 +8,18 @@ using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Gameplay;
 using Assets._Project.Develop.Runtime.Utilities.Conditions;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
-using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
 {
-    public class BasicGameMode : IGameMode
+    // Уровень кампании: победа — когда пройден последний стейдж, спавн окончен и врагов на поле не осталось.
+    public class BasicGameMode : GameModeBase
     {
-        private ReactiveEvent<LevelResults> _end = new();
-
-        private readonly GameplayPopupService _popupService;
-
         private readonly StagesCycle _stagesCycle;
         private readonly WavesSpawner _wavesSpawner;
         private readonly PlayerHealth _playerHealth;
         private readonly EntitiesLifeContext _entitiesLifeContext;
 
-        private bool _isRunning;
-
         private CompositeCondition _winCondition = new();
-
-        private List<IDisposable> _disposables = new();
 
         public BasicGameMode(
             StagesCycle stagesCycle,
@@ -36,44 +27,20 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
             PlayerHealth playerHealth,
             GameplayPopupService popupService,
             EntitiesLifeContext entitiesLifeContext)
+            : base(stagesCycle, wavesSpawner, playerHealth, popupService)
         {
             _stagesCycle = stagesCycle;
             _wavesSpawner = wavesSpawner;
             _playerHealth = playerHealth;
-            _popupService = popupService;
             _entitiesLifeContext = entitiesLifeContext;
 
             CreateWinCondition();
         }
 
-        public IReadOnlyEvent<LevelResults> End => _end;
-
-        public void Start()
+        protected override void OnUpdate(float deltaTime)
         {
-            _popupService.OpenStartStagesPopup();
-
-            _disposables.Add(_playerHealth.Current.Subscribe(OnPlayerHealthChanged));
-
-            _isRunning = true;
-        }
-
-        public void Update(float deltaTime)
-        {
-            if (_isRunning == false)
-                return;
-
-            _stagesCycle.Update(deltaTime);
-
             if (_winCondition.Evaluate() == true)
                 ProcessWin();
-        }
-
-        public void Dispose()
-        {
-            _isRunning = false;
-
-            foreach (IDisposable disposable  in _disposables)
-                disposable.Dispose();
         }
 
         private void CreateWinCondition()
@@ -98,37 +65,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
             return false;
         }
 
-        // Враги, уже стоящие у замка, могут снять здоровье и после итога — второй раз он не наступает
-        private void OnPlayerHealthChanged(int oldValue, int newValue)
-        {
-            if (_isRunning && newValue <= 0)
-                ProcessLose();
-        }
-
         private void ProcessWin()
         {
             LevelResults levelResults = CalculateWinResults();
 
             ProcessEndGame(levelResults);
-        }
-
-        private void ProcessLose()
-        {
-            LevelResults levelResults = LevelResults.Defeat;
-
-            ProcessEndGame(levelResults);
-        }
-
-        private void ProcessEndGame(LevelResults levelResults)
-        {
-            _isRunning = false;
-
-            _stagesCycle.Stop();
-            _wavesSpawner.Stop();
-
-            _end.Invoke(levelResults);
-
-            Debug.Log($"Конец уровня с результатом: {levelResults}");
         }
 
         private LevelResults CalculateWinResults()
