@@ -3,7 +3,7 @@
   "campaignNumber": null,
   "prefabPath": "Prefabs/Levels/EndlessLevel",
   "gameMode": "Basic",
-  "towerSlotsCount": 0,
+  "towerSlotsCount": 13,
   "startGold": 2000,
   "startPlayerHealth": 20,
   "roads": [
@@ -254,7 +254,5 @@
     ]
   },
   "errors": [],
-  "warnings": [
-    "На префабе нет ни одного места под башню"
-  ]
+  "warnings": []
 }
