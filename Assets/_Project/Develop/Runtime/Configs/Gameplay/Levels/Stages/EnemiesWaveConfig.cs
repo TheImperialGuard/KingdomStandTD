@@ -12,6 +12,26 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels
         [SerializeField] private List<WaveEnemyGroup> _enemyGroups = new();
         [SerializeField, TextArea] private string _note;
 
+        // Для сериализации Unity
+        public EnemiesWaveConfig()
+        {
+        }
+
+        // Поток, собранный в коде, — например, волна бесконечного режима
+        public EnemiesWaveConfig(
+            List<WaveEnemyGroup> enemyGroups,
+            PathNumber pathNumber,
+            PathLane lane,
+            float startDelay,
+            float delayBetweenSpawns)
+        {
+            _enemyGroups = enemyGroups;
+            PathNumber = pathNumber;
+            Lane = lane;
+            StartDelay = startDelay;
+            DelayBetweenSpawns = delayBetweenSpawns;
+        }
+
         [field: SerializeField, Min(1)] public int PatternRepeats { get; private set; } = 1;
         [field: SerializeField] public PathNumber PathNumber { get; private set; }
         [field: SerializeField] public PathLane Lane { get; private set; }
