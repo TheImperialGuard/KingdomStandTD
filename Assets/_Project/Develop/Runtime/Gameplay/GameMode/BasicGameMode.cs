@@ -98,9 +98,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
             return false;
         }
 
+        // Враги, уже стоящие у замка, могут снять здоровье и после итога — второй раз он не наступает
         private void OnPlayerHealthChanged(int oldValue, int newValue)
         {
-            if (newValue <= 0)
+            if (_isRunning && newValue <= 0)
                 ProcessLose();
         }
 
@@ -121,6 +122,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
         private void ProcessEndGame(LevelResults levelResults)
         {
             _isRunning = false;
+
+            _stagesCycle.Stop();
+            _wavesSpawner.Stop();
 
             _end.Invoke(levelResults);
 

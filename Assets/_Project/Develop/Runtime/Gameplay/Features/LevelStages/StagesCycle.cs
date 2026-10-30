@@ -56,9 +56,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
             SwitchStage();
         }
 
+        // Конец игры: окно вызова закрывается, а таймер текущего стейджа гаснет и уже не запустит следующий стейдж
         public void Stop()
         {
             _isRunning = false;
+            _stageCanBeSkiped.Value = false;
+
+            _stageProviderService.CleanupCurrent();
         }
 
         public void Update(float deltaTime)

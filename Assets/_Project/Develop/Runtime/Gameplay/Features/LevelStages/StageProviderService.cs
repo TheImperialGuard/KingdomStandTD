@@ -67,7 +67,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
         public void UpdateCurrent(float deltaTime) => _currentStage.Update(deltaTime);
 
-        public void CleanupCurrent() => _currentStage.Cleanup();
+        public void CleanupCurrent() => _currentStage?.Cleanup();
 
         public void Dispose()
         {
