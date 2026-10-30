@@ -1,7 +1,6 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Utilities.Reactive;
 using System;
-using System.Collections.Generic;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 {
@@ -9,7 +8,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
     {
         private StagesFactory _stagesFactory;
 
-        private List<StageConfig> _stagesConfigs;
+        private IStagesSource _stagesSource;
 
         private IStage _currentStage;
 
@@ -19,23 +18,26 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         private IDisposable _stageEndedDisposable;
         private IDisposable _stageCanBeSkipedDisposable;
 
-        public StageProviderService(StagesFactory stagesFactory, IReadOnlyList<StageConfig> stagesConfigs)
+        public StageProviderService(StagesFactory stagesFactory, IStagesSource stagesSource)
         {
             _stagesFactory = stagesFactory;
-            _stagesConfigs = new(stagesConfigs);
+            _stagesSource = stagesSource;
         }
 
         public IReadOnlyVariable<int> CurrentStageNumber => _currentStageNumber;
 
-        public StageConfig NextStageConfig => _stagesConfigs[_currentStageNumber.Value];
+        public StageConfig NextStageConfig => _stagesSource.Get(_currentStageNumber.Value + 1);
 
         public IReadOnlyVariable<StageResults> CurrentStageResult => _currentStageResult;
 
         public IReadOnlyVariable<float> CurrentStageRemainingTime => _currentStage.RemainingTime;
 
-        public int StagesCount => _stagesConfigs.Count;
+        // У бесконечного режима стейджей без конца, и StagesCount у него нет
+        public bool HasFiniteStages => _stagesSource.IsFinite;
 
-        public bool HasNextStage() => _currentStageNumber.Value < StagesCount;
+        public int StagesCount => _stagesSource.Count;
+
+        public bool HasNextStage() => _stagesSource.Has(_currentStageNumber.Value + 1);
 
         public void SwitchToNext(out float currentStageRemainingTime)
         {
@@ -54,7 +56,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
             _currentStageNumber.Value++;
             _currentStageResult.Value = StageResults.Uncompleted;
 
-            _currentStage = _stagesFactory.Create(_stagesConfigs[_currentStageNumber.Value - 1]);
+            _currentStage = _stagesFactory.Create(_stagesSource.Get(_currentStageNumber.Value));
         }
 
         public void StartCurrent()

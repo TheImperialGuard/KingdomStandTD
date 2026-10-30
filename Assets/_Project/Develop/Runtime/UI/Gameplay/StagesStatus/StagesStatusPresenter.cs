@@ -5,8 +5,12 @@ using System;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.StagesStatus
 {
+    // «Волна  N/M» в HUD; у бесконечного режима числа волн нет — «Волна  N».
     public class StagesStatusPresenter : IPresenter
     {
+        private const string StatusPrefix = "Волна  ";
+        private const string CountSeparator = "/";
+
         private readonly IconTextView _view;
         private readonly StageProviderService _stagesProvider;
 
@@ -34,7 +38,11 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.StagesStatus
 
         private void UpdateView()
         {
-            string stagesStatus = "Волна  " + _stagesProvider.CurrentStageNumber.Value.ToString() + "/" + _stagesProvider.StagesCount.ToString();
+            string stagesStatus = StatusPrefix + _stagesProvider.CurrentStageNumber.Value.ToString();
+
+            if (_stagesProvider.HasFiniteStages)
+                stagesStatus += CountSeparator + _stagesProvider.StagesCount.ToString();
+
             _view.SetText(stagesStatus);
         }
     }

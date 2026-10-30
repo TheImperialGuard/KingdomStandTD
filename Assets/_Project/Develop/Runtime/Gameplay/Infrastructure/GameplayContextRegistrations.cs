@@ -102,6 +102,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateStagesFactory);
 
+            container.RegisterAsSingle(CreateCampaignStagesSource);
+
             container.RegisterAsSingle(CreateStageProviderService);
 
             container.RegisterAsSingle(CreateGameModesFactory);
@@ -203,8 +205,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         {
             return new StageProviderService(
                 c.Resolve<StagesFactory>(),
-                _levelConfig.Stages);
+                c.Resolve<IStagesSource>());
         }
+
+        private static IStagesSource CreateCampaignStagesSource(DIContainer c)
+            => new FixedStagesSource(_levelConfig.Stages);
 
         private static DealDamageToPlayerService CreateDealDamageToPlayerService(DIContainer c)
         {
