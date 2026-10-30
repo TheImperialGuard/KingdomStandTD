@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
+using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 using Assets._Project.Develop.Runtime.Utilities.Text;
 
 namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 {
     // Доска «Играть»: шаг «Режим игры» и шаг «Кампания» со всеми уровнями и постоянной плиткой «В разработке» (Р-07).
+    // Карточка бесконечного режима пока сразу запускает его уровень; окно режима перед стартом — позже.
     public class PlayBoardPopupPresenter : PopupPresenterBase, IMainMenuPanel
     {
         private const string LevelWordOne = "уровень";
@@ -19,6 +22,8 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
         private readonly ConfigsProviderService _configProviderService;
         private readonly LevelsProgressionService _levelsProgressionService;
+        private readonly SceneSwitcherService _sceneSwitcherService;
+        private readonly ICoroutinesPerformer _coroutinesPerformer;
 
         private readonly MainMenuPresentersFactory _presentersFactory;
         private readonly ViewsFactory _viewsFactory;
@@ -38,6 +43,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             ViewsFactory viewsFactory,
             LevelsProgressionService levelsProgressionService,
             ConfigsProviderService configProviderService,
+            SceneSwitcherService sceneSwitcherService,
             PlayBoardPopupView boardView,
             PlayBoardSteps startStep) : base(coroutinesPerformer, rayShooterService)
         {
@@ -45,6 +51,8 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             _viewsFactory = viewsFactory;
             _levelsProgressionService = levelsProgressionService;
             _configProviderService = configProviderService;
+            _sceneSwitcherService = sceneSwitcherService;
+            _coroutinesPerformer = coroutinesPerformer;
             _boardView = boardView;
             _startStep = startStep;
         }
@@ -99,6 +107,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             base.OnPreShow();
 
             _boardView.CampaignClicked += OnCampaignClicked;
+            _boardView.EndlessClicked += OnEndlessClicked;
             _boardView.BackClicked += OnBackClicked;
 
             foreach (LevelTilePresenter levelTilePresenter in _levelTilePresenters)
@@ -110,6 +119,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             base.OnPreHide();
 
             _boardView.CampaignClicked -= OnCampaignClicked;
+            _boardView.EndlessClicked -= OnEndlessClicked;
             _boardView.BackClicked -= OnBackClicked;
 
             foreach (LevelTilePresenter levelTilePresenter in _levelTilePresenters)
@@ -166,6 +176,12 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
         }
 
         private void OnCampaignClicked() => ShowStep(PlayBoardSteps.Campaign);
+
+        private void OnEndlessClicked()
+        {
+            _coroutinesPerformer
+                .StartPerform(_sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, GameplayInputArgs.ForEndless()));
+        }
 
         private void OnBackClicked() => ShowStep(PlayBoardSteps.Modes);
     }

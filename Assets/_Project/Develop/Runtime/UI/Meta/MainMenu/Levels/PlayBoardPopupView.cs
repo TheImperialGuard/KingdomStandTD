@@ -24,6 +24,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
         private const float ScrollbarSpritePixel = 4f;
 
         public event Action CampaignClicked;
+        public event Action EndlessClicked;
         public event Action BackClicked;
 
         [SerializeField] private GameObject _modesStep;
@@ -53,6 +54,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             _campaignCard.Clicked += OnCampaignCardClicked;
             _campaignCard.HoverStarted += OnCardHoverStarted;
             _campaignCard.HoverEnded += OnCardHoverEnded;
+            _endlessCard.Clicked += OnEndlessCardClicked;
             _endlessCard.HoverStarted += OnCardHoverStarted;
             _endlessCard.HoverEnded += OnCardHoverEnded;
             _backButton.onClick.AddListener(OnBackButtonClicked);
@@ -63,6 +65,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             _campaignCard.Clicked -= OnCampaignCardClicked;
             _campaignCard.HoverStarted -= OnCardHoverStarted;
             _campaignCard.HoverEnded -= OnCardHoverEnded;
+            _endlessCard.Clicked -= OnEndlessCardClicked;
             _endlessCard.HoverStarted -= OnCardHoverStarted;
             _endlessCard.HoverEnded -= OnCardHoverEnded;
             _backButton.onClick.RemoveListener(OnBackButtonClicked);
@@ -166,6 +169,8 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
         private PlayModeCardView GetOtherCard(PlayModeCardView card) => card == _campaignCard ? _endlessCard : _campaignCard;
 
         private void OnCampaignCardClicked() => CampaignClicked?.Invoke();
+
+        private void OnEndlessCardClicked() => EndlessClicked?.Invoke();
 
         private void OnBackButtonClicked() => BackClicked?.Invoke();
     }

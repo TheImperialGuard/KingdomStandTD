@@ -51,6 +51,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
                 _container.Resolve<ViewsFactory>(),
                 _container.Resolve<LevelsProgressionService>(),
                 _container.Resolve<ConfigsProviderService>(),
+                _container.Resolve<SceneSwitcherService>(),
                 view,
                 startStep);
         }
