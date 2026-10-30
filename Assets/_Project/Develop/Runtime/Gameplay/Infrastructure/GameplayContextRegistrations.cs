@@ -1,6 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
@@ -102,9 +103,17 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateStagesFactory);
 
-            container.RegisterAsSingle(CreateCampaignStagesSource);
+            if (_inputArgs.IsEndless)
+            {
+                // Волны бесконечного уровня собирает генератор режима
+                EndlessContextRegistrations.Process(container);
+            }
+            else
+            {
+                container.RegisterAsSingle(CreateCampaignStagesSource);
 
-            container.RegisterAsSingle(CreateCampaignStagesContent);
+                container.RegisterAsSingle(CreateCampaignStagesContent);
+            }
 
             container.RegisterAsSingle(CreateStageProviderService);
 
@@ -408,9 +417,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                     return playtestLevelConfig;
             #endif
 
-            int levelNumber = _inputArgs.LevelNumber;
-
             ConfigsProviderService configsProviderService = c.Resolve<ConfigsProviderService>();
+
+            if (_inputArgs.IsEndless)
+                return configsProviderService.GetConfig<EndlessModeConfig>().Level;
+
+            int levelNumber = _inputArgs.LevelNumber;
 
             LevelsListConfig levelsListConfig = configsProviderService.GetConfig<LevelsListConfig>();
             LevelConfig levelConfig = levelsListConfig.GetBy(levelNumber);

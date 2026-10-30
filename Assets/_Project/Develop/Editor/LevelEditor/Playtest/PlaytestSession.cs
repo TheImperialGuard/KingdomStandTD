@@ -51,7 +51,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
 
             _isStartArgsTaken = true;
 
-            return new GameplayInputArgs(_campaignNumber ?? NON_CAMPAIGN_LEVEL_NUMBER);
+            return GameplayInputArgs.ForCampaign(_campaignNumber ?? NON_CAMPAIGN_LEVEL_NUMBER);
         }
 
         // Прошлая копия к этому моменту не нужна: сцена Gameplay перезагружается целиком, вместе со своим контейнером.

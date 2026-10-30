@@ -66,8 +66,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.ResultsPopup
 
         private void OnRestartClicked()
         {
-            _coroutinesPerformer.StartPerform(
-                _sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(_gameplayInputArgs.LevelNumber)));
+            _coroutinesPerformer.StartPerform(_sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, _gameplayInputArgs));
             OnCloseRequest();
         }
     }

@@ -4,6 +4,7 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Projectiles;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
 using Assets._Project.Develop.Runtime.Utilities.AssetsManagment;
 using System;
 using System.Collections;
@@ -19,6 +20,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.ConfigsManagment
         private readonly Dictionary<Type, string> _configsResourcesPaths = new()
         {
             {typeof(LevelsListConfig), "Configs/Gameplay/Levels/LevelsListConfig" },
+            {typeof(EndlessModeConfig), "Configs/Gameplay/Levels/Endless/EndlessModeConfig" },
             {typeof(TowerPlaceholderConfig), "Configs/Gameplay/Entities/Towers/TowerPlaceholderConfig" },
             {typeof(TowersListConfig), "Configs/Gameplay/Entities/Towers/TowersListConfig" },
             {typeof(GameConfig), "Configs/Gameplay/GameConfig" },

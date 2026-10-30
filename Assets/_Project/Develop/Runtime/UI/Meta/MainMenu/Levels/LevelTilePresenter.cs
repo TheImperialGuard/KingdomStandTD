@@ -69,7 +69,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             }
 
             _coroutinesPerformer
-                .StartPerform(_sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(_levelNumber)));
+                .StartPerform(_sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, GameplayInputArgs.ForCampaign(_levelNumber)));
         }
     }
 }

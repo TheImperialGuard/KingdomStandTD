@@ -23,6 +23,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 {
     public class GameplayBootstrap : SceneBootstrap
     {
+        private const string EndlessLevelName = "бесконечный";
+
         private DIContainer _container;
         private GameplayInputArgs _inputArgs;
 
@@ -65,7 +67,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         public override IEnumerator Initialize()
         {
-            Debug.Log($"Выполнен переход на уровень {_inputArgs.LevelNumber}");
+            string levelName = _inputArgs.IsEndless ? EndlessLevelName : _inputArgs.LevelNumber.ToString();
+
+            Debug.Log($"Выполнен переход на уровень {levelName}");
 
             Debug.Log("Инициализация геймплейной сцены");
 

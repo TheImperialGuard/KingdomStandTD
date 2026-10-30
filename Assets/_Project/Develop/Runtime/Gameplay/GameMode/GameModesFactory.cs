@@ -29,6 +29,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
                         _container.Resolve<GameplayPopupService>(),
                         _container.Resolve<EntitiesLifeContext>());
 
+                case GameModes.Infinity:
+                    return new EndlessGameMode(
+                        _container.Resolve<StagesCycle>(),
+                        _container.Resolve<WavesSpawner>(),
+                        _container.Resolve<PlayerHealth>(),
+                        _container.Resolve<GameplayPopupService>());
+
                 default:
                     throw new ArgumentException($"Not supported {nameof(mode)} game mode");
             }
