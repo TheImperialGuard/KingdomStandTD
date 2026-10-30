@@ -1,7 +1,7 @@
 {
   "level": "WPS",
   "campaignNumber": null,
-  "prefabPath": "Prefabs/Levels/RoadMaket_5",
+  "prefabPath": "Prefabs/Levels/EndlessLevel",
   "gameMode": "Basic",
   "towerSlotsCount": 0,
   "startGold": 2000,
@@ -12,8 +12,8 @@
       "name": "Path_1",
       "waypointsCount": 11,
       "lengthCenter": 47.0,
-      "lengthLeft": 47.0,
-      "lengthRight": 47.0,
+      "lengthLeft": 47.01,
+      "lengthRight": 47.013,
       "timeToBase": {
         "Gargoyle": 47.0,
         "Skeleton": 47.0
@@ -24,8 +24,8 @@
       "name": "Path_2",
       "waypointsCount": 11,
       "lengthCenter": 47.0,
-      "lengthLeft": 47.0,
-      "lengthRight": 47.0,
+      "lengthLeft": 47.013,
+      "lengthRight": 47.01,
       "timeToBase": {
         "Gargoyle": 47.0,
         "Orc": 47.0
