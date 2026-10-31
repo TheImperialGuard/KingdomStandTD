@@ -63,7 +63,8 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu
             _closeRequestedDisposable.Dispose();
         }
 
-        // Щелчок по «Играть» открывает доску на режимах, возврат из боя — сразу на уровнях (Р-23).
+        // Щелчок по «Играть» открывает доску на режимах, возврат из боя — сразу на уровнях (Р-23), а после бесконечного
+        // забега — на режимах.
         public void OpenPlayBoard(PlayBoardSteps startStep)
         {
             _playBoardStartStep = startStep;

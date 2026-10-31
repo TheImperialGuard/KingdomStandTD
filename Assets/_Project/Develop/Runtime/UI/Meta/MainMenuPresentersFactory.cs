@@ -1,6 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.Meta.Features.Endless;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.Meta.Features.Settings;
 using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
@@ -52,6 +53,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
                 this,
                 _container.Resolve<ViewsFactory>(),
                 _container.Resolve<LevelsProgressionService>(),
+                _container.Resolve<EndlessRecordService>(),
                 _container.Resolve<ConfigsProviderService>(),
                 _container.Resolve<MainMenuPopupService>(),
                 view,

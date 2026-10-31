@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
+using Assets._Project.Develop.Runtime.Meta.Features.Endless;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
@@ -12,15 +13,19 @@ using Assets._Project.Develop.Runtime.Utilities.Text;
 namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 {
     // Доска «Играть»: шаг «Режим игры» и шаг «Кампания» со всеми уровнями и постоянной плиткой «В разработке» (Р-07).
-    // Карточка бесконечного режима открывает поверх доски окно режима; окно закрывается вместе с доской.
+    // Карточка бесконечного режима открывает поверх доски окно режима и подписана рекордом; окно закрывается вместе с
+    // доской.
     public class PlayBoardPopupPresenter : PopupPresenterBase, IMainMenuPanel
     {
         private const string LevelWordOne = "уровень";
         private const string LevelWordFew = "уровня";
         private const string LevelWordMany = "уровней";
+        private const string EndlessRecordPrefix = "Рекорд: волна ";
+        private const string EndlessNoRecordSubtitle = "Волны без конца";
 
         private readonly ConfigsProviderService _configProviderService;
         private readonly LevelsProgressionService _levelsProgressionService;
+        private readonly EndlessRecordService _endlessRecordService;
         private readonly MainMenuPopupService _popupService;
 
         private readonly MainMenuPresentersFactory _presentersFactory;
@@ -41,6 +46,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             MainMenuPresentersFactory presentersFactory,
             ViewsFactory viewsFactory,
             LevelsProgressionService levelsProgressionService,
+            EndlessRecordService endlessRecordService,
             ConfigsProviderService configProviderService,
             MainMenuPopupService popupService,
             PlayBoardPopupView boardView,
@@ -49,6 +55,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             _presentersFactory = presentersFactory;
             _viewsFactory = viewsFactory;
             _levelsProgressionService = levelsProgressionService;
+            _endlessRecordService = endlessRecordService;
             _configProviderService = configProviderService;
             _popupService = popupService;
             _boardView = boardView;
@@ -71,6 +78,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
             string levelWord = RussianPlural.Select(levelsCount, LevelWordOne, LevelWordFew, LevelWordMany);
             _boardView.SetCampaignSubtitle($"{levelsCount} {levelWord}");
+            _boardView.SetEndlessSubtitle(GetEndlessSubtitle());
 
             _focusedTileIndex = GetFocusedTileIndex(levelsCount);
             _boardView.RefreshList();
@@ -167,6 +175,14 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             }
 
             return levelsCount;
+        }
+
+        private string GetEndlessSubtitle()
+        {
+            if (_endlessRecordService.HasRecord)
+                return EndlessRecordPrefix + _endlessRecordService.BestWave;
+
+            return EndlessNoRecordSubtitle;
         }
 
         private void ShowStep(PlayBoardSteps step)

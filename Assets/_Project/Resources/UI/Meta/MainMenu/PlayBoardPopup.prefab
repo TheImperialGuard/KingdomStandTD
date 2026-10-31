@@ -500,7 +500,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -3154,6 +3154,7 @@ MonoBehaviour:
   _campaignCard: {fileID: 6764239953028658722}
   _endlessCard: {fileID: 9068176425718739608}
   _campaignSubtitle: {fileID: 2900521498392189670}
+  _endlessSubtitle: {fileID: 4717123257070644070}
   _backButton: {fileID: 5404725620617682316}
   _list: {fileID: 7373696498867142563}
   _scrollRect: {fileID: 4679415558566451654}

@@ -32,6 +32,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
         [SerializeField] private PlayModeCardView _campaignCard;
         [SerializeField] private PlayModeCardView _endlessCard;
         [SerializeField] private TMP_Text _campaignSubtitle;
+        [SerializeField] private TMP_Text _endlessSubtitle;
         [SerializeField] private Button _backButton;
 
         [SerializeField] private LayoutElement _list;
@@ -72,6 +73,8 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
         }
 
         public void SetCampaignSubtitle(string subtitle) => _campaignSubtitle.text = subtitle;
+
+        public void SetEndlessSubtitle(string subtitle) => _endlessSubtitle.text = subtitle;
 
         public void ShowStep(PlayBoardSteps step)
         {

@@ -75,7 +75,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.EndlessResultPopup
 
         private void OnMenuClicked()
         {
-            _coroutinesPerformer.StartPerform(_sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu, new MainMenuInputArgs(Scenes.Gameplay)));
+            _coroutinesPerformer.StartPerform(
+                _sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu, MainMenuInputArgs.FromGameplay(_gameplayInputArgs)));
 
             OnCloseRequest();
         }
