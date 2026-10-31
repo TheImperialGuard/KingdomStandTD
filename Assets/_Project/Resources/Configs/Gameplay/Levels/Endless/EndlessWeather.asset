@@ -35,4 +35,14 @@ MonoBehaviour:
   - _from: 2
     _to: 1
   _transitionDuration: 4
+  _lightning:
+    _minInterval: 18
+    _maxInterval: 20
+    _roadStrikesShare: 0.6
+    _radius: 1.5
+    _baseDamage: 300
+    _damageType: 2
+    _strikeEffect: {fileID: 6282276373602371897, guid: 223a73c1cfdeac44182b55b52f147510, type: 3}
+    _flashIntensity: 0.6
+    _flashDuration: 0.45
   _rainPrefab: {fileID: 7124769979106573025, guid: aaa578878341e87498be65d86779a54d, type: 3}

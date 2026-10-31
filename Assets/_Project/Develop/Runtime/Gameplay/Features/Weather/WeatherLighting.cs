@@ -9,7 +9,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
 {
     // Свет погоды. На старте снимает свет каждой погоды: обычный — свет уровня, если он задан, иначе свет сцены;
     // пресет погоды — так, как его поставил бы LevelLightingService. Дальше ставит сцене свет, который задаёт сервис
-    // погоды. Пока свет не меняется, сцену не трогает.
+    // погоды, и вспышку молнии поверх него. Пока свет не меняется и вспышки нет, сцену не трогает.
     public class WeatherLighting : IInitializable
     {
         private readonly LevelLightingConfig _levelLighting;
@@ -21,6 +21,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
         private SceneLighting _current;
         private bool _isChanged;
 
+        private float _flashIntensity;
+        private float _flashDuration;
+        private float _flashRemainingTime;
+
         // levelLighting — свет уровня, null — у уровня свой свет не задан и горит свет сцены
         public WeatherLighting(LevelLightingConfig levelLighting, Light sun, WeatherConfig config)
         {
@@ -29,7 +33,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
             _config = config;
         }
 
-        // Свет, который сейчас стоит на сцене
+        // Свет, который сейчас стоит на сцене, без вспышки
         public SceneLighting Current => _current;
 
         public void Initialize()
@@ -54,14 +58,36 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
             _isChanged = true;
         }
 
+        // Солнце вспыхивает ярче на intensity и за duration секунд гаснет до обычного
+        public void Flash(float intensity, float duration)
+        {
+            _flashIntensity = intensity;
+            _flashDuration = duration;
+            _flashRemainingTime = duration;
+            _isChanged = true;
+        }
+
         public void Update(float deltaTime)
         {
-            if (_isChanged == false)
+            bool isFlashing = _flashRemainingTime > 0f;
+
+            if (isFlashing)
+                _flashRemainingTime = Mathf.Max(0f, _flashRemainingTime - deltaTime);
+
+            if (_isChanged == false && isFlashing == false)
                 return;
 
             _isChanged = false;
 
-            _current.ApplyTo(_sun);
+            _current.WithSunIntensity(_current.SunIntensity + GetFlashIntensity()).ApplyTo(_sun);
+        }
+
+        private float GetFlashIntensity()
+        {
+            if (_flashDuration <= 0f)
+                return 0f;
+
+            return _flashIntensity * _flashRemainingTime / _flashDuration;
         }
 
         // Свет пресета так, как его ставит LevelLightingService: гармоники окружения из градиента считает сам Unity

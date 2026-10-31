@@ -146,6 +146,9 @@ namespace Assets._Project.Develop.Editor.Weather
 
             CheckWeathers(config, issues);
 
+            if (config.Lightning.MinInterval > config.Lightning.MaxInterval)
+                issues.Add("Молнии: меньшая пауза между ударами больше большей");
+
             if (config.RainPrefab == null)
                 issues.Add("Не задан префаб дождя — бой с погодой не запустится");
 
@@ -169,6 +172,9 @@ namespace Assets._Project.Develop.Editor.Weather
 
                 if (HasNextWeather(config, weather.Kind) == false)
                     issues.Add($"После погоды {weather.Kind} сменить её не на что — она останется навсегда");
+
+                if (weather.HasLightning && config.Lightning.StrikeEffect == null)
+                    issues.Add($"У погоды {weather.Kind} молнии, а эффект удара не задан");
             }
         }
 

@@ -8,8 +8,8 @@ using UnityEngine;
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
 {
     // Погода боя. На старте ставит стартовую погоду сразу, без перехода. В начале каждой волны делает шаг
-    // последовательности погод; если погода сменилась — за время перехода плавно переводит к ней свет и силу дождя.
-    // Пока погода задана в редакторе принудительно, она не меняется.
+    // последовательности погод; если погода сменилась — за время перехода плавно переводит к ней свет и силу дождя, а
+    // молнии включает или выключает сразу. Пока погода задана в редакторе принудительно, она не меняется.
     public class WeatherService : IInitializable, IDisposable
     {
         private const float NoRain = 0f;
@@ -20,6 +20,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
         private readonly WeatherSequence _sequence;
         private readonly WeatherLighting _lighting;
         private readonly RainView _rainView;
+        private readonly LightningStrikesService _lightningStrikesService;
         private readonly StageProviderService _stageProviderService;
         private readonly bool _isWeatherForced;
 
@@ -40,6 +41,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
             WeatherSequence sequence,
             WeatherLighting lighting,
             RainView rainView,
+            LightningStrikesService lightningStrikesService,
             StageProviderService stageProviderService,
             bool isWeatherForced)
         {
@@ -47,6 +49,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
             _sequence = sequence;
             _lighting = lighting;
             _rainView = rainView;
+            _lightningStrikesService = lightningStrikesService;
             _stageProviderService = stageProviderService;
             _isWeatherForced = isWeatherForced;
         }
@@ -57,6 +60,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
 
             _lighting.Set(_lighting.GetLighting(_weather.Kind));
             SetRainIntensity(GetRainIntensity(_weather));
+            _lightningStrikesService.SetActive(_weather.HasLightning);
 
             _stageNumberDisposable = _stageProviderService.CurrentStageNumber.Subscribe(OnStageNumberChanged);
 
@@ -68,6 +72,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
             UpdateTransition(deltaTime);
 
             _lighting.Update(deltaTime);
+            _lightningStrikesService.Update(deltaTime);
         }
 
         public void Dispose()
@@ -98,6 +103,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
 
             _transitionElapsedTime = 0f;
             _isInTransition = true;
+
+            _lightningStrikesService.SetActive(weather.HasLightning);
         }
 
         private void UpdateTransition(float deltaTime)

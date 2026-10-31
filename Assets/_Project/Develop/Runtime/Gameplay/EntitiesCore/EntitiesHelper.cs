@@ -12,13 +12,20 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
     {
         public static bool TryTakeDamageFrom(Entity source, Entity target, float damage)
         {
-            if (target.TryGetTakeDamageRequest(out ReactiveEvent<float> takeDamageRequest) == false)
-                return false;
-
             if (IsSameTeam(source, target))
                 return false;
 
             if (source.TryGetInstantAttackDamageType(out ReactiveVariable<DamageTypes> damageType) == false)
+                return false;
+
+            return TryTakeDamage(target, damage, damageType.Value);
+        }
+
+        // Урон без сущности-источника, например от молнии: команда не сверяется, а сопротивление цели и предел урона
+        // по боссу — как у урона от сущности
+        public static bool TryTakeDamage(Entity target, float damage, DamageTypes damageType)
+        {
+            if (target.TryGetTakeDamageRequest(out ReactiveEvent<float> takeDamageRequest) == false)
                 return false;
 
             if (target.TryGetDamageResistanceType(out ReactiveVariable<DamageTypes> damageResistanceType) == false)
@@ -27,7 +34,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.EntitiesCore
             if (target.TryGetDamageResistanceIndex(out ReactiveVariable<float> damageResistanceIndex) == false)
                 return false;
 
-            float finalDamage = CalculateFinalDamage(damage, damageType.Value, damageResistanceType.Value, damageResistanceIndex.Value);
+            float finalDamage = CalculateFinalDamage(damage, damageType, damageResistanceType.Value, damageResistanceIndex.Value);
 
             if (target.TryGetComponent(out IsBoss isBoss))
                 finalDamage = GetDamageForBoss(finalDamage, target);

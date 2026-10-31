@@ -3,6 +3,7 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Weather;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.AOE;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
@@ -13,6 +14,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Weather;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
+using Assets._Project.Develop.Runtime.Utilities.ParticleEffects;
 using UnityEngine;
 using Random = System.Random;
 
@@ -56,6 +58,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             // Контейнер инициализирует в порядке регистраций: свет погод снимается раньше, чем сервис погоды поставит
             // стартовую погоду
             container.RegisterAsSingle(CreateWeatherLighting).NonLazy();
+
+            container.RegisterAsSingle(CreateLightningStrikesService);
 
             container.RegisterAsSingle(CreateWeatherService).NonLazy();
         }
@@ -126,6 +130,19 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private static WeatherLighting CreateWeatherLighting(DIContainer c)
             => new(c.Resolve<Level>().Lighting, RenderSettings.sun, GetWeatherConfig(c));
 
+        // Урон молнии растёт по волнам вместе со здоровьем врагов — по той же таблице множителя
+        private static LightningStrikesService CreateLightningStrikesService(DIContainer c)
+        {
+            return new LightningStrikesService(
+                GetWeatherConfig(c).Lightning,
+                c.Resolve<LevelPointsSampler>(),
+                c.Resolve<AreaDamageService>(),
+                c.Resolve<ParticleEffectsPool>(),
+                c.Resolve<WeatherLighting>(),
+                c.Resolve<StageProviderService>(),
+                GetConfig(c).HealthMultiplier);
+        }
+
         private static WeatherService CreateWeatherService(DIContainer c)
         {
             return new WeatherService(
@@ -133,6 +150,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<WeatherSequence>(),
                 c.Resolve<WeatherLighting>(),
                 c.Resolve<RainView>(),
+                c.Resolve<LightningStrikesService>(),
                 c.Resolve<StageProviderService>(),
                 GetForcedWeather().HasValue);
         }

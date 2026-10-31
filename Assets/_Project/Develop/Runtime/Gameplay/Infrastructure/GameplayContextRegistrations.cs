@@ -141,6 +141,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             container.RegisterAsSingle(CreateAreaEntitiesDetectorService);
 
+            container.RegisterAsSingle(CreateAreaDamageService);
+
+            container.RegisterAsSingle(CreateLevelPointsSampler);
+
             container.RegisterAsSingle(CreatePlayerInteractsService);
 
             container.RegisterAsSingle(CreateGameplayPopupService);
@@ -251,6 +255,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         {
             return new AreaEntitiesDetectorService(c.Resolve<CollidersRegistryService>());
         }
+
+        private static AreaDamageService CreateAreaDamageService(DIContainer c)
+            => new(c.Resolve<AreaEntitiesDetectorService>());
+
+        private static LevelPointsSampler CreateLevelPointsSampler(DIContainer c)
+            => new(c.Resolve<Level>());
 
         private static TimeScalePauseService CreateTimeScalePauseService(DIContainer c)
         {
