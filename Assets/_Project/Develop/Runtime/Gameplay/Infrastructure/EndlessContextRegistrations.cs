@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
+using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
@@ -23,6 +25,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateStagesSource);
 
             container.RegisterAsSingle(CreateLevelStagesContent);
+
+            container.RegisterAsSingle(CreateEnemiesOnFieldCounter);
+
+            container.RegisterAsSingle(CreateEndlessSkipStageCondition);
 
             container.RegisterAsSingle(CreateEndlessHealthMultiplierService).NonLazy();
         }
@@ -54,6 +60,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             return new LevelStagesContent(enemies, c.Resolve<EndlessWavesGenerator>().PathNumbers);
         }
+
+        private static EnemiesOnFieldCounter CreateEnemiesOnFieldCounter(DIContainer c)
+            => new(c.Resolve<EntitiesLifeContext>());
+
+        private static EndlessSkipStageCondition CreateEndlessSkipStageCondition(DIContainer c)
+            => new(c.Resolve<EnemiesOnFieldCounter>(), GetConfig(c));
 
         private static EndlessHealthMultiplierService CreateEndlessHealthMultiplierService(DIContainer c)
             => new(c.Resolve<WavesSpawner>(), c.Resolve<EndlessStagesSource>(), GetConfig(c));

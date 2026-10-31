@@ -5,7 +5,8 @@ using UnityEngine;
 namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless
 {
     // Правила бесконечного режима: уровень, на котором он идёт, и всё, из чего генератор собирает волны. Числа по волнам —
-    // таблицы ключей, состав — тиры врагов в порядке выхода на дорогу.
+    // таблицы ключей, состав — тиры врагов в порядке выхода на дорогу. Ещё — боссы, рост здоровья врагов и порог толпы,
+    // выше которого нельзя вызвать волну досрочно.
     [CreateAssetMenu(menuName = "Configs/Gameplay/Levels/NewEndlessModeConfig", fileName = "EndlessModeConfig")]
     public class EndlessModeConfig : ScriptableObject
     {
@@ -42,6 +43,9 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless
         [Tooltip("Множитель здоровья врагов из волн, в том числе боссов. Призванных врагов не касается")]
         [SerializeField] private WaveValueTable _healthMultiplier = new();
 
+        [Tooltip("Досрочный вызов волны закрыт, пока врагов на поле больше этого числа (призванные — в счёт)")]
+        [SerializeField, Min(0)] private int _maxEnemiesToSkipWave = 40;
+
         public LevelConfig Level => _level;
         public string Description => _description;
         public int Seed => _seed;
@@ -53,5 +57,6 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless
         public IReadOnlyList<MeleeConfig> Bosses => _bosses;
         public float BossWaveEnemiesShare => _bossWaveEnemiesShare;
         public WaveValueTable HealthMultiplier => _healthMultiplier;
+        public int MaxEnemiesToSkipWave => _maxEnemiesToSkipWave;
     }
 }

@@ -11,7 +11,7 @@ using UnityEngine;
 namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
 {
     // Общее у режимов игры: окно старта стейджей, поражение, когда у замка кончилось здоровье, и остановка боя в конце —
-    // после итога стейджи и спавн больше ничего не запускают. Условие победы задаёт наследник.
+    // после итога стейджи и спавн больше ничего не запускают. Условие победы и запрет досрочного вызова задаёт наследник.
     public abstract class GameModeBase : IGameMode
     {
         private ReactiveEvent<LevelResults> _end = new();
@@ -54,7 +54,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
             if (_isRunning == false)
                 return;
 
-            _stagesCycle.Update(deltaTime);
+            _stagesCycle.Update(deltaTime, CanSkipStage());
 
             OnUpdate(deltaTime);
         }
@@ -66,6 +66,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
             foreach (IDisposable disposable in _disposables)
                 disposable.Dispose();
         }
+
+        // Можно ли сейчас вызвать следующий стейдж досрочно, если стейдж это уже позволяет. Спрашивается каждый кадр
+        protected virtual bool CanSkipStage() => true;
 
         // Кадр идущего боя, после стейджей: здесь наследник проверяет своё условие победы
         protected virtual void OnUpdate(float deltaTime)

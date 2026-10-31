@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
@@ -34,7 +35,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.GameMode
                         _container.Resolve<StagesCycle>(),
                         _container.Resolve<WavesSpawner>(),
                         _container.Resolve<PlayerHealth>(),
-                        _container.Resolve<GameplayPopupService>());
+                        _container.Resolve<GameplayPopupService>(),
+                        _container.Resolve<EndlessSkipStageCondition>());
 
                 default:
                     throw new ArgumentException($"Not supported {nameof(mode)} game mode");

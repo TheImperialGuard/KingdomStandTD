@@ -20,6 +20,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
         private bool _isRunning;
 
+        // Стейдж дошёл до времени, с которого его можно пропустить; откроется ли окно вызова, решает ещё и режим
+        private bool _isStageSkipReached;
+
         private List<IDisposable> _disposables = new();
 
         public StagesCycle(
@@ -60,17 +63,22 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         public void Stop()
         {
             _isRunning = false;
+            _isStageSkipReached = false;
             _stageCanBeSkiped.Value = false;
 
             _stageProviderService.CleanupCurrent();
         }
 
-        public void Update(float deltaTime)
+        // Режим каждый кадр говорит, разрешает ли он досрочный вызов. Стейдж его уже открыл, а режим запретил — окно
+        // вызова закрывается; снова разрешил — открывается заново
+        public void Update(float deltaTime, bool isSkipAllowedByMode)
         {
             if (_isRunning == false)
                 return;
 
             _stageProviderService.UpdateCurrent(deltaTime);
+
+            UpdateStageCanBeSkiped(isSkipAllowedByMode);
         }
 
         public void Dispose()
@@ -92,7 +100,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
                 case StageResults.CanBeSkiped:
                     if (_stageProviderService.HasNextStage())
-                        OnStageCanBeSkiped();
+                        _isStageSkipReached = true;
                     break;
             }
         }
@@ -105,10 +113,22 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
                 OnCycleComplete();
         }
 
-        private void OnStageCanBeSkiped()
+        private void UpdateStageCanBeSkiped(bool isSkipAllowedByMode)
         {
-            _stageCanBeSkiped.Value = true;
+            bool canBeSkiped = _isStageSkipReached && isSkipAllowedByMode;
 
+            if (canBeSkiped == _stageCanBeSkiped.Value)
+                return;
+
+            // Открытое окно вызова закроется само, когда значение станет false
+            _stageCanBeSkiped.Value = canBeSkiped;
+
+            if (canBeSkiped)
+                OpenSkipStagePopup();
+        }
+
+        private void OpenSkipStagePopup()
+        {
             _gameplayPopupService.OpenSkipStagePopup();
 
             Debug.Log($"Текущий стейдж может быть пропущен");
@@ -116,6 +136,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
         public void SwitchStage()
         {
+            _isStageSkipReached = false;
             _stageCanBeSkiped.Value = false;
 
             _stageProviderService.SwitchToNext(out float remainingStageTime);
@@ -130,6 +151,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         private void OnCycleComplete()
         {
             _isRunning = false;
+            _isStageSkipReached = false;
             _stageCanBeSkiped.Value = false;
             _isCycleComplete.Value = true;
         }
