@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless
@@ -29,6 +30,15 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless
         [Tooltip("Передышка после выхода последнего врага волны до начала следующей, с")]
         [SerializeField] private WaveValueTable _restTime = new();
 
+        [Tooltip("Боссовая — каждая волна с номером, кратным шагу")]
+        [SerializeField, Min(1)] private int _bossWavesStep = 10;
+
+        [Tooltip("Боссы по кругу: на первой боссовой волне — первый, на второй — второй, после последнего — снова первый")]
+        [SerializeField] private List<MeleeConfig> _bosses = new();
+
+        [Tooltip("Сколько обычных врагов остаётся в боссовой волне — доля от волны того же номера")]
+        [SerializeField, Range(0f, 1f)] private float _bossWaveEnemiesShare = 0.5f;
+
         public LevelConfig Level => _level;
         public string Description => _description;
         public int Seed => _seed;
@@ -36,5 +46,8 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless
         public IReadOnlyList<EndlessTier> Tiers => _tiers;
         public WaveValueTable DelayBetweenSpawns => _delayBetweenSpawns;
         public WaveValueTable RestTime => _restTime;
+        public int BossWavesStep => _bossWavesStep;
+        public IReadOnlyList<MeleeConfig> Bosses => _bosses;
+        public float BossWaveEnemiesShare => _bossWaveEnemiesShare;
     }
 }

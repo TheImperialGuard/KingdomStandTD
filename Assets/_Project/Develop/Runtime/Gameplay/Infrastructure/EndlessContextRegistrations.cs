@@ -34,19 +34,20 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private static IStagesSource CreateStagesSource(DIContainer c)
             => c.Resolve<EndlessStagesSource>();
 
-        // Прогрев — все враги тиров (призываемых и снежки EnemiesPrewarmer добавит сам), превью — все дороги уровня
+        // Прогрев — все враги тиров и боссы (призываемых и снежки EnemiesPrewarmer добавит сам), превью — все дороги уровня
         private static LevelStagesContent CreateLevelStagesContent(DIContainer c)
         {
+            EndlessModeConfig config = GetConfig(c);
             List<CharacterConfig> enemies = new();
 
-            foreach (EndlessTier tier in GetConfig(c).Tiers)
+            foreach (EndlessTier tier in config.Tiers)
             {
                 foreach (EndlessTierEnemy tierEnemy in tier.Enemies)
-                {
-                    if (tierEnemy.EnemyConfig != null && enemies.Contains(tierEnemy.EnemyConfig) == false)
-                        enemies.Add(tierEnemy.EnemyConfig);
-                }
+                    AddDistinct(enemies, tierEnemy.EnemyConfig);
             }
+
+            foreach (MeleeConfig boss in config.Bosses)
+                AddDistinct(enemies, boss);
 
             return new LevelStagesContent(enemies, c.Resolve<EndlessWavesGenerator>().PathNumbers);
         }
@@ -62,6 +63,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             #else
                 return EndlessStagesSource.DefaultFirstWaveNumber;
             #endif
+        }
+
+        private static void AddDistinct(List<CharacterConfig> enemies, CharacterConfig enemy)
+        {
+            if (enemy != null && enemies.Contains(enemy) == false)
+                enemies.Add(enemy);
         }
     }
 }

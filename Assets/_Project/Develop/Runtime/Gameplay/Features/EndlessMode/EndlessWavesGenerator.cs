@@ -17,16 +17,24 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode
     // Число врагов волны делится между тирами по их долям методом наибольшего остатка; доля тира, у которого на этой
     // волне ещё нет открытых врагов, достаётся остальным пропорционально. Внутри тира — несколько случайных видов из
     // открытых. Каждая группа делится между всеми дорогами уровня; на дороге сначала идут слабые, потом сильнее — в
-    // порядке тиров. Волна длится, пока выходят враги самой длинной дороги, плюс передышка; досрочный вызов следующей
+    // порядке тиров. Волна длится, пока выходят враги самого позднего потока, плюс передышка; досрочный вызов следующей
     // открывается, когда вышел последний враг.
+    //
+    // Каждая волна с номером, кратным шагу боссов, — боссовая: обычных врагов в ней — доля от волны того же номера, а
+    // первым отдельным потоком выходит босс. Боссы идут по кругу, дорога босса меняется от босса к боссу; обычные враги
+    // на его дороге выходят через интервал после него.
     public class EndlessWavesGenerator
     {
+        public const int BossesInWave = 1;
+
         // Зерно волны — зерно конфига × множитель + номер волны: у разных зёрен волны не совпадают, пока номер меньше него
         private const int SeedMultiplier = 100003;
 
         private const float MinDelayBetweenSpawns = 0.1f;
         private const float MinRestTime = 0f;
         private const float StartDelay = 0f;
+
+        private const int NoPathIndex = -1;
 
         // Остаток, который уже дал врага, и вес, которому враги не положены, в дележе по наибольшему остатку
         private const double UsedRemainder = -1d;
@@ -56,7 +64,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode
         {
             Random random = new Random(unchecked(_config.Seed * SeedMultiplier + waveNumber));
 
-            int enemiesCount = Mathf.Max(0, Mathf.RoundToInt(_config.EnemiesCount.GetValue(waveNumber)));
+            bool hasBoss = TryGetBoss(waveNumber, out MeleeConfig boss);
+
+            float enemiesCountValue = _config.EnemiesCount.GetValue(waveNumber);
+
+            if (hasBoss)
+                enemiesCountValue *= _config.BossWaveEnemiesShare;
+
+            int enemiesCount = Mathf.Max(0, Mathf.RoundToInt(enemiesCountValue));
             float delayBetweenSpawns = Mathf.Max(MinDelayBetweenSpawns, _config.DelayBetweenSpawns.GetValue(waveNumber));
             float restTime = Mathf.Max(MinRestTime, _config.RestTime.GetValue(waveNumber));
 
@@ -64,7 +79,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode
             List<List<WaveEnemyGroup>> pathsGroups = SplitByPaths(groups);
 
             List<EnemiesWaveConfig> waves = new();
-            int longestPathEnemiesCount = 0;
+            int bossPathIndex = NoPathIndex;
+
+            if (hasBoss)
+            {
+                bossPathIndex = GetBossPathIndex(waveNumber);
+
+                List<WaveEnemyGroup> bossGroups = new() { new WaveEnemyGroup(boss, BossesInWave) };
+
+                waves.Add(new EnemiesWaveConfig(bossGroups, _pathNumbers[bossPathIndex], PathLane.Center, StartDelay, delayBetweenSpawns));
+            }
 
             for (int i = 0; i < _pathNumbers.Count; i++)
             {
@@ -73,15 +97,44 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode
                 if (pathGroups.Count == 0)
                     continue;
 
-                waves.Add(new EnemiesWaveConfig(pathGroups, _pathNumbers[i], PathLane.Center, StartDelay, delayBetweenSpawns));
+                // На дороге босса обычные враги выходят следом за ним, а не одновременно в той же точке
+                float startDelay = i == bossPathIndex ? delayBetweenSpawns : StartDelay;
 
-                longestPathEnemiesCount = Mathf.Max(longestPathEnemiesCount, CountEnemies(pathGroups));
+                waves.Add(new EnemiesWaveConfig(pathGroups, _pathNumbers[i], PathLane.Center, startDelay, delayBetweenSpawns));
             }
 
-            float spawnDuration = GetSpawnDuration(longestPathEnemiesCount, delayBetweenSpawns);
+            float spawnDuration = GetSpawnDuration(waves);
 
             return new EnemiesWavesStageConfig(waves, spawnDuration + restTime, spawnDuration);
         }
+
+        // Босс волны, если она боссовая: боссы идут по кругу, начиная с первого в списке
+        public bool TryGetBoss(int waveNumber, out MeleeConfig boss)
+        {
+            boss = null;
+
+            if (IsBossWave(waveNumber) == false)
+                return false;
+
+            IReadOnlyList<MeleeConfig> bosses = _config.Bosses;
+
+            boss = bosses[GetBossOrdinal(waveNumber) % bosses.Count];
+
+            return boss != null;
+        }
+
+        private bool IsBossWave(int waveNumber)
+        {
+            int bossWavesStep = _config.BossWavesStep;
+
+            return _config.Bosses.Count > 0 && bossWavesStep > 0 && waveNumber % bossWavesStep == 0;
+        }
+
+        // Порядковый номер боссовой волны с нуля: волна 10 — 0, волна 20 — 1
+        private int GetBossOrdinal(int waveNumber) => waveNumber / _config.BossWavesStep - 1;
+
+        // Дорога босса меняется от босса к боссу
+        private int GetBossPathIndex(int waveNumber) => GetBossOrdinal(waveNumber) % _pathNumbers.Count;
 
         // Группы волны в порядке тиров, по группе на каждый выбранный вид
         private List<WaveEnemyGroup> ComposeGroups(int waveNumber, int enemiesCount, Random random)
@@ -260,7 +313,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode
             return pathsGroups;
         }
 
-        private static int CountEnemies(List<WaveEnemyGroup> groups)
+        private static int CountEnemies(IReadOnlyList<WaveEnemyGroup> groups)
         {
             int count = 0;
 
@@ -270,13 +323,25 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode
             return count;
         }
 
-        // Первый враг дороги выходит сразу, каждый следующий — через интервал
-        private static float GetSpawnDuration(int pathEnemiesCount, float delayBetweenSpawns)
+        // Спавн волны идёт, пока не выйдет последний враг самого позднего потока: первый враг потока выходит после
+        // задержки старта, каждый следующий — через интервал
+        private static float GetSpawnDuration(List<EnemiesWaveConfig> waves)
         {
-            if (pathEnemiesCount == 0)
-                return 0f;
+            float spawnDuration = 0f;
 
-            return (pathEnemiesCount - 1) * delayBetweenSpawns;
+            foreach (EnemiesWaveConfig wave in waves)
+            {
+                int enemiesCount = CountEnemies(wave.EnemyGroups);
+
+                if (enemiesCount == 0)
+                    continue;
+
+                float waveSpawnDuration = wave.StartDelay + (enemiesCount - 1) * wave.DelayBetweenSpawns;
+
+                spawnDuration = Mathf.Max(spawnDuration, waveSpawnDuration);
+            }
+
+            return spawnDuration;
         }
     }
 }

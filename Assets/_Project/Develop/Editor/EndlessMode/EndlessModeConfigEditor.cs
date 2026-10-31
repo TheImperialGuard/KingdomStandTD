@@ -2,6 +2,7 @@
 using System.Linq;
 using Assets._Project.Develop.Editor.LevelEditor;
 using Assets._Project.Develop.Editor.LevelEditor.Window;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode;
@@ -34,7 +35,12 @@ namespace Assets._Project.Develop.Editor.EndlessMode
         private const float WaveColumnWidth = 44f;
         private const float CountColumnWidth = 52f;
         private const float TierColumnWidth = 64f;
+        private const float BossColumnWidth = 84f;
         private const float TimeColumnWidth = 60f;
+
+        // Состав делит с остальными столбцами то, что осталось от ширины инспектора; уже этого его не сжимать — таблица
+        // уйдёт в горизонтальную прокрутку
+        private const float CompositionColumnMinWidth = 180f;
         private const float CellPadding = 2f;
 
         private static readonly Color HeaderBackground = new(0f, 0f, 0f, 0.2f);
@@ -190,7 +196,9 @@ namespace Assets._Project.Develop.Editor.EndlessMode
             for (int waveNumber = FirstWaveNumber; waveNumber < FirstWaveNumber + _wavesCount; waveNumber++)
             {
                 EnemiesWavesStageConfig wave = generator.Generate(waveNumber);
-                EndlessWaveSummary summary = EndlessWaveSummary.Create(waveNumber, wave, config);
+                generator.TryGetBoss(waveNumber, out MeleeConfig boss);
+
+                EndlessWaveSummary summary = EndlessWaveSummary.Create(waveNumber, wave, boss, config);
 
                 _table.Add(CreateWaveRow(summary));
             }
@@ -220,6 +228,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
                 AddCell(row, tier.Name, TierColumnWidth);
 
             AddCompositionCell(row, "Состав");
+            AddCell(row, "Босс", BossColumnWidth);
             AddCell(row, "Спавн, с", TimeColumnWidth);
             AddCell(row, "Волна, с", TimeColumnWidth);
 
@@ -240,6 +249,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
                 AddCell(row, tierEnemiesCount.ToString(), TierColumnWidth);
 
             AddCompositionCell(row, summary.Composition);
+            AddCell(row, summary.BossName, BossColumnWidth);
             AddCell(row, summary.SpawnDuration.ToString(TimeFormat), TimeColumnWidth);
             AddCell(row, summary.WaveDuration.ToString(TimeFormat), TimeColumnWidth);
 
@@ -274,6 +284,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
 
             cell.style.flexGrow = 1;
             cell.style.flexShrink = 1;
+            cell.style.minWidth = CompositionColumnMinWidth;
             cell.style.whiteSpace = WhiteSpace.Normal;
             cell.style.paddingLeft = CellPadding;
             cell.style.paddingRight = CellPadding;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets._Project.Develop.Editor.LevelEditor;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.GameMode;
@@ -24,6 +25,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
             ValidateTable(config.DelayBetweenSpawns, DelayBetweenSpawnsTableName, issues);
             ValidateTable(config.RestTime, RestTimeTableName, issues);
             ValidateTiers(config, issues);
+            ValidateBosses(config, issues);
 
             return issues;
         }
@@ -88,6 +90,30 @@ namespace Assets._Project.Develop.Editor.EndlessMode
 
             if (tierEnemy.EnemyConfig.IsBoss)
                 issues.Add(LevelIssue.Warning($"{tierName}: {tierEnemy.EnemyConfig.name} — босс, он выйдет как обычный враг"));
+        }
+
+        private static void ValidateBosses(EndlessModeConfig config, List<LevelIssue> issues)
+        {
+            if (config.Bosses.Count == 0)
+            {
+                issues.Add(LevelIssue.Warning("Список боссов пуст: боссовых волн не будет"));
+                return;
+            }
+
+            foreach (MeleeConfig boss in config.Bosses)
+            {
+                if (boss == null)
+                {
+                    issues.Add(LevelIssue.Warning("Пустой элемент в списке боссов: его волна выйдет обычной"));
+                    continue;
+                }
+
+                if (boss.IsBoss == false)
+                {
+                    issues.Add(LevelIssue.Warning(
+                        $"{boss.name} в списке боссов — не босс: без полоски и музыки босса, вызов волны при нём открыт"));
+                }
+            }
         }
 
         private static void ValidateTable(WaveValueTable table, string tableName, List<LevelIssue> issues)
