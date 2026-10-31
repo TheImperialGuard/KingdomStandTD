@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Weather;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Weather
 {
     // Правила погоды боя: какие погоды бывают, сколько волн каждая идёт наверняка, с каким шансом потом сменяется и
-    // какая смена запрещена. Ещё — переход между погодами.
+    // какая смена запрещена. Ещё — переход между погодами и дождь.
     [CreateAssetMenu(menuName = "Configs/Gameplay/Weather/NewWeatherConfig", fileName = "WeatherConfig")]
     public class WeatherConfig : ScriptableObject
     {
@@ -26,11 +27,15 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Weather
         [Tooltip("За сколько секунд свет и дождь переходят от прежней погоды к новой")]
         [SerializeField, Min(0f)] private float _transitionDuration = 4f;
 
+        [Tooltip("Дождь над полем: капли, всплески и звук")]
+        [SerializeField] private RainView _rainPrefab;
+
         public WeatherKinds StartWeather => _startWeather;
         public IReadOnlyList<WeatherKindConfig> Weathers => _weathers;
         public float ChangeChance => _changeChance;
         public float ChangeChanceGrowth => _changeChanceGrowth;
         public float TransitionDuration => _transitionDuration;
+        public RainView RainPrefab => _rainPrefab;
 
         public bool HasWeather(WeatherKinds kind) => TryFindWeather(kind, out _);
 

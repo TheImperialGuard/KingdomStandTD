@@ -8,15 +8,18 @@ using UnityEngine;
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
 {
     // Погода боя. На старте ставит стартовую погоду сразу, без перехода. В начале каждой волны делает шаг
-    // последовательности погод; если погода сменилась — за время перехода плавно переводит к ней свет. Пока погода
-    // задана в редакторе принудительно, она не меняется.
+    // последовательности погод; если погода сменилась — за время перехода плавно переводит к ней свет и силу дождя.
+    // Пока погода задана в редакторе принудительно, она не меняется.
     public class WeatherService : IInitializable, IDisposable
     {
+        private const float NoRain = 0f;
+        private const float FullRain = 1f;
         private const float TransitionEnd = 1f;
 
         private readonly WeatherConfig _config;
         private readonly WeatherSequence _sequence;
         private readonly WeatherLighting _lighting;
+        private readonly RainView _rainView;
         private readonly StageProviderService _stageProviderService;
         private readonly bool _isWeatherForced;
 
@@ -25,6 +28,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
         private WeatherKindConfig _weather;
 
         private SceneLighting _fromLighting;
+        private float _fromRainIntensity;
+        private float _rainIntensity;
 
         private float _transitionElapsedTime;
         private bool _isInTransition;
@@ -34,12 +39,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
             WeatherConfig config,
             WeatherSequence sequence,
             WeatherLighting lighting,
+            RainView rainView,
             StageProviderService stageProviderService,
             bool isWeatherForced)
         {
             _config = config;
             _sequence = sequence;
             _lighting = lighting;
+            _rainView = rainView;
             _stageProviderService = stageProviderService;
             _isWeatherForced = isWeatherForced;
         }
@@ -49,6 +56,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
             _weather = _config.GetWeather(_sequence.Current);
 
             _lighting.Set(_lighting.GetLighting(_weather.Kind));
+            SetRainIntensity(GetRainIntensity(_weather));
 
             _stageNumberDisposable = _stageProviderService.CurrentStageNumber.Subscribe(OnStageNumberChanged);
 
@@ -80,12 +88,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
             Debug.Log($"Волна {newNumber}: погода сменилась на {_weather.Kind}");
         }
 
-        // Переход начинается с того света, что сейчас на сцене, даже если прошлый переход не закончился
+        // Переход начинается с того света и дождя, что сейчас на сцене, даже если прошлый переход не закончился
         private void StartTransition(WeatherKindConfig weather)
         {
             _weather = weather;
 
             _fromLighting = _lighting.Current;
+            _fromRainIntensity = _rainIntensity;
 
             _transitionElapsedTime = 0f;
             _isInTransition = true;
@@ -101,6 +110,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
             float progress = GetTransitionProgress();
 
             _lighting.Set(SceneLighting.Lerp(_fromLighting, _lighting.GetLighting(_weather.Kind), progress));
+            SetRainIntensity(Mathf.Lerp(_fromRainIntensity, GetRainIntensity(_weather), progress));
 
             if (progress >= TransitionEnd)
                 _isInTransition = false;
@@ -113,5 +123,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
 
             return Mathf.Clamp01(_transitionElapsedTime / _config.TransitionDuration);
         }
+
+        private void SetRainIntensity(float intensity)
+        {
+            _rainIntensity = intensity;
+            _rainView.SetIntensity(intensity);
+        }
+
+        private static float GetRainIntensity(WeatherKindConfig weather) => weather.HasRain ? FullRain : NoRain;
     }
 }

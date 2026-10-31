@@ -146,6 +146,9 @@ namespace Assets._Project.Develop.Editor.Weather
 
             CheckWeathers(config, issues);
 
+            if (config.RainPrefab == null)
+                issues.Add("Не задан префаб дождя — бой с погодой не запустится");
+
             return issues;
         }
 

@@ -51,6 +51,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         {
             container.RegisterAsSingle(CreateWeatherSequence);
 
+            container.RegisterAsSingle(CreateRainView);
+
             // Контейнер инициализирует в порядке регистраций: свет погод снимается раньше, чем сервис погоды поставит
             // стартовую погоду
             container.RegisterAsSingle(CreateWeatherLighting).NonLazy();
@@ -111,6 +113,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             return new WeatherSequence(config, new Random(), GetForcedWeather() ?? config.StartWeather);
         }
 
+        // Дождь — над серединой поля на высоте уровня; капли и всплески разнесены по высоте в самом префабе
+        private static RainView CreateRainView(DIContainer c)
+        {
+            Level level = c.Resolve<Level>();
+            Vector3 fieldCenter = level.FieldBounds.center;
+            Vector3 position = new(fieldCenter.x, level.transform.position.y, fieldCenter.z);
+
+            return GameObject.Instantiate(GetWeatherConfig(c).RainPrefab, position, Quaternion.identity);
+        }
+
         private static WeatherLighting CreateWeatherLighting(DIContainer c)
             => new(c.Resolve<Level>().Lighting, RenderSettings.sun, GetWeatherConfig(c));
 
@@ -120,6 +132,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 GetWeatherConfig(c),
                 c.Resolve<WeatherSequence>(),
                 c.Resolve<WeatherLighting>(),
+                c.Resolve<RainView>(),
                 c.Resolve<StageProviderService>(),
                 GetForcedWeather().HasValue);
         }

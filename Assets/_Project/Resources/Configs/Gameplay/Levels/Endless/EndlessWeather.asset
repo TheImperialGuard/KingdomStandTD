@@ -35,3 +35,4 @@ MonoBehaviour:
   - _from: 2
     _to: 1
   _transitionDuration: 4
+  _rainPrefab: {fileID: 7124769979106573025, guid: aaa578878341e87498be65d86779a54d, type: 3}
