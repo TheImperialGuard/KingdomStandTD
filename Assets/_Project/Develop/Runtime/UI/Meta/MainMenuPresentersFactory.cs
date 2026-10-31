@@ -1,10 +1,12 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
+﻿using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.Meta.Features.Settings;
 using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu;
+using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Endless;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Settings;
 using Assets._Project.Develop.Runtime.UI.Settings;
@@ -51,9 +53,19 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
                 _container.Resolve<ViewsFactory>(),
                 _container.Resolve<LevelsProgressionService>(),
                 _container.Resolve<ConfigsProviderService>(),
-                _container.Resolve<SceneSwitcherService>(),
+                _container.Resolve<MainMenuPopupService>(),
                 view,
                 startStep);
+        }
+
+        public EndlessModePopupPresenter CreateEndlessModePopupPresenter(EndlessModePopupView view)
+        {
+            return new EndlessModePopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                _container.Resolve<RayShooterService>(),
+                view,
+                _container.Resolve<SceneSwitcherService>(),
+                _container.Resolve<ConfigsProviderService>().GetConfig<EndlessModeConfig>());
         }
 
         public SettingsPopupPresenter CreateSettingsPopupPresenter(SettingsPopupView view)

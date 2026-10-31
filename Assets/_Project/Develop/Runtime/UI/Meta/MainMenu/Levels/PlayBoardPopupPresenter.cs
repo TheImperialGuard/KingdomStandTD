@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
-using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
+using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Endless;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
-using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 using Assets._Project.Develop.Runtime.Utilities.Text;
 
 namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 {
     // Доска «Играть»: шаг «Режим игры» и шаг «Кампания» со всеми уровнями и постоянной плиткой «В разработке» (Р-07).
-    // Карточка бесконечного режима пока сразу запускает его уровень; окно режима перед стартом — позже.
+    // Карточка бесконечного режима открывает поверх доски окно режима; окно закрывается вместе с доской.
     public class PlayBoardPopupPresenter : PopupPresenterBase, IMainMenuPanel
     {
         private const string LevelWordOne = "уровень";
@@ -22,8 +21,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
         private readonly ConfigsProviderService _configProviderService;
         private readonly LevelsProgressionService _levelsProgressionService;
-        private readonly SceneSwitcherService _sceneSwitcherService;
-        private readonly ICoroutinesPerformer _coroutinesPerformer;
+        private readonly MainMenuPopupService _popupService;
 
         private readonly MainMenuPresentersFactory _presentersFactory;
         private readonly ViewsFactory _viewsFactory;
@@ -35,6 +33,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
         private LevelTileView _inDevelopmentTile;
         private int _focusedTileIndex;
+        private EndlessModePopupPresenter _endlessModePopup;
 
         public PlayBoardPopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
@@ -43,7 +42,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             ViewsFactory viewsFactory,
             LevelsProgressionService levelsProgressionService,
             ConfigsProviderService configProviderService,
-            SceneSwitcherService sceneSwitcherService,
+            MainMenuPopupService popupService,
             PlayBoardPopupView boardView,
             PlayBoardSteps startStep) : base(coroutinesPerformer, rayShooterService)
         {
@@ -51,8 +50,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             _viewsFactory = viewsFactory;
             _levelsProgressionService = levelsProgressionService;
             _configProviderService = configProviderService;
-            _sceneSwitcherService = sceneSwitcherService;
-            _coroutinesPerformer = coroutinesPerformer;
+            _popupService = popupService;
             _boardView = boardView;
             _startStep = startStep;
         }
@@ -124,6 +122,10 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
             foreach (LevelTilePresenter levelTilePresenter in _levelTilePresenters)
                 levelTilePresenter.Unsubscribe();
+
+            // Доска закрывается по Esc или по другому пункту меню — окно режима над ней не остаётся
+            if (_endlessModePopup != null)
+                _popupService.ClosePopup(_endlessModePopup);
         }
 
         private void CreateLevelTile(int levelNumber)
@@ -179,9 +181,13 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
         private void OnEndlessClicked()
         {
-            _coroutinesPerformer
-                .StartPerform(_sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, GameplayInputArgs.ForEndless()));
+            if (_endlessModePopup != null)
+                return;
+
+            _endlessModePopup = _popupService.OpenEndlessModePopup(OnEndlessModePopupClosed);
         }
+
+        private void OnEndlessModePopupClosed() => _endlessModePopup = null;
 
         private void OnBackClicked() => ShowStep(PlayBoardSteps.Modes);
     }
