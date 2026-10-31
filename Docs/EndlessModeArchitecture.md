@@ -1,9 +1,9 @@
 # Бесконечный режим: устройство кода
 
 Схемы кода бесконечного режима: каркас — этап 2 плана «Бесконечный уровень», боссы, множитель здоровья, запрет
-досрочного вызова, музыка после босса и старт с волны N — этап 3 (раздел 5), погода — этап 4 (раздел 6). Окно режима и
-рекорд дописываются по ходу следующих этапов. Пути — от `Assets/_Project/Develop/`, имя файла
-совпадает с именем класса.
+досрочного вызова, музыка после босса и старт с волны N — этап 3 (раздел 5), погода — этап 4 (раздел 6), рекорд, окно
+итога и окно режима в меню — этап 5 (раздел 7). Пути — от `Assets/_Project/Develop/`, имя файла совпадает с именем
+класса.
 
 Схемы нарисованы в Mermaid: их рисуют предпросмотр Markdown в VS Code (расширение Markdown Preview Mermaid Support) и
 GitHub.
@@ -14,7 +14,7 @@ GitHub.
   режима по потоку на каждую дорогу уровня.
 
 Цвета на схемах — по отношению к коду до бесконечного режима; в разделе 5 — по отношению к коду этапа 2, в разделе 6 —
-к коду этапа 3:
+к коду этапа 3, в разделе 7 — к коду этапа 4:
 
 ```mermaid
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
@@ -260,7 +260,8 @@ sequenceDiagram
 ```
 
 Раньше таймер волны — корутина — после поражения доходил до конца и запускал следующую волну. Поражение срабатывает
-один раз: после итога падение здоровья замка ничего не делает.
+один раз: после итога падение здоровья замка ничего не делает. В бесконечном режиме вместо окна поражения открывается
+итог забега (раздел 7).
 
 ## 4. Генератор волн
 
@@ -673,7 +674,7 @@ flowchart LR
 ```
 
 Значение живёт в `EditorPrefs`, а не в ассете: его не закоммитить случайно, и раскладка сериализации конфига одна для
-редактора и сборки. Пока оно не 1, инспектор показывает предупреждение. Рекорд этапа 5 не пишется, если
+редактора и сборки. Пока оно не 1, инспектор показывает предупреждение. Рекорд (раздел 7) не пишется, если
 `FirstNumber` источника больше 1. У кампании `FirstNumber` всегда 1.
 
 ## 6. Погода — этап 4
@@ -889,7 +890,145 @@ Billboard, падают с высоты 14 м с наклоном), всплес
 предупреждение. Он же проверяет конфиг: стартовая и принудительная погода есть в списке, нет повторов, у каждой погоды
 есть на что смениться, задан префаб дождя и эффект удара.
 
-## 7. Инспектор конфига — только в редакторе
+## 7. Рекорд, окно итога, меню — этап 5
+
+Результат забега — волна, на которой он кончился, то же число, что в HUD. Рекорд — лучший результат, он лежит в
+`PlayerData`. Рекорд живёт в двух местах: сервис рекорда — в проектном контексте, его читают и меню, и бой; запись забега
+— только в сцене бесконечного уровня, её регистрирует `EndlessContextRegistrations`.
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
+flowchart LR
+    classDef new fill:#d4edda,stroke:#2e7d32,color:#1b1b1b
+    classDef changed fill:#fff3cd,stroke:#b7791f,color:#1b1b1b
+    classDef config fill:#dbe9f9,stroke:#2f6db3,color:#1b1b1b
+    classDef old fill:#ececec,stroke:#8a8a8a,color:#1b1b1b
+
+    subgraph PROJECT["Проектный контекст — вся сессия"]
+        direction TB
+        Record["EndlessRecordService<br/>BestWave · HasRecord · TryUpdate"]:::new
+        Provider["PlayerDataProvider"]:::old
+        Data[("PlayerData<br/>EndlessBestWave")]:::changed
+    end
+
+    subgraph BATTLE["Сцена бесконечного уровня"]
+        direction TB
+        Pause["PausePopupPresenter<br/>«Выйти» · «Заново»"]:::changed
+        Cycle["GameplayCycle<br/>ProcessLeave · поражение"]:::changed
+        Recorder["EndlessRunRecorder"]:::new
+        Stages["StageProviderService<br/>CurrentStageNumber"]:::old
+        Source["EndlessStagesSource<br/>FirstNumber"]:::old
+        Result["EndlessResultPopupPresenter<br/>окно итога"]:::new
+    end
+
+    subgraph MENU["Главное меню"]
+        direction TB
+        Board["PlayBoardPopupPresenter<br/>подпись карточки"]:::changed
+        ModeWindow["EndlessModePopupPresenter<br/>окно режима"]:::new
+    end
+
+    Config[("EndlessModeConfig.asset<br/>описание режима")]:::config
+
+    Pause --> Cycle --> Recorder
+    Stages -->|волна| Recorder
+    Source -->|первая волна| Recorder
+    Recorder -->|TryUpdate| Record
+    Recorder -.->|SaveAsync, если побит| Provider
+    Cycle -->|EndlessRunResult| Result
+    Record <-->|ReadFrom · WriteTo| Provider <--> Data
+    Record -->|рекорд| Board -->|щелчок по карточке| ModeWindow
+    Config -.-> ModeWindow
+```
+
+### Когда забег засчитывается
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "noteBkgColor": "#fff3cd", "noteTextColor": "#1b1b1b", "noteBorderColor": "#b7791f", "signalColor": "#8b949e", "signalTextColor": "#8b949e", "actorLineColor": "#8b949e", "labelBoxBkgColor": "#e8e1f7", "labelBoxBorderColor": "#6a4fb3", "labelTextColor": "#1b1b1b", "loopTextColor": "#8b949e", "sequenceNumberColor": "#ffffff"}}}%%
+sequenceDiagram
+    participant P as PausePopupPresenter
+    participant GM as GameModeBase
+    participant GC as GameplayCycle
+    participant R as EndlessRunRecorder
+    participant RS as EndlessRecordService
+    participant DP as PlayerDataProvider
+    participant UI as окно итога
+
+    alt замок пал
+        GM->>GC: End(Defeat)
+        GC->>R: Record()
+    else «Выйти» или «Заново» из паузы
+        P->>GC: ProcessLeave()
+        GC->>R: Record()
+    end
+    Note over R: засчитан, если не плейтест<br/>и FirstNumber = 1
+    R->>RS: TryUpdate(волна)
+    opt рекорд побит
+        R->>DP: SaveAsync
+    end
+    R-->>GC: EndlessRunResult
+    opt замок пал
+        GC->>UI: OpenEndlessResultPopup — вместо окна поражения
+    end
+    Note over P: после ProcessLeave пауза<br/>запускает переход на сцену
+```
+
+`ProcessLeave` у кампании ничего не делает: `GameplayCycle` решает по режиму уровня, а запись забега ему передают только
+регистрации бесконечного. «Заново» из окна итога забег второй раз не пишет — он засчитан при поражении; повторный
+`Record()` всё равно безопасен: та же волна рекорд не побьёт.
+
+На настоящих числах проверки в Play Mode (строка лога «Забег бесконечного режима: …»):
+
+| Забег | Волна | Засчитан | Рекорд после | Окно итога |
+|---|---|---|---|---|
+| поражение на волне 5, рекорда ещё нет | 5 | да | 5 | «Новый рекорд!» |
+| выход из паузы до старта волн | 0 | да | 5 | — |
+| старт с волны 10 в редакторе, выход из паузы | 13 | нет | 5 | — |
+| старт с волны 9 в редакторе | 9 | нет | 5 | — |
+
+### Сохранение при уходе со сцены
+
+Сохраняется только побитый рекорд: запись данных игрока на Яндекс Играх ограничена по частоте, сохранение каждую волну
+не годится. Уход со сцены сохранению не мешает: вся цепочка `SaveAsync` → `SaveLoadService.Save` → `IDataRepository.Write`
+синхронная — данные собираются у писателей, сериализуются и пишутся (`File.WriteAllText` или `YG2.SaveProgress`) в первом
+же шаге корутины, ещё до перехода. К тому же корутина идёт на исполнителе проекта (`DontDestroyOnLoad`).
+
+В редакторе с целевой платформой WebGL сохранения идут через `YGCloudDataRepository` — в файл
+`Assets/PluginYourGames/Editor/SavesEditorYG2.json`, а не в `Saves/PlayerData.json`.
+
+### Меню: окно режима, подпись карточки, возврат из боя
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
+flowchart TB
+    classDef new fill:#d4edda,stroke:#2e7d32,color:#1b1b1b
+    classDef changed fill:#fff3cd,stroke:#b7791f,color:#1b1b1b
+    classDef config fill:#dbe9f9,stroke:#2f6db3,color:#1b1b1b
+    classDef old fill:#ececec,stroke:#8a8a8a,color:#1b1b1b
+
+    Exit["окно итога · пауза"]:::changed
+    Args["MainMenuInputArgs.FromGameplay<br/>бесконечный → Modes, кампания → Campaign"]:::changed
+    Boot["MainMenuBootstrap.Run<br/>OpenPlayBoard(PlayBoardStep)"]:::changed
+    Board["PlayBoardPopupPresenter"]:::changed
+    Subtitle["подпись карточки<br/>«Рекорд: волна N» · «Волны без конца»"]:::changed
+    Popups["MainMenuPopupService<br/>OpenEndlessModePopup"]:::changed
+    Window["EndlessModePopupPresenter<br/>«Бесконечный режим», описание"]:::new
+    Config[("EndlessModeConfig.Description")]:::config
+    Battle["бой — GameplayInputArgs.ForEndless()"]:::old
+
+    Exit --> Args --> Boot --> Board
+    Board --> Subtitle
+    Board -->|щелчок по карточке| Popups --> Window
+    Config -.-> Window
+    Window -->|«Играть»| Battle
+    Window -->|«Назад»| Board
+```
+
+Окно режима открывается поверх доски, а не вместо неё: доска помнит открытое окно и закрывает его, когда закрывается
+сама — по Esc или по другому пункту меню. Окна режима и итога — временные, чисто функциональные, собраны из копии окна
+поражения: `Resources/UI/Meta/MainMenu/EndlessModePopup.prefab` и `Resources/UI/Gameplay/ResultPopup/EndlessResultPopup.prefab`.
+Вид по макету — пункты доски `endless-window` и `results`.
+
+## 8. Инспектор конфига — только в редакторе
 
 ```mermaid
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
@@ -922,7 +1061,7 @@ flowchart LR
   узком инспекторе таблица уходит в горизонтальную прокрутку. Число волн в таблице (по умолчанию 40) и старт с волны N
   хранятся в `EditorPrefs`, а не в ассете.
 
-## 8. Куда пристраиваются следующие этапы
+## 9. Куда пристраиваются следующие этапы
 
 ```mermaid
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
@@ -932,13 +1071,12 @@ flowchart LR
     classDef old fill:#ececec,stroke:#8a8a8a,color:#1b1b1b
     classDef future fill:#f6dff3,stroke:#9c3f91,color:#1b1b1b,stroke-dasharray:5 3
 
-    Record["Этап 5 · рекорд и окно итога"]:::future --> GameplayCycle["GameplayCycle"]:::old
-    Source["EndlessStagesSource.FirstNumber"]:::new -.->|старт с волны N — без рекорда| Record
     Slice["Этап 6 · плейтест бесконечного"]:::future
     Weather["WeatherService<br/>«Погода на старте» · «сменилась на»"]:::new -.->|строки погоды в лог плейтеста| Slice
+    Recorder["EndlessRunRecorder<br/>«Забег бесконечного режима: …»"]:::new -.->|в плейтесте рекорд не пишется — уже в коде| Slice
 ```
 
-## 9. Файлы
+## 10. Файлы
 
 ```mermaid
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e"}}}%%
@@ -957,6 +1095,16 @@ mindmap
       EndlessHealthMultiplierService
       EndlessSkipStageCondition
       EndlessModeEditorSettings
+      EndlessRunRecorder
+      EndlessRunResult
+    Runtime/Meta/Features/Endless
+      EndlessRecordService
+    Runtime/UI/Gameplay/EndlessResultPopup
+      EndlessResultPopupView
+      EndlessResultPopupPresenter
+    Runtime/UI/Meta/MainMenu/Endless
+      EndlessModePopupView
+      EndlessModePopupPresenter
     Runtime/Gameplay/Features/Enemies
       EnemiesOnFieldCounter
       ReturnBattleMusicAfterBossService
@@ -1033,3 +1181,16 @@ mindmap
 | `Runtime/Gameplay/Infrastructure/` | `EndlessContextRegistrations` | блок погоды, если она задана |
 | `Runtime/Gameplay/Infrastructure/` | `GameplayContextRegistrations` | общие `AreaDamageService` и `LevelPointsSampler` |
 | `Runtime/Gameplay/Infrastructure/` | `GameplayBootstrap` | апдейт погоды сразу за `GameplayCycle`, если она зарегистрирована |
+
+Изменённые на этапе 5:
+
+| Папка | Файл | Что изменилось |
+|---|---|---|
+| `Runtime/Utilities/DataManagment/` | `PlayerData` | поле `EndlessBestWave` |
+| `Runtime/Infrastructure/Boot/` | `ProjectContextRegistrations` | `EndlessRecordService` |
+| `Runtime/Gameplay/Infrastructure/` | `GameplayCycle` | `ProcessLeave`; итог забега вместо окна поражения |
+| `Runtime/Gameplay/Infrastructure/` | `EndlessContextRegistrations`, `GameplayContextRegistrations` | запись забега — только бесконечному |
+| `Runtime/Meta/Infrastructure/` | `MainMenuInputArgs`, `MainMenuBootstrap` | шаг доски «Играть» после боя |
+| `Runtime/UI/Gameplay/` | `GameplayPopupService`, `GameplayPresentersFactory`, `PausePopupPresenter` | окно итога; пауза засчитывает забег перед уходом |
+| `Runtime/UI/Meta/` | `MainMenuPopupService`, `MainMenuPresentersFactory`, `PlayBoardPopupPresenter`, `PlayBoardPopupView`, `MainMenuScreenPresenter` | окно режима; подпись карточки рекордом |
+| `Runtime/UI/Core/Views/` | `ViewIDs`, `ViewsFactory` | два окна и пути к их префабам |
