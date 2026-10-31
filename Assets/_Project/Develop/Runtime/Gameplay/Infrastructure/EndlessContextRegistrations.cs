@@ -6,14 +6,17 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 {
     // Регистрации сцены Gameplay, которые нужны только бесконечному уровню: волны собирает генератор по правилам
-    // EndlessModeConfig. GameplayContextRegistrations вызывает их вместо стейджей кампании.
+    // EndlessModeConfig, здоровье врагов растёт по волнам, досрочный вызов закрыт при боссе и толпе, после босса
+    // возвращается боевая музыка. GameplayContextRegistrations вызывает их вместо стейджей кампании.
     public static class EndlessContextRegistrations
     {
         public static void Process(DIContainer container)
@@ -31,6 +34,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateEndlessSkipStageCondition);
 
             container.RegisterAsSingle(CreateEndlessHealthMultiplierService).NonLazy();
+
+            container.RegisterAsSingle(CreateReturnBattleMusicAfterBossService).NonLazy();
         }
 
         private static EndlessWavesGenerator CreateEndlessWavesGenerator(DIContainer c)
@@ -69,6 +74,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static EndlessHealthMultiplierService CreateEndlessHealthMultiplierService(DIContainer c)
             => new(c.Resolve<WavesSpawner>(), c.Resolve<EndlessStagesSource>(), GetConfig(c));
+
+        private static ReturnBattleMusicAfterBossService CreateReturnBattleMusicAfterBossService(DIContainer c)
+        {
+            return new ReturnBattleMusicAfterBossService(
+                c.Resolve<MusicSwitcherService>(),
+                c.Resolve<EnemiesOnFieldCounter>(),
+                c.Resolve<PlayerHealth>());
+        }
 
         private static EndlessModeConfig GetConfig(DIContainer c)
             => c.Resolve<ConfigsProviderService>().GetConfig<EndlessModeConfig>();
