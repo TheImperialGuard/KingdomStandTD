@@ -4,6 +4,7 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay;
 using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Raycast;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.Meta.Features.Endless;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.Meta.Features.Settings;
 using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
@@ -58,6 +59,8 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
 
             container.RegisterAsSingle(CreateLevelsProgressionService).NonLazy();
+
+            container.RegisterAsSingle(CreateEndlessRecordService).NonLazy();
 
             container.RegisterAsSingle(CreateMusicSwitcherService);
 
@@ -169,6 +172,11 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
         private static LevelsProgressionService CreateLevelsProgressionService(DIContainer c)
         {
             return new LevelsProgressionService(c.Resolve<PlayerDataProvider>());
+        }
+
+        private static EndlessRecordService CreateEndlessRecordService(DIContainer c)
+        {
+            return new EndlessRecordService(c.Resolve<PlayerDataProvider>());
         }
 
         private static MusicSwitcherService CreateMusicSwitcherService(DIContainer c)

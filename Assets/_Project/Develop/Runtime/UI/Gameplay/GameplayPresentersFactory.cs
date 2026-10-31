@@ -3,6 +3,7 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore.EntitiesFactory;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.Abilities;
+using Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode;
 using Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
@@ -20,6 +21,7 @@ using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BossHealthBar;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
+using Assets._Project.Develop.Runtime.UI.Gameplay.EndlessResultPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.EnemyHealthBars;
 using Assets._Project.Develop.Runtime.UI.Gameplay.GoldWallet;
 using Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup;
@@ -222,6 +224,17 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _gameplayInputArgs);
         }
 
+        public EndlessResultPopupPresenter CreateEndlessResultPopupPresenter(EndlessResultPopupView view, EndlessRunResult runResult)
+        {
+            return new EndlessResultPopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                _container.Resolve<RayShooterService>(),
+                view,
+                _container.Resolve<SceneSwitcherService>(),
+                _gameplayInputArgs,
+                runResult);
+        }
+
         public PausePopupPresenter CreatePausePopupPresenter(PausePopupView view)
         {
             return new PausePopupPresenter(
@@ -232,7 +245,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<SceneSwitcherService>(),
                 _gameplayInputArgs,
                 this,
-                _container.Resolve<HotkeysService>());
+                _container.Resolve<HotkeysService>(),
+                _container.Resolve<GameplayCycle>());
         }
 
         public AudioSettingsPresenter CreateAudioSettingsPresenter(AudioSettingsView view)

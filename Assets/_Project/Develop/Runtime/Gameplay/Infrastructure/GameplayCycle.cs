@@ -1,4 +1,5 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
+﻿using Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
@@ -20,6 +21,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private readonly PlayerInteractsService _playerInteractsService;
         private MusicSwitcherService _musicSwitcherService;
         private GameplayPopupService _gameplayPopupService;
+        private readonly EndlessRunRecorder _endlessRunRecorder;
 
         private readonly GameModes _gameModeType;
         private readonly int _levelNumber;
@@ -38,7 +40,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             TowersPlaceholdersService towersPlaceholdersService,
             PlayerInteractsService playerInteractsService,
             MusicSwitcherService musicSwitcherService,
-            GameplayPopupService gameplayPopupService)
+            GameplayPopupService gameplayPopupService,
+            EndlessRunRecorder endlessRunRecorder)
         {
             _gameModesFactory = gameModesFactory;
             _coroutinesPerformer = coroutinesPerformer;
@@ -50,7 +53,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             _playerInteractsService = playerInteractsService;
             _musicSwitcherService = musicSwitcherService;
             _gameplayPopupService = gameplayPopupService;
+            _endlessRunRecorder = endlessRunRecorder;
         }
+
+        private bool IsEndless => _gameModeType == GameModes.Infinity;
 
         public void Prepare()
         {
@@ -68,6 +74,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         }
 
         public void Update(float deltaTime) => _gameMode?.Update(deltaTime);
+
+        // Игрок уходит с уровня посреди боя: выход в меню или «Заново» из паузы. Забег бесконечного режима засчитывается
+        public void ProcessLeave()
+        {
+            if (IsEndless)
+                _endlessRunRecorder.Record();
+        }
 
         public void Dispose() => _gameModeDisposable.Dispose();
 
@@ -98,6 +111,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private void ProcessDefeat()
         {
             _musicSwitcherService.SwitchFor(MusicContexts.GameplayDefeat, false);
+
+            // Бесконечный режим кончается только поражением: вместо окна поражения — итог забега
+            if (IsEndless)
+            {
+                _gameplayPopupService.OpenEndlessResultPopup(_endlessRunRecorder.Record());
+                return;
+            }
 
             _gameplayPopupService.OpenDefeatPopup();
         }

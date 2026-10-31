@@ -1,10 +1,12 @@
 ﻿using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode;
 using Assets._Project.Develop.Runtime.Gameplay.Features.PauseFeature;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
 using Assets._Project.Develop.Runtime.UI.Core.Popups;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BottomInfoPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.BuildTowerPopup;
+using Assets._Project.Develop.Runtime.UI.Gameplay.EndlessResultPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.ResultsPopup;
 using Assets._Project.Develop.Runtime.UI.Gameplay.SkipStagePopup;
@@ -148,6 +150,17 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
             DefeatPopupView view = ViewsFactory.Create<DefeatPopupView>(ViewIDs.DefeatPopup, PopupLayer);
 
             DefeatPopupPresenter presenter = _gameplayPresentersFactory.CreateDefeatPopupPresenter(view);
+
+            OnPopupCreated(presenter, view, closedCallback);
+
+            return presenter;
+        }
+
+        public EndlessResultPopupPresenter OpenEndlessResultPopup(EndlessRunResult runResult, Action closedCallback = null)
+        {
+            EndlessResultPopupView view = ViewsFactory.Create<EndlessResultPopupView>(ViewIDs.EndlessResultPopup, PopupLayer);
+
+            EndlessResultPopupPresenter presenter = _gameplayPresentersFactory.CreateEndlessResultPopupPresenter(view, runResult);
 
             OnPopupCreated(presenter, view, closedCallback);
 

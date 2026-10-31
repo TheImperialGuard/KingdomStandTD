@@ -12,8 +12,11 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Weather;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
+using Assets._Project.Develop.Runtime.Meta.Features.Endless;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
+using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
+using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
 using Assets._Project.Develop.Runtime.Utilities.ParticleEffects;
 using UnityEngine;
 using Random = System.Random;
@@ -22,8 +25,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 {
     // Регистрации сцены Gameplay, которые нужны только бесконечному уровню: волны собирает генератор по правилам
     // EndlessModeConfig, здоровье врагов растёт по волнам, досрочный вызов закрыт при боссе и толпе, после босса
-    // возвращается боевая музыка, погода меняется по волнам. GameplayContextRegistrations вызывает их вместо стейджей
-    // кампании.
+    // возвращается боевая музыка, забег засчитывается в рекорд, погода меняется по волнам. GameplayContextRegistrations
+    // вызывает их вместо стейджей кампании.
     public static class EndlessContextRegistrations
     {
         public static void Process(DIContainer container)
@@ -43,6 +46,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateEndlessHealthMultiplierService).NonLazy();
 
             container.RegisterAsSingle(CreateReturnBattleMusicAfterBossService).NonLazy();
+
+            container.RegisterAsSingle(CreateEndlessRunRecorder);
 
             // Погода — только если она задана в конфиге режима
             if (GetConfig(container).Weather != null)
@@ -107,6 +112,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<MusicSwitcherService>(),
                 c.Resolve<EnemiesOnFieldCounter>(),
                 c.Resolve<PlayerHealth>());
+        }
+
+        private static EndlessRunRecorder CreateEndlessRunRecorder(DIContainer c)
+        {
+            return new EndlessRunRecorder(
+                c.Resolve<StageProviderService>(),
+                c.Resolve<EndlessStagesSource>(),
+                c.Resolve<EndlessRecordService>(),
+                c.Resolve<PlayerDataProvider>(),
+                c.Resolve<ICoroutinesPerformer>());
         }
 
         // Погода не зависит от зерна волн: в каждом забеге своя

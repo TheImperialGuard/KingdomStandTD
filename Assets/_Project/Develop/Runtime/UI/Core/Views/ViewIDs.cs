@@ -14,6 +14,7 @@
         public const string BottomInfoPopup = nameof(BottomInfoPopup);
         public const string WinPopup = nameof(WinPopup);
         public const string DefeatPopup = nameof(DefeatPopup);
+        public const string EndlessResultPopup = nameof(EndlessResultPopup);
         public const string PausePopup = nameof(PausePopup);
         public const string SettingsPopup = nameof(SettingsPopup);
         public const string EncyclopediaPopup = nameof(EncyclopediaPopup);

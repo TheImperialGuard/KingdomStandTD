@@ -20,6 +20,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
         private readonly GameplayInputArgs _gameplayInputArgs;
         private readonly GameplayPresentersFactory _presentersFactory;
         private readonly HotkeysService _hotkeysService;
+        private readonly GameplayCycle _gameplayCycle;
 
         private AudioSettingsPresenter _audioSettingsPresenter;
         private IDisposable _closeRequestedDisposable;
@@ -32,7 +33,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
             SceneSwitcherService sceneSwitcherService,
             GameplayInputArgs gameplayInputArgs,
             GameplayPresentersFactory presentersFactory,
-            HotkeysService hotkeysService)
+            HotkeysService hotkeysService,
+            GameplayCycle gameplayCycle)
             : base(coroutinesPerformer, rayShooterService)
         {
             _popupView = popupView;
@@ -42,6 +44,7 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
             _gameplayInputArgs = gameplayInputArgs;
             _presentersFactory = presentersFactory;
             _hotkeysService = hotkeysService;
+            _gameplayCycle = gameplayCycle;
         }
 
         protected override PopupViewBase PopupView => _popupView;
@@ -110,15 +113,22 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.PausePopup
 
         private void OnContinueClicked() => OnCloseRequest();
 
+        // Уход с уровня посреди боя: бесконечный режим засчитывает забег до перехода на другую сцену
         private void OnExitClicked()
         {
+            _gameplayCycle.ProcessLeave();
+
             _coroutinesPerformer.StartPerform(_sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu, new MainMenuInputArgs(Scenes.Gameplay)));
+
             OnCloseRequest();
         }
 
         private void OnRestartClicked()
         {
+            _gameplayCycle.ProcessLeave();
+
             _coroutinesPerformer.StartPerform(_sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, _gameplayInputArgs));
+
             OnCloseRequest();
         }
     }

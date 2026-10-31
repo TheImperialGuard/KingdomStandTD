@@ -10,6 +10,7 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.AbilitiesFeature.EnemyAb
 using Assets._Project.Develop.Runtime.Gameplay.Features.AI.Brains;
 using Assets._Project.Develop.Runtime.Gameplay.Features.AOE;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
+using Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode;
 using Assets._Project.Develop.Runtime.Gameplay.Features.GoldEarning;
 using Assets._Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Interactables;
@@ -248,7 +249,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<TowersPlaceholdersService>(),
                 c.Resolve<PlayerInteractsService>(),
                 c.Resolve<MusicSwitcherService>(),
-                c.Resolve<GameplayPopupService>());
+                c.Resolve<GameplayPopupService>(),
+                // Рекорд забега есть только у бесконечного уровня
+                _inputArgs.IsEndless ? c.Resolve<EndlessRunRecorder>() : null);
         }
 
         private static AreaEntitiesDetectorService CreateAreaEntitiesDetectorService(DIContainer c)
