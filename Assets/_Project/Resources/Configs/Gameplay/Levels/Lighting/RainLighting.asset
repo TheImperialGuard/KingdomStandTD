@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: RainLighting
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.LevelLightingConfig
   <SunColor>k__BackingField: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  <SunIntensity>k__BackingField: 0.85
+  <SunIntensity>k__BackingField: 0.7
   <SunRotation>k__BackingField: {x: 77.9, y: 330, z: 0}
   <SunShadowStrength>k__BackingField: 1
-  <AmbientSkyColor>k__BackingField: {r: 0.36862746, g: 0.45490196, b: 0.58431375, a: 1}
-  <AmbientEquatorColor>k__BackingField: {r: 0.43137255, g: 0.47843137, b: 0.54901963, a: 1}
-  <AmbientGroundColor>k__BackingField: {r: 0.38039216, g: 0.3647059, b: 0.34509805, a: 1}
+  <AmbientSkyColor>k__BackingField: {r: 0.31333336, g: 0.3866667, b: 0.4966667, a: 1}
+  <AmbientEquatorColor>k__BackingField: {r: 0.36666667, g: 0.40666667, b: 0.4666667, a: 1}
+  <AmbientGroundColor>k__BackingField: {r: 0.32333335, g: 0.31, b: 0.29333335, a: 1}

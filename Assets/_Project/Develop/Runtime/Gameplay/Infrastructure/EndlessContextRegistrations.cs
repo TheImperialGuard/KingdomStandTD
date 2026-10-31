@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Weather;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode;
@@ -8,15 +9,19 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Weather;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
+using UnityEngine;
+using Random = System.Random;
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 {
     // Регистрации сцены Gameplay, которые нужны только бесконечному уровню: волны собирает генератор по правилам
     // EndlessModeConfig, здоровье врагов растёт по волнам, досрочный вызов закрыт при боссе и толпе, после босса
-    // возвращается боевая музыка. GameplayContextRegistrations вызывает их вместо стейджей кампании.
+    // возвращается боевая музыка, погода меняется по волнам. GameplayContextRegistrations вызывает их вместо стейджей
+    // кампании.
     public static class EndlessContextRegistrations
     {
         public static void Process(DIContainer container)
@@ -36,6 +41,21 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateEndlessHealthMultiplierService).NonLazy();
 
             container.RegisterAsSingle(CreateReturnBattleMusicAfterBossService).NonLazy();
+
+            // Погода — только если она задана в конфиге режима
+            if (GetConfig(container).Weather != null)
+                RegisterWeather(container);
+        }
+
+        private static void RegisterWeather(DIContainer container)
+        {
+            container.RegisterAsSingle(CreateWeatherSequence);
+
+            // Контейнер инициализирует в порядке регистраций: свет погод снимается раньше, чем сервис погоды поставит
+            // стартовую погоду
+            container.RegisterAsSingle(CreateWeatherLighting).NonLazy();
+
+            container.RegisterAsSingle(CreateWeatherService).NonLazy();
         }
 
         private static EndlessWavesGenerator CreateEndlessWavesGenerator(DIContainer c)
@@ -83,8 +103,31 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<PlayerHealth>());
         }
 
+        // Погода не зависит от зерна волн: в каждом забеге своя
+        private static WeatherSequence CreateWeatherSequence(DIContainer c)
+        {
+            WeatherConfig config = GetWeatherConfig(c);
+
+            return new WeatherSequence(config, new Random(), GetForcedWeather() ?? config.StartWeather);
+        }
+
+        private static WeatherLighting CreateWeatherLighting(DIContainer c)
+            => new(c.Resolve<Level>().Lighting, RenderSettings.sun, GetWeatherConfig(c));
+
+        private static WeatherService CreateWeatherService(DIContainer c)
+        {
+            return new WeatherService(
+                GetWeatherConfig(c),
+                c.Resolve<WeatherSequence>(),
+                c.Resolve<WeatherLighting>(),
+                c.Resolve<StageProviderService>(),
+                GetForcedWeather().HasValue);
+        }
+
         private static EndlessModeConfig GetConfig(DIContainer c)
             => c.Resolve<ConfigsProviderService>().GetConfig<EndlessModeConfig>();
+
+        private static WeatherConfig GetWeatherConfig(DIContainer c) => GetConfig(c).Weather;
 
         private static int GetFirstWaveNumber()
         {
@@ -93,6 +136,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
                 return EndlessModeEditorSettings.StartWaveNumber;
             #else
                 return EndlessStagesSource.DefaultFirstWaveNumber;
+            #endif
+        }
+
+        private static WeatherKinds? GetForcedWeather()
+        {
+            #if UNITY_EDITOR
+                // Принудительная погода — настройка инспектора WeatherConfig, только для проверок в редакторе
+                return EndlessModeEditorSettings.ForcedWeather;
+            #else
+                return null;
             #endif
         }
 

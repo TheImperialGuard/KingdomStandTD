@@ -116,3 +116,4 @@ MonoBehaviour:
     <TailMode>k__BackingField: 2
     <TailStep>k__BackingField: 0.04
   _maxEnemiesToSkipWave: 40
+  _weather: {fileID: 11400000, guid: b7766e31f04a8d646be970f46b99128b, type: 2}

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb84be375fb220d4dbd4a27a4da8f5f9, type: 3}
+  m_Name: EndlessWeather
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Weather.WeatherConfig
+  _startWeather: 0
+  _weathers:
+  - _kind: 0
+    _wavesCount: 3
+    _lighting: {fileID: 0}
+    _hasRain: 0
+    _hasLightning: 0
+  - _kind: 1
+    _wavesCount: 2
+    _lighting: {fileID: 0}
+    _hasRain: 1
+    _hasLightning: 0
+  - _kind: 2
+    _wavesCount: 2
+    _lighting: {fileID: 11400000, guid: b8ab3360a845f0249b042050e8ccf76c, type: 2}
+    _hasRain: 1
+    _hasLightning: 1
+  _changeChance: 0.25
+  _changeChanceGrowth: 0.15
+  _transitionBans:
+  - _from: 2
+    _to: 1
+  _transitionDuration: 4

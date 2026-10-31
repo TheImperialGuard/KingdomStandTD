@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Weather;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless
 {
     // Правила бесконечного режима: уровень, на котором он идёт, и всё, из чего генератор собирает волны. Числа по волнам —
-    // таблицы ключей, состав — тиры врагов в порядке выхода на дорогу. Ещё — боссы, рост здоровья врагов и порог толпы,
-    // выше которого нельзя вызвать волну досрочно.
+    // таблицы ключей, состав — тиры врагов в порядке выхода на дорогу. Ещё — боссы, рост здоровья врагов, порог толпы,
+    // выше которого нельзя вызвать волну досрочно, и погода.
     [CreateAssetMenu(menuName = "Configs/Gameplay/Levels/NewEndlessModeConfig", fileName = "EndlessModeConfig")]
     public class EndlessModeConfig : ScriptableObject
     {
@@ -46,6 +47,9 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless
         [Tooltip("Досрочный вызов волны закрыт, пока врагов на поле больше этого числа (призванные — в счёт)")]
         [SerializeField, Min(0)] private int _maxEnemiesToSkipWave = 40;
 
+        [Tooltip("Погода режима. Пусто — погоды нет, весь забег горит обычный свет уровня")]
+        [SerializeField] private WeatherConfig _weather;
+
         public LevelConfig Level => _level;
         public string Description => _description;
         public int Seed => _seed;
@@ -58,5 +62,6 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless
         public float BossWaveEnemiesShare => _bossWaveEnemiesShare;
         public WaveValueTable HealthMultiplier => _healthMultiplier;
         public int MaxEnemiesToSkipWave => _maxEnemiesToSkipWave;
+        public WeatherConfig Weather => _weather;
     }
 }

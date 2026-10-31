@@ -25,22 +25,28 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Level
             if (lighting == null)
                 return;
 
-            ApplySun(lighting);
+            Apply(lighting, _sun);
+        }
+
+        // Свет из конфига на сцену. Им же погода снимает свет своих пресетов
+        public static void Apply(LevelLightingConfig lighting, Light sun)
+        {
+            ApplySun(lighting, sun);
             ApplyAmbient(lighting);
         }
 
-        private void ApplySun(LevelLightingConfig lighting)
+        private static void ApplySun(LevelLightingConfig lighting, Light sun)
         {
-            if (_sun == null)
+            if (sun == null)
                 return;
 
-            _sun.color = lighting.SunColor;
-            _sun.intensity = lighting.SunIntensity;
-            _sun.transform.rotation = Quaternion.Euler(lighting.SunRotation);
-            _sun.shadowStrength = lighting.SunShadowStrength;
+            sun.color = lighting.SunColor;
+            sun.intensity = lighting.SunIntensity;
+            sun.transform.rotation = Quaternion.Euler(lighting.SunRotation);
+            sun.shadowStrength = lighting.SunShadowStrength;
         }
 
-        private void ApplyAmbient(LevelLightingConfig lighting)
+        private static void ApplyAmbient(LevelLightingConfig lighting)
         {
             RenderSettings.ambientMode = AmbientMode.Trilight;
             RenderSettings.ambientSkyColor = lighting.AmbientSkyColor;
