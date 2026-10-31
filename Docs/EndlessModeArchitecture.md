@@ -1,7 +1,8 @@
 # Бесконечный режим: устройство кода
 
-Схемы кода бесконечного режима. Сейчас здесь каркас — этап 2 плана «Бесконечный уровень»; боссы, множитель здоровья,
-погода, окно режима и рекорд дописываются по ходу следующих этапов. Пути — от `Assets/_Project/Develop/`, имя файла
+Схемы кода бесконечного режима: каркас — этап 2 плана «Бесконечный уровень», боссы, множитель здоровья, запрет
+досрочного вызова, музыка после босса и старт с волны N — этап 3 (раздел 5). Погода, окно режима и рекорд дописываются по
+ходу следующих этапов. Пути — от `Assets/_Project/Develop/`, имя файла
 совпадает с именем класса.
 
 Схемы нарисованы в Mermaid: их рисуют предпросмотр Markdown в VS Code (расширение Markdown Preview Mermaid Support) и
@@ -12,7 +13,7 @@ GitHub.
 - **Поток** — `EnemiesWaveConfig` внутри волны: одна дорога, интервал между врагами, группы врагов. У волны бесконечного
   режима по потоку на каждую дорогу уровня.
 
-Цвета на схемах:
+Цвета на схемах — по отношению к коду до бесконечного режима; в разделе 5 — по отношению к коду этапа 2:
 
 ```mermaid
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
@@ -142,6 +143,7 @@ classDiagram
         <<abstract>>
         Start()
         Update(deltaTime)
+        #CanSkipStage() bool
         #OnUpdate(deltaTime)
         #ProcessEndGame(results)
     }
@@ -155,7 +157,7 @@ classDiagram
 
     note for GameModeBase "окно старта, поражение по здоровью замка,<br/>остановка боя в конце"
     note for BasicGameMode "победа: последний стейдж, спавн окончен, врагов нет"
-    note for EndlessGameMode "победы нет"
+    note for EndlessGameMode "победы нет; вызов закрыт при боссе или толпе"
 ```
 
 ```mermaid
@@ -175,6 +177,7 @@ classDiagram
     class IStagesSource {
         <<interface>>
         IsFinite
+        FirstNumber
         Count
         Has(N)
         Get(N)
@@ -407,6 +410,11 @@ classDiagram
         Tiers
         DelayBetweenSpawns
         RestTime
+        BossWavesStep
+        Bosses
+        BossWaveEnemiesShare
+        HealthMultiplier
+        MaxEnemiesToSkipWave
     }
 
     class EndlessTier {
@@ -435,7 +443,7 @@ classDiagram
 
     EndlessModeConfig "1" *-- "many" EndlessTier
     EndlessTier "1" *-- "many" EndlessTierEnemy
-    EndlessModeConfig ..> WaveValueTable : EnemiesCount, DelayBetweenSpawns, RestTime
+    EndlessModeConfig ..> WaveValueTable : EnemiesCount, DelayBetweenSpawns, RestTime, HealthMultiplier
     EndlessTier ..> WaveValueTable : Share
     WaveValueTable "1" *-- "many" WaveValueKey
 
@@ -445,7 +453,229 @@ classDiagram
 Классы конфигов лежат в `Runtime/Configs/Gameplay/Levels/Endless/`. Тиры идут в порядке выхода на дорогу: слабые,
 средние, сильные.
 
-## 5. Инспектор конфига — только в редакторе
+## 5. Боссы, рост здоровья, запрет вызова, музыка — этап 3
+
+Пять дополнений к каркасу. Каждое живёт в своём классе, а в общий код боя добавлены только точки подключения: событие
+спавна у `WavesSpawner`, разрешение режима у `StagesCycle`, номер первой волны у источника стейджей.
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
+flowchart LR
+    classDef new fill:#d4edda,stroke:#2e7d32,color:#1b1b1b
+    classDef changed fill:#fff3cd,stroke:#b7791f,color:#1b1b1b
+    classDef config fill:#dbe9f9,stroke:#2f6db3,color:#1b1b1b
+    classDef old fill:#ececec,stroke:#8a8a8a,color:#1b1b1b
+
+    Config[("EndlessModeConfig.asset<br/>боссы · множитель · порог")]:::config
+
+    Gen["EndlessWavesGenerator<br/>боссовая волна"]:::changed
+    Spawner["WavesSpawner<br/>событие EnemySpawned"]:::changed
+    Health["EndlessHealthMultiplierService"]:::new
+    Source["EndlessStagesSource<br/>FirstNumber · TryGetWaveNumber"]:::changed
+
+    Life["EntitiesLifeContext<br/>Added · Released"]:::old
+    Counter["EnemiesOnFieldCounter<br/>врагов и боссов на поле"]:::new
+    Skip["EndlessSkipStageCondition"]:::new
+    Mode["EndlessGameMode<br/>CanSkipStage()"]:::changed
+    Cycle["StagesCycle<br/>окно вызова"]:::changed
+    Music["ReturnBattleMusicAfterBossService"]:::new
+
+    Prefs["EndlessModeEditorSettings<br/>старт с волны N, только редактор"]:::new
+
+    Config -.-> Gen & Health & Skip
+    Spawner -->|враг и поток| Health -->|номер волны по потоку| Source
+    Life --> Counter --> Skip --> Mode -->|каждый кадр| Cycle
+    Counter -->|боссов стало 0| Music
+    Prefs -.->|первая волна| Source
+```
+
+Всё новое регистрирует `EndlessContextRegistrations`: в кампании этих классов нет, и она работает как раньше — режим
+кампании вызов не запрещает.
+
+### Боссовая волна — на примере волны 10
+
+Каждая волна с номером, кратным шагу (`BossWavesStep` = 10), — боссовая. Числа — из текущего чернового конфига.
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
+flowchart TB
+    classDef config fill:#dbe9f9,stroke:#2f6db3,color:#1b1b1b
+    classDef step fill:#e8e1f7,stroke:#6a4fb3,color:#1b1b1b
+    classDef out fill:#d4edda,stroke:#2e7d32,color:#1b1b1b
+
+    subgraph IN["EndlessModeConfig"]
+        direction LR
+        StepCfg["BossWavesStep 10"]:::config
+        Bosses["Bosses<br/>SkeletonBoss · Yeti · OrcChief"]:::config
+        Share["BossWaveEnemiesShare 0,5"]:::config
+    end
+
+    B0["0 · Боссовая ли волна<br/>10 mod 10 = 0 — да"]:::step
+    B1["1 · Порядковый номер босса<br/>10 / 10 − 1 = 0"]:::step
+    B2["2 · Кто и где<br/>босс 0 mod 3 = SkeletonBoss<br/>дорога 0 mod 2 = First"]:::step
+    B3["3 · Урезанная волна<br/>20 × 0,5 = 10 врагов<br/>по тирам 6 · 3 · 1, обычным порядком"]:::step
+    B4["4 · Потоки<br/>First: SkeletonBoss, старт 0 с<br/>First: 5 врагов, старт 1,2 с<br/>Second: 5 врагов, старт 0 с"]:::step
+    B5["5 · Время<br/>спавн = max(0; 1,2 + 4 × 1,2; 4 × 1,2) = 6 с<br/>волна = 6 + 12 = 18 с"]:::out
+
+    StepCfg --> B0
+    B0 --> B1 --> B2 --> B3 --> B4 --> B5
+    Bosses --> B2
+    Share --> B3
+```
+
+- **Босс** выходит первым отдельным потоком. Обычные враги на его дороге стартуют через один интервал, чтобы не
+  появиться в той же точке одновременно с ним, — как йети на Level_8.
+- **Время спавна** теперь считается по самому позднему потоку с учётом задержки старта: старт + (врагов − 1) × интервал.
+- **Боссы по кругу, дорога — по очереди.** `TryGetBoss(N)` открыт и для инспектора: таблица волн показывает босса
+  отдельным столбцом.
+
+| Волна | 10 | 20 | 30 | 40 | 50 | 60 |
+|---|---|---|---|---|---|---|
+| Босс | SkeletonBoss | Yeti | OrcChief | SkeletonBoss | Yeti | OrcChief |
+| Дорога | First | Second | First | Second | First | Second |
+| Обычных врагов | 10 из 20 | 12 из 24 | 12 из 24 | 12 из 24 | 12 из 24 | 12 из 24 |
+
+Боссы прогреваются вместе с врагами тиров: `EndlessContextRegistrations` добавляет их в `LevelStagesContent.Enemies`.
+
+### Множитель здоровья
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "noteBkgColor": "#fff3cd", "noteTextColor": "#1b1b1b", "noteBorderColor": "#b7791f", "signalColor": "#8b949e", "signalTextColor": "#8b949e", "actorLineColor": "#8b949e", "labelBoxBkgColor": "#e8e1f7", "labelBoxBorderColor": "#6a4fb3", "labelTextColor": "#1b1b1b", "loopTextColor": "#8b949e", "sequenceNumberColor": "#ffffff"}}}%%
+sequenceDiagram
+    autonumber
+    participant WS as WavesSpawner
+    participant HM as EndlessHealthMultiplierService
+    participant SRC as EndlessStagesSource
+    participant E as враг
+    participant PH as PlaytestHooks
+
+    WS->>E: EnemiesFactory.Create
+    WS->>HM: EnemySpawned(враг, поток)
+    HM->>SRC: TryGetWaveNumber(поток)
+    SRC-->>HM: N
+    HM->>E: MaxHealth × HealthMultiplier(N)<br/>CurrentHealth = MaxHealth
+    WS->>PH: NotifyEnemySpawned — только в редакторе
+    Note over WS,PH: лог плейтеста видит здоровье уже с множителем
+```
+
+- **Номер волны берётся по потоку**, а не по текущей волне: враги прошлых волн, которые ещё идут, остаются со своим
+  множителем.
+- **Призванные — без множителя.** `SummonOnAnimationEventSystem` зовёт `EnemiesFactory.Create` мимо спавнера, и события
+  о них нет.
+- **Проверено в бою** на волне 25: Barbarian 600 → 730, Skeleton 20 → 24,3, а призванный некромантом скелет — 20.
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"xyChart": {"backgroundColor": "transparent", "titleColor": "#8b949e", "xAxisLabelColor": "#8b949e", "xAxisTitleColor": "#8b949e", "xAxisTickColor": "#8b949e", "xAxisLineColor": "#8b949e", "yAxisLabelColor": "#8b949e", "yAxisTitleColor": "#8b949e", "yAxisTickColor": "#8b949e", "yAxisLineColor": "#8b949e", "plotColorPalette": "#5b8fd1"}}}}%%
+xychart-beta
+    title "Множитель здоровья: 1 до волны 20, дальше +4 % за волну"
+    x-axis "Волна" ["20", "25", "30", "35", "40", "45", "50", "55", "60"]
+    y-axis "Множитель" 0 --> 5
+    line [1, 1.22, 1.48, 1.8, 2.19, 2.67, 3.24, 3.95, 4.8]
+```
+
+Таблица `HealthMultiplier`: ключи 1 → 1, 20 → 1, хвост `Compound` с шагом 0,04 — значение волны 20 + k равно 1,04^k.
+
+### Запрет досрочного вызова
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
+flowchart LR
+    classDef new fill:#d4edda,stroke:#2e7d32,color:#1b1b1b
+    classDef changed fill:#fff3cd,stroke:#b7791f,color:#1b1b1b
+    classDef config fill:#dbe9f9,stroke:#2f6db3,color:#1b1b1b
+    classDef old fill:#ececec,stroke:#8a8a8a,color:#1b1b1b
+
+    Life["EntitiesLifeContext"]:::old
+    Counter["EnemiesOnFieldCounter<br/>EnemiesCount · BossesCount"]:::new
+    Skip["EndlessSkipStageCondition<br/>боссов 0 и врагов ≤ 40"]:::new
+    Mode["EndlessGameMode.CanSkipStage()"]:::changed
+    Base["GameModeBase.Update"]:::changed
+    Cycle["StagesCycle.Update(dt, разрешено)"]:::changed
+    Popup["SkipStagePopupPresenter<br/>закрывается на StageCanBeSkiped = false"]:::old
+
+    Life -->|Added +1 · Released −1| Counter --> Skip --> Mode --> Base --> Cycle -->|StageCanBeSkiped| Popup
+```
+
+- **Счётчик** считает врагов по `Added` и `Released`, без обхода всех сущностей каждый кадр. Враг — сущность от
+  `EnemiesFactory` (компонент `EnemyKind`), призванные тоже; снежки йети — снаряды команды врагов — в счёт не идут.
+  Умирающий враг на поле до освобождения сущности, поэтому босс держит запрет ещё 1–5 с после смерти, пока полоска
+  уходит.
+- **У кампании** `CanSkipStage()` всегда `true` — разрешение по умолчанию в `GameModeBase`.
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "noteBkgColor": "#fff3cd", "noteTextColor": "#1b1b1b", "noteBorderColor": "#b7791f", "labelBackgroundColor": "#e8ecf1"}}}%%
+stateDiagram-v2
+    direction LR
+    state "Рано: враги волны ещё выходят" as Early
+    state "Окно закрыто" as Closed
+    state "Окно открыто" as Open
+    [*] --> Early: волна началась
+    Early --> Closed: вышел последний враг,<br/>режим запрещает
+    Early --> Open: вышел последний враг,<br/>режим разрешает
+    Closed --> Open: режим снова разрешил —<br/>новое окно
+    Open --> Closed: режим запретил —<br/>окно закрылось само
+    Open --> [*]: вызов — следующая волна и золото
+    Closed --> [*]: время волны вышло — следующая волна
+```
+
+`StagesCycle` помнит, что стейдж уже позволил вызов, и каждый кадр сверяет это с разрешением режима. Каждое открытие —
+новое окно: счётчик щелчков с нуля, золото — по оставшемуся времени волны.
+
+### Боевая музыка после босса
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "noteBkgColor": "#fff3cd", "noteTextColor": "#1b1b1b", "noteBorderColor": "#b7791f", "signalColor": "#8b949e", "signalTextColor": "#8b949e", "actorLineColor": "#8b949e", "labelBoxBkgColor": "#e8e1f7", "labelBoxBorderColor": "#6a4fb3", "labelTextColor": "#1b1b1b", "loopTextColor": "#8b949e", "sequenceNumberColor": "#ffffff"}}}%%
+sequenceDiagram
+    participant LC as EntitiesLifeContext
+    participant SB as StartBossMusicService
+    participant DP as DealDamageToPlayerService
+    participant C as EnemiesOnFieldCounter
+    participant RM as ReturnBattleMusicAfterBossService
+    participant MS as MusicSwitcherService
+
+    LC->>SB: Added(босс)
+    SB->>MS: GameplayBossfight
+    Note over LC: босс погиб или дошёл до замка
+    LC->>DP: Released(босс) — урон замку, если дошёл
+    LC->>C: Released(босс)
+    C->>RM: BossesCount → 0
+    alt замок цел
+        RM->>MS: GameplayBattle
+    else замок пал
+        Note over RM: итог боя уже включил музыку поражения
+    end
+```
+
+Только в бесконечном режиме: сервис регистрирует `EndlessContextRegistrations`, `StartBossMusicService` не менялся.
+Бесконечный кончается только поражением, поэтому «конец игры» здесь — замок пал.
+
+### Старт с волны N — только в редакторе
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
+flowchart LR
+    classDef new fill:#d4edda,stroke:#2e7d32,color:#1b1b1b
+    classDef changed fill:#fff3cd,stroke:#b7791f,color:#1b1b1b
+    classDef config fill:#dbe9f9,stroke:#2f6db3,color:#1b1b1b
+    classDef old fill:#ececec,stroke:#8a8a8a,color:#1b1b1b
+
+    Inspector["EndlessModeConfigEditor<br/>поле «Старт с волны»"]:::changed
+    Prefs["EndlessModeEditorSettings<br/>EditorPrefs, файл под #if UNITY_EDITOR"]:::new
+    Reg["EndlessContextRegistrations"]:::changed
+    Source["EndlessStagesSource(генератор, N)<br/>FirstNumber = N"]:::changed
+    Provider["StageProviderService<br/>счёт с FirstNumber − 1"]:::changed
+    Hud["HUD — «Волна N»<br/>первая волна боя — N"]:::old
+
+    Inspector <--> Prefs
+    Reg -->|"редактор: StartWaveNumber<br/>сборка: 1"| Source --> Provider --> Hud
+    Prefs -.-> Reg
+```
+
+Значение живёт в `EditorPrefs`, а не в ассете: его не закоммитить случайно, и раскладка сериализации конфига одна для
+редактора и сборки. Пока оно не 1, инспектор показывает предупреждение. Рекорд этапа 5 не пишется, если
+`FirstNumber` источника больше 1. У кампании `FirstNumber` всегда 1.
+
+## 6. Инспектор конфига — только в редакторе
 
 ```mermaid
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
@@ -461,18 +691,24 @@ flowchart LR
     Prefab[("префаб уровня режима<br/>его дороги")]:::old
     LevelValidator["LevelValidator<br/>не проверяет стейджи у Infinity"]:::changed
 
+    Prefs["EndlessModeEditorSettings<br/>старт с волны N"]:::new
+
     Editor -->|1| Validator
     Editor -->|2 — если ошибок нет| Gen
     Prefab -.-> Gen
     Gen --> Summary
+    Editor <-->|поле «Старт с волны»| Prefs
 ```
 
 - **Замечания:** пустые таблицы, ключи не по возрастанию, нет уровня, префаба или дорог — ошибки, и тогда таблица волн
-  не строится. Режим уровня не `Infinity`, стейджи у уровня, пустой тир или элемент, босс в тире — предупреждения.
-- **Таблица:** волна, врагов, по тирам, состав (имена ассетов в порядке тиров), спавн, длительность. Число волн в
-  таблице (по умолчанию 40) хранится в `EditorPrefs`, а не в ассете.
+  не строится. Режим уровня не `Infinity`, стейджи у уровня, пустой тир или элемент, босс в тире, пустой список боссов,
+  пустой элемент в нём или «босс» без признака `IsBoss` — предупреждения.
+- **Таблица:** волна, врагов, по тирам, состав (имена ассетов в порядке тиров), босс, множитель здоровья, спавн,
+  длительность. Босс в число врагов и состав не входит — видно, насколько урезана волна. Состав не уже 180 точек: в
+  узком инспекторе таблица уходит в горизонтальную прокрутку. Число волн в таблице (по умолчанию 40) и старт с волны N
+  хранятся в `EditorPrefs`, а не в ассете.
 
-## 6. Куда пристраиваются следующие этапы
+## 7. Куда пристраиваются следующие этапы
 
 ```mermaid
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
@@ -482,16 +718,14 @@ flowchart LR
     classDef old fill:#ececec,stroke:#8a8a8a,color:#1b1b1b
     classDef future fill:#f6dff3,stroke:#9c3f91,color:#1b1b1b,stroke-dasharray:5 3
 
-    Bosses["Этап 3 · босс каждые 10 волн"]:::future --> Gen["EndlessWavesGenerator"]:::new
-    Spawner["WavesSpawner"]:::old -.->|событие спавна| Health["Этап 3 · множитель здоровья"]:::future
-    Health -->|номер волны врага| Source["EndlessStagesSource.TryGetWaveNumber"]:::new
-    Mode["EndlessGameMode"]:::new -.-> Skip["Этап 3 · запрет досрочного вызова"]:::future
-    Skip --> Cycle["StagesCycle"]:::changed
     Provider["StageProviderService.CurrentStageNumber"]:::changed -.->|начало волны| Weather["Этап 4 · погода"]:::future
+    Multiplier["EndlessModeConfig.HealthMultiplier"]:::new -.->|урон молнии| Weather
+    Prefs["EndlessModeEditorSettings"]:::new -.->|принудительная погода| Weather
     Record["Этап 5 · рекорд и окно итога"]:::future --> GameplayCycle["GameplayCycle"]:::old
+    Source["EndlessStagesSource.FirstNumber"]:::new -.->|старт с волны N — без рекорда| Record
 ```
 
-## 7. Файлы
+## 8. Файлы
 
 ```mermaid
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e"}}}%%
@@ -507,6 +741,12 @@ mindmap
     Runtime/Gameplay/Features/EndlessMode
       EndlessWavesGenerator
       EndlessStagesSource
+      EndlessHealthMultiplierService
+      EndlessSkipStageCondition
+      EndlessModeEditorSettings
+    Runtime/Gameplay/Features/Enemies
+      EnemiesOnFieldCounter
+      ReturnBattleMusicAfterBossService
     Runtime/Gameplay/Features/LevelStages
       IStagesSource
       FixedStagesSource
@@ -523,7 +763,7 @@ mindmap
       EndlessWaveSummary
 ```
 
-Новые файлы — на схеме выше. Изменённые:
+Новые файлы — на схеме выше. Изменённые на этапе 2:
 
 | Папка | Файл | Что изменилось |
 |---|---|---|
@@ -537,3 +777,15 @@ mindmap
 | `Runtime/UI/Meta/` | `PlayBoardPopupView`, `PlayBoardPopupPresenter`, `MainMenuPresentersFactory`, `LevelTilePresenter` | щелчок по карточке → бой |
 | `Runtime/Utilities/ConfigsManagment/` | `ResourcesConfigsLoader` | путь к `EndlessModeConfig` |
 | `Editor/LevelEditor/` | `LevelValidator`, `PlaytestSession` | уровень `Infinity` без стейджей; `ForCampaign` |
+
+Изменённые на этапе 3:
+
+| Папка | Файл | Что изменилось |
+|---|---|---|
+| `Runtime/Configs/Gameplay/Levels/Endless/` | `EndlessModeConfig` | боссы, доля боссовой волны, множитель здоровья, порог толпы |
+| `Runtime/Gameplay/Features/EndlessMode/` | `EndlessWavesGenerator`, `EndlessStagesSource` | боссовая волна, время по задержкам потоков; первая волна |
+| `Runtime/Gameplay/Features/LevelStages/` | `IStagesSource`, `FixedStagesSource`, `StageProviderService`, `StagesCycle` | `FirstNumber`; окно вызова по разрешению режима |
+| `Runtime/Gameplay/Features/SpawnFeature/` | `WavesSpawner` | событие `EnemySpawned` |
+| `Runtime/Gameplay/GameMode/` | `GameModeBase`, `EndlessGameMode`, `GameModesFactory` | `CanSkipStage()`; условие бесконечного |
+| `Runtime/Gameplay/Infrastructure/` | `EndlessContextRegistrations` | новые классы, боссы в прогреве, старт с волны N |
+| `Editor/EndlessMode/` | `EndlessModeConfigEditor`, `EndlessModeConfigValidator`, `EndlessWaveSummary` | старт с волны N; босс и множитель в таблице; проверка боссов |
