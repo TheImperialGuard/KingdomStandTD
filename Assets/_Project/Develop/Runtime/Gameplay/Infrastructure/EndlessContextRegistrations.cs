@@ -4,6 +4,7 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
 using Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
+using Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 
@@ -22,6 +23,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateStagesSource);
 
             container.RegisterAsSingle(CreateLevelStagesContent);
+
+            container.RegisterAsSingle(CreateEndlessHealthMultiplierService).NonLazy();
         }
 
         private static EndlessWavesGenerator CreateEndlessWavesGenerator(DIContainer c)
@@ -51,6 +54,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
             return new LevelStagesContent(enemies, c.Resolve<EndlessWavesGenerator>().PathNumbers);
         }
+
+        private static EndlessHealthMultiplierService CreateEndlessHealthMultiplierService(DIContainer c)
+            => new(c.Resolve<WavesSpawner>(), c.Resolve<EndlessStagesSource>(), GetConfig(c));
 
         private static EndlessModeConfig GetConfig(DIContainer c)
             => c.Resolve<ConfigsProviderService>().GetConfig<EndlessModeConfig>();

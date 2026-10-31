@@ -107,3 +107,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b54ea7a5567773d4fae8ed2eabc5ca3a, type: 2}
   - {fileID: 11400000, guid: 7b986777ae748f949a65c5063ce560f8, type: 2}
   _bossWaveEnemiesShare: 0.5
+  _healthMultiplier:
+    _keys:
+    - <Wave>k__BackingField: 1
+      <Value>k__BackingField: 1
+    - <Wave>k__BackingField: 20
+      <Value>k__BackingField: 1
+    <TailMode>k__BackingField: 2
+    <TailStep>k__BackingField: 0.04

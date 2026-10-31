@@ -22,6 +22,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
             IReadOnlyList<int> tiersEnemiesCounts,
             string composition,
             string bossName,
+            float healthMultiplier,
             float spawnDuration,
             float waveDuration)
         {
@@ -30,6 +31,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
             TiersEnemiesCounts = tiersEnemiesCounts;
             Composition = composition;
             BossName = bossName;
+            HealthMultiplier = healthMultiplier;
             SpawnDuration = spawnDuration;
             WaveDuration = waveDuration;
         }
@@ -39,6 +41,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
         public IReadOnlyList<int> TiersEnemiesCounts { get; }
         public string Composition { get; }
         public string BossName { get; }
+        public float HealthMultiplier { get; }
         public float SpawnDuration { get; }
         public float WaveDuration { get; }
 
@@ -90,6 +93,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
                 tiersEnemiesCounts,
                 composition,
                 bossName,
+                config.HealthMultiplier.GetValue(waveNumber),
                 wave.TimeToSkipStage,
                 wave.StageTime);
         }

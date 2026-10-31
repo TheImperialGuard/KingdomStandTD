@@ -19,6 +19,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
 {
     public class WavesSpawner : IDisposable
     {
+        // Враг из волны только что создан; поток — конфиг, по которому он вышел. Призванных врагов спавнер не создаёт,
+        // и о них события нет
+        public event Action<Entity, EnemiesWaveConfig> EnemySpawned;
+
         private readonly EnemiesFactory _enemiesFactory;
         private readonly TimerServiceFactory _timerServiceFactory;
         private readonly ICoroutinesPerformer _coroutinesPerformer;
@@ -99,11 +103,13 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
                 {
                     for (int i = 0; i < enemyGroup.Count; i++)
                     {
-                        SpawnEnemy(enemyGroup.EnemyConfig, waypoints, waypointsOffset);
+                        Entity enemy = SpawnEnemy(enemyGroup.EnemyConfig, waypoints, waypointsOffset);
+
+                        // Подписчики правят врага сразу, и лог плейтеста ниже видит его уже таким
+                        EnemySpawned?.Invoke(enemy, waveConfig);
 
                         #if UNITY_EDITOR
-                            // SpawnEnemy только что добавил врага в конец списка
-                            PlaytestHooks.NotifyEnemySpawned(_spawnedEnemies[_spawnedEnemies.Count - 1], enemyGroup.EnemyConfig, waveConfig);
+                            PlaytestHooks.NotifyEnemySpawned(enemy, enemyGroup.EnemyConfig, waveConfig);
                         #endif
 
                         spawnCooldownTimer.Restart();
@@ -126,7 +132,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
             throw new InvalidOperationException($"На уровне нет дороги с номером {number}");
         }
 
-        private void SpawnEnemy(CharacterConfig enemyConfig, IReadOnlyList<Waypoint> waypoints, Vector3 waypointsOffset)
+        private Entity SpawnEnemy(CharacterConfig enemyConfig, IReadOnlyList<Waypoint> waypoints, Vector3 waypointsOffset)
         {
             Vector3 spawnPos = waypoints.First().transform.position;
 
@@ -138,6 +144,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.SpawnFeature
             Entity enemy = _enemiesFactory.Create(spawnPos, enemyConfig, path, waypointsOffset);
 
             _spawnedEnemies.Add(enemy);
+
+            return enemy;
         }
 
         private void ClearSpawnProcesses()

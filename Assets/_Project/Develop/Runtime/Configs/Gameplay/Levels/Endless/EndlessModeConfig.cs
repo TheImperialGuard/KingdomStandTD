@@ -39,6 +39,9 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless
         [Tooltip("Сколько обычных врагов остаётся в боссовой волне — доля от волны того же номера")]
         [SerializeField, Range(0f, 1f)] private float _bossWaveEnemiesShare = 0.5f;
 
+        [Tooltip("Множитель здоровья врагов из волн, в том числе боссов. Призванных врагов не касается")]
+        [SerializeField] private WaveValueTable _healthMultiplier = new();
+
         public LevelConfig Level => _level;
         public string Description => _description;
         public int Seed => _seed;
@@ -49,5 +52,6 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless
         public int BossWavesStep => _bossWavesStep;
         public IReadOnlyList<MeleeConfig> Bosses => _bosses;
         public float BossWaveEnemiesShare => _bossWaveEnemiesShare;
+        public WaveValueTable HealthMultiplier => _healthMultiplier;
     }
 }

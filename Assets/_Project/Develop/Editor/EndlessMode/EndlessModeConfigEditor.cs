@@ -24,6 +24,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
         private const string ScriptProperty = "m_Script";
         private const string WavesCountPrefsKey = "KingdomStandTD.EndlessModeConfigEditor.WavesCount";
         private const string TimeFormat = "0.0";
+        private const string MultiplierFormat = "0.00";
         private const string IssuesSeparator = "\n";
 
         private const int FirstWaveNumber = 1;
@@ -36,6 +37,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
         private const float CountColumnWidth = 52f;
         private const float TierColumnWidth = 64f;
         private const float BossColumnWidth = 84f;
+        private const float MultiplierColumnWidth = 56f;
         private const float TimeColumnWidth = 60f;
 
         // Состав делит с остальными столбцами то, что осталось от ширины инспектора; уже этого его не сжимать — таблица
@@ -229,6 +231,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
 
             AddCompositionCell(row, "Состав");
             AddCell(row, "Босс", BossColumnWidth);
+            AddCell(row, "Здор. ×", MultiplierColumnWidth);
             AddCell(row, "Спавн, с", TimeColumnWidth);
             AddCell(row, "Волна, с", TimeColumnWidth);
 
@@ -250,6 +253,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
 
             AddCompositionCell(row, summary.Composition);
             AddCell(row, summary.BossName, BossColumnWidth);
+            AddCell(row, summary.HealthMultiplier.ToString(MultiplierFormat), MultiplierColumnWidth);
             AddCell(row, summary.SpawnDuration.ToString(TimeFormat), TimeColumnWidth);
             AddCell(row, summary.WaveDuration.ToString(TimeFormat), TimeColumnWidth);
 

@@ -14,6 +14,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
         private const string EnemiesCountTableName = "Число врагов";
         private const string DelayBetweenSpawnsTableName = "Интервал между врагами";
         private const string RestTimeTableName = "Передышка";
+        private const string HealthMultiplierTableName = "Множитель здоровья";
 
         // levelPrefab — префаб уровня режима, загруженный по его PrefabPath; null, если загрузить не удалось
         public static List<LevelIssue> Validate(EndlessModeConfig config, Level levelPrefab)
@@ -24,6 +25,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
             ValidateTable(config.EnemiesCount, EnemiesCountTableName, issues);
             ValidateTable(config.DelayBetweenSpawns, DelayBetweenSpawnsTableName, issues);
             ValidateTable(config.RestTime, RestTimeTableName, issues);
+            ValidateTable(config.HealthMultiplier, HealthMultiplierTableName, issues);
             ValidateTiers(config, issues);
             ValidateBosses(config, issues);
 
