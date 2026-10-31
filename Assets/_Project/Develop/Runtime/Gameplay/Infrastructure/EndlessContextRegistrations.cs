@@ -28,7 +28,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             => new(GetConfig(c), c.Resolve<Level>().RoadPaths);
 
         private static EndlessStagesSource CreateEndlessStagesSource(DIContainer c)
-            => new(c.Resolve<EndlessWavesGenerator>());
+            => new(c.Resolve<EndlessWavesGenerator>(), GetFirstWaveNumber());
 
         // StageProviderService получает тот же экземпляр, что зарегистрирован как EndlessStagesSource
         private static IStagesSource CreateStagesSource(DIContainer c)
@@ -53,5 +53,15 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static EndlessModeConfig GetConfig(DIContainer c)
             => c.Resolve<ConfigsProviderService>().GetConfig<EndlessModeConfig>();
+
+        private static int GetFirstWaveNumber()
+        {
+            #if UNITY_EDITOR
+                // Старт с волны N — настройка инспектора EndlessModeConfig, только для проверок в редакторе
+                return EndlessModeEditorSettings.StartWaveNumber;
+            #else
+                return EndlessStagesSource.DefaultFirstWaveNumber;
+            #endif
+        }
     }
 }

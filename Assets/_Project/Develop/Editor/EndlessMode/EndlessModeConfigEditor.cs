@@ -13,9 +13,10 @@ using UnityEngine.UIElements;
 
 namespace Assets._Project.Develop.Editor.EndlessMode
 {
-    // Инспектор EndlessModeConfig: поля конфига, итог проверки и таблица первых волн. Таблицу собирает тот же генератор,
-    // что и в игре, по дорогам префаба уровня режима, поэтому она показывает ровно те волны, что выйдут в бою.
-    // Пересчитывается при любой правке конфига; число волн в таблице — настройка этого инспектора, а не ассета.
+    // Инспектор EndlessModeConfig: поля конфига, настройки проверок в редакторе, итог проверки и таблица первых волн.
+    // Таблицу собирает тот же генератор, что и в игре, по дорогам префаба уровня режима, поэтому она показывает ровно те
+    // волны, что выйдут в бою. Пересчитывается при любой правке конфига; число волн в таблице и старт с волны N —
+    // настройки редактора в EditorPrefs, а не поля ассета.
     [CustomEditor(typeof(EndlessModeConfig))]
     public class EndlessModeConfigEditor : UnityEditor.Editor
     {
@@ -39,6 +40,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
         private static readonly Color HeaderBackground = new(0f, 0f, 0f, 0.2f);
         private static readonly Color EvenRowBackground = new(1f, 1f, 1f, 0.04f);
 
+        private HelpBox _startWaveBox;
         private HelpBox _issuesBox;
         private VisualElement _table;
         private int _wavesCount;
@@ -55,12 +57,36 @@ namespace Assets._Project.Develop.Editor.EndlessMode
             foreach (SerializedProperty property in EnumerateConfigProperties())
                 root.Add(new PropertyField(property));
 
+            root.Add(CreateEditorChecksSection());
             root.Add(CreateWavesSection());
             root.TrackSerializedObjectValue(serializedObject, _ => Refresh());
 
             Refresh();
 
             return root;
+        }
+
+        // Старт с волны N: значение в EditorPrefs, игра берёт его через EndlessModeEditorSettings
+        private VisualElement CreateEditorChecksSection()
+        {
+            VisualElement section = new();
+            section.style.marginTop = SectionMarginTop;
+
+            Label title = new("Проверки в редакторе");
+            title.style.unityFontStyleAndWeight = FontStyle.Bold;
+
+            IntegerField startWaveField = new("Старт с волны") { value = EndlessModeEditorSettings.StartWaveNumber };
+            startWaveField.RegisterValueChangedCallback(changeEvent => OnStartWaveChanged(startWaveField, changeEvent.newValue));
+
+            _startWaveBox = new HelpBox(string.Empty, HelpBoxMessageType.Warning);
+
+            section.Add(title);
+            section.Add(startWaveField);
+            section.Add(_startWaveBox);
+
+            UpdateStartWaveBox();
+
+            return section;
         }
 
         private VisualElement CreateWavesSection()
@@ -99,6 +125,29 @@ namespace Assets._Project.Develop.Editor.EndlessMode
 
                 yield return property.Copy();
             }
+        }
+
+        private void OnStartWaveChanged(IntegerField field, int waveNumber)
+        {
+            EndlessModeEditorSettings.StartWaveNumber = waveNumber;
+
+            int savedWaveNumber = EndlessModeEditorSettings.StartWaveNumber;
+
+            if (savedWaveNumber != waveNumber)
+                field.SetValueWithoutNotify(savedWaveNumber);
+
+            UpdateStartWaveBox();
+        }
+
+        // Предупреждение видно, только пока забег в редакторе начинается не с первой волны
+        private void UpdateStartWaveBox()
+        {
+            int startWaveNumber = EndlessModeEditorSettings.StartWaveNumber;
+            bool isChanged = startWaveNumber != EndlessStagesSource.DefaultFirstWaveNumber;
+
+            _startWaveBox.text = $"Забег в редакторе начнётся с волны {startWaveNumber}; рекорд такого забега не засчитывается. "
+                + "В сборке забег всегда начинается с первой волны";
+            _startWaveBox.style.display = isChanged ? DisplayStyle.Flex : DisplayStyle.None;
         }
 
         private void OnWavesCountChanged(IntegerField field, int wavesCount)

@@ -22,6 +22,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
         {
             _stagesFactory = stagesFactory;
             _stagesSource = stagesSource;
+
+            // Номер растёт при запуске каждого стейджа, и первым запустится первый стейдж источника
+            _currentStageNumber.Value = _stagesSource.FirstNumber - 1;
         }
 
         public IReadOnlyVariable<int> CurrentStageNumber => _currentStageNumber;

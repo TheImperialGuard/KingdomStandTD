@@ -17,6 +17,8 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages
 
         public bool IsFinite => true;
 
+        public int FirstNumber => FirstStageNumber;
+
         public int Count => _stagesConfigs.Count;
 
         public bool Has(int stageNumber) => stageNumber >= FirstStageNumber && stageNumber <= Count;
