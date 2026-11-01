@@ -2,7 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using Assets._Project.Develop.Editor.EndlessMode;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 using UnityEditor;
 using UnityEngine;
 
@@ -126,9 +128,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor
                 return $"Файл не найден: {fullPath}";
 
             string json = File.ReadAllText(fullPath);
-            LevelSliceImportResult result = isApplying
-                ? LevelSliceImporter.Import(config, json)
-                : LevelSliceImporter.Preview(config, json);
+            LevelSliceImportResult result = ImportSlice(config, json, isApplying);
 
             string importReport = DescribeImport(result, config, isApplying);
 
@@ -139,6 +139,15 @@ namespace Assets._Project.Develop.Editor.LevelEditor
             string exportReport = ExportAll();
 
             return importReport + exportReport;
+        }
+
+        // Срез бесконечного уровня импортирует настройки режима, а не стейджи: волны собирает генератор
+        private static LevelSliceImportResult ImportSlice(LevelConfig config, string json, bool isApplying)
+        {
+            if (config.GameMode == GameModes.Infinity)
+                return isApplying ? EndlessSliceImporter.Import(config, json) : EndlessSliceImporter.Preview(config, json);
+
+            return isApplying ? LevelSliceImporter.Import(config, json) : LevelSliceImporter.Preview(config, json);
         }
 
         private static string DescribeImport(LevelSliceImportResult result, LevelConfig config, bool isApplying)

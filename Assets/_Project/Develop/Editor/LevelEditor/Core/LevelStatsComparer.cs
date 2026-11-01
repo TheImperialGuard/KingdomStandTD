@@ -70,6 +70,23 @@ namespace Assets._Project.Develop.Editor.LevelEditor
             return changes;
         }
 
+        // Метрика по стейджам, которой нет в статистике, — например, здоровье врагов с множителем бесконечного режима.
+        public static List<string> CompareStageValues(string label, IReadOnlyList<float> before, IReadOnlyList<float> after)
+        {
+            List<string> changes = new();
+            int stagesCount = Math.Max(before.Count, after.Count);
+
+            for (int i = 0; i < stagesCount; i++)
+            {
+                float? beforeValue = i < before.Count ? before[i] : null;
+                float? afterValue = i < after.Count ? after[i] : null;
+
+                AddValueChange(changes, LevelAddress.Format(i), label, beforeValue, afterValue);
+            }
+
+            return changes;
+        }
+
         // Тип врага, которого нет с одной из сторон, считается с нулевым количеством.
         private static void AddCompositionChanges(
             List<string> changes,
@@ -112,14 +129,19 @@ namespace Assets._Project.Develop.Editor.LevelEditor
                 float? beforeValue = before != null ? read(before) : null;
                 float? afterValue = after != null ? read(after) : null;
 
-                if (IsSame(beforeValue, afterValue))
-                    continue;
-
-                string beforeText = ToText(beforeValue);
-                string afterText = ToText(afterValue);
-                string percentText = DescribePercent(beforeValue, afterValue);
-                changes.Add($"{address}: {label} {beforeText}{ARROW}{afterText}{percentText}");
+                AddValueChange(changes, address, label, beforeValue, afterValue);
             }
+        }
+
+        private static void AddValueChange(List<string> changes, string address, string label, float? beforeValue, float? afterValue)
+        {
+            if (IsSame(beforeValue, afterValue))
+                return;
+
+            string beforeText = ToText(beforeValue);
+            string afterText = ToText(afterValue);
+            string percentText = DescribePercent(beforeValue, afterValue);
+            changes.Add($"{address}: {label} {beforeText}{ARROW}{afterText}{percentText}");
         }
 
         private static bool IsSame(float? before, float? after)

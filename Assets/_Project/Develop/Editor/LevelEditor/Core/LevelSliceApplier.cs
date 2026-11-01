@@ -12,14 +12,20 @@ namespace Assets._Project.Develop.Editor.LevelEditor
     {
         public static void Apply(SerializedObject config, LevelSlice slice, IReadOnlyDictionary<string, CharacterConfig> enemies)
         {
-            SetInt(LevelConfigFields.FindRequired(config, LevelConfigFields.StartGold), slice.StartGold);
-            SetInt(LevelConfigFields.FindRequired(config, LevelConfigFields.StartPlayerHealth), slice.StartPlayerHealth);
+            ApplyEconomy(config, slice);
 
             SerializedProperty stages = LevelConfigFields.FindRequired(config, LevelConfigFields.STAGES);
             stages.arraySize = slice.Stages.Count;
 
             for (int i = 0; i < slice.Stages.Count; i++)
                 ApplyStage(stages.GetArrayElementAtIndex(i), slice.Stages[i], enemies);
+        }
+
+        // Стартовое золото и здоровье игрока — без стейджей: у бесконечного уровня стейджи среза не импортируются.
+        public static void ApplyEconomy(SerializedObject config, LevelSlice slice)
+        {
+            SetInt(LevelConfigFields.FindRequired(config, LevelConfigFields.StartGold), slice.StartGold);
+            SetInt(LevelConfigFields.FindRequired(config, LevelConfigFields.StartPlayerHealth), slice.StartPlayerHealth);
         }
 
         public static void ApplyStage(SerializedProperty stage, StageSlice stageSlice, IReadOnlyDictionary<string, CharacterConfig> enemies)
@@ -58,7 +64,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor
         }
 
         // Для enum intValue — числовое значение элемента, а не его индекс в списке имён.
-        private static void SetInt(SerializedProperty property, int value)
+        public static void SetInt(SerializedProperty property, int value)
         {
             if (property.intValue != value)
                 property.intValue = value;
@@ -66,13 +72,13 @@ namespace Assets._Project.Develop.Editor.LevelEditor
 
         // Значение, совпадающее после округления до трёх знаков, не перезаписывается:
         // в срезе числа округлены, а в ассете могут быть точнее.
-        private static void SetFloat(SerializedProperty property, float value)
+        public static void SetFloat(SerializedProperty property, float value)
         {
             if (LevelSliceNumbers.IsSame(property.floatValue, value) == false)
                 property.floatValue = value;
         }
 
-        private static void SetString(SerializedProperty property, string value)
+        public static void SetString(SerializedProperty property, string value)
         {
             string newValue = value ?? string.Empty;
 
@@ -80,7 +86,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor
                 property.stringValue = newValue;
         }
 
-        private static void SetObject(SerializedProperty property, CharacterConfig value)
+        public static void SetObject(SerializedProperty property, CharacterConfig value)
         {
             if (property.objectReferenceValue != value)
                 property.objectReferenceValue = value;
