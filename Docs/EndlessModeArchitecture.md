@@ -2,7 +2,7 @@
 
 Схемы кода бесконечного режима: каркас — этап 2 плана «Бесконечный уровень», боссы, множитель здоровья, запрет
 досрочного вызова, музыка после босса и старт с волны N — этап 3 (раздел 5), погода — этап 4 (раздел 6), рекорд, окно
-итога и окно режима в меню — этап 5 (раздел 7). Пути — от `Assets/_Project/Develop/`, имя файла совпадает с именем
+итога и окно режима в меню — этап 5 (раздел 7), срез, импорт и плейтест в редакторе — этап 6 (раздел 9). Пути — от `Assets/_Project/Develop/`, имя файла совпадает с именем
 класса.
 
 Схемы нарисованы в Mermaid: их рисуют предпросмотр Markdown в VS Code (расширение Markdown Preview Mermaid Support) и
@@ -14,7 +14,7 @@ GitHub.
   режима по потоку на каждую дорогу уровня.
 
 Цвета на схемах — по отношению к коду до бесконечного режима; в разделе 5 — по отношению к коду этапа 2, в разделе 6 —
-к коду этапа 3, в разделе 7 — к коду этапа 4:
+к коду этапа 3, в разделе 7 — к коду этапа 4, в разделе 9 — к коду этапа 5:
 
 ```mermaid
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
@@ -1061,20 +1061,168 @@ flowchart LR
   узком инспекторе таблица уходит в горизонтальную прокрутку. Число волн в таблице (по умолчанию 40) и старт с волны N
   хранятся в `EditorPrefs`, а не в ассете.
 
-## 9. Куда пристраиваются следующие этапы
+## 9. Срез, импорт и плейтест — этап 6, только в редакторе
+
+Инструменты баланса кампании — срез в `Docs/Balance/Levels`, импорт среза и плейтест из окна редактора уровней — теперь
+работают и с бесконечным уровнем. Своих стейджей у него нет, поэтому везде, где кампания берёт стейджи из `LevelConfig`,
+бесконечный берёт волны генератора — тот же код, что в бою. Цвета на схемах этого раздела — по отношению к коду этапа 5.
+
+### Срез
 
 ```mermaid
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
-flowchart LR
+flowchart TB
     classDef new fill:#d4edda,stroke:#2e7d32,color:#1b1b1b
     classDef changed fill:#fff3cd,stroke:#b7791f,color:#1b1b1b
+    classDef config fill:#dbe9f9,stroke:#2f6db3,color:#1b1b1b
     classDef old fill:#ececec,stroke:#8a8a8a,color:#1b1b1b
-    classDef future fill:#f6dff3,stroke:#9c3f91,color:#1b1b1b,stroke-dasharray:5 3
 
-    Slice["Этап 6 · плейтест бесконечного"]:::future
-    Weather["WeatherService<br/>«Погода на старте» · «сменилась на»"]:::new -.->|строки погоды в лог плейтеста| Slice
-    Recorder["EndlessRunRecorder<br/>«Забег бесконечного режима: …»"]:::new -.->|в плейтесте рекорд не пишется — уже в коде| Slice
+    Auto["LevelSliceAutoExporter<br/>+ EndlessModeConfig, WeatherConfig"]:::changed
+    Exporter["LevelSliceExporter.CreateSliceJson"]:::changed
+    Branch{"GameMode = Infinity?"}
+    Campaign["срез кампании — как раньше"]:::old
+    Serializer["EndlessSliceSerializer<br/>50 волн"]:::new
+
+    subgraph WAVES["EndlessEditorWaves"]
+        direction TB
+        Try["TryCreateGenerator<br/>валидатор режима → генератор"]:::new
+        Generate["Generate — волны 1…50"]:::new
+        Stats["CalculateStats"]:::new
+    end
+
+    Validator["EndlessModeConfigValidator"]:::old
+    Gen["EndlessWavesGenerator"]:::old
+    Calc["LevelStatsCalculator<br/>стейджи списком, без последнего"]:::changed
+    Slice["LevelSliceSerializer.CreateSlice<br/>стейджи списком"]:::changed
+    Summary["EndlessWaveSummary<br/>враги по тирам"]:::old
+    Json[("Docs/Balance/Levels/EndlessLevel.json")]:::config
+
+    Auto --> Exporter --> Branch
+    Branch -->|нет| Campaign
+    Branch -->|да| Serializer
+    Serializer --> Try --> Validator
+    Try --> Gen
+    Serializer --> Generate --> Gen
+    Serializer --> Stats --> Calc
+    Serializer --> Slice
+    Serializer -->|добавки к analysis| Summary
+    Serializer --> Json
 ```
+
+- **Формат тот же**, `LevelSlice`, и ещё два блока: `endless` — настройки режима, `weather` — справочно правила погоды и
+  молний (какие погоды могут прийти на смену каждой — по `WeatherConfig.CanFollow`). У остальных уровней этих блоков нет:
+  свойства не пишутся, когда они пусты.
+- **Волн — 50**, константа `SliceWavesCount`: срез лежит в git и должен выходить одинаковым на любой машине.
+- **Анализ** — тот же, что у стейджей кампании, но без последнего стейджа: скип есть у каждой волны, а пик последней
+  считается до прихода всех врагов. `maxSkipGold` — верхняя граница: при боссе или толпе вызов закрыт.
+- **Добавки** дописываются в конец блоков `analysis`: у волны — `healthMultiplier`, `healthWithMultiplier`, EHP с
+  множителем, `boss`, `enemiesByTier`; у потока — `healthWithMultiplier`; у среза — суммы с множителем.
+- **Ошибки конфига режима** — в `errors` среза; волн тогда нет, настройки остаются.
+
+На настоящих числах — черновые настройки, срез 01.11.2026:
+
+| Волна | Врагов | По тирам | Босс | HP | × | HP с множителем | Пик на поле | Золото к началу |
+|---|---|---|---|---|---|---|---|---|
+| 1 | 6 | 6 / 0 / 0 | — | 165 | 1 | 165 | 6 | 800 |
+| 10 | 11 | 6 / 3 / 1 | SkeletonBoss | 8970 | 1 | 8970 | 40 | 1935 |
+| 12 | 21 | 11 / 7 / 3 | — | 2215 | 1 | 2215 | 50 | 2375 |
+| 50 | 13 | 4 / 5 / 3 | Yeti | 2070 | 3,243 | 6713,8 | 61 | 14520 |
+
+### Импорт
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "noteBkgColor": "#fff3cd", "noteTextColor": "#1b1b1b", "noteBorderColor": "#b7791f", "signalColor": "#8b949e", "signalTextColor": "#8b949e", "actorLineColor": "#8b949e", "labelBoxBkgColor": "#e8e1f7", "labelBoxBorderColor": "#6a4fb3", "labelTextColor": "#1b1b1b", "loopTextColor": "#8b949e", "sequenceNumberColor": "#ffffff"}}}%%
+sequenceDiagram
+    participant C as LevelBalanceCommands
+    participant I as EndlessSliceImporter
+    participant A as EndlessSettingsApplier
+    participant W as EndlessEditorWaves
+    participant S as LevelStatsComparer
+
+    C->>I: Preview / Import — уровень Infinity
+    I->>I: разбор среза и блока endless, враги по имени, числа в допустимых пределах
+    I->>I: дифф — золото и здоровье (LevelSliceComparer), настройки (EndlessSettingsComparer)
+    I->>A: настройки — в копию EndlessModeConfig в памяти
+    I->>W: валидатор копии, 50 волн до и после
+    I->>S: Compare и CompareStageValues «HP с множителем»
+    opt Import, ошибок нет, изменения есть
+        I->>A: настройки — в ассет режима, золото и здоровье — в LevelConfig
+        Note over I: одна группа Undo «Импорт среза EndlessLevel»,<br/>сохраняются оба ассета
+    end
+```
+
+Импортируются `startGold`, `startPlayerHealth` и блок `endless`; волны среза и `weather` пропускаются. Дифф настроек —
+путь в блоке и значения, например `endless.healthMultiplier.keys[1].value: 1 → 1.5`. Множитель статистика уровня не видит —
+она считает здоровье по конфигам врагов, — поэтому «Анализ после правки» дополняют строки «Стейдж N: HP с множителем».
+
+### Плейтест
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f9", "primaryTextColor": "#1b1b1b", "primaryBorderColor": "#5b8fd1", "lineColor": "#8b949e", "textColor": "#8b949e", "edgeLabelBackground": "#e8ecf1", "clusterBkg": "rgba(139,148,158,0.10)", "clusterBorder": "#8b949e", "titleColor": "#8b949e"}}}%%
+flowchart TB
+    classDef new fill:#d4edda,stroke:#2e7d32,color:#1b1b1b
+    classDef changed fill:#fff3cd,stroke:#b7791f,color:#1b1b1b
+    classDef config fill:#dbe9f9,stroke:#2f6db3,color:#1b1b1b
+    classDef old fill:#ececec,stroke:#8a8a8a,color:#1b1b1b
+
+    subgraph EDITOR["Редактор"]
+        direction TB
+        Bar["PlaytestBar<br/>«Волна» · «▶ С волны N» · золото к её началу"]:::changed
+        Prefs["EndlessModeEditorSettings<br/>старт с волны N"]:::old
+        Launch["PlaytestLaunch<br/>IsEndless · индекс = волна − 1"]:::changed
+        Session["PlaytestSession<br/>ForEndless · GetStartWaveNumber"]:::changed
+        Log["PlaytestLogService<br/>стейджи из IStagesSource"]:::changed
+    end
+
+    Hooks["PlaytestHooks<br/>TryGetStartWaveNumber · NotifyWaveWeather · NotifyLightningStruck"]:::changed
+
+    subgraph GAME["Сцена бесконечного уровня"]
+        direction TB
+        Reg["EndlessContextRegistrations<br/>первая волна: плейтест → EditorPrefs"]:::changed
+        Source["EndlessStagesSource"]:::old
+        Weather["WeatherService<br/>погода каждой волны"]:::changed
+        Lightning["LightningStrikesService<br/>урон и задетые"]:::changed
+        Counter["EnemiesOnFieldCounter<br/>свой экземпляр у лога"]:::old
+    end
+
+    LogFile[("Logs/Playtests/…_EndlessLevel.json")]:::config
+
+    Bar <-->|поле «Волна»| Prefs
+    Bar --> Launch --> Session
+    Session -->|сессия| Hooks
+    Hooks -->|стартовая волна| Reg --> Source
+    Weather -->|NotifyWaveWeather| Hooks
+    Lightning -->|NotifyLightningStruck| Hooks
+    Hooks --> Session --> Log
+    Source -->|время и потоки волны| Log
+    Counter -->|пик врагов| Log
+    Log --> LogFile
+```
+
+- **Запуск.** «▶ Играть» — с волны 1, «▶ С волны N» — с волны из поля; поле и «Старт с волны» инспектора — одно значение
+  в `EditorPrefs`. Сессия отдаёт игре `ForEndless()`, а стартовую волну — через хук; в регистрациях она важнее значения
+  из инспектора. Копия уровня у бесконечного стейджей не теряет. С ошибками в конфиге режима запуск закрыт.
+- **Лог общий с кампанией.** Время стейджа и номера потоков берутся из `IStagesSource` сцены, а не из копии уровня;
+  потоки стейджа запоминаются, когда он открывается. Первый номер — следующий за `CurrentStageNumber`: у кампании это 1
+  копии, у бесконечного — волна N. Новое для обоих режимов: `peakEnemies` (свой `EnemiesOnFieldCounter` — с призванными
+  и умирающими), `maxHealth` врага (читается на спавне: `EnemySpawned` с множителем срабатывает раньше хука плейтеста),
+  `reachedStage`, `gameMode`.
+- **Только у бесконечного.** У волны — `healthMultiplier`, `weather` (приходит в начале каждой волны вместе с её номером,
+  поэтому порядок с открытием стейджа неважен), `lightning` (удары, задетые, урон до сопротивлений); у прогона —
+  `forcedWeather`, если погода задана в редакторе. `levelStagesCount` нет, снимок уровня — срез без волн.
+
+Проверка 01.11.2026 — старт с волны 9, поражение на 14-й, лог 24 КБ:
+
+| Волна | Время | Пик | × | Погода | Утечки | Здоровье: потеряно |
+|---|---|---|---|---|---|---|
+| 9 | 21,6 | 16 | 1 | Clear | 1 | 0 |
+| 10 | 18,0 | 16 | 1 | Clear | 2, в том числе SkeletonBoss (8000 HP, урон 20) | 0 |
+| 11 | 22,8 | 25 | 1 | Clear | 5 | 1 |
+| 12 | 24,0 | 32 | 1 | Clear | 0 | 5 |
+| 13 | 24,0 | 26 | 1 | Clear | 0 | 3 |
+| 14 | 4,5 — поражение | 22 | 1 | Storm | 0 | 11 |
+
+Утечки числятся за волной врага, а здоровье — за временем волны: босс 10-й волны дошёл до замка на 14-й.
 
 ## 10. Файлы
 
@@ -1139,6 +1287,12 @@ mindmap
       EndlessModeConfigEditor
       EndlessModeConfigValidator
       EndlessWaveSummary
+      EndlessEditorWaves
+      EndlessSliceSerializer
+      EndlessSliceTypes
+      EndlessSliceImporter
+      EndlessSettingsApplier
+      EndlessSettingsComparer
     Editor/Weather
       WeatherConfigEditor
 ```
@@ -1194,3 +1348,17 @@ mindmap
 | `Runtime/UI/Gameplay/` | `GameplayPopupService`, `GameplayPresentersFactory`, `PausePopupPresenter` | окно итога; пауза засчитывает забег перед уходом |
 | `Runtime/UI/Meta/` | `MainMenuPopupService`, `MainMenuPresentersFactory`, `PlayBoardPopupPresenter`, `PlayBoardPopupView`, `MainMenuScreenPresenter` | окно режима; подпись карточки рекордом |
 | `Runtime/UI/Core/Views/` | `ViewIDs`, `ViewsFactory` | два окна и пути к их префабам |
+
+Изменённые на этапе 6:
+
+| Папка | Файл | Что изменилось |
+|---|---|---|
+| `Runtime/Gameplay/Infrastructure/` | `IPlaytestSession`, `PlaytestHooks` | стартовая волна плейтеста, погода волны, удар молнии |
+| `Runtime/Gameplay/Infrastructure/` | `EndlessContextRegistrations` | первая волна плейтеста важнее старта с волны N |
+| `Runtime/Gameplay/Features/Weather/` | `WeatherService`, `LightningStrikesService` | хуки плейтеста под `#if UNITY_EDITOR` |
+| `Editor/LevelEditor/Core/` | `LevelStatsCalculator`, `LevelSliceSerializer` | стейджи списком, без последнего; `ToToken` |
+| `Editor/LevelEditor/Core/` | `LevelSliceTypes`, `LevelSliceExporter`, `LevelSliceAutoExporter` | блоки `endless` и `weather`; срез бесконечного; конфиги режима и погоды |
+| `Editor/LevelEditor/Core/` | `LevelBalanceCommands`, `LevelSliceApplier`, `LevelStatsComparer`, `LevelEditorAssets` | импорт бесконечного; `ApplyEconomy`; `CompareStageValues`; поиск конфига режима |
+| `Editor/LevelEditor/Playtest/` | `PlaytestLaunch`, `PlaytestLevelCopy`, `PlaytestSession`, `PlaytestLogService`, `PlaytestLogTypes` | бесконечный уровень в плейтесте; новые поля лога |
+| `Editor/LevelEditor/Window/` | `PlaytestBar`, `LevelEditorWindow.uxml`, `LevelEditorWindow.uss` | поле «Волна» и «▶ С волны N» |
+| `Editor/EndlessMode/` | `EndlessModeConfigEditor` | префаб уровня — через `EndlessEditorWaves` |
