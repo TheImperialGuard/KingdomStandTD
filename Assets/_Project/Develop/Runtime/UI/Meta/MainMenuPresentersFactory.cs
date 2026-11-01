@@ -55,19 +55,18 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
                 _container.Resolve<LevelsProgressionService>(),
                 _container.Resolve<EndlessRecordService>(),
                 _container.Resolve<ConfigsProviderService>(),
-                _container.Resolve<MainMenuPopupService>(),
                 view,
                 startStep);
         }
 
-        public EndlessModePopupPresenter CreateEndlessModePopupPresenter(EndlessModePopupView view)
+        public EndlessStepPresenter CreateEndlessStepPresenter(EndlessStepView view)
         {
-            return new EndlessModePopupPresenter(
-                _container.Resolve<ICoroutinesPerformer>(),
-                _container.Resolve<RayShooterService>(),
+            return new EndlessStepPresenter(
                 view,
+                _container.Resolve<ConfigsProviderService>().GetConfig<EndlessModeConfig>(),
+                _container.Resolve<EndlessRecordService>(),
                 _container.Resolve<SceneSwitcherService>(),
-                _container.Resolve<ConfigsProviderService>().GetConfig<EndlessModeConfig>());
+                _container.Resolve<ICoroutinesPerformer>());
         }
 
         public SettingsPopupPresenter CreateSettingsPopupPresenter(SettingsPopupView view)

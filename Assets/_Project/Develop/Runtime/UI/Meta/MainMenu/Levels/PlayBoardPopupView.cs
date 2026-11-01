@@ -1,12 +1,14 @@
 ﻿using System;
 using Assets._Project.Develop.Runtime.UI.CommonViews;
+using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Endless;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 {
-    // Доска «Играть» на цепях: шаги «Режим игры» и «Кампания» сменяют содержимое одной доски (Р-11). Ширину и верх задаёт
+    // Доска «Играть» на цепях: шаги «Режим игры», «Кампания» и «Бесконечный режим» сменяют содержимое одной доски (Р-11),
+    // ◀ обоих вложенных шагов ведёт к режимам. Ширину и верх задаёт
     // общий расчёт раскладки, сетку уровней и прокрутку доска считает сама по формулам макета (spec-menu.md → «Уровни»).
     // Числа — в px макета.
     public class PlayBoardPopupView : ChainBoardPopupView
@@ -29,11 +31,13 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
         [SerializeField] private GameObject _modesStep;
         [SerializeField] private GameObject _campaignStep;
+        [SerializeField] private EndlessStepView _endlessStep;
         [SerializeField] private PlayModeCardView _campaignCard;
         [SerializeField] private PlayModeCardView _endlessCard;
         [SerializeField] private TMP_Text _campaignSubtitle;
         [SerializeField] private TMP_Text _endlessSubtitle;
         [SerializeField] private Button _backButton;
+        [SerializeField] private Button _endlessBackButton;
 
         [SerializeField] private LayoutElement _list;
         [SerializeField] private ScrollRect _scrollRect;
@@ -50,6 +54,8 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
         public LevelTilesListView LevelTilesListView => _levelTilesListView;
 
+        public EndlessStepView EndlessStep => _endlessStep;
+
         private void OnEnable()
         {
             _campaignCard.Clicked += OnCampaignCardClicked;
@@ -59,6 +65,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             _endlessCard.HoverStarted += OnCardHoverStarted;
             _endlessCard.HoverEnded += OnCardHoverEnded;
             _backButton.onClick.AddListener(OnBackButtonClicked);
+            _endlessBackButton.onClick.AddListener(OnBackButtonClicked);
         }
 
         private void OnDisable()
@@ -70,6 +77,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             _endlessCard.HoverStarted -= OnCardHoverStarted;
             _endlessCard.HoverEnded -= OnCardHoverEnded;
             _backButton.onClick.RemoveListener(OnBackButtonClicked);
+            _endlessBackButton.onClick.RemoveListener(OnBackButtonClicked);
         }
 
         public void SetCampaignSubtitle(string subtitle) => _campaignSubtitle.text = subtitle;
@@ -80,6 +88,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
         {
             _modesStep.SetActive(step == PlayBoardSteps.Modes);
             _campaignStep.SetActive(step == PlayBoardSteps.Campaign);
+            _endlessStep.gameObject.SetActive(step == PlayBoardSteps.Endless);
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(Board);
         }

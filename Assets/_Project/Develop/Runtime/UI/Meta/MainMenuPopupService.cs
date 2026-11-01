@@ -1,6 +1,5 @@
 ﻿using System;
 using Assets._Project.Develop.Runtime.UI.Core.Views;
-using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Endless;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels;
 using Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Settings;
 using Assets._Project.Develop.Runtime.UI.ProjectContext;
@@ -34,17 +33,6 @@ namespace Assets._Project.Develop.Runtime.UI.Meta
             PlayBoardPopupView view = ViewsFactory.Create<PlayBoardPopupView>(ViewIDs.PlayBoardPopup, PopupLayer);
 
             PlayBoardPopupPresenter popup = _presentersFactory.CreatePlayBoardPopupPresenter(view, startStep);
-
-            OnPopupCreated(popup, view, closedCallback);
-
-            return popup;
-        }
-
-        public EndlessModePopupPresenter OpenEndlessModePopup(Action closedCallback = null)
-        {
-            EndlessModePopupView view = ViewsFactory.Create<EndlessModePopupView>(ViewIDs.EndlessModePopup, PopupLayer);
-
-            EndlessModePopupPresenter popup = _presentersFactory.CreateEndlessModePopupPresenter(view);
 
             OnPopupCreated(popup, view, closedCallback);
 

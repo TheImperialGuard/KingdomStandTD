@@ -14,8 +14,11 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless
         [Tooltip("Уровень режима: карта, стартовое золото, здоровье замка, лимиты улучшений. Его стейджи не используются")]
         [SerializeField] private LevelConfig _level;
 
-        [Tooltip("Описание режима для окна в главном меню")]
-        [SerializeField, TextArea(3, 12)] private string _description;
+        [Tooltip("Первый абзац описания режима в главном меню — цель, рядом с ним череп волны")]
+        [SerializeField, TextArea(2, 6)] private string _goal;
+
+        [Tooltip("Второй абзац описания режима в главном меню — совет, рядом с ним знак «!»")]
+        [SerializeField, TextArea(2, 6)] private string _advice;
 
         [Tooltip("Зерно случайности: вместе с номером волны задаёт её состав, так что волна N всегда одна и та же")]
         [SerializeField] private int _seed;
@@ -51,7 +54,8 @@ namespace Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless
         [SerializeField] private WeatherConfig _weather;
 
         public LevelConfig Level => _level;
-        public string Description => _description;
+        public string Goal => _goal;
+        public string Advice => _advice;
         public int Seed => _seed;
         public WaveValueTable EnemiesCount => _enemiesCount;
         public IReadOnlyList<EndlessTier> Tiers => _tiers;

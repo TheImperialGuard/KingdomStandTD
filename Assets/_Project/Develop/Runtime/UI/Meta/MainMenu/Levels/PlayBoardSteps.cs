@@ -4,5 +4,6 @@
     {
         Modes,
         Campaign,
+        Endless,
     }
 }

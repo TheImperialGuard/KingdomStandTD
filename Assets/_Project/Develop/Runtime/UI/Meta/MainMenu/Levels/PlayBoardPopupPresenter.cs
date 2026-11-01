@@ -12,9 +12,8 @@ using Assets._Project.Develop.Runtime.Utilities.Text;
 
 namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 {
-    // Доска «Играть»: шаг «Режим игры» и шаг «Кампания» со всеми уровнями и постоянной плиткой «В разработке» (Р-07).
-    // Карточка бесконечного режима открывает поверх доски окно режима и подписана рекордом; окно закрывается вместе с
-    // доской.
+    // Доска «Играть»: шаг «Режим игры», шаг «Кампания» со всеми уровнями и постоянной плиткой «В разработке» (Р-07) и шаг
+    // «Бесконечный режим» со своим дочерним презентером. Карточка бесконечного режима подписана рекордом.
     public class PlayBoardPopupPresenter : PopupPresenterBase, IMainMenuPanel
     {
         private const string LevelWordOne = "уровень";
@@ -26,7 +25,6 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
         private readonly ConfigsProviderService _configProviderService;
         private readonly LevelsProgressionService _levelsProgressionService;
         private readonly EndlessRecordService _endlessRecordService;
-        private readonly MainMenuPopupService _popupService;
 
         private readonly MainMenuPresentersFactory _presentersFactory;
         private readonly ViewsFactory _viewsFactory;
@@ -38,7 +36,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
         private LevelTileView _inDevelopmentTile;
         private int _focusedTileIndex;
-        private EndlessModePopupPresenter _endlessModePopup;
+        private EndlessStepPresenter _endlessStepPresenter;
 
         public PlayBoardPopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
@@ -48,7 +46,6 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             LevelsProgressionService levelsProgressionService,
             EndlessRecordService endlessRecordService,
             ConfigsProviderService configProviderService,
-            MainMenuPopupService popupService,
             PlayBoardPopupView boardView,
             PlayBoardSteps startStep) : base(coroutinesPerformer, rayShooterService)
         {
@@ -57,7 +54,6 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             _levelsProgressionService = levelsProgressionService;
             _endlessRecordService = endlessRecordService;
             _configProviderService = configProviderService;
-            _popupService = popupService;
             _boardView = boardView;
             _startStep = startStep;
         }
@@ -75,6 +71,9 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
                 CreateLevelTile(i + 1);
 
             CreateInDevelopmentTile();
+
+            _endlessStepPresenter = _presentersFactory.CreateEndlessStepPresenter(_boardView.EndlessStep);
+            _endlessStepPresenter.Initialize();
 
             string levelWord = RussianPlural.Select(levelsCount, LevelWordOne, LevelWordFew, LevelWordMany);
             _boardView.SetCampaignSubtitle($"{levelsCount} {levelWord}");
@@ -100,6 +99,8 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
             ReleaseTile(_inDevelopmentTile);
             _inDevelopmentTile = null;
+
+            _endlessStepPresenter.Dispose();
         }
 
         public void ApplyLayout(MainMenuLayout layout)
@@ -118,6 +119,8 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
             foreach (LevelTilePresenter levelTilePresenter in _levelTilePresenters)
                 levelTilePresenter.Subscribe();
+
+            _endlessStepPresenter.Subscribe();
         }
 
         protected override void OnPreHide()
@@ -131,9 +134,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
             foreach (LevelTilePresenter levelTilePresenter in _levelTilePresenters)
                 levelTilePresenter.Unsubscribe();
 
-            // Доска закрывается по Esc или по другому пункту меню — окно режима над ней не остаётся
-            if (_endlessModePopup != null)
-                _popupService.ClosePopup(_endlessModePopup);
+            _endlessStepPresenter.Unsubscribe();
         }
 
         private void CreateLevelTile(int levelNumber)
@@ -195,15 +196,7 @@ namespace Assets._Project.Develop.Runtime.UI.Meta.MainMenu.Levels
 
         private void OnCampaignClicked() => ShowStep(PlayBoardSteps.Campaign);
 
-        private void OnEndlessClicked()
-        {
-            if (_endlessModePopup != null)
-                return;
-
-            _endlessModePopup = _popupService.OpenEndlessModePopup(OnEndlessModePopupClosed);
-        }
-
-        private void OnEndlessModePopupClosed() => _endlessModePopup = null;
+        private void OnEndlessClicked() => ShowStep(PlayBoardSteps.Endless);
 
         private void OnBackClicked() => ShowStep(PlayBoardSteps.Modes);
     }
