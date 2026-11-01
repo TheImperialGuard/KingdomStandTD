@@ -86,3 +86,7 @@ crashlytics-build.properties
 # Local Claude skills and working docs
 /.claude/skills/
 /Docs/PerformanceAudit.md
+
+# Unity crash recovery scenes
+/[Aa]ssets/_Recovery/
+/[Aa]ssets/_Recovery.meta
