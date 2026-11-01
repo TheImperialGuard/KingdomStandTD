@@ -15,6 +15,48 @@ MonoBehaviour:
   _stages:
   - _enemiesWaveConfigs:
     - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: b54ea7a5567773d4fae8ed2eabc5ca3a, type: 2}
+        <Count>k__BackingField: 1
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 0
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 0
+      <DelayBetweenSpawns>k__BackingField: 1
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 30bd45e5488d52c428ca586473d434e1, type: 2}
+        <Count>k__BackingField: 1
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 46d121b34a2ad214c9e8e92d567bc452, type: 2}
+        <Count>k__BackingField: 1
+      _note: 
+      <PatternRepeats>k__BackingField: 3
+      <PathNumber>k__BackingField: 1
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 0
+      <DelayBetweenSpawns>k__BackingField: 1
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 17626c9dc0622e249b983315d20a89de, type: 2}
+        <Count>k__BackingField: 3
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 0
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 2
+      <DelayBetweenSpawns>k__BackingField: 2
+    - _enemyGroups:
+      - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: dbf8c312d815bdf42a56d598a7d92f57, type: 2}
+        <Count>k__BackingField: 1
+      _note: 
+      <PatternRepeats>k__BackingField: 1
+      <PathNumber>k__BackingField: 1
+      <Lane>k__BackingField: 0
+      <StartDelay>k__BackingField: 6
+      <DelayBetweenSpawns>k__BackingField: 1
+    _note: 
+    <StageTime>k__BackingField: 60
+    <TimeToSkipStage>k__BackingField: 15
+  - _enemiesWaveConfigs:
+    - _enemyGroups:
       - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 8989fa9734e9862409d4b8d1e3ce7b24, type: 2}
         <Count>k__BackingField: 10
       _note: 
@@ -241,7 +283,7 @@ MonoBehaviour:
     <TimeToSkipStage>k__BackingField: 60
   <PrefabPath>k__BackingField: Prefabs/Levels/Level_8
   <GameMode>k__BackingField: 0
-  <StartGold>k__BackingField: 850
+  <StartGold>k__BackingField: 8500
   <StartPlayerHealth>k__BackingField: 20
   <ArrowsUpgradesLevelLimit>k__BackingField: 5
   <MagicUpgradesLevelLimit>k__BackingField: 5

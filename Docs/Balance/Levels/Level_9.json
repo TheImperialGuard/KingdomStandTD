@@ -3,7 +3,7 @@
   "campaignNumber": 9,
   "prefabPath": "Prefabs/Levels/Level_9",
   "gameMode": "Basic",
-  "towerSlotsCount": 0,
+  "towerSlotsCount": 13,
   "startGold": 850,
   "startPlayerHealth": 20,
   "roads": [
@@ -12,10 +12,11 @@
       "name": "Path_1",
       "waypointsCount": 10,
       "lengthCenter": 53.0,
-      "lengthLeft": 53.713,
-      "lengthRight": 52.301,
+      "lengthLeft": 53.893,
+      "lengthRight": 52.13,
       "timeToBase": {
         "HumanRogue": 35.333,
+        "IceElemental": 132.5,
         "Skeleton": 53.0,
         "SkeletonMage": 88.333
       }
@@ -25,15 +26,15 @@
       "name": "Path_2",
       "waypointsCount": 7,
       "lengthCenter": 45.0,
-      "lengthLeft": 45.005,
-      "lengthRight": 45.007,
+      "lengthLeft": 45.008,
+      "lengthRight": 45.012,
       "timeToBase": {
         "Barbarian": 90.0,
         "HumanRogue": 30.0,
         "Skeleton": 45.0,
-        "SkeletonBoss": 90.0,
         "SkeletonMage": 75.0,
-        "SkeletonRogue": 90.0
+        "SkeletonRogue": 90.0,
+        "Yeti": 112.5
       }
     },
     {
@@ -41,12 +42,166 @@
       "name": "Path_3",
       "waypointsCount": 10,
       "lengthCenter": 53.0,
-      "lengthLeft": 52.299,
-      "lengthRight": 53.715,
-      "timeToBase": {}
+      "lengthLeft": 52.126,
+      "lengthRight": 53.897,
+      "timeToBase": {
+        "SnowWolf": 33.125
+      }
     }
   ],
   "stages": [
+    {
+      "stageTime": 60.0,
+      "timeToSkipStage": 25.0,
+      "note": "",
+      "waves": [
+        {
+          "groups": [
+            {
+              "enemy": "Yeti",
+              "count": 1
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Second",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 1.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 1,
+            "health": 1000.0,
+            "killGold": 10,
+            "breakthroughDamage": 20,
+            "spawnEnd": 0.0,
+            "firstArrival": 112.5,
+            "lastArrival": 112.5
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "IceElemental",
+              "count": 5
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "First",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 5.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 5,
+            "health": 500.0,
+            "killGold": 50,
+            "breakthroughDamage": 5,
+            "spawnEnd": 20.0,
+            "firstArrival": 132.5,
+            "lastArrival": 152.5
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "SnowWolf",
+              "count": 3
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Third",
+          "lane": "Center",
+          "startDelay": 0.0,
+          "delayBetweenSpawns": 6.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 3,
+            "health": 300.0,
+            "killGold": 30,
+            "breakthroughDamage": 3,
+            "spawnEnd": 12.0,
+            "firstArrival": 33.125,
+            "lastArrival": 45.125
+          }
+        },
+        {
+          "groups": [
+            {
+              "enemy": "SnowWolf",
+              "count": 3
+            }
+          ],
+          "patternRepeats": 1,
+          "pathNumber": "Third",
+          "lane": "Left",
+          "startDelay": 3.0,
+          "delayBetweenSpawns": 6.0,
+          "note": "",
+          "analysis": {
+            "enemiesCount": 3,
+            "health": 300.0,
+            "killGold": 30,
+            "breakthroughDamage": 3,
+            "spawnEnd": 15.0,
+            "firstArrival": 35.579,
+            "lastArrival": 47.579
+          }
+        }
+      ],
+      "analysis": {
+        "wavesCount": 4,
+        "enemiesCount": 12,
+        "enemiesByType": {
+          "IceElemental": 5,
+          "SnowWolf": 6,
+          "Yeti": 1
+        },
+        "health": 2100.0,
+        "effectiveHealthPhysic": 2100.0,
+        "effectiveHealthMagic": 2100.0,
+        "healthPerSecond": 35.0,
+        "killGold": 120,
+        "maxSkipGold": 30,
+        "goldAtStartWithoutSkips": 850,
+        "goldAtStartWithMaxSkips": 850,
+        "breakthroughDamage": 31,
+        "breakthroughThreat": 1.55,
+        "spawnEnd": 20.0,
+        "spawnOverflow": 0.0,
+        "lastArrival": 152.5,
+        "peakEnemies": 12,
+        "traffic": [
+          {
+            "pathNumber": "First",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 5,
+            "health": 500.0
+          },
+          {
+            "pathNumber": "Second",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 1,
+            "health": 1000.0
+          },
+          {
+            "pathNumber": "Third",
+            "lane": "Center",
+            "wavesCount": 1,
+            "enemiesCount": 3,
+            "health": 300.0
+          },
+          {
+            "pathNumber": "Third",
+            "lane": "Left",
+            "wavesCount": 1,
+            "enemiesCount": 3,
+            "health": 300.0
+          }
+        ]
+      }
+    },
     {
       "stageTime": 60.0,
       "timeToSkipStage": 35.0,
@@ -112,14 +267,14 @@
         "healthPerSecond": 30.0,
         "killGold": 350,
         "maxSkipGold": 30,
-        "goldAtStartWithoutSkips": 850,
-        "goldAtStartWithMaxSkips": 850,
+        "goldAtStartWithoutSkips": 970,
+        "goldAtStartWithMaxSkips": 1000,
         "breakthroughDamage": 20,
         "breakthroughThreat": 1.0,
         "spawnEnd": 19.0,
         "spawnOverflow": 0.0,
         "lastArrival": 109.0,
-        "peakEnemies": 20,
+        "peakEnemies": 26,
         "traffic": [
           {
             "pathNumber": "First",
@@ -202,14 +357,14 @@
         "healthPerSecond": 7.778,
         "killGold": 100,
         "maxSkipGold": 30,
-        "goldAtStartWithoutSkips": 1200,
-        "goldAtStartWithMaxSkips": 1230,
+        "goldAtStartWithoutSkips": 1320,
+        "goldAtStartWithMaxSkips": 1380,
         "breakthroughDamage": 10,
         "breakthroughThreat": 0.5,
         "spawnEnd": 8.0,
         "spawnOverflow": 0.0,
         "lastArrival": 43.333,
-        "peakEnemies": 30,
+        "peakEnemies": 35,
         "traffic": [
           {
             "pathNumber": "First",
@@ -344,8 +499,8 @@
             "killGold": 50,
             "breakthroughDamage": 10,
             "spawnEnd": 36.0,
-            "firstArrival": 61.301,
-            "lastArrival": 88.301
+            "firstArrival": 61.13,
+            "lastArrival": 88.13
           }
         }
       ],
@@ -364,8 +519,8 @@
         "healthPerSecond": 33.417,
         "killGold": 290,
         "maxSkipGold": 30,
-        "goldAtStartWithoutSkips": 1300,
-        "goldAtStartWithMaxSkips": 1360,
+        "goldAtStartWithoutSkips": 1420,
+        "goldAtStartWithMaxSkips": 1510,
         "breakthroughDamage": 32,
         "breakthroughThreat": 1.6,
         "spawnEnd": 36.0,
@@ -467,8 +622,8 @@
             "killGold": 50,
             "breakthroughDamage": 5,
             "spawnEnd": 20.0,
-            "firstArrival": 35.809,
-            "lastArrival": 55.809
+            "firstArrival": 35.929,
+            "lastArrival": 55.929
           }
         },
         {
@@ -490,8 +645,8 @@
             "killGold": 50,
             "breakthroughDamage": 5,
             "spawnEnd": 20.0,
-            "firstArrival": 30.005,
-            "lastArrival": 50.005
+            "firstArrival": 30.008,
+            "lastArrival": 50.008
           }
         },
         {
@@ -513,8 +668,8 @@
             "killGold": 50,
             "breakthroughDamage": 10,
             "spawnEnd": 9.0,
-            "firstArrival": 52.301,
-            "lastArrival": 61.301
+            "firstArrival": 52.13,
+            "lastArrival": 61.13
           }
         },
         {
@@ -536,8 +691,8 @@
             "killGold": 50,
             "breakthroughDamage": 10,
             "spawnEnd": 9.0,
-            "firstArrival": 45.005,
-            "lastArrival": 54.005
+            "firstArrival": 45.008,
+            "lastArrival": 54.008
           }
         }
       ],
@@ -554,9 +709,9 @@
         "effectiveHealthMagic": 14083.335,
         "healthPerSecond": 45.833,
         "killGold": 600,
-        "maxSkipGold": 30,
-        "goldAtStartWithoutSkips": 1590,
-        "goldAtStartWithMaxSkips": 1680,
+        "maxSkipGold": 0,
+        "goldAtStartWithoutSkips": 1710,
+        "goldAtStartWithMaxSkips": 1830,
         "breakthroughDamage": 50,
         "breakthroughThreat": 2.5,
         "spawnEnd": 38.0,
@@ -608,362 +763,62 @@
           }
         ]
       }
-    },
-    {
-      "stageTime": 70.0,
-      "timeToSkipStage": 45.0,
-      "note": "",
-      "waves": [
-        {
-          "groups": [
-            {
-              "enemy": "SkeletonRogue",
-              "count": 20
-            }
-          ],
-          "patternRepeats": 1,
-          "pathNumber": "Second",
-          "lane": "Center",
-          "startDelay": 0.0,
-          "delayBetweenSpawns": 2.0,
-          "note": "",
-          "analysis": {
-            "enemiesCount": 20,
-            "health": 1600.0,
-            "killGold": 300,
-            "breakthroughDamage": 20,
-            "spawnEnd": 38.0,
-            "firstArrival": 90.0,
-            "lastArrival": 128.0
-          }
-        },
-        {
-          "groups": [
-            {
-              "enemy": "Skeleton",
-              "count": 30
-            }
-          ],
-          "patternRepeats": 1,
-          "pathNumber": "First",
-          "lane": "Center",
-          "startDelay": 0.0,
-          "delayBetweenSpawns": 1.0,
-          "note": "",
-          "analysis": {
-            "enemiesCount": 30,
-            "health": 600.0,
-            "killGold": 150,
-            "breakthroughDamage": 30,
-            "spawnEnd": 29.0,
-            "firstArrival": 53.0,
-            "lastArrival": 82.0
-          }
-        },
-        {
-          "groups": [
-            {
-              "enemy": "Skeleton",
-              "count": 30
-            }
-          ],
-          "patternRepeats": 1,
-          "pathNumber": "First",
-          "lane": "Left",
-          "startDelay": 0.0,
-          "delayBetweenSpawns": 1.0,
-          "note": "",
-          "analysis": {
-            "enemiesCount": 30,
-            "health": 600.0,
-            "killGold": 150,
-            "breakthroughDamage": 30,
-            "spawnEnd": 29.0,
-            "firstArrival": 53.713,
-            "lastArrival": 82.713
-          }
-        },
-        {
-          "groups": [
-            {
-              "enemy": "Skeleton",
-              "count": 30
-            }
-          ],
-          "patternRepeats": 1,
-          "pathNumber": "First",
-          "lane": "Right",
-          "startDelay": 0.0,
-          "delayBetweenSpawns": 1.0,
-          "note": "",
-          "analysis": {
-            "enemiesCount": 30,
-            "health": 600.0,
-            "killGold": 150,
-            "breakthroughDamage": 30,
-            "spawnEnd": 29.0,
-            "firstArrival": 52.301,
-            "lastArrival": 81.301
-          }
-        }
-      ],
-      "analysis": {
-        "wavesCount": 4,
-        "enemiesCount": 110,
-        "enemiesByType": {
-          "Skeleton": 90,
-          "SkeletonRogue": 20
-        },
-        "health": 3400.0,
-        "effectiveHealthPhysic": 4085.714,
-        "effectiveHealthMagic": 3400.0,
-        "healthPerSecond": 48.571,
-        "killGold": 750,
-        "maxSkipGold": 30,
-        "goldAtStartWithoutSkips": 2190,
-        "goldAtStartWithMaxSkips": 2310,
-        "breakthroughDamage": 110,
-        "breakthroughThreat": 5.5,
-        "spawnEnd": 38.0,
-        "spawnOverflow": 0.0,
-        "lastArrival": 128.0,
-        "peakEnemies": 122,
-        "traffic": [
-          {
-            "pathNumber": "First",
-            "lane": "Center",
-            "wavesCount": 1,
-            "enemiesCount": 30,
-            "health": 600.0
-          },
-          {
-            "pathNumber": "First",
-            "lane": "Left",
-            "wavesCount": 1,
-            "enemiesCount": 30,
-            "health": 600.0
-          },
-          {
-            "pathNumber": "First",
-            "lane": "Right",
-            "wavesCount": 1,
-            "enemiesCount": 30,
-            "health": 600.0
-          },
-          {
-            "pathNumber": "Second",
-            "lane": "Center",
-            "wavesCount": 1,
-            "enemiesCount": 20,
-            "health": 1600.0
-          }
-        ]
-      }
-    },
-    {
-      "stageTime": 110.0,
-      "timeToSkipStage": 60.0,
-      "note": "",
-      "waves": [
-        {
-          "groups": [
-            {
-              "enemy": "Barbarian",
-              "count": 7
-            }
-          ],
-          "patternRepeats": 1,
-          "pathNumber": "Second",
-          "lane": "Center",
-          "startDelay": 0.0,
-          "delayBetweenSpawns": 6.0,
-          "note": "",
-          "analysis": {
-            "enemiesCount": 7,
-            "health": 4200.0,
-            "killGold": 350,
-            "breakthroughDamage": 21,
-            "spawnEnd": 36.0,
-            "firstArrival": 90.0,
-            "lastArrival": 126.0
-          }
-        },
-        {
-          "groups": [
-            {
-              "enemy": "HumanRogue",
-              "count": 15
-            }
-          ],
-          "patternRepeats": 1,
-          "pathNumber": "First",
-          "lane": "Center",
-          "startDelay": 0.0,
-          "delayBetweenSpawns": 5.0,
-          "note": "",
-          "analysis": {
-            "enemiesCount": 15,
-            "health": 525.0,
-            "killGold": 150,
-            "breakthroughDamage": 15,
-            "spawnEnd": 70.0,
-            "firstArrival": 35.333,
-            "lastArrival": 105.333
-          }
-        }
-      ],
-      "analysis": {
-        "wavesCount": 2,
-        "enemiesCount": 22,
-        "enemiesByType": {
-          "Barbarian": 7,
-          "HumanRogue": 15
-        },
-        "health": 4725.0,
-        "effectiveHealthPhysic": 8925.0,
-        "effectiveHealthMagic": 4725.0,
-        "healthPerSecond": 42.955,
-        "killGold": 500,
-        "maxSkipGold": 30,
-        "goldAtStartWithoutSkips": 2940,
-        "goldAtStartWithMaxSkips": 3090,
-        "breakthroughDamage": 36,
-        "breakthroughThreat": 1.8,
-        "spawnEnd": 70.0,
-        "spawnOverflow": 0.0,
-        "lastArrival": 126.0,
-        "peakEnemies": 59,
-        "traffic": [
-          {
-            "pathNumber": "First",
-            "lane": "Center",
-            "wavesCount": 1,
-            "enemiesCount": 15,
-            "health": 525.0
-          },
-          {
-            "pathNumber": "Second",
-            "lane": "Center",
-            "wavesCount": 1,
-            "enemiesCount": 7,
-            "health": 4200.0
-          }
-        ]
-      }
-    },
-    {
-      "stageTime": 100.0,
-      "timeToSkipStage": 60.0,
-      "note": "",
-      "waves": [
-        {
-          "groups": [
-            {
-              "enemy": "SkeletonBoss",
-              "count": 1
-            }
-          ],
-          "patternRepeats": 1,
-          "pathNumber": "Second",
-          "lane": "Center",
-          "startDelay": 0.0,
-          "delayBetweenSpawns": 1.0,
-          "note": "",
-          "analysis": {
-            "enemiesCount": 1,
-            "health": 8000.0,
-            "killGold": 100,
-            "breakthroughDamage": 20,
-            "spawnEnd": 0.0,
-            "firstArrival": 90.0,
-            "lastArrival": 90.0
-          }
-        }
-      ],
-      "analysis": {
-        "wavesCount": 1,
-        "enemiesCount": 1,
-        "enemiesByType": {
-          "SkeletonBoss": 1
-        },
-        "health": 8000.0,
-        "effectiveHealthPhysic": 16000.0,
-        "effectiveHealthMagic": 8000.0,
-        "healthPerSecond": 80.0,
-        "killGold": 100,
-        "maxSkipGold": 0,
-        "goldAtStartWithoutSkips": 3440,
-        "goldAtStartWithMaxSkips": 3620,
-        "breakthroughDamage": 20,
-        "breakthroughThreat": 1.0,
-        "spawnEnd": 0.0,
-        "spawnOverflow": 0.0,
-        "lastArrival": 90.0,
-        "peakEnemies": 4,
-        "traffic": [
-          {
-            "pathNumber": "Second",
-            "lane": "Center",
-            "wavesCount": 1,
-            "enemiesCount": 1,
-            "health": 8000.0
-          }
-        ]
-      }
     }
   ],
   "analysis": {
-    "stagesCount": 7,
-    "wavesCount": 22,
-    "enemiesCount": 241,
+    "stagesCount": 5,
+    "wavesCount": 19,
+    "enemiesCount": 120,
     "enemiesByType": {
-      "Barbarian": 9,
-      "HumanRogue": 38,
-      "Skeleton": 130,
-      "SkeletonBoss": 1,
+      "Barbarian": 2,
+      "HumanRogue": 23,
+      "IceElemental": 5,
+      "Skeleton": 40,
       "SkeletonMage": 33,
-      "SkeletonRogue": 30
+      "SkeletonRogue": 10,
+      "SnowWolf": 6,
+      "Yeti": 1
     },
-    "health": 23030.0,
-    "effectiveHealthPhysic": 37458.57,
-    "effectiveHealthMagic": 41730.004,
-    "killGold": 2690,
-    "maxSkipGold": 180,
-    "totalGoldWithoutSkips": 3540,
-    "totalGoldWithMaxSkips": 3720,
-    "breakthroughDamage": 278,
-    "breakthroughThreat": 13.9,
-    "durationWithoutSkips": 406.0,
-    "durationWithMaxSkips": 240.0,
-    "peakEnemies": 122,
+    "health": 9005.0,
+    "effectiveHealthPhysic": 10547.857,
+    "effectiveHealthMagic": 27705.004,
+    "killGold": 1460,
+    "maxSkipGold": 120,
+    "totalGoldWithoutSkips": 2310,
+    "totalGoldWithMaxSkips": 2430,
+    "breakthroughDamage": 143,
+    "breakthroughThreat": 7.15,
+    "durationWithoutSkips": 267.0,
+    "durationWithMaxSkips": 152.0,
+    "peakEnemies": 52,
     "traffic": [
       {
         "pathNumber": "First",
         "lane": "Center",
-        "wavesCount": 7,
-        "enemiesCount": 83,
-        "health": 3800.0
+        "wavesCount": 6,
+        "enemiesCount": 43,
+        "health": 3175.0
       },
       {
         "pathNumber": "First",
         "lane": "Left",
-        "wavesCount": 2,
-        "enemiesCount": 35,
-        "health": 775.0
+        "wavesCount": 1,
+        "enemiesCount": 5,
+        "health": 175.0
       },
       {
         "pathNumber": "First",
         "lane": "Right",
-        "wavesCount": 3,
-        "enemiesCount": 50,
-        "health": 1000.0
+        "wavesCount": 2,
+        "enemiesCount": 20,
+        "health": 400.0
       },
       {
         "pathNumber": "Second",
         "lane": "Center",
-        "wavesCount": 8,
-        "enemiesCount": 58,
-        "health": 17080.0
+        "wavesCount": 6,
+        "enemiesCount": 31,
+        "health": 4280.0
       },
       {
         "pathNumber": "Second",
@@ -978,11 +833,23 @@
         "wavesCount": 1,
         "enemiesCount": 5,
         "health": 175.0
+      },
+      {
+        "pathNumber": "Third",
+        "lane": "Center",
+        "wavesCount": 1,
+        "enemiesCount": 3,
+        "health": 300.0
+      },
+      {
+        "pathNumber": "Third",
+        "lane": "Left",
+        "wavesCount": 1,
+        "enemiesCount": 3,
+        "health": 300.0
       }
     ]
   },
   "errors": [],
-  "warnings": [
-    "На префабе нет ни одного места под башню"
-  ]
+  "warnings": []
 }
