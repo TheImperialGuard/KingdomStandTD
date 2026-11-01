@@ -12,8 +12,8 @@
       "name": "Path_1",
       "waypointsCount": 7,
       "lengthCenter": 35.0,
-      "lengthLeft": 35.004,
-      "lengthRight": 35.004,
+      "lengthLeft": 35.006,
+      "lengthRight": 35.005,
       "timeToBase": {
         "HumanRogue": 23.333,
         "Skeleton": 35.0,
@@ -25,8 +25,8 @@
       "name": "Path_2",
       "waypointsCount": 8,
       "lengthCenter": 41.0,
-      "lengthLeft": 41.713,
-      "lengthRight": 40.301,
+      "lengthLeft": 41.893,
+      "lengthRight": 40.129,
       "timeToBase": {
         "Barbarian": 82.0,
         "HumanRogue": 27.333,
@@ -335,8 +335,8 @@
             "killGold": 50,
             "breakthroughDamage": 10,
             "spawnEnd": 36.0,
-            "firstArrival": 44.004,
-            "lastArrival": 71.004
+            "firstArrival": 44.005,
+            "lastArrival": 71.005
           }
         }
       ],
@@ -458,8 +458,8 @@
             "killGold": 50,
             "breakthroughDamage": 5,
             "spawnEnd": 20.0,
-            "firstArrival": 23.336,
-            "lastArrival": 43.336
+            "firstArrival": 23.338,
+            "lastArrival": 43.338
           }
         },
         {
@@ -481,8 +481,8 @@
             "killGold": 50,
             "breakthroughDamage": 5,
             "spawnEnd": 20.0,
-            "firstArrival": 26.867,
-            "lastArrival": 46.867
+            "firstArrival": 26.753,
+            "lastArrival": 46.753
           }
         },
         {
@@ -504,8 +504,8 @@
             "killGold": 50,
             "breakthroughDamage": 10,
             "spawnEnd": 9.0,
-            "firstArrival": 35.004,
-            "lastArrival": 44.004
+            "firstArrival": 35.005,
+            "lastArrival": 44.005
           }
         },
         {
@@ -527,8 +527,8 @@
             "killGold": 50,
             "breakthroughDamage": 10,
             "spawnEnd": 9.0,
-            "firstArrival": 41.713,
-            "lastArrival": 50.713
+            "firstArrival": 41.893,
+            "lastArrival": 50.893
           }
         }
       ],
@@ -670,8 +670,8 @@
             "killGold": 150,
             "breakthroughDamage": 30,
             "spawnEnd": 29.0,
-            "firstArrival": 35.004,
-            "lastArrival": 64.004
+            "firstArrival": 35.006,
+            "lastArrival": 64.006
           }
         },
         {
@@ -693,8 +693,8 @@
             "killGold": 150,
             "breakthroughDamage": 30,
             "spawnEnd": 29.0,
-            "firstArrival": 35.004,
-            "lastArrival": 64.004
+            "firstArrival": 35.005,
+            "lastArrival": 64.005
           }
         }
       ],
