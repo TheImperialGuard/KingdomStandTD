@@ -3,12 +3,15 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Weather;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
+using Assets._Project.Develop.Runtime.Utilities.ConfigsManagment;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 using Assets._Project.Develop.Runtime.Utilities.Wallet;
 using UnityEngine.SceneManagement;
@@ -43,13 +46,17 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
 
         public int CurrentStageNumber => _log?.CurrentStageNumber ?? PlaytestLogService.NOT_STARTED_STAGE_NUMBER;
 
-        // Номер уровня игре нужен только для сообщений в консоли: результат плейтеста не сохраняется.
+        // Номер уровня игре нужен только для сообщений в консоли: результат плейтеста не сохраняется. Бесконечный уровень
+        // запускается своими аргументами: по ним выбираются регистрации режима, запись забега и окно итога.
         public GameplayInputArgs TakeStartArgs()
         {
             if (_isStartArgsTaken)
                 return null;
 
             _isStartArgsTaken = true;
+
+            if (Launch.IsEndless)
+                return GameplayInputArgs.ForEndless();
 
             return GameplayInputArgs.ForCampaign(_campaignNumber ?? NON_CAMPAIGN_LEVEL_NUMBER);
         }
@@ -63,6 +70,8 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
 
             return _levelCopy;
         }
+
+        public int? GetStartWaveNumber() => Launch.IsEndless ? Launch.StartWaveNumber : null;
 
         public void ProcessRegistrations(DIContainer container) => container.RegisterAsSingle(CreateLog).NonLazy();
 
@@ -80,6 +89,10 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
 
         public void OnSkipGoldEarned(int gold) => _log?.OnSkipGoldEarned(gold);
 
+        public void OnWaveWeather(WeatherKinds weather, int waveNumber) => _log?.OnWaveWeather(weather, waveNumber);
+
+        public void OnLightningStruck(float damage, int hitEnemiesCount) => _log?.OnLightningStruck(damage, hitEnemiesCount);
+
         // Stop не освобождает сцену, поэтому идущий прогон дописывается здесь, по выходу из Play Mode.
         public void CompleteRun() => _log?.CompleteInterrupted();
 
@@ -92,14 +105,21 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
 
         private PlaytestLogService CreateLog(DIContainer container)
         {
+            // Множитель здоровья и погода в логе есть только у бесконечного уровня
+            EndlessModeConfig endlessConfig = Launch.IsEndless
+                ? container.Resolve<ConfigsProviderService>().GetConfig<EndlessModeConfig>()
+                : null;
+
             _log = new PlaytestLogService(
                 container.Resolve<StageProviderService>(),
+                container.Resolve<IStagesSource>(),
                 container.Resolve<WalletService>(),
                 container.Resolve<PlayerHealth>(),
                 container.Resolve<EntitiesLifeContext>(),
                 Launch,
                 _levelCopy,
-                _campaignNumber);
+                _campaignNumber,
+                endlessConfig);
 
             return _log;
         }

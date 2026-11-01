@@ -3,6 +3,7 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Weather;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
@@ -41,6 +42,14 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             return levelConfig != null;
         }
 
+        public static bool TryGetStartWaveNumber(out int waveNumber)
+        {
+            int? sessionWaveNumber = _session?.GetStartWaveNumber();
+            waveNumber = sessionWaveNumber ?? 0;
+
+            return sessionWaveNumber.HasValue;
+        }
+
         public static void ProcessRegistrations(DIContainer container) => _session?.ProcessRegistrations(container);
 
         public static void NotifyGameEnded(LevelResults results) => _session?.OnGameEnded(results);
@@ -58,6 +67,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             => _session?.OnAbilityBought(towerType, ability, cost);
 
         public static void NotifySkipGoldEarned(int gold) => _session?.OnSkipGoldEarned(gold);
+
+        public static void NotifyWaveWeather(WeatherKinds weather, int waveNumber) => _session?.OnWaveWeather(weather, waveNumber);
+
+        public static void NotifyLightningStruck(float damage, int hitEnemiesCount)
+            => _session?.OnLightningStruck(damage, hitEnemiesCount);
     }
 }
 #endif

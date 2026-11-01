@@ -5,6 +5,9 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Utilities.ParticleEffects;
 using UnityEngine;
+#if UNITY_EDITOR
+using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
+#endif
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
 {
@@ -75,6 +78,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
             float damage = _config.BaseDamage * _damageMultiplier.GetValue(waveNumber);
 
             int hitEnemiesCount = _areaDamageService.DealToGroundEnemies(point, _config.Radius, damage, _config.DamageType);
+
+            #if UNITY_EDITOR
+                // Урон молний — в лог плейтеста из редактора уровней
+                PlaytestHooks.NotifyLightningStruck(damage, hitEnemiesCount);
+            #endif
 
             _particleEffectsPool.Spawn(_config.StrikeEffect, point);
             _weatherLighting.Flash(_config.FlashIntensity, _config.FlashDuration);

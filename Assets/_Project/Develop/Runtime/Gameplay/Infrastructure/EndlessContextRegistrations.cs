@@ -178,6 +178,10 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         private static int GetFirstWaveNumber()
         {
             #if UNITY_EDITOR
+                // Плейтест из редактора уровней задаёт стартовую волну сам
+                if (PlaytestHooks.TryGetStartWaveNumber(out int playtestWaveNumber))
+                    return playtestWaveNumber;
+
                 // Старт с волны N — настройка инспектора EndlessModeConfig, только для проверок в редакторе
                 return EndlessModeEditorSettings.StartWaveNumber;
             #else

@@ -3,6 +3,7 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Weather;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.Meta.Features.Levels;
@@ -19,6 +20,9 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         // Конфиг уровня для очередного прогона — вместо уровня кампании по номеру.
         LevelConfig CreateLevelConfig();
 
+        // С какой волны начинается бесконечный уровень — вместо старта с волны N из инспектора; null — играется кампания.
+        int? GetStartWaveNumber();
+
         // Регистрации сцены Gameplay, которые нужны плейтесту, — лог прогона.
         void ProcessRegistrations(DIContainer container);
 
@@ -33,6 +37,12 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         void OnAbilityBought(TowerTypes towerType, AbilityConfig ability, int cost);
 
         void OnSkipGoldEarned(int gold);
+
+        // Погода, с которой началась волна бесконечного режима.
+        void OnWaveWeather(WeatherKinds weather, int waveNumber);
+
+        // Удар молнии: урон каждому задетому врагу до сопротивлений и сколько врагов задето.
+        void OnLightningStruck(float damage, int hitEnemiesCount);
     }
 }
 #endif

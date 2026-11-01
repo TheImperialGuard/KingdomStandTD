@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Weather;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
@@ -9,22 +11,34 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
     // за стейджем своей волны; золото, здоровье и башни — за временем стейджа: от его начала до начала следующего,
     // у первого стейджа прогона — вместе с подготовкой. levelSnapshot — срез уровня на момент запуска, как в
     // Docs/Balance, с несохранёнными правками.
+    //
+    // Бесконечный уровень (gameMode Infinity): стейджи — волны режима с их настоящими номерами, levelStagesCount нет,
+    // levelSnapshot — срез без волн, только данные уровня и настройки режима: волны из тех же настроек — в срезе
+    // Docs/Balance. У волн — множитель здоровья, погода и молнии; forcedWeather — погода, заданная в редакторе на весь
+    // забег. Пики врагов на поле — с призванными и умирающими, как у порога досрочного вызова.
     public class PlaytestLog
     {
         public string Level { get; set; }
         public int? CampaignNumber { get; set; }
+        public string GameMode { get; set; }
         public string StartedAt { get; set; }
         public int StartStage { get; set; }
-        public int LevelStagesCount { get; set; }
+        public int? LevelStagesCount { get; set; }
         public int StartGold { get; set; }
         public int StartPlayerHealth { get; set; }
         public bool HasUnsavedChanges { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public WeatherKinds? ForcedWeather { get; set; }
+
         public PlaytestResult Result { get; set; }
+        public int ReachedStage { get; set; }
         public float PreparationTime { get; set; }
         public float GameTime { get; set; }
         public float RealTime { get; set; }
         public int FinalGold { get; set; }
         public int FinalPlayerHealth { get; set; }
+        public int PeakEnemies { get; set; }
         public List<PlaytestStageLog> Stages { get; set; } = new();
         public List<PlaytestTowerCount> TowersAtEnd { get; set; } = new();
         public JToken LevelSnapshot { get; set; }
@@ -48,11 +62,30 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
         public float StartTime { get; set; }
         public float Duration { get; set; }
         public bool IsSkipped { get; set; }
+        public int PeakEnemies { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public float? HealthMultiplier { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public WeatherKinds? Weather { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public PlaytestLightningLog Lightning { get; set; }
+
         public PlaytestGoldLog Gold { get; set; } = new();
         public PlaytestHealthLog Health { get; set; } = new();
         public PlaytestTowersLog Towers { get; set; } = new();
         public List<PlaytestEnemyLog> Enemies { get; set; } = new();
         public List<PlaytestWaveLog> Waves { get; set; } = new();
+    }
+
+    // Молнии за время волны. damage — урон удара до сопротивлений, сложенный по всем задетым врагам.
+    public class PlaytestLightningLog
+    {
+        public int Strikes { get; set; }
+        public int HitEnemies { get; set; }
+        public float Damage { get; set; }
     }
 
     // atEnd = atStart + kills + skip + sales − towerPurchases − abilityPurchases + other; other — то, что прошло мимо
@@ -105,10 +138,12 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
         public int Gold { get; set; }
     }
 
-    // Враг — имя ассета CharacterConfig, как в срезах.
+    // Враг — имя ассета CharacterConfig, как в срезах. maxHealth — здоровье одного врага сразу после спавна, у
+    // бесконечного уровня — уже с множителем его волны.
     public class PlaytestEnemyLog
     {
         public string Enemy { get; set; }
+        public float MaxHealth { get; set; }
         public int Spawned { get; set; }
         public int Killed { get; set; }
         public int Leaked { get; set; }

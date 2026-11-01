@@ -23,6 +23,7 @@
             <ui:VisualElement name="playtestBar" class="playtest-bar">
                 <ui:Button name="playButton" text="▶ Играть" tooltip="Запустить уровень в Play Mode сразу, без главного меню, с первого стейджа — как в игре. Играется текущее состояние уровня, вместе с несохранёнными правками; результат в прогресс не записывается" class="playtest-bar__button" />
                 <ui:Button name="playFromStageButton" text="▶ Со стейджа" tooltip="Запустить уровень с выбранного стейджа: стейджи до него пропускаются, золото на старте — из поля справа. В игре счёт волн начнётся с 1" class="playtest-bar__button" />
+                <ui:IntegerField name="playtestWaveField" label="Волна" is-delayed="true" tooltip="С какой волны начать бесконечный уровень. Это то же значение, что «Старт с волны» в инспекторе конфига режима" class="playtest-bar__wave" />
                 <ui:IntegerField name="playtestGoldField" label="Золото на старте" is-delayed="true" class="playtest-bar__gold" />
                 <ui:Label name="playtestStatusLabel" class="playtest-bar__status" />
             </ui:VisualElement>

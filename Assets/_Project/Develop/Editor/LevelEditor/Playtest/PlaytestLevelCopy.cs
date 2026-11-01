@@ -5,7 +5,8 @@ using UnityEngine;
 namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
 {
     // Копия уровня для прогона плейтеста. Instantiate берёт данные из памяти, поэтому несохранённые правки окна попадают
-    // в игру. В копии меняется стартовое золото и убираются стейджи до стартового — сам ассет не трогается.
+    // в игру. В копии меняется стартовое золото и убираются стейджи до стартового — сам ассет не трогается. Бесконечный
+    // уровень начинает с волны N через PlaytestHooks, его стейджи не трогаются.
     public static class PlaytestLevelCopy
     {
         public static LevelConfig Create(PlaytestLaunch launch)
@@ -18,7 +19,8 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
                 if (launch.StartGold.HasValue)
                     LevelConfigFields.FindRequired(serializedCopy, LevelConfigFields.StartGold).intValue = launch.StartGold.Value;
 
-                RemoveStagesBefore(serializedCopy, launch.StartStageIndex);
+                if (launch.IsEndless == false)
+                    RemoveStagesBefore(serializedCopy, launch.StartStageIndex);
 
                 serializedCopy.ApplyModifiedPropertiesWithoutUndo();
             }

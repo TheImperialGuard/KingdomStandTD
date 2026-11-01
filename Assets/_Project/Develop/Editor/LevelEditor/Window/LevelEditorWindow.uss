@@ -65,6 +65,15 @@
     margin-right: 12px;
 }
 
+.playtest-bar__wave {
+    width: 110px;
+    margin-right: 8px;
+}
+
+.playtest-bar__wave > .unity-base-field__label {
+    min-width: 50px;
+}
+
 .level-summary__field > .unity-base-field__label,
 .playtest-bar__gold > .unity-base-field__label {
     min-width: 120px;

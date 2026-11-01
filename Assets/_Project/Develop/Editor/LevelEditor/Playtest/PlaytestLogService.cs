@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Assets._Project.Develop.Editor.EndlessMode;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Abilities;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Weather;
 using Assets._Project.Develop.Runtime.Gameplay.EntitiesCore;
+using Assets._Project.Develop.Runtime.Gameplay.Features.Enemies;
+using Assets._Project.Develop.Runtime.Gameplay.Features.EndlessMode;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Gameplay.Features.Player;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
@@ -23,24 +28,27 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
     // Лог одного прогона плейтеста (что в нём — см. PlaytestLog). Живёт в контейнере сцены Gameplay: регистрирует его
     // PlaytestSession через хук, от неё же приходят события игры. Файл переписывается на каждом стейдже, в конце игры,
     // при уходе со сцены и при выходе из Play Mode: Stop сцену не освобождает, и без этого оборванный прогон пропал бы.
-    // Прогон, не дошедший до первого стейджа, не пишется.
+    // Прогон, не дошедший до первого стейджа, не пишется. Стейджи прогона — из источника стейджей сцены: у кампании это
+    // копия уровня без стейджей до стартового, у бесконечного — волны генератора с их настоящими номерами.
     public class PlaytestLogService : IInitializable, IDisposable
     {
         public const int NOT_STARTED_STAGE_NUMBER = 0;
 
         private const string LOG_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-        private const int FIRST_RUN_STAGE_NUMBER = 1;
         private const int FIRST_TOWER_LEVEL = 1;
         private const int UNKNOWN_WAVE_NUMBER = 0;
         private const int NO_DAMAGE = 0;
+        private const int ENDLESS_SNAPSHOT_WAVES_COUNT = 0;
 
         private readonly StageProviderService _stageProvider;
+        private readonly IStagesSource _stagesSource;
         private readonly WalletService _wallet;
         private readonly PlayerHealth _playerHealth;
         private readonly EntitiesLifeContext _entitiesLifeContext;
         private readonly PlaytestLaunch _launch;
         private readonly LevelConfig _levelCopy;
         private readonly int? _campaignNumber;
+        private readonly EndlessModeConfig _endlessConfig;
 
         private readonly Dictionary<int, PlaytestStageLog> _stagesByNumber = new();
         private readonly Dictionary<EnemiesWaveConfig, WaveAddress> _waveAddresses = new();
@@ -51,6 +59,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
         private PlaytestLog _log;
         private string _filePath;
         private int _stageOffset;
+        private EnemiesOnFieldCounter _enemiesCounter;
 
         private PlaytestStageLog _currentStage;
         private PlaytestStageLog _lastClosedStage;
@@ -62,22 +71,27 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
         private int? _endFrame;
         private bool _isCompleted;
 
+        // endlessConfig — конфиг бесконечного режима; null — играется уровень кампании
         public PlaytestLogService(
             StageProviderService stageProvider,
+            IStagesSource stagesSource,
             WalletService wallet,
             PlayerHealth playerHealth,
             EntitiesLifeContext entitiesLifeContext,
             PlaytestLaunch launch,
             LevelConfig levelCopy,
-            int? campaignNumber)
+            int? campaignNumber,
+            EndlessModeConfig endlessConfig)
         {
             _stageProvider = stageProvider;
+            _stagesSource = stagesSource;
             _wallet = wallet;
             _playerHealth = playerHealth;
             _entitiesLifeContext = entitiesLifeContext;
             _launch = launch;
             _levelCopy = levelCopy;
             _campaignNumber = campaignNumber;
+            _endlessConfig = endlessConfig;
         }
 
         // Настоящий номер идущего стейджа; NOT_STARTED_STAGE_NUMBER — первый стейдж прогона ещё не начался.
@@ -98,29 +112,35 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
             _runStartRealTime = Time.realtimeSinceStartup;
             _filePath = PlaytestLogFile.CreatePath(_launch.Level.name, startedAt);
 
-            // В копии нет стейджей до стартового: столько номеров и сдвигается.
+            // В копии кампании нет стейджей до стартового: столько номеров и сдвигается. У бесконечного уровня сдвига нет —
+            // источник сам начинает с волны N.
             _stageOffset = _launch.Level.Stages.Count - _levelCopy.Stages.Count;
+
+            // Номер растёт при запуске стейджа: первым запустится следующий за текущим
+            int firstRunStageNumber = _stageProvider.CurrentStageNumber.Value + 1;
 
             _log = new PlaytestLog
             {
                 Level = _launch.Level.name,
                 CampaignNumber = _campaignNumber,
+                GameMode = _launch.Level.GameMode.ToString(),
                 StartedAt = startedAt.ToString(LOG_TIME_FORMAT, CultureInfo.InvariantCulture),
-                StartStage = ToLevelStageNumber(FIRST_RUN_STAGE_NUMBER),
-                LevelStagesCount = _launch.Level.Stages.Count,
+                StartStage = ToLevelStageNumber(firstRunStageNumber),
+                LevelStagesCount = _launch.IsEndless ? null : _launch.Level.Stages.Count,
                 StartGold = Gold,
                 StartPlayerHealth = _playerHealth.Current.Value,
-                HasUnsavedChanges = EditorUtility.IsDirty(_launch.Level),
+                HasUnsavedChanges = HasUnsavedChanges(),
+                ForcedWeather = _launch.IsEndless ? EndlessModeEditorSettings.ForcedWeather : null,
                 Result = PlaytestResult.InProgress,
                 LevelSnapshot = CreateLevelSnapshot(),
             };
 
-            MapWaves();
-
-            _currentStage = OpenStage(ToLevelStageNumber(FIRST_RUN_STAGE_NUMBER));
+            _enemiesCounter = new EnemiesOnFieldCounter(_entitiesLifeContext);
+            _currentStage = OpenStage(ToLevelStageNumber(firstRunStageNumber));
 
             _disposables.Add(_stageProvider.CurrentStageNumber.Subscribe(OnRunStageNumberChanged));
             _disposables.Add(_playerHealth.Current.Subscribe(OnPlayerHealthChanged));
+            _disposables.Add(_enemiesCounter.EnemiesCount.Subscribe(OnEnemiesCountChanged));
             _entitiesLifeContext.Released += OnEntityReleased;
         }
 
@@ -148,6 +168,8 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
                 GetOrCreateEnemyLog(stage, enemyConfig.name),
                 GetOrCreateWaveLog(stage, address.WaveNumber));
 
+            // Множитель здоровья бесконечного режима враг получает раньше, по событию спавна
+            tracked.Enemy.MaxHealth = enemy.MaxHealth.Value;
             tracked.Enemy.Spawned++;
             tracked.Wave.Spawned++;
             tracked.DeathSubscription = enemy.IsDead.Subscribe((_, isDead) => OnEnemyDeathChanged(enemy, tracked, isDead));
@@ -204,6 +226,27 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
             Write();
         }
 
+        // Погода приходит в начале каждой волны вместе с её номером, поэтому неважно, раньше или позже открытия стейджа.
+        public void OnWaveWeather(WeatherKinds weather, int waveNumber)
+        {
+            if (IsAfterEnd)
+                return;
+
+            GetOrCreateStage(ToLevelStageNumber(waveNumber)).Weather = weather;
+        }
+
+        public void OnLightningStruck(float damage, int hitEnemiesCount)
+        {
+            if (IsAfterEnd)
+                return;
+
+            PlaytestLightningLog lightning = _currentStage.Lightning ??= new PlaytestLightningLog();
+
+            lightning.Strikes++;
+            lightning.HitEnemies += hitEnemiesCount;
+            lightning.Damage += damage * hitEnemiesCount;
+        }
+
         // Прогон оборван: «Заново», выход в меню или Stop. Если игра уже закончилась, итог остаётся её итогом.
         public void CompleteInterrupted()
         {
@@ -231,6 +274,8 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
 
             foreach (TrackedEnemy tracked in _enemies.Values)
                 tracked.DeathSubscription.Dispose();
+
+            _enemiesCounter?.Dispose();
 
             _disposables.Clear();
             _enemies.Clear();
@@ -268,6 +313,16 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
                 return;
 
             _currentStage.Health.Lost += oldValue - newValue;
+        }
+
+        // Пик — за время стейджа, как золото и здоровье: враги прошлых стейджей на поле тоже в счёт
+        private void OnEnemiesCountChanged(int oldCount, int newCount)
+        {
+            if (IsAfterEnd)
+                return;
+
+            _currentStage.PeakEnemies = Math.Max(_currentStage.PeakEnemies, newCount);
+            _log.PeakEnemies = Math.Max(_log.PeakEnemies, newCount);
         }
 
         private void OnEnemyDeathChanged(Entity enemy, TrackedEnemy tracked, bool isDead)
@@ -360,6 +415,9 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
             stage.Gold.AtStart = Gold;
             stage.Health.AtStart = _playerHealth.Current.Value;
             stage.Towers.AtStart = CreateTowersSnapshot();
+            stage.PeakEnemies = Math.Max(stage.PeakEnemies, _enemiesCounter.EnemiesCount.Value);
+
+            MapWaves(levelStageNumber);
 
             return stage;
         }
@@ -377,6 +435,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
         {
             _log.GameTime = time;
             _log.RealTime = Time.realtimeSinceStartup - _runStartRealTime;
+            _log.ReachedStage = _currentStage.Stage;
             _log.FinalGold = Gold;
             _log.FinalPlayerHealth = _playerHealth.Current.Value;
             _log.TowersAtEnd = CreateTowersSnapshot();
@@ -387,10 +446,13 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
             if (_stagesByNumber.TryGetValue(levelStageNumber, out PlaytestStageLog stage))
                 return stage;
 
+            EnemiesWavesStageConfig stageConfig = FindStageConfig(levelStageNumber);
+
             stage = new PlaytestStageLog
             {
                 Stage = levelStageNumber,
-                StageTime = GetStageTime(levelStageNumber),
+                StageTime = stageConfig != null ? stageConfig.StageTime : 0f,
+                HealthMultiplier = _endlessConfig?.HealthMultiplier.GetValue(levelStageNumber),
             };
 
             _stagesByNumber.Add(levelStageNumber, stage);
@@ -399,14 +461,15 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
             return stage;
         }
 
-        private float GetStageTime(int levelStageNumber)
+        // Конфиг стейджа по настоящему номеру; null — у источника такого стейджа нет
+        private EnemiesWavesStageConfig FindStageConfig(int levelStageNumber)
         {
-            int copyStageIndex = levelStageNumber - _stageOffset - 1;
+            int runStageNumber = levelStageNumber - _stageOffset;
 
-            if (copyStageIndex < 0 || copyStageIndex >= _levelCopy.Stages.Count)
-                return 0f;
+            if (_stagesSource.Has(runStageNumber) == false)
+                return null;
 
-            return _levelCopy.Stages[copyStageIndex].StageTime;
+            return _stagesSource.Get(runStageNumber) as EnemiesWavesStageConfig;
         }
 
         private static PlaytestEnemyLog GetOrCreateEnemyLog(PlaytestStageLog stage, string enemyName)
@@ -442,16 +505,19 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
             return waveLog;
         }
 
-        private void MapWaves()
+        // Волны стейджа запоминаются, когда он открывается: враги стейджа выходят только после его начала, а бесконечный
+        // источник собирает волну по первому запросу.
+        private void MapWaves(int levelStageNumber)
         {
-            for (int stageIndex = 0; stageIndex < _levelCopy.Stages.Count; stageIndex++)
-            {
-                IReadOnlyList<EnemiesWaveConfig> waves = _levelCopy.Stages[stageIndex].EnemiesWaveConfigs;
-                int levelStageNumber = ToLevelStageNumber(stageIndex + 1);
+            EnemiesWavesStageConfig stageConfig = FindStageConfig(levelStageNumber);
 
-                for (int waveIndex = 0; waveIndex < waves.Count; waveIndex++)
-                    _waveAddresses[waves[waveIndex]] = new WaveAddress(levelStageNumber, waveIndex + 1);
-            }
+            if (stageConfig == null)
+                return;
+
+            IReadOnlyList<EnemiesWaveConfig> waves = stageConfig.EnemiesWaveConfigs;
+
+            for (int waveIndex = 0; waveIndex < waves.Count; waveIndex++)
+                _waveAddresses[waves[waveIndex]] = new WaveAddress(levelStageNumber, waveIndex + 1);
         }
 
         // Волна не из копии уровня не ожидается; если встретится, враг числится за идущим стейджем.
@@ -493,11 +559,36 @@ namespace Assets._Project.Develop.Editor.LevelEditor.Playtest
                 .ToList();
         }
 
-        // Снимок уровня — тот же срез, что в Docs/Balance; если собрать его не вышло, лог пишется без него.
+        // У бесконечного уровня несохранённые правки могут быть и в конфигах режима и погоды
+        private bool HasUnsavedChanges()
+        {
+            if (EditorUtility.IsDirty(_launch.Level))
+                return true;
+
+            if (_endlessConfig == null)
+                return false;
+
+            return EditorUtility.IsDirty(_endlessConfig) || (_endlessConfig.Weather != null && EditorUtility.IsDirty(_endlessConfig.Weather));
+        }
+
+        // Снимок уровня — тот же срез, что в Docs/Balance; если собрать его не вышло, лог пишется без него. Снимок
+        // бесконечного уровня — без волн: из тех же настроек они собираются заново, и для 50 волн лог вырос бы впятеро.
         private JToken CreateLevelSnapshot()
         {
             try
             {
+                if (_launch.IsEndless)
+                {
+                    LevelSlice endlessSlice = EndlessSliceSerializer.CreateSlice(
+                        _launch.Level,
+                        _campaignNumber,
+                        LevelPrefabReader.Read(_launch.Level),
+                        LevelEditorAssets.FindGameConfig(),
+                        ENDLESS_SNAPSHOT_WAVES_COUNT);
+
+                    return LevelSliceSerializer.ToToken(endlessSlice);
+                }
+
                 string sliceJson = LevelSliceExporter.CreateSliceJson(
                     _launch.Level,
                     LevelEditorAssets.FindGameConfig(),

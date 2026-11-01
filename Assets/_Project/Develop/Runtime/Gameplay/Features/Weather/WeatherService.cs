@@ -4,6 +4,9 @@ using Assets._Project.Develop.Runtime.Gameplay.Features.Level;
 using Assets._Project.Develop.Runtime.Gameplay.Features.LevelStages;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using UnityEngine;
+#if UNITY_EDITOR
+using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
+#endif
 
 namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
 {
@@ -82,6 +85,16 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
 
         private void OnStageNumberChanged(int oldNumber, int newNumber)
         {
+            TryChangeWeather(newNumber);
+
+            #if UNITY_EDITOR
+                // Плейтест из редактора уровней пишет погоду каждой волны в лог прогона
+                PlaytestHooks.NotifyWaveWeather(_weather.Kind, newNumber);
+            #endif
+        }
+
+        private void TryChangeWeather(int waveNumber)
+        {
             if (_isWeatherForced)
                 return;
 
@@ -90,7 +103,7 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Features.Weather
 
             StartTransition(_config.GetWeather(_sequence.Current));
 
-            Debug.Log($"Волна {newNumber}: погода сменилась на {_weather.Kind}");
+            Debug.Log($"Волна {waveNumber}: погода сменилась на {_weather.Kind}");
         }
 
         // Переход начинается с того света и дождя, что сейчас на сцене, даже если прошлый переход не закончился
