@@ -5,6 +5,7 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
 using UnityEditor;
 using Object = UnityEngine.Object;
 
@@ -55,6 +56,10 @@ namespace Assets._Project.Develop.Editor.LevelEditor
         }
 
         public static LevelsListConfig FindLevelsList() => FindAll<LevelsListConfig>().FirstOrDefault();
+
+        // Конфиг бесконечного режима, который играется на этом уровне; null — такого нет.
+        public static EndlessModeConfig FindEndlessModeConfig(LevelConfig level)
+            => FindAll<EndlessModeConfig>().FirstOrDefault(config => config.Level == level);
 
         public static GameConfig FindGameConfig() => FindAll<GameConfig>().FirstOrDefault();
 

@@ -19,14 +19,23 @@ namespace Assets._Project.Develop.Editor.LevelEditor
         private static readonly IReadOnlyList<WaveEnemyGroup> _noGroups = Array.Empty<WaveEnemyGroup>();
 
         public static LevelStats Calculate(LevelConfig config, LevelPrefabInfo prefab, GameConfig gameConfig)
+            => Calculate(config, config.Stages, hasLastStage: true, prefab, gameConfig);
+
+        // Стейджи не из конфига — например, волны бесконечного режима, собранные генератором; золото на старте и здоровье
+        // игрока — из конфига. Без последнего стейджа скип есть у каждого: за посчитанными стейджами идут следующие.
+        public static LevelStats Calculate(
+            LevelConfig config,
+            IReadOnlyList<EnemiesWavesStageConfig> stages,
+            bool hasLastStage,
+            LevelPrefabInfo prefab,
+            GameConfig gameConfig)
         {
             LevelStats levelStats = new();
             List<List<EnemySpawn>> stagesSpawns = new();
-            IReadOnlyList<EnemiesWavesStageConfig> stages = config.Stages;
 
             for (int i = 0; i < stages.Count; i++)
             {
-                bool isLastStage = i == stages.Count - 1;
+                bool isLastStage = hasLastStage && i == stages.Count - 1;
                 List<EnemySpawn> stageSpawns = new();
 
                 levelStats.Stages.Add(CalculateStage(stages[i], isLastStage, config, prefab, gameConfig, stageSpawns));
@@ -37,7 +46,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor
             CalculateDurations(stages, levelStats);
             CalculatePeaks(stages, stagesSpawns, levelStats);
 
-            levelStats.Roads = CalculateRoads(config, prefab);
+            levelStats.Roads = CalculateRoads(stages, prefab);
 
             return levelStats;
         }
@@ -73,6 +82,8 @@ namespace Assets._Project.Develop.Editor.LevelEditor
 
             return Math.Min(gold, gameConfig.MaxGoldForSkipStage);
         }
+
+        public static int CalculateKillGold(EnemiesWaveConfig wave) => SumStat(wave, enemy => enemy.GoldOnDeath);
 
         public static int CountEnemies(EnemiesWaveConfig wave)
         {
@@ -177,7 +188,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor
             {
                 EnemiesCount = spawns.Count,
                 Health = SumStat(wave, enemy => enemy.MaxHealth),
-                KillGold = SumStat(wave, enemy => enemy.GoldOnDeath),
+                KillGold = CalculateKillGold(wave),
                 BreakthroughDamage = SumStat(wave, enemy => enemy.DamageOnFinishPath),
                 SpawnEnd = CalculateLastSpawnTime(wave),
                 FirstArrival = CalculateFirstArrival(spawns),
@@ -419,7 +430,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor
         private static int CountOnField(IReadOnlyList<EnemySpawn> spawns, float time)
             => spawns.Count(spawn => spawn.SpawnTime <= time && spawn.ArrivalTime > time);
 
-        private static List<RoadStats> CalculateRoads(LevelConfig config, LevelPrefabInfo prefab)
+        private static List<RoadStats> CalculateRoads(IReadOnlyList<EnemiesWavesStageConfig> stages, LevelPrefabInfo prefab)
         {
             List<RoadStats> roadsStats = new();
 
@@ -436,7 +447,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor
                 };
 
                 if (roadStats.LengthCenter.HasValue)
-                    AddTimesToBase(config, roadStats);
+                    AddTimesToBase(stages, roadStats);
 
                 roadsStats.Add(roadStats);
             }
@@ -444,9 +455,9 @@ namespace Assets._Project.Develop.Editor.LevelEditor
             return roadsStats;
         }
 
-        private static void AddTimesToBase(LevelConfig config, RoadStats roadStats)
+        private static void AddTimesToBase(IReadOnlyList<EnemiesWavesStageConfig> stages, RoadStats roadStats)
         {
-            foreach (EnemiesWavesStageConfig stage in config.Stages)
+            foreach (EnemiesWavesStageConfig stage in stages)
             {
                 foreach (EnemiesWaveConfig wave in GetWaves(stage))
                 {

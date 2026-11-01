@@ -5,6 +5,8 @@ using Assets._Project.Develop.Runtime.Configs.Gameplay;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Towers;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels.Endless;
+using Assets._Project.Develop.Runtime.Configs.Gameplay.Weather;
 using UnityEditor;
 using UnityEngine;
 
@@ -28,6 +30,8 @@ namespace Assets._Project.Develop.Editor.LevelEditor
             typeof(ShootingTowerConfig),
             typeof(TowerUpgradeTreeConfig),
             typeof(TowersListConfig),
+            typeof(EndlessModeConfig),
+            typeof(WeatherConfig),
         };
 
         private static bool _isExportScheduled;

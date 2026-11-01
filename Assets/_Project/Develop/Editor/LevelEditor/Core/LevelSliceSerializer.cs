@@ -38,8 +38,18 @@ namespace Assets._Project.Develop.Editor.LevelEditor
             LevelPrefabInfo prefab,
             LevelStats stats,
             IReadOnlyList<LevelIssue> issues)
+            => CreateSlice(config, config.Stages, campaignNumber, prefab, stats, issues);
+
+        // Стейджи не из конфига — волны бесконечного режима, собранные генератором; stats посчитаны по ним же.
+        public static LevelSlice CreateSlice(
+            LevelConfig config,
+            IReadOnlyList<EnemiesWavesStageConfig> stages,
+            int? campaignNumber,
+            LevelPrefabInfo prefab,
+            LevelStats stats,
+            IReadOnlyList<LevelIssue> issues)
         {
-            LevelSlice slice = CreateDataSlice(config);
+            LevelSlice slice = CreateDataSlice(config, stages);
 
             slice.CampaignNumber = campaignNumber;
             slice.PrefabPath = config.PrefabPath;
@@ -63,7 +73,9 @@ namespace Assets._Project.Develop.Editor.LevelEditor
         }
 
         // Только импортируемые данные уровня — для сравнения с импортируемым срезом.
-        public static LevelSlice CreateDataSlice(LevelConfig config)
+        public static LevelSlice CreateDataSlice(LevelConfig config) => CreateDataSlice(config, config.Stages);
+
+        public static LevelSlice CreateDataSlice(LevelConfig config, IReadOnlyList<EnemiesWavesStageConfig> stages)
         {
             LevelSlice slice = new()
             {
@@ -72,7 +84,7 @@ namespace Assets._Project.Develop.Editor.LevelEditor
                 StartPlayerHealth = config.StartPlayerHealth,
             };
 
-            foreach (EnemiesWavesStageConfig stage in config.Stages)
+            foreach (EnemiesWavesStageConfig stage in stages)
                 slice.Stages.Add(CreateStageSlice(stage));
 
             return slice;
@@ -160,6 +172,9 @@ namespace Assets._Project.Develop.Editor.LevelEditor
         }
 
         public static T FromToken<T>(JToken token) => token.ToObject<T>(_serializer);
+
+        // Дерево JSON в формате срезов: ключи в camelCase, enum строками, числа округлены.
+        public static JToken ToToken(object value) => JToken.FromObject(value, _serializer);
 
         private static JsonSerializerSettings CreateSettings()
         {

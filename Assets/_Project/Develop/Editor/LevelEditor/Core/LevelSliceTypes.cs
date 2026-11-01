@@ -8,6 +8,10 @@ namespace Assets._Project.Develop.Editor.LevelEditor
     // Срез уровня — JSON в Docs/Balance/Levels. Импортируются только startGold, startPlayerHealth и stages
     // (данные стейджей и волн); campaignNumber, prefabPath, gameMode, towerSlotsCount, roads, analysis, errors
     // и warnings — справочные блоки, при импорте их содержимое пропускается.
+    //
+    // Срез бесконечного уровня (EndlessSliceSerializer) — тот же формат и ещё два блока: endless — настройки режима, их
+    // импортирует EndlessSliceImporter вместо stages, и справочный weather. Его stages — первые волны, собранные
+    // генератором режима, они не импортируются. У остальных уровней этих блоков в срезе нет.
     public class LevelSlice
     {
         [JsonProperty(Required = Required.Always)]
@@ -23,6 +27,12 @@ namespace Assets._Project.Develop.Editor.LevelEditor
 
         [JsonProperty(Required = Required.Always)]
         public int StartPlayerHealth { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public JToken Endless { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public JToken Weather { get; set; }
 
         public JToken Roads { get; set; }
 

@@ -178,7 +178,7 @@ namespace Assets._Project.Develop.Editor.EndlessMode
             if (config == null)
                 return;
 
-            Level levelPrefab = LoadLevelPrefab(config);
+            Level levelPrefab = EndlessEditorWaves.LoadLevelPrefab(config);
             List<LevelIssue> issues = EndlessModeConfigValidator.Validate(config, levelPrefab);
 
             ShowIssues(issues);
@@ -294,15 +294,6 @@ namespace Assets._Project.Develop.Editor.EndlessMode
             cell.style.paddingRight = CellPadding;
 
             row.Add(cell);
-        }
-
-        // Префаб так же, как его грузит игра: Resources.Load по LevelConfig.PrefabPath.
-        private static Level LoadLevelPrefab(EndlessModeConfig config)
-        {
-            if (config.Level == null || string.IsNullOrWhiteSpace(config.Level.PrefabPath))
-                return null;
-
-            return Resources.Load<Level>(config.Level.PrefabPath);
         }
     }
 }

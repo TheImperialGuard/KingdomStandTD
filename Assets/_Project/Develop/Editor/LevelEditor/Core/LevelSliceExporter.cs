@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Assets._Project.Develop.Editor.EndlessMode;
 using Assets._Project.Develop.Runtime.Configs.Gameplay;
 using Assets._Project.Develop.Runtime.Configs.Gameplay.Levels;
+using Assets._Project.Develop.Runtime.Gameplay.GameMode;
 using UnityEngine;
 
 namespace Assets._Project.Develop.Editor.LevelEditor
@@ -57,9 +59,23 @@ namespace Assets._Project.Develop.Editor.LevelEditor
         public static string CreateSliceJson(LevelConfig level, GameConfig gameConfig, LevelsListConfig campaign)
         {
             LevelPrefabInfo prefab = LevelPrefabReader.Read(level);
+            int? campaignNumber = LevelEditorAssets.GetCampaignNumber(campaign, level);
+
+            // Своих стейджей у бесконечного уровня нет: в срезе — волны, собранные генератором режима
+            if (level.GameMode == GameModes.Infinity)
+            {
+                LevelSlice endlessSlice = EndlessSliceSerializer.CreateSlice(
+                    level,
+                    campaignNumber,
+                    prefab,
+                    gameConfig,
+                    EndlessSliceSerializer.SliceWavesCount);
+
+                return LevelSliceSerializer.ToJson(endlessSlice);
+            }
+
             LevelStats stats = LevelStatsCalculator.Calculate(level, prefab, gameConfig);
             List<LevelIssue> issues = LevelValidator.Validate(level, prefab);
-            int? campaignNumber = LevelEditorAssets.GetCampaignNumber(campaign, level);
             LevelSlice slice = LevelSliceSerializer.CreateSlice(level, campaignNumber, prefab, stats, issues);
 
             return LevelSliceSerializer.ToJson(slice);
