@@ -211,7 +211,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<RayShooterService>(),
                 view,
                 _container.Resolve<SceneSwitcherService>(),
-                results);
+                results,
+                _container.Resolve<PlayerHealth>());
         }
 
         public DefeatPopupPresenter CreateDefeatPopupPresenter(DefeatPopupView view)
@@ -221,7 +222,8 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay
                 _container.Resolve<RayShooterService>(),
                 view,
                 _container.Resolve<SceneSwitcherService>(),
-                _gameplayInputArgs);
+                _gameplayInputArgs,
+                _container.Resolve<StageProviderService>());
         }
 
         public EndlessResultPopupPresenter CreateEndlessResultPopupPresenter(EndlessResultPopupView view, EndlessRunResult runResult)

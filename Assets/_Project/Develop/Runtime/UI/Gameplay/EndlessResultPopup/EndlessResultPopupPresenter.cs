@@ -8,11 +8,12 @@ using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.EndlessResultPopup
 {
-    // Итог забега бесконечного режима вместо окна поражения: достигнутая волна и рекорд или «Новый рекорд!». Забег к этому
-    // времени уже засчитан. Временное, чисто функциональное окно: вид по макету — отдельная задача.
+    // Итог забега бесконечного режима вместо окна поражения: достигнутая волна и рекорд или штамп «Новый рекорд!». Забег
+    // к этому времени уже засчитан.
     public class EndlessResultPopupPresenter : PopupPresenterBase
     {
-        private const string TitleName = "Забег окончен";
+        private const string TitleName = "Раунд окончен";
+        private const string DecreeText = "Вы внесли своё имя в летопись";
         private const string WavePrefix = "Волна ";
         private const string RecordPrefix = "Рекорд: волна ";
         private const string NewRecordText = "Новый рекорд!";
@@ -46,8 +47,13 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.EndlessResultPopup
             base.Initialize();
 
             _popupView.SetTitle(TitleName);
+            _popupView.SetDecree(DecreeText);
             _popupView.SetWave(WavePrefix + _runResult.ReachedWave);
-            _popupView.SetRecord(_runResult.IsNewRecord ? NewRecordText : RecordPrefix + _runResult.BestWave);
+
+            if (_runResult.IsNewRecord)
+                _popupView.SetNewRecord(NewRecordText);
+            else
+                _popupView.SetRecord(RecordPrefix + _runResult.BestWave);
 
             _popupView.MenuClicked += OnMenuClicked;
             _popupView.RestartClicked += OnRestartClicked;

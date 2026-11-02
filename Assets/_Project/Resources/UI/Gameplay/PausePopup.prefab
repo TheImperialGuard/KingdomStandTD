@@ -2764,35 +2764,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4850799718475590462}
     m_Modifications:
-    - target: {fileID: 4065476897486495153, guid: 1e9995c3735cc32428b0345ffad28f87, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4065476897486495153, guid: 1e9995c3735cc32428b0345ffad28f87, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4065476897486495153, guid: 1e9995c3735cc32428b0345ffad28f87, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 3597073162778972936, guid: c71db4871a4416f448e4adfe7d8420a4, type: 3}
-    - target: {fileID: 4065476897486495153, guid: 1e9995c3735cc32428b0345ffad28f87, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4065476897486495153, guid: 1e9995c3735cc32428b0345ffad28f87, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnContinueClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 4065476897486495153, guid: 1e9995c3735cc32428b0345ffad28f87, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Assets._Project.Develop.Runtime.UI.Gameplay.ResultsPopup.WinPopupView,
-        Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4065476897486495153, guid: 1e9995c3735cc32428b0345ffad28f87, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 4316392018632372309, guid: 1e9995c3735cc32428b0345ffad28f87, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

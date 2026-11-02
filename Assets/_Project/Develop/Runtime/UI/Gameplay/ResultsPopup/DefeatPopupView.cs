@@ -1,22 +1,21 @@
-﻿using Assets._Project.Develop.Runtime.UI.Core.Popups;
-using System;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets._Project.Develop.Runtime.UI.Gameplay.ResultsPopup
 {
-    public class DefeatPopupView : PopupViewBase
+    public class DefeatPopupView : ResultSheetPopupView
     {
         public event Action ContinueClicked;
         public event Action RestartClicked;
 
-        [SerializeField] private TMP_Text _title;
+        [SerializeField] private TMP_Text _wave;
 
         [SerializeField] private Button _continueButton;
         [SerializeField] private Button _restartButton;
 
-        public void SetTitle(string title) => _title.text = title;
+        public void SetWave(string wave) => _wave.text = wave;
 
         protected override void OnPreShow()
         {
@@ -30,11 +29,12 @@ namespace Assets._Project.Develop.Runtime.UI.Gameplay.ResultsPopup
         {
             base.OnPreHide();
 
-            _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
-            _restartButton.onClick.RemoveListener(OnRestartButtonClicked);
+            RemoveButtonsListeners();
         }
 
-        private void OnDisable()
+        private void OnDisable() => RemoveButtonsListeners();
+
+        private void RemoveButtonsListeners()
         {
             _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
             _restartButton.onClick.RemoveListener(OnRestartButtonClicked);
