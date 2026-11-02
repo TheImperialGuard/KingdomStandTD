@@ -11,6 +11,7 @@ using Assets._Project.Develop.Runtime.Infrastructure;
 using Assets._Project.Develop.Runtime.Infrastructure.DI;
 using Assets._Project.Develop.Runtime.UI.Core.Hotkeys;
 using Assets._Project.Develop.Runtime.UI.Gameplay.EnemyHealthBars;
+using Assets._Project.Develop.Runtime.Utilities.Adverts;
 using Assets._Project.Develop.Runtime.Utilities.Audio;
 using Assets._Project.Develop.Runtime.Utilities.ParticleEffects;
 using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
@@ -106,6 +107,11 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
         public override void Run()
         {
             Debug.Log("Старт геймплейной сцены");
+
+            // Как при выходе в меню из боя. На время рекламы плагин площадки сам ставит игру на паузу, частоту показа
+            // ограничивает тоже он
+            if (_inputArgs.IsRestart)
+                _container.Resolve<IAdvertsService>().OpenFullScreenAdvert();
 
             _musicSwitcherService.SwitchFor(MusicContexts.GameplayPrepare);
 
