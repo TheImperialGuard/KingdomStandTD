@@ -14,12 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters.MeleeConfig
   <PrefabPath>k__BackingField: Prefabs/Entities/Characters/MeleeOgre
   <CharacterName>k__BackingField: "\u041E\u0433\u0440"
-  <MoveSpeed>k__BackingField: 0.5
+  <Picture>k__BackingField: {fileID: 0}
+  <MoveSpeed>k__BackingField: 0.3
   <RotateSpeed>k__BackingField: 900
-  <MaxHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 1000
+  <SpawnProcessTime>k__BackingField: 0
   <DeathProcessTime>k__BackingField: 2
   <DamageResistanceType>k__BackingField: 0
   <DamageResistanceIndex>k__BackingField: 0
   <DamageOnFinishPath>k__BackingField: 1
-  <GoldOnDeath>k__BackingField: 10
+  <GoldOnDeath>k__BackingField: 65
   <IsBoss>k__BackingField: 0
+  <IsFlying>k__BackingField: 0
+  <Kind>k__BackingField: 0
+  <Ability>k__BackingField: {fileID: 0}

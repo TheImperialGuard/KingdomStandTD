@@ -15,15 +15,15 @@ MonoBehaviour:
   <PrefabPath>k__BackingField: Prefabs/Entities/Characters/Necromancer
   <CharacterName>k__BackingField: "\u041D\u0435\u043A\u0440\u043E\u043C\u0430\u043D\u0442"
   <Picture>k__BackingField: {fileID: 0}
-  <MoveSpeed>k__BackingField: 1
+  <MoveSpeed>k__BackingField: 0.4
   <RotateSpeed>k__BackingField: 900
-  <MaxHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 850
   <SpawnProcessTime>k__BackingField: 0
   <DeathProcessTime>k__BackingField: 2
   <DamageResistanceType>k__BackingField: 0
   <DamageResistanceIndex>k__BackingField: 0
   <DamageOnFinishPath>k__BackingField: 1
-  <GoldOnDeath>k__BackingField: 10
+  <GoldOnDeath>k__BackingField: 70
   <IsBoss>k__BackingField: 0
   <IsFlying>k__BackingField: 0
   <Kind>k__BackingField: 0

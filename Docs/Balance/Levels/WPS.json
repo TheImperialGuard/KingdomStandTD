@@ -53,8 +53,8 @@
           "note": "",
           "analysis": {
             "enemiesCount": 5,
-            "health": 50.0,
-            "killGold": 50,
+            "health": 500.0,
+            "killGold": 75,
             "breakthroughDamage": 5,
             "spawnEnd": 8.0,
             "firstArrival": 47.0,
@@ -76,8 +76,8 @@
           "note": "",
           "analysis": {
             "enemiesCount": 10,
-            "health": 100.0,
-            "killGold": 100,
+            "health": 1000.0,
+            "killGold": 150,
             "breakthroughDamage": 10,
             "spawnEnd": 18.0,
             "firstArrival": 47.0,
@@ -91,11 +91,11 @@
         "enemiesByType": {
           "Gargoyle": 15
         },
-        "health": 150.0,
-        "effectiveHealthPhysic": 150.0,
-        "effectiveHealthMagic": 150.0,
-        "healthPerSecond": 7.5,
-        "killGold": 150,
+        "health": 1500.0,
+        "effectiveHealthPhysic": 1500.0,
+        "effectiveHealthMagic": 1500.0,
+        "healthPerSecond": 75.0,
+        "killGold": 225,
         "maxSkipGold": 8,
         "goldAtStartWithoutSkips": 2000,
         "goldAtStartWithMaxSkips": 2000,
@@ -111,14 +111,14 @@
             "lane": "Center",
             "wavesCount": 1,
             "enemiesCount": 5,
-            "health": 50.0
+            "health": 500.0
           },
           {
             "pathNumber": "Second",
             "lane": "Center",
             "wavesCount": 1,
             "enemiesCount": 10,
-            "health": 100.0
+            "health": 1000.0
           }
         ]
       }
@@ -143,7 +143,7 @@
           "note": "",
           "analysis": {
             "enemiesCount": 10,
-            "health": 200.0,
+            "health": 300.0,
             "killGold": 50,
             "breakthroughDamage": 10,
             "spawnEnd": 18.0,
@@ -167,7 +167,7 @@
           "analysis": {
             "enemiesCount": 10,
             "health": 1000.0,
-            "killGold": 100,
+            "killGold": 110,
             "breakthroughDamage": 10,
             "spawnEnd": 18.0,
             "firstArrival": 47.0,
@@ -182,14 +182,14 @@
           "Orc": 10,
           "Skeleton": 10
         },
-        "health": 1200.0,
-        "effectiveHealthPhysic": 1286.957,
-        "effectiveHealthMagic": 1200.0,
-        "healthPerSecond": 60.0,
-        "killGold": 150,
+        "health": 1300.0,
+        "effectiveHealthPhysic": 1728.572,
+        "effectiveHealthMagic": 1300.0,
+        "healthPerSecond": 65.0,
+        "killGold": 160,
         "maxSkipGold": 0,
-        "goldAtStartWithoutSkips": 2150,
-        "goldAtStartWithMaxSkips": 2158,
+        "goldAtStartWithoutSkips": 2225,
+        "goldAtStartWithMaxSkips": 2233,
         "breakthroughDamage": 20,
         "breakthroughThreat": 1.0,
         "spawnEnd": 18.0,
@@ -202,7 +202,7 @@
             "lane": "Center",
             "wavesCount": 1,
             "enemiesCount": 10,
-            "health": 200.0
+            "health": 300.0
           },
           {
             "pathNumber": "Second",
@@ -224,13 +224,13 @@
       "Orc": 10,
       "Skeleton": 10
     },
-    "health": 1350.0,
-    "effectiveHealthPhysic": 1436.957,
-    "effectiveHealthMagic": 1350.0,
-    "killGold": 300,
+    "health": 2800.0,
+    "effectiveHealthPhysic": 3228.572,
+    "effectiveHealthMagic": 2800.0,
+    "killGold": 385,
     "maxSkipGold": 8,
-    "totalGoldWithoutSkips": 2300,
-    "totalGoldWithMaxSkips": 2308,
+    "totalGoldWithoutSkips": 2385,
+    "totalGoldWithMaxSkips": 2393,
     "breakthroughDamage": 35,
     "breakthroughThreat": 1.75,
     "durationWithoutSkips": 40.0,
@@ -242,14 +242,14 @@
         "lane": "Center",
         "wavesCount": 2,
         "enemiesCount": 15,
-        "health": 250.0
+        "health": 800.0
       },
       {
         "pathNumber": "Second",
         "lane": "Center",
         "wavesCount": 2,
         "enemiesCount": 20,
-        "health": 1100.0
+        "health": 2000.0
       }
     ]
   },

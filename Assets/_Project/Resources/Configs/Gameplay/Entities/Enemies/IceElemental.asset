@@ -14,12 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.Characters.MeleeConfig
   <PrefabPath>k__BackingField: Prefabs/Entities/Characters/MeleeIceElemental
   <CharacterName>k__BackingField: "\u041B\u0435\u0434\u044F\u043D\u043E\u0439 \u0433\u043E\u043B\u0435\u043C"
-  <MoveSpeed>k__BackingField: 0.4
+  <Picture>k__BackingField: {fileID: 0}
+  <MoveSpeed>k__BackingField: 0.3
   <RotateSpeed>k__BackingField: 900
-  <MaxHealth>k__BackingField: 100
-  <DeathProcessTime>k__BackingField: 2
+  <MaxHealth>k__BackingField: 2000
+  <SpawnProcessTime>k__BackingField: 0
+  <DeathProcessTime>k__BackingField: 2.5
   <DamageResistanceType>k__BackingField: 0
   <DamageResistanceIndex>k__BackingField: 0
   <DamageOnFinishPath>k__BackingField: 1
-  <GoldOnDeath>k__BackingField: 10
+  <GoldOnDeath>k__BackingField: 120
   <IsBoss>k__BackingField: 0
+  <IsFlying>k__BackingField: 0
+  <Kind>k__BackingField: 0
+  <Ability>k__BackingField: {fileID: 0}

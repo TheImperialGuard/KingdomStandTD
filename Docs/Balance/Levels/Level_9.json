@@ -16,7 +16,7 @@
       "lengthRight": 52.13,
       "timeToBase": {
         "HumanRogue": 35.333,
-        "IceElemental": 132.5,
+        "IceElemental": 176.667,
         "Skeleton": 53.0,
         "SkeletonMage": 88.333
       }
@@ -34,7 +34,7 @@
         "Skeleton": 45.0,
         "SkeletonMage": 75.0,
         "SkeletonRogue": 90.0,
-        "Yeti": 112.5
+        "Yeti": 150.0
       }
     },
     {
@@ -74,8 +74,8 @@
             "killGold": 10,
             "breakthroughDamage": 20,
             "spawnEnd": 0.0,
-            "firstArrival": 112.5,
-            "lastArrival": 112.5
+            "firstArrival": 150.0,
+            "lastArrival": 150.0
           }
         },
         {
@@ -93,12 +93,12 @@
           "note": "",
           "analysis": {
             "enemiesCount": 5,
-            "health": 500.0,
-            "killGold": 50,
+            "health": 10000.0,
+            "killGold": 600,
             "breakthroughDamage": 5,
             "spawnEnd": 20.0,
-            "firstArrival": 132.5,
-            "lastArrival": 152.5
+            "firstArrival": 176.667,
+            "lastArrival": 196.667
           }
         },
         {
@@ -116,8 +116,8 @@
           "note": "",
           "analysis": {
             "enemiesCount": 3,
-            "health": 300.0,
-            "killGold": 30,
+            "health": 1050.0,
+            "killGold": 120,
             "breakthroughDamage": 3,
             "spawnEnd": 12.0,
             "firstArrival": 33.125,
@@ -139,8 +139,8 @@
           "note": "",
           "analysis": {
             "enemiesCount": 3,
-            "health": 300.0,
-            "killGold": 30,
+            "health": 1050.0,
+            "killGold": 120,
             "breakthroughDamage": 3,
             "spawnEnd": 15.0,
             "firstArrival": 35.579,
@@ -156,11 +156,11 @@
           "SnowWolf": 6,
           "Yeti": 1
         },
-        "health": 2100.0,
-        "effectiveHealthPhysic": 2100.0,
-        "effectiveHealthMagic": 2100.0,
-        "healthPerSecond": 35.0,
-        "killGold": 120,
+        "health": 13100.0,
+        "effectiveHealthPhysic": 13100.0,
+        "effectiveHealthMagic": 15450.0,
+        "healthPerSecond": 218.333,
+        "killGold": 850,
         "maxSkipGold": 30,
         "goldAtStartWithoutSkips": 850,
         "goldAtStartWithMaxSkips": 850,
@@ -168,7 +168,7 @@
         "breakthroughThreat": 1.55,
         "spawnEnd": 20.0,
         "spawnOverflow": 0.0,
-        "lastArrival": 152.5,
+        "lastArrival": 196.667,
         "peakEnemies": 12,
         "traffic": [
           {
@@ -176,7 +176,7 @@
             "lane": "Center",
             "wavesCount": 1,
             "enemiesCount": 5,
-            "health": 500.0
+            "health": 10000.0
           },
           {
             "pathNumber": "Second",
@@ -190,14 +190,14 @@
             "lane": "Center",
             "wavesCount": 1,
             "enemiesCount": 3,
-            "health": 300.0
+            "health": 1050.0
           },
           {
             "pathNumber": "Third",
             "lane": "Left",
             "wavesCount": 1,
             "enemiesCount": 3,
-            "health": 300.0
+            "health": 1050.0
           }
         ]
       }
@@ -222,7 +222,7 @@
           "note": "",
           "analysis": {
             "enemiesCount": 10,
-            "health": 1000.0,
+            "health": 1200.0,
             "killGold": 200,
             "breakthroughDamage": 10,
             "spawnEnd": 18.0,
@@ -261,14 +261,14 @@
           "SkeletonMage": 10,
           "SkeletonRogue": 10
         },
-        "health": 1800.0,
-        "effectiveHealthPhysic": 2142.857,
-        "effectiveHealthMagic": 7466.667,
-        "healthPerSecond": 30.0,
+        "health": 2000.0,
+        "effectiveHealthPhysic": 2342.857,
+        "effectiveHealthMagic": 8800.001,
+        "healthPerSecond": 33.333,
         "killGold": 350,
         "maxSkipGold": 30,
-        "goldAtStartWithoutSkips": 970,
-        "goldAtStartWithMaxSkips": 1000,
+        "goldAtStartWithoutSkips": 1700,
+        "goldAtStartWithMaxSkips": 1730,
         "breakthroughDamage": 20,
         "breakthroughThreat": 1.0,
         "spawnEnd": 19.0,
@@ -281,7 +281,7 @@
             "lane": "Center",
             "wavesCount": 1,
             "enemiesCount": 10,
-            "health": 1000.0
+            "health": 1200.0
           },
           {
             "pathNumber": "Second",
@@ -313,8 +313,8 @@
           "note": "",
           "analysis": {
             "enemiesCount": 5,
-            "health": 175.0,
-            "killGold": 50,
+            "health": 400.0,
+            "killGold": 60,
             "breakthroughDamage": 5,
             "spawnEnd": 8.0,
             "firstArrival": 35.333,
@@ -336,8 +336,8 @@
           "note": "",
           "analysis": {
             "enemiesCount": 5,
-            "health": 175.0,
-            "killGold": 50,
+            "health": 400.0,
+            "killGold": 60,
             "breakthroughDamage": 5,
             "spawnEnd": 8.0,
             "firstArrival": 30.0,
@@ -351,34 +351,34 @@
         "enemiesByType": {
           "HumanRogue": 10
         },
-        "health": 350.0,
-        "effectiveHealthPhysic": 350.0,
-        "effectiveHealthMagic": 350.0,
-        "healthPerSecond": 7.778,
-        "killGold": 100,
+        "health": 800.0,
+        "effectiveHealthPhysic": 800.0,
+        "effectiveHealthMagic": 800.0,
+        "healthPerSecond": 17.778,
+        "killGold": 120,
         "maxSkipGold": 30,
-        "goldAtStartWithoutSkips": 1320,
-        "goldAtStartWithMaxSkips": 1380,
+        "goldAtStartWithoutSkips": 2050,
+        "goldAtStartWithMaxSkips": 2110,
         "breakthroughDamage": 10,
         "breakthroughThreat": 0.5,
         "spawnEnd": 8.0,
         "spawnOverflow": 0.0,
         "lastArrival": 43.333,
-        "peakEnemies": 35,
+        "peakEnemies": 36,
         "traffic": [
           {
             "pathNumber": "First",
             "lane": "Center",
             "wavesCount": 1,
             "enemiesCount": 5,
-            "health": 175.0
+            "health": 400.0
           },
           {
             "pathNumber": "Second",
             "lane": "Center",
             "wavesCount": 1,
             "enemiesCount": 5,
-            "health": 175.0
+            "health": 400.0
           }
         ]
       }
@@ -403,7 +403,7 @@
           "note": "",
           "analysis": {
             "enemiesCount": 3,
-            "health": 300.0,
+            "health": 360.0,
             "killGold": 60,
             "breakthroughDamage": 3,
             "spawnEnd": 4.0,
@@ -426,8 +426,8 @@
           "note": "",
           "analysis": {
             "enemiesCount": 3,
-            "health": 105.0,
-            "killGold": 30,
+            "health": 240.0,
+            "killGold": 36,
             "breakthroughDamage": 3,
             "spawnEnd": 4.0,
             "firstArrival": 30.0,
@@ -449,8 +449,8 @@
           "note": "",
           "analysis": {
             "enemiesCount": 2,
-            "health": 1200.0,
-            "killGold": 100,
+            "health": 1440.0,
+            "killGold": 110,
             "breakthroughDamage": 6,
             "spawnEnd": 12.0,
             "firstArrival": 92.0,
@@ -472,7 +472,7 @@
           "note": "",
           "analysis": {
             "enemiesCount": 10,
-            "health": 200.0,
+            "health": 300.0,
             "killGold": 50,
             "breakthroughDamage": 10,
             "spawnEnd": 35.0,
@@ -495,7 +495,7 @@
           "note": "",
           "analysis": {
             "enemiesCount": 10,
-            "health": 200.0,
+            "health": 300.0,
             "killGold": 50,
             "breakthroughDamage": 10,
             "spawnEnd": 36.0,
@@ -513,14 +513,14 @@
           "Skeleton": 20,
           "SkeletonMage": 3
         },
-        "health": 2005.0,
-        "effectiveHealthPhysic": 3205.0,
-        "effectiveHealthMagic": 3705.0,
-        "healthPerSecond": 33.417,
-        "killGold": 290,
+        "health": 2640.0,
+        "effectiveHealthPhysic": 4800.0,
+        "effectiveHealthMagic": 4680.0,
+        "healthPerSecond": 44.0,
+        "killGold": 306,
         "maxSkipGold": 30,
-        "goldAtStartWithoutSkips": 1420,
-        "goldAtStartWithMaxSkips": 1510,
+        "goldAtStartWithoutSkips": 2170,
+        "goldAtStartWithMaxSkips": 2260,
         "breakthroughDamage": 32,
         "breakthroughThreat": 1.6,
         "spawnEnd": 36.0,
@@ -533,21 +533,21 @@
             "lane": "Center",
             "wavesCount": 2,
             "enemiesCount": 13,
-            "health": 500.0
+            "health": 660.0
           },
           {
             "pathNumber": "First",
             "lane": "Right",
             "wavesCount": 1,
             "enemiesCount": 10,
-            "health": 200.0
+            "health": 300.0
           },
           {
             "pathNumber": "Second",
             "lane": "Center",
             "wavesCount": 2,
             "enemiesCount": 5,
-            "health": 1305.0
+            "health": 1680.0
           }
         ]
       }
@@ -572,7 +572,7 @@
           "note": "",
           "analysis": {
             "enemiesCount": 10,
-            "health": 1000.0,
+            "health": 1200.0,
             "killGold": 200,
             "breakthroughDamage": 10,
             "spawnEnd": 38.0,
@@ -595,7 +595,7 @@
           "note": "",
           "analysis": {
             "enemiesCount": 10,
-            "health": 1000.0,
+            "health": 1200.0,
             "killGold": 200,
             "breakthroughDamage": 10,
             "spawnEnd": 36.0,
@@ -618,8 +618,8 @@
           "note": "",
           "analysis": {
             "enemiesCount": 5,
-            "health": 175.0,
-            "killGold": 50,
+            "health": 400.0,
+            "killGold": 60,
             "breakthroughDamage": 5,
             "spawnEnd": 20.0,
             "firstArrival": 35.929,
@@ -641,8 +641,8 @@
           "note": "",
           "analysis": {
             "enemiesCount": 5,
-            "health": 175.0,
-            "killGold": 50,
+            "health": 400.0,
+            "killGold": 60,
             "breakthroughDamage": 5,
             "spawnEnd": 20.0,
             "firstArrival": 30.008,
@@ -664,7 +664,7 @@
           "note": "",
           "analysis": {
             "enemiesCount": 10,
-            "health": 200.0,
+            "health": 300.0,
             "killGold": 50,
             "breakthroughDamage": 10,
             "spawnEnd": 9.0,
@@ -687,7 +687,7 @@
           "note": "",
           "analysis": {
             "enemiesCount": 10,
-            "health": 200.0,
+            "health": 300.0,
             "killGold": 50,
             "breakthroughDamage": 10,
             "spawnEnd": 9.0,
@@ -704,14 +704,14 @@
           "Skeleton": 20,
           "SkeletonMage": 20
         },
-        "health": 2750.0,
-        "effectiveHealthPhysic": 2750.0,
-        "effectiveHealthMagic": 14083.335,
-        "healthPerSecond": 45.833,
-        "killGold": 600,
+        "health": 3800.0,
+        "effectiveHealthPhysic": 3800.0,
+        "effectiveHealthMagic": 17400.002,
+        "healthPerSecond": 63.333,
+        "killGold": 620,
         "maxSkipGold": 0,
-        "goldAtStartWithoutSkips": 1710,
-        "goldAtStartWithMaxSkips": 1830,
+        "goldAtStartWithoutSkips": 2476,
+        "goldAtStartWithMaxSkips": 2596,
         "breakthroughDamage": 50,
         "breakthroughThreat": 2.5,
         "spawnEnd": 38.0,
@@ -724,42 +724,42 @@
             "lane": "Center",
             "wavesCount": 1,
             "enemiesCount": 10,
-            "health": 1000.0
+            "health": 1200.0
           },
           {
             "pathNumber": "First",
             "lane": "Left",
             "wavesCount": 1,
             "enemiesCount": 5,
-            "health": 175.0
+            "health": 400.0
           },
           {
             "pathNumber": "First",
             "lane": "Right",
             "wavesCount": 1,
             "enemiesCount": 10,
-            "health": 200.0
+            "health": 300.0
           },
           {
             "pathNumber": "Second",
             "lane": "Center",
             "wavesCount": 1,
             "enemiesCount": 10,
-            "health": 1000.0
+            "health": 1200.0
           },
           {
             "pathNumber": "Second",
             "lane": "Left",
             "wavesCount": 1,
             "enemiesCount": 10,
-            "health": 200.0
+            "health": 300.0
           },
           {
             "pathNumber": "Second",
             "lane": "Right",
             "wavesCount": 1,
             "enemiesCount": 5,
-            "health": 175.0
+            "health": 400.0
           }
         ]
       }
@@ -779,13 +779,13 @@
       "SnowWolf": 6,
       "Yeti": 1
     },
-    "health": 9005.0,
-    "effectiveHealthPhysic": 10547.857,
-    "effectiveHealthMagic": 27705.004,
-    "killGold": 1460,
+    "health": 22340.0,
+    "effectiveHealthPhysic": 24842.857,
+    "effectiveHealthMagic": 47130.0,
+    "killGold": 2246,
     "maxSkipGold": 120,
-    "totalGoldWithoutSkips": 2310,
-    "totalGoldWithMaxSkips": 2430,
+    "totalGoldWithoutSkips": 3096,
+    "totalGoldWithMaxSkips": 3216,
     "breakthroughDamage": 143,
     "breakthroughThreat": 7.15,
     "durationWithoutSkips": 267.0,
@@ -797,56 +797,56 @@
         "lane": "Center",
         "wavesCount": 6,
         "enemiesCount": 43,
-        "health": 3175.0
+        "health": 13460.0
       },
       {
         "pathNumber": "First",
         "lane": "Left",
         "wavesCount": 1,
         "enemiesCount": 5,
-        "health": 175.0
+        "health": 400.0
       },
       {
         "pathNumber": "First",
         "lane": "Right",
         "wavesCount": 2,
         "enemiesCount": 20,
-        "health": 400.0
+        "health": 600.0
       },
       {
         "pathNumber": "Second",
         "lane": "Center",
         "wavesCount": 6,
         "enemiesCount": 31,
-        "health": 4280.0
+        "health": 5080.0
       },
       {
         "pathNumber": "Second",
         "lane": "Left",
         "wavesCount": 1,
         "enemiesCount": 10,
-        "health": 200.0
+        "health": 300.0
       },
       {
         "pathNumber": "Second",
         "lane": "Right",
         "wavesCount": 1,
         "enemiesCount": 5,
-        "health": 175.0
+        "health": 400.0
       },
       {
         "pathNumber": "Third",
         "lane": "Center",
         "wavesCount": 1,
         "enemiesCount": 3,
-        "health": 300.0
+        "health": 1050.0
       },
       {
         "pathNumber": "Third",
         "lane": "Left",
         "wavesCount": 1,
         "enemiesCount": 3,
-        "health": 300.0
+        "health": 1050.0
       }
     ]
   },

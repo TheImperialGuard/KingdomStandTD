@@ -27,5 +27,5 @@ MonoBehaviour:
   <AttackDelayTime>k__BackingField: 0.1
   <AttackCooldown>k__BackingField: 1
   <Projectile>k__BackingField: 6
-  <AttackDamage>k__BackingField: 80
+  <AttackDamage>k__BackingField: 115
   <ProjectileSpeed>k__BackingField: 10

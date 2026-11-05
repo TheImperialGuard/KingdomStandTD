@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets._Project.Develop.Runtime.Configs.Gameplay.Entities.MeleeConfig
   <PrefabPath>k__BackingField: Prefabs/Entities/Characters/SummonedSkeleton
   <CharacterName>k__BackingField: "\u0421\u043A\u0435\u043B\u0435\u0442"
-  <MoveSpeed>k__BackingField: 1
+  <Picture>k__BackingField: {fileID: 0}
+  <MoveSpeed>k__BackingField: 0.6
   <RotateSpeed>k__BackingField: 900
-  <MaxHealth>k__BackingField: 20
+  <MaxHealth>k__BackingField: 200
   <SpawnProcessTime>k__BackingField: 1.3000001
   <DeathProcessTime>k__BackingField: 1
   <DamageResistanceType>k__BackingField: 0
