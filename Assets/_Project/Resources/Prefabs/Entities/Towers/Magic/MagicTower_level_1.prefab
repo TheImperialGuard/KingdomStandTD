@@ -79,6 +79,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5267259873951898561, guid: 9b50163fb7cfab24483388826a4a96ea, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2202892853515455343, guid: 9b50163fb7cfab24483388826a4a96ea, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9b50163fb7cfab24483388826a4a96ea, type: 3}
       propertyPath: m_Name
       value: tower-round-crystals
@@ -86,6 +94,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9b50163fb7cfab24483388826a4a96ea, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087177055782513071, guid: 9b50163fb7cfab24483388826a4a96ea, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565596417422238528, guid: 9b50163fb7cfab24483388826a4a96ea, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7643650049808204338, guid: 9b50163fb7cfab24483388826a4a96ea, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
